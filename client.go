@@ -103,15 +103,18 @@ func init() {
 
 func initUserAgent() {
 	data := map[string]string{
-		"bindings_version": "1.0.1",
+		"bindings_version": "1.0.2",
 		"lang":             "go",
 		"lang_version":     runtime.Version(),
-		"publisher":        "digitalfemsa",
 		"uname":            getUname(),
 	}
 
-	r, _ := json.Marshal(data)
-	encodedDigitalFemsaUserAgent = string(r)
+	// Crear formato de string con valores separados por punto y coma (key=value;key2=value2)
+	var parts []string
+	for k, v := range data {
+		parts = append(parts, k+"="+v)
+	}
+	encodedDigitalFemsaUserAgent = strings.Join(parts, ";")
 }
 
 // getUname tries to get an uname from the system, but not that hard. It tries
@@ -384,7 +387,7 @@ func (c *APIClient) prepareRequest(
 	formParams url.Values,
 	formFiles []formFile) (localVarRequest *http.Request, err error) {
 
-	headerParams["X-DigitalFemsa-Client-User-Agent"] = encodedDigitalFemsaUserAgent
+	headerParams["Spin-Client-User-Agent"] = encodedDigitalFemsaUserAgent
 
 	var body *bytes.Buffer
 
