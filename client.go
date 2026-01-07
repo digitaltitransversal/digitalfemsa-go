@@ -106,7 +106,6 @@ func initUserAgent() {
 		"bindings_version": "1.0.2",
 		"lang":             "go",
 		"lang_version":     runtime.Version(),
-		"publisher":        "digitalfemsa",
 		"uname":            getUname(),
 	}
 
