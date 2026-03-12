@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | Pointer to **string** |  | [optional] 
+**Type** | Pointer to **string** | Cash payment type | [optional] 
 **Object** | **string** |  | 
-**AuthCode** | Pointer to **NullableInt32** |  | [optional] 
+**AuthCode** | Pointer to **NullableString** |  | [optional] 
 **CashierId** | Pointer to **NullableString** |  | [optional] 
 **Reference** | Pointer to **string** |  | [optional] 
 **BarcodeUrl** | Pointer to **string** |  | [optional] 
@@ -81,20 +81,20 @@ SetObject sets Object field to given value.
 
 ### GetAuthCode
 
-`func (o *ChargeResponsePaymentMethod) GetAuthCode() int32`
+`func (o *ChargeResponsePaymentMethod) GetAuthCode() string`
 
 GetAuthCode returns the AuthCode field if non-nil, zero value otherwise.
 
 ### GetAuthCodeOk
 
-`func (o *ChargeResponsePaymentMethod) GetAuthCodeOk() (*int32, bool)`
+`func (o *ChargeResponsePaymentMethod) GetAuthCodeOk() (*string, bool)`
 
 GetAuthCodeOk returns a tuple with the AuthCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAuthCode
 
-`func (o *ChargeResponsePaymentMethod) SetAuthCode(v int32)`
+`func (o *ChargeResponsePaymentMethod) SetAuthCode(v string)`
 
 SetAuthCode sets AuthCode field to given value.
 

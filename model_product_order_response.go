@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -21,7 +21,6 @@ var _ MappedNullable = &ProductOrderResponse{}
 
 // ProductOrderResponse struct for ProductOrderResponse
 type ProductOrderResponse struct {
-	AntifraudInfo map[string]interface{} `json:"antifraud_info,omitempty"`
 	// The brand of the item.
 	Brand *string `json:"brand,omitempty"`
 	// Short description of the item
@@ -37,10 +36,10 @@ type ProductOrderResponse struct {
 	// List of tags for the item. It is used to identify the item in the order.
 	Tags []string `json:"tags,omitempty"`
 	// The price of the item in cents.
-	UnitPrice            int32   `json:"unit_price"`
-	Id                   *string `json:"id,omitempty"`
-	Object               *string `json:"object,omitempty"`
-	ParentId             *string `json:"parent_id,omitempty"`
+	UnitPrice int32 `json:"unit_price"`
+	Id *string `json:"id,omitempty"`
+	Object *string `json:"object,omitempty"`
+	ParentId *string `json:"parent_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -64,38 +63,6 @@ func NewProductOrderResponse(name string, quantity int32, unitPrice int32) *Prod
 func NewProductOrderResponseWithDefaults() *ProductOrderResponse {
 	this := ProductOrderResponse{}
 	return &this
-}
-
-// GetAntifraudInfo returns the AntifraudInfo field value if set, zero value otherwise.
-func (o *ProductOrderResponse) GetAntifraudInfo() map[string]interface{} {
-	if o == nil || IsNil(o.AntifraudInfo) {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.AntifraudInfo
-}
-
-// GetAntifraudInfoOk returns a tuple with the AntifraudInfo field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ProductOrderResponse) GetAntifraudInfoOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.AntifraudInfo) {
-		return map[string]interface{}{}, false
-	}
-	return o.AntifraudInfo, true
-}
-
-// HasAntifraudInfo returns a boolean if a field has been set.
-func (o *ProductOrderResponse) HasAntifraudInfo() bool {
-	if o != nil && !IsNil(o.AntifraudInfo) {
-		return true
-	}
-
-	return false
-}
-
-// SetAntifraudInfo gets a reference to the given map[string]interface{} and assigns it to the AntifraudInfo field.
-func (o *ProductOrderResponse) SetAntifraudInfo(v map[string]interface{}) {
-	o.AntifraudInfo = v
 }
 
 // GetBrand returns the Brand field value if set, zero value otherwise.
@@ -427,7 +394,7 @@ func (o *ProductOrderResponse) SetParentId(v string) {
 }
 
 func (o ProductOrderResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -436,9 +403,6 @@ func (o ProductOrderResponse) MarshalJSON() ([]byte, error) {
 
 func (o ProductOrderResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AntifraudInfo) {
-		toSerialize["antifraud_info"] = o.AntifraudInfo
-	}
 	if !IsNil(o.Brand) {
 		toSerialize["brand"] = o.Brand
 	}
@@ -489,10 +453,10 @@ func (o *ProductOrderResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -511,7 +475,6 @@ func (o *ProductOrderResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "antifraud_info")
 		delete(additionalProperties, "brand")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "metadata")
@@ -564,3 +527,5 @@ func (v *NullableProductOrderResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

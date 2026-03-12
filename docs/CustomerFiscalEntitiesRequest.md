@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **TaxId** | Pointer to **string** |  | [optional] 
 **Email** | Pointer to **string** |  | [optional] 
 **Phone** | Pointer to **string** |  | [optional] 
-**Metadata** | Pointer to **map[string]map[string]interface{}** |  | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
 **CompanyName** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -127,20 +127,20 @@ HasPhone returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *CustomerFiscalEntitiesRequest) GetMetadata() map[string]map[string]interface{}`
+`func (o *CustomerFiscalEntitiesRequest) GetMetadata() map[string]interface{}`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *CustomerFiscalEntitiesRequest) GetMetadataOk() (*map[string]map[string]interface{}, bool)`
+`func (o *CustomerFiscalEntitiesRequest) GetMetadataOk() (*map[string]interface{}, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *CustomerFiscalEntitiesRequest) SetMetadata(v map[string]map[string]interface{})`
+`func (o *CustomerFiscalEntitiesRequest) SetMetadata(v map[string]interface{})`
 
 SetMetadata sets Metadata field to given value.
 

@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -20,16 +20,17 @@ import (
 	"strings"
 )
 
+
 type DiscountsAPI interface {
 
 	/*
-		OrdersCreateDiscountLine Create Discount
+	OrdersCreateDiscountLine Create Discount
 
-		Create discount lines for an existing orden
+	Create discount lines for an existing order
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param id Identifier of the resource
-		@return ApiOrdersCreateDiscountLineRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@return ApiOrdersCreateDiscountLineRequest
 	*/
 	OrdersCreateDiscountLine(ctx context.Context, id string) ApiOrdersCreateDiscountLineRequest
 
@@ -38,14 +39,14 @@ type DiscountsAPI interface {
 	OrdersCreateDiscountLineExecute(r ApiOrdersCreateDiscountLineRequest) (*DiscountLinesResponse, *http.Response, error)
 
 	/*
-		OrdersDeleteDiscountLines Delete Discount
+	OrdersDeleteDiscountLines Delete Discount
 
-		Delete an existing discount lines for an existing orden
+	Delete an existing discount line for an existing order
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param id Identifier of the resource
-		@param discountLinesId discount line id identifier
-		@return ApiOrdersDeleteDiscountLinesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@param discountLinesId discount line id identifier
+	@return ApiOrdersDeleteDiscountLinesRequest
 	*/
 	OrdersDeleteDiscountLines(ctx context.Context, id string, discountLinesId string) ApiOrdersDeleteDiscountLinesRequest
 
@@ -54,14 +55,14 @@ type DiscountsAPI interface {
 	OrdersDeleteDiscountLinesExecute(r ApiOrdersDeleteDiscountLinesRequest) (*DiscountLinesResponse, *http.Response, error)
 
 	/*
-		OrdersGetDiscountLine Get Discount
+	OrdersGetDiscountLine Get Discount
 
-		Get an existing discount lines for an existing orden
+	Get an existing discount line for an existing order
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param id Identifier of the resource
-		@param discountLinesId discount line id identifier
-		@return ApiOrdersGetDiscountLineRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@param discountLinesId discount line id identifier
+	@return ApiOrdersGetDiscountLineRequest
 	*/
 	OrdersGetDiscountLine(ctx context.Context, id string, discountLinesId string) ApiOrdersGetDiscountLineRequest
 
@@ -70,13 +71,13 @@ type DiscountsAPI interface {
 	OrdersGetDiscountLineExecute(r ApiOrdersGetDiscountLineRequest) (*DiscountLinesResponse, *http.Response, error)
 
 	/*
-		OrdersGetDiscountLines Get a List of Discount
+	OrdersGetDiscountLines Get a List of Discounts
 
-		Get discount lines for an existing orden
+	Get discount lines for an existing order
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param id Identifier of the resource
-		@return ApiOrdersGetDiscountLinesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@return ApiOrdersGetDiscountLinesRequest
 	*/
 	OrdersGetDiscountLines(ctx context.Context, id string) ApiOrdersGetDiscountLinesRequest
 
@@ -85,14 +86,14 @@ type DiscountsAPI interface {
 	OrdersGetDiscountLinesExecute(r ApiOrdersGetDiscountLinesRequest) (*GetOrderDiscountLinesResponse, *http.Response, error)
 
 	/*
-		OrdersUpdateDiscountLines Update Discount
+	OrdersUpdateDiscountLines Update Discount
 
-		Update an existing discount lines for an existing orden
+	Update an existing discount line for an existing order
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param id Identifier of the resource
-		@param discountLinesId discount line id identifier
-		@return ApiOrdersUpdateDiscountLinesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@param discountLinesId discount line id identifier
+	@return ApiOrdersUpdateDiscountLinesRequest
 	*/
 	OrdersUpdateDiscountLines(ctx context.Context, id string, discountLinesId string) ApiOrdersUpdateDiscountLinesRequest
 
@@ -105,12 +106,12 @@ type DiscountsAPI interface {
 type DiscountsAPIService service
 
 type ApiOrdersCreateDiscountLineRequest struct {
-	ctx                       context.Context
-	ApiService                DiscountsAPI
-	id                        string
+	ctx context.Context
+	ApiService DiscountsAPI
+	id string
 	orderDiscountLinesRequest *OrderDiscountLinesRequest
-	acceptLanguage            *string
-	xChildCompanyId           *string
+	acceptLanguage *string
+	xChildCompanyId *string
 }
 
 // requested field for a discount lines
@@ -138,29 +139,28 @@ func (r ApiOrdersCreateDiscountLineRequest) Execute() (*DiscountLinesResponse, *
 /*
 OrdersCreateDiscountLine Create Discount
 
-Create discount lines for an existing orden
+Create discount lines for an existing order
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@return ApiOrdersCreateDiscountLineRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @return ApiOrdersCreateDiscountLineRequest
 */
 func (a *DiscountsAPIService) OrdersCreateDiscountLine(ctx context.Context, id string) ApiOrdersCreateDiscountLineRequest {
 	return ApiOrdersCreateDiscountLineRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return DiscountLinesResponse
+//  @return DiscountLinesResponse
 func (a *DiscountsAPIService) OrdersCreateDiscountLineExecute(r ApiOrdersCreateDiscountLineRequest) (*DiscountLinesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *DiscountLinesResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DiscountLinesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DiscountsAPIService.OrdersCreateDiscountLine")
@@ -188,7 +188,7 @@ func (a *DiscountsAPIService) OrdersCreateDiscountLineExecute(r ApiOrdersCreateD
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -232,8 +232,8 @@ func (a *DiscountsAPIService) OrdersCreateDiscountLineExecute(r ApiOrdersCreateD
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -243,8 +243,8 @@ func (a *DiscountsAPIService) OrdersCreateDiscountLineExecute(r ApiOrdersCreateD
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -254,8 +254,8 @@ func (a *DiscountsAPIService) OrdersCreateDiscountLineExecute(r ApiOrdersCreateD
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -273,11 +273,11 @@ func (a *DiscountsAPIService) OrdersCreateDiscountLineExecute(r ApiOrdersCreateD
 }
 
 type ApiOrdersDeleteDiscountLinesRequest struct {
-	ctx             context.Context
-	ApiService      DiscountsAPI
-	id              string
+	ctx context.Context
+	ApiService DiscountsAPI
+	id string
 	discountLinesId string
-	acceptLanguage  *string
+	acceptLanguage *string
 	xChildCompanyId *string
 }
 
@@ -300,31 +300,30 @@ func (r ApiOrdersDeleteDiscountLinesRequest) Execute() (*DiscountLinesResponse, 
 /*
 OrdersDeleteDiscountLines Delete Discount
 
-Delete an existing discount lines for an existing orden
+Delete an existing discount line for an existing order
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@param discountLinesId discount line id identifier
-	@return ApiOrdersDeleteDiscountLinesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @param discountLinesId discount line id identifier
+ @return ApiOrdersDeleteDiscountLinesRequest
 */
 func (a *DiscountsAPIService) OrdersDeleteDiscountLines(ctx context.Context, id string, discountLinesId string) ApiOrdersDeleteDiscountLinesRequest {
 	return ApiOrdersDeleteDiscountLinesRequest{
-		ApiService:      a,
-		ctx:             ctx,
-		id:              id,
+		ApiService: a,
+		ctx: ctx,
+		id: id,
 		discountLinesId: discountLinesId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return DiscountLinesResponse
+//  @return DiscountLinesResponse
 func (a *DiscountsAPIService) OrdersDeleteDiscountLinesExecute(r ApiOrdersDeleteDiscountLinesRequest) (*DiscountLinesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *DiscountLinesResponse
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DiscountLinesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DiscountsAPIService.OrdersDeleteDiscountLines")
@@ -350,7 +349,7 @@ func (a *DiscountsAPIService) OrdersDeleteDiscountLinesExecute(r ApiOrdersDelete
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -392,8 +391,8 @@ func (a *DiscountsAPIService) OrdersDeleteDiscountLinesExecute(r ApiOrdersDelete
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -403,8 +402,8 @@ func (a *DiscountsAPIService) OrdersDeleteDiscountLinesExecute(r ApiOrdersDelete
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
@@ -414,8 +413,8 @@ func (a *DiscountsAPIService) OrdersDeleteDiscountLinesExecute(r ApiOrdersDelete
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -425,8 +424,8 @@ func (a *DiscountsAPIService) OrdersDeleteDiscountLinesExecute(r ApiOrdersDelete
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -444,11 +443,11 @@ func (a *DiscountsAPIService) OrdersDeleteDiscountLinesExecute(r ApiOrdersDelete
 }
 
 type ApiOrdersGetDiscountLineRequest struct {
-	ctx             context.Context
-	ApiService      DiscountsAPI
-	id              string
+	ctx context.Context
+	ApiService DiscountsAPI
+	id string
 	discountLinesId string
-	acceptLanguage  *string
+	acceptLanguage *string
 	xChildCompanyId *string
 }
 
@@ -471,31 +470,30 @@ func (r ApiOrdersGetDiscountLineRequest) Execute() (*DiscountLinesResponse, *htt
 /*
 OrdersGetDiscountLine Get Discount
 
-Get an existing discount lines for an existing orden
+Get an existing discount line for an existing order
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@param discountLinesId discount line id identifier
-	@return ApiOrdersGetDiscountLineRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @param discountLinesId discount line id identifier
+ @return ApiOrdersGetDiscountLineRequest
 */
 func (a *DiscountsAPIService) OrdersGetDiscountLine(ctx context.Context, id string, discountLinesId string) ApiOrdersGetDiscountLineRequest {
 	return ApiOrdersGetDiscountLineRequest{
-		ApiService:      a,
-		ctx:             ctx,
-		id:              id,
+		ApiService: a,
+		ctx: ctx,
+		id: id,
 		discountLinesId: discountLinesId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return DiscountLinesResponse
+//  @return DiscountLinesResponse
 func (a *DiscountsAPIService) OrdersGetDiscountLineExecute(r ApiOrdersGetDiscountLineRequest) (*DiscountLinesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *DiscountLinesResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DiscountLinesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DiscountsAPIService.OrdersGetDiscountLine")
@@ -521,7 +519,7 @@ func (a *DiscountsAPIService) OrdersGetDiscountLineExecute(r ApiOrdersGetDiscoun
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -563,8 +561,8 @@ func (a *DiscountsAPIService) OrdersGetDiscountLineExecute(r ApiOrdersGetDiscoun
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -574,19 +572,8 @@ func (a *DiscountsAPIService) OrdersGetDiscountLineExecute(r ApiOrdersGetDiscoun
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v ModelError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -596,8 +583,8 @@ func (a *DiscountsAPIService) OrdersGetDiscountLineExecute(r ApiOrdersGetDiscoun
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -615,15 +602,15 @@ func (a *DiscountsAPIService) OrdersGetDiscountLineExecute(r ApiOrdersGetDiscoun
 }
 
 type ApiOrdersGetDiscountLinesRequest struct {
-	ctx             context.Context
-	ApiService      DiscountsAPI
-	id              string
-	acceptLanguage  *string
+	ctx context.Context
+	ApiService DiscountsAPI
+	id string
+	acceptLanguage *string
 	xChildCompanyId *string
-	limit           *int32
-	search          *string
-	next            *string
-	previous        *string
+	limit *int32
+	search *string
+	next *string
+	previous *string
 }
 
 // Use for knowing which language to use
@@ -667,31 +654,30 @@ func (r ApiOrdersGetDiscountLinesRequest) Execute() (*GetOrderDiscountLinesRespo
 }
 
 /*
-OrdersGetDiscountLines Get a List of Discount
+OrdersGetDiscountLines Get a List of Discounts
 
-Get discount lines for an existing orden
+Get discount lines for an existing order
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@return ApiOrdersGetDiscountLinesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @return ApiOrdersGetDiscountLinesRequest
 */
 func (a *DiscountsAPIService) OrdersGetDiscountLines(ctx context.Context, id string) ApiOrdersGetDiscountLinesRequest {
 	return ApiOrdersGetDiscountLinesRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetOrderDiscountLinesResponse
+//  @return GetOrderDiscountLinesResponse
 func (a *DiscountsAPIService) OrdersGetDiscountLinesExecute(r ApiOrdersGetDiscountLinesRequest) (*GetOrderDiscountLinesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetOrderDiscountLinesResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetOrderDiscountLinesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DiscountsAPIService.OrdersGetDiscountLines")
@@ -731,7 +717,7 @@ func (a *DiscountsAPIService) OrdersGetDiscountLinesExecute(r ApiOrdersGetDiscou
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -773,8 +759,8 @@ func (a *DiscountsAPIService) OrdersGetDiscountLinesExecute(r ApiOrdersGetDiscou
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -784,8 +770,8 @@ func (a *DiscountsAPIService) OrdersGetDiscountLinesExecute(r ApiOrdersGetDiscou
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -803,13 +789,13 @@ func (a *DiscountsAPIService) OrdersGetDiscountLinesExecute(r ApiOrdersGetDiscou
 }
 
 type ApiOrdersUpdateDiscountLinesRequest struct {
-	ctx                             context.Context
-	ApiService                      DiscountsAPI
-	id                              string
-	discountLinesId                 string
+	ctx context.Context
+	ApiService DiscountsAPI
+	id string
+	discountLinesId string
 	updateOrderDiscountLinesRequest *UpdateOrderDiscountLinesRequest
-	acceptLanguage                  *string
-	xChildCompanyId                 *string
+	acceptLanguage *string
+	xChildCompanyId *string
 }
 
 // requested field for a discount lines
@@ -837,31 +823,30 @@ func (r ApiOrdersUpdateDiscountLinesRequest) Execute() (*DiscountLinesResponse, 
 /*
 OrdersUpdateDiscountLines Update Discount
 
-Update an existing discount lines for an existing orden
+Update an existing discount line for an existing order
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@param discountLinesId discount line id identifier
-	@return ApiOrdersUpdateDiscountLinesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @param discountLinesId discount line id identifier
+ @return ApiOrdersUpdateDiscountLinesRequest
 */
 func (a *DiscountsAPIService) OrdersUpdateDiscountLines(ctx context.Context, id string, discountLinesId string) ApiOrdersUpdateDiscountLinesRequest {
 	return ApiOrdersUpdateDiscountLinesRequest{
-		ApiService:      a,
-		ctx:             ctx,
-		id:              id,
+		ApiService: a,
+		ctx: ctx,
+		id: id,
 		discountLinesId: discountLinesId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return DiscountLinesResponse
+//  @return DiscountLinesResponse
 func (a *DiscountsAPIService) OrdersUpdateDiscountLinesExecute(r ApiOrdersUpdateDiscountLinesRequest) (*DiscountLinesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *DiscountLinesResponse
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DiscountLinesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DiscountsAPIService.OrdersUpdateDiscountLines")
@@ -890,7 +875,7 @@ func (a *DiscountsAPIService) OrdersUpdateDiscountLinesExecute(r ApiOrdersUpdate
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -934,8 +919,8 @@ func (a *DiscountsAPIService) OrdersUpdateDiscountLinesExecute(r ApiOrdersUpdate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -945,8 +930,8 @@ func (a *DiscountsAPIService) OrdersUpdateDiscountLinesExecute(r ApiOrdersUpdate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
@@ -956,8 +941,8 @@ func (a *DiscountsAPIService) OrdersUpdateDiscountLinesExecute(r ApiOrdersUpdate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -967,8 +952,8 @@ func (a *DiscountsAPIService) OrdersUpdateDiscountLinesExecute(r ApiOrdersUpdate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

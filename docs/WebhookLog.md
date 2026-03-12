@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FailedAttempts** | Pointer to **int32** |  | [optional] 
-**Id** | Pointer to **string** |  | [optional] 
-**LastAttemptedAt** | Pointer to **int32** |  | [optional] 
-**LastHttpResponseStatus** | Pointer to **int32** |  | [optional] 
+**FailedAttempts** | **int32** |  | 
+**Id** | **string** |  | 
+**LastAttemptedAt** | **int64** |  | 
+**LastHttpResponseStatus** | **int32** |  | 
 **Object** | Pointer to **string** |  | [optional] 
 **ResponseData** | Pointer to **map[string]interface{}** |  | [optional] 
-**Url** | Pointer to **string** |  | [optional] 
+**Url** | **string** |  | 
 
 ## Methods
 
 ### NewWebhookLog
 
-`func NewWebhookLog() *WebhookLog`
+`func NewWebhookLog(failedAttempts int32, id string, lastAttemptedAt int64, lastHttpResponseStatus int32, url string, ) *WebhookLog`
 
 NewWebhookLog instantiates a new WebhookLog object
 This constructor will assign default values to properties that have it defined,
@@ -50,11 +50,6 @@ and a boolean to check if the value has been set.
 
 SetFailedAttempts sets FailedAttempts field to given value.
 
-### HasFailedAttempts
-
-`func (o *WebhookLog) HasFailedAttempts() bool`
-
-HasFailedAttempts returns a boolean if a field has been set.
 
 ### GetId
 
@@ -75,36 +70,26 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *WebhookLog) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetLastAttemptedAt
 
-`func (o *WebhookLog) GetLastAttemptedAt() int32`
+`func (o *WebhookLog) GetLastAttemptedAt() int64`
 
 GetLastAttemptedAt returns the LastAttemptedAt field if non-nil, zero value otherwise.
 
 ### GetLastAttemptedAtOk
 
-`func (o *WebhookLog) GetLastAttemptedAtOk() (*int32, bool)`
+`func (o *WebhookLog) GetLastAttemptedAtOk() (*int64, bool)`
 
 GetLastAttemptedAtOk returns a tuple with the LastAttemptedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLastAttemptedAt
 
-`func (o *WebhookLog) SetLastAttemptedAt(v int32)`
+`func (o *WebhookLog) SetLastAttemptedAt(v int64)`
 
 SetLastAttemptedAt sets LastAttemptedAt field to given value.
 
-### HasLastAttemptedAt
-
-`func (o *WebhookLog) HasLastAttemptedAt() bool`
-
-HasLastAttemptedAt returns a boolean if a field has been set.
 
 ### GetLastHttpResponseStatus
 
@@ -125,11 +110,6 @@ and a boolean to check if the value has been set.
 
 SetLastHttpResponseStatus sets LastHttpResponseStatus field to given value.
 
-### HasLastHttpResponseStatus
-
-`func (o *WebhookLog) HasLastHttpResponseStatus() bool`
-
-HasLastHttpResponseStatus returns a boolean if a field has been set.
 
 ### GetObject
 
@@ -181,6 +161,16 @@ SetResponseData sets ResponseData field to given value.
 
 HasResponseData returns a boolean if a field has been set.
 
+### SetResponseDataNil
+
+`func (o *WebhookLog) SetResponseDataNil(b bool)`
+
+ SetResponseDataNil sets the value for ResponseData to be an explicit nil
+
+### UnsetResponseData
+`func (o *WebhookLog) UnsetResponseData()`
+
+UnsetResponseData ensures that no value is present for ResponseData, not even an explicit nil
 ### GetUrl
 
 `func (o *WebhookLog) GetUrl() string`
@@ -200,11 +190,6 @@ and a boolean to check if the value has been set.
 
 SetUrl sets Url field to given value.
 
-### HasUrl
-
-`func (o *WebhookLog) HasUrl() bool`
-
-HasUrl returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

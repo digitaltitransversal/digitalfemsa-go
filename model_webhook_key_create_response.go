@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -13,6 +13,7 @@ package digitalfemsa
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the WebhookKeyCreateResponse type satisfies the MappedNullable interface at compile time
@@ -20,18 +21,22 @@ var _ MappedNullable = &WebhookKeyCreateResponse{}
 
 // WebhookKeyCreateResponse webhook keys model
 type WebhookKeyCreateResponse struct {
-	// Indicates if the webhook key is active
-	Active *bool `json:"active,omitempty"`
-	// Unix timestamp in seconds with the creation date of the webhook key
-	CreatedAt *int64 `json:"created_at,omitempty"`
 	// Unique identifier of the webhook key
-	Id *string `json:"id,omitempty"`
-	// Indicates if the webhook key is in live mode
-	Livemode *bool `json:"livemode,omitempty"`
+	Id string `json:"id"`
 	// Object name, value is webhook_key
-	Object *string `json:"object,omitempty"`
-	// Public key to be used in the webhook
-	PublicKey            *string `json:"public_key,omitempty"`
+	Object string `json:"object"`
+	// Indicates if the webhook key is active
+	Active bool `json:"active"`
+	// Indicates if the webhook key is in live mode
+	Livemode bool `json:"livemode"`
+	// Unix timestamp in seconds with the creation date of the webhook key
+	CreatedAt int64 `json:"created_at"`
+	// Unix timestamp in seconds when the webhook key was deactivated (if applicable).
+	DeactivatedAt NullableInt64 `json:"deactivated_at,omitempty"`
+	// Present only when the webhook key is deleted.
+	Deleted NullableBool `json:"deleted,omitempty"`
+	// Public key to be used in the webhook.
+	PublicKey NullableString `json:"public_key,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -41,8 +46,13 @@ type _WebhookKeyCreateResponse WebhookKeyCreateResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWebhookKeyCreateResponse() *WebhookKeyCreateResponse {
+func NewWebhookKeyCreateResponse(id string, object string, active bool, livemode bool, createdAt int64) *WebhookKeyCreateResponse {
 	this := WebhookKeyCreateResponse{}
+	this.Id = id
+	this.Object = object
+	this.Active = active
+	this.Livemode = livemode
+	this.CreatedAt = createdAt
 	return &this
 }
 
@@ -54,200 +64,254 @@ func NewWebhookKeyCreateResponseWithDefaults() *WebhookKeyCreateResponse {
 	return &this
 }
 
-// GetActive returns the Active field value if set, zero value otherwise.
+// GetId returns the Id field value
+func (o *WebhookKeyCreateResponse) GetId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *WebhookKeyCreateResponse) GetIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *WebhookKeyCreateResponse) SetId(v string) {
+	o.Id = v
+}
+
+// GetObject returns the Object field value
+func (o *WebhookKeyCreateResponse) GetObject() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Object
+}
+
+// GetObjectOk returns a tuple with the Object field value
+// and a boolean to check if the value has been set.
+func (o *WebhookKeyCreateResponse) GetObjectOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Object, true
+}
+
+// SetObject sets field value
+func (o *WebhookKeyCreateResponse) SetObject(v string) {
+	o.Object = v
+}
+
+// GetActive returns the Active field value
 func (o *WebhookKeyCreateResponse) GetActive() bool {
-	if o == nil || IsNil(o.Active) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Active
+
+	return o.Active
 }
 
-// GetActiveOk returns a tuple with the Active field value if set, nil otherwise
+// GetActiveOk returns a tuple with the Active field value
 // and a boolean to check if the value has been set.
 func (o *WebhookKeyCreateResponse) GetActiveOk() (*bool, bool) {
-	if o == nil || IsNil(o.Active) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Active, true
+	return &o.Active, true
 }
 
-// HasActive returns a boolean if a field has been set.
-func (o *WebhookKeyCreateResponse) HasActive() bool {
-	if o != nil && !IsNil(o.Active) {
-		return true
+// SetActive sets field value
+func (o *WebhookKeyCreateResponse) SetActive(v bool) {
+	o.Active = v
+}
+
+// GetLivemode returns the Livemode field value
+func (o *WebhookKeyCreateResponse) GetLivemode() bool {
+	if o == nil {
+		var ret bool
+		return ret
 	}
 
-	return false
+	return o.Livemode
 }
 
-// SetActive gets a reference to the given bool and assigns it to the Active field.
-func (o *WebhookKeyCreateResponse) SetActive(v bool) {
-	o.Active = &v
+// GetLivemodeOk returns a tuple with the Livemode field value
+// and a boolean to check if the value has been set.
+func (o *WebhookKeyCreateResponse) GetLivemodeOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Livemode, true
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// SetLivemode sets field value
+func (o *WebhookKeyCreateResponse) SetLivemode(v bool) {
+	o.Livemode = v
+}
+
+// GetCreatedAt returns the CreatedAt field value
 func (o *WebhookKeyCreateResponse) GetCreatedAt() int64 {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.CreatedAt
+
+	return o.CreatedAt
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *WebhookKeyCreateResponse) GetCreatedAtOk() (*int64, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return &o.CreatedAt, true
 }
 
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *WebhookKeyCreateResponse) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given int64 and assigns it to the CreatedAt field.
+// SetCreatedAt sets field value
 func (o *WebhookKeyCreateResponse) SetCreatedAt(v int64) {
-	o.CreatedAt = &v
+	o.CreatedAt = v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *WebhookKeyCreateResponse) GetId() string {
-	if o == nil || IsNil(o.Id) {
-		var ret string
+// GetDeactivatedAt returns the DeactivatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WebhookKeyCreateResponse) GetDeactivatedAt() int64 {
+	if o == nil || IsNil(o.DeactivatedAt.Get()) {
+		var ret int64
 		return ret
 	}
-	return *o.Id
+	return *o.DeactivatedAt.Get()
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetDeactivatedAtOk returns a tuple with the DeactivatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WebhookKeyCreateResponse) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WebhookKeyCreateResponse) GetDeactivatedAtOk() (*int64, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return o.DeactivatedAt.Get(), o.DeactivatedAt.IsSet()
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *WebhookKeyCreateResponse) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
+// HasDeactivatedAt returns a boolean if a field has been set.
+func (o *WebhookKeyCreateResponse) HasDeactivatedAt() bool {
+	if o != nil && o.DeactivatedAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetId gets a reference to the given string and assigns it to the Id field.
-func (o *WebhookKeyCreateResponse) SetId(v string) {
-	o.Id = &v
+// SetDeactivatedAt gets a reference to the given NullableInt64 and assigns it to the DeactivatedAt field.
+func (o *WebhookKeyCreateResponse) SetDeactivatedAt(v int64) {
+	o.DeactivatedAt.Set(&v)
+}
+// SetDeactivatedAtNil sets the value for DeactivatedAt to be an explicit nil
+func (o *WebhookKeyCreateResponse) SetDeactivatedAtNil() {
+	o.DeactivatedAt.Set(nil)
 }
 
-// GetLivemode returns the Livemode field value if set, zero value otherwise.
-func (o *WebhookKeyCreateResponse) GetLivemode() bool {
-	if o == nil || IsNil(o.Livemode) {
+// UnsetDeactivatedAt ensures that no value is present for DeactivatedAt, not even an explicit nil
+func (o *WebhookKeyCreateResponse) UnsetDeactivatedAt() {
+	o.DeactivatedAt.Unset()
+}
+
+// GetDeleted returns the Deleted field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WebhookKeyCreateResponse) GetDeleted() bool {
+	if o == nil || IsNil(o.Deleted.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.Livemode
+	return *o.Deleted.Get()
 }
 
-// GetLivemodeOk returns a tuple with the Livemode field value if set, nil otherwise
+// GetDeletedOk returns a tuple with the Deleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WebhookKeyCreateResponse) GetLivemodeOk() (*bool, bool) {
-	if o == nil || IsNil(o.Livemode) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WebhookKeyCreateResponse) GetDeletedOk() (*bool, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Livemode, true
+	return o.Deleted.Get(), o.Deleted.IsSet()
 }
 
-// HasLivemode returns a boolean if a field has been set.
-func (o *WebhookKeyCreateResponse) HasLivemode() bool {
-	if o != nil && !IsNil(o.Livemode) {
+// HasDeleted returns a boolean if a field has been set.
+func (o *WebhookKeyCreateResponse) HasDeleted() bool {
+	if o != nil && o.Deleted.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLivemode gets a reference to the given bool and assigns it to the Livemode field.
-func (o *WebhookKeyCreateResponse) SetLivemode(v bool) {
-	o.Livemode = &v
+// SetDeleted gets a reference to the given NullableBool and assigns it to the Deleted field.
+func (o *WebhookKeyCreateResponse) SetDeleted(v bool) {
+	o.Deleted.Set(&v)
+}
+// SetDeletedNil sets the value for Deleted to be an explicit nil
+func (o *WebhookKeyCreateResponse) SetDeletedNil() {
+	o.Deleted.Set(nil)
 }
 
-// GetObject returns the Object field value if set, zero value otherwise.
-func (o *WebhookKeyCreateResponse) GetObject() string {
-	if o == nil || IsNil(o.Object) {
-		var ret string
-		return ret
-	}
-	return *o.Object
+// UnsetDeleted ensures that no value is present for Deleted, not even an explicit nil
+func (o *WebhookKeyCreateResponse) UnsetDeleted() {
+	o.Deleted.Unset()
 }
 
-// GetObjectOk returns a tuple with the Object field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *WebhookKeyCreateResponse) GetObjectOk() (*string, bool) {
-	if o == nil || IsNil(o.Object) {
-		return nil, false
-	}
-	return o.Object, true
-}
-
-// HasObject returns a boolean if a field has been set.
-func (o *WebhookKeyCreateResponse) HasObject() bool {
-	if o != nil && !IsNil(o.Object) {
-		return true
-	}
-
-	return false
-}
-
-// SetObject gets a reference to the given string and assigns it to the Object field.
-func (o *WebhookKeyCreateResponse) SetObject(v string) {
-	o.Object = &v
-}
-
-// GetPublicKey returns the PublicKey field value if set, zero value otherwise.
+// GetPublicKey returns the PublicKey field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WebhookKeyCreateResponse) GetPublicKey() string {
-	if o == nil || IsNil(o.PublicKey) {
+	if o == nil || IsNil(o.PublicKey.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.PublicKey
+	return *o.PublicKey.Get()
 }
 
 // GetPublicKeyOk returns a tuple with the PublicKey field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WebhookKeyCreateResponse) GetPublicKeyOk() (*string, bool) {
-	if o == nil || IsNil(o.PublicKey) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PublicKey, true
+	return o.PublicKey.Get(), o.PublicKey.IsSet()
 }
 
 // HasPublicKey returns a boolean if a field has been set.
 func (o *WebhookKeyCreateResponse) HasPublicKey() bool {
-	if o != nil && !IsNil(o.PublicKey) {
+	if o != nil && o.PublicKey.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPublicKey gets a reference to the given string and assigns it to the PublicKey field.
+// SetPublicKey gets a reference to the given NullableString and assigns it to the PublicKey field.
 func (o *WebhookKeyCreateResponse) SetPublicKey(v string) {
-	o.PublicKey = &v
+	o.PublicKey.Set(&v)
+}
+// SetPublicKeyNil sets the value for PublicKey to be an explicit nil
+func (o *WebhookKeyCreateResponse) SetPublicKeyNil() {
+	o.PublicKey.Set(nil)
+}
+
+// UnsetPublicKey ensures that no value is present for PublicKey, not even an explicit nil
+func (o *WebhookKeyCreateResponse) UnsetPublicKey() {
+	o.PublicKey.Unset()
 }
 
 func (o WebhookKeyCreateResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -256,23 +320,19 @@ func (o WebhookKeyCreateResponse) MarshalJSON() ([]byte, error) {
 
 func (o WebhookKeyCreateResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Active) {
-		toSerialize["active"] = o.Active
+	toSerialize["id"] = o.Id
+	toSerialize["object"] = o.Object
+	toSerialize["active"] = o.Active
+	toSerialize["livemode"] = o.Livemode
+	toSerialize["created_at"] = o.CreatedAt
+	if o.DeactivatedAt.IsSet() {
+		toSerialize["deactivated_at"] = o.DeactivatedAt.Get()
 	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
+	if o.Deleted.IsSet() {
+		toSerialize["deleted"] = o.Deleted.Get()
 	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.Livemode) {
-		toSerialize["livemode"] = o.Livemode
-	}
-	if !IsNil(o.Object) {
-		toSerialize["object"] = o.Object
-	}
-	if !IsNil(o.PublicKey) {
-		toSerialize["public_key"] = o.PublicKey
+	if o.PublicKey.IsSet() {
+		toSerialize["public_key"] = o.PublicKey.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -283,6 +343,31 @@ func (o WebhookKeyCreateResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *WebhookKeyCreateResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+		"object",
+		"active",
+		"livemode",
+		"created_at",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varWebhookKeyCreateResponse := _WebhookKeyCreateResponse{}
 
 	err = json.Unmarshal(data, &varWebhookKeyCreateResponse)
@@ -296,11 +381,13 @@ func (o *WebhookKeyCreateResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "active")
-		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "id")
-		delete(additionalProperties, "livemode")
 		delete(additionalProperties, "object")
+		delete(additionalProperties, "active")
+		delete(additionalProperties, "livemode")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "deactivated_at")
+		delete(additionalProperties, "deleted")
 		delete(additionalProperties, "public_key")
 		o.AdditionalProperties = additionalProperties
 	}
@@ -343,3 +430,5 @@ func (v *NullableWebhookKeyCreateResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

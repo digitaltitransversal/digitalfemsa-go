@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -21,11 +21,12 @@ var _ MappedNullable = &CustomerInfo{}
 
 // CustomerInfo struct for CustomerInfo
 type CustomerInfo struct {
-	Name                 string  `json:"name"`
-	Email                string  `json:"email"`
-	Phone                string  `json:"phone"`
-	Corporate            *bool   `json:"corporate,omitempty"`
-	Object               *string `json:"object,omitempty"`
+	CustomerId *string `json:"customer_id,omitempty"`
+	Name string `json:"name"`
+	Email string `json:"email"`
+	Phone string `json:"phone"`
+	Corporate *bool `json:"corporate,omitempty"`
+	Object *string `json:"object,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -49,6 +50,38 @@ func NewCustomerInfo(name string, email string, phone string) *CustomerInfo {
 func NewCustomerInfoWithDefaults() *CustomerInfo {
 	this := CustomerInfo{}
 	return &this
+}
+
+// GetCustomerId returns the CustomerId field value if set, zero value otherwise.
+func (o *CustomerInfo) GetCustomerId() string {
+	if o == nil || IsNil(o.CustomerId) {
+		var ret string
+		return ret
+	}
+	return *o.CustomerId
+}
+
+// GetCustomerIdOk returns a tuple with the CustomerId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CustomerInfo) GetCustomerIdOk() (*string, bool) {
+	if o == nil || IsNil(o.CustomerId) {
+		return nil, false
+	}
+	return o.CustomerId, true
+}
+
+// HasCustomerId returns a boolean if a field has been set.
+func (o *CustomerInfo) HasCustomerId() bool {
+	if o != nil && !IsNil(o.CustomerId) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomerId gets a reference to the given string and assigns it to the CustomerId field.
+func (o *CustomerInfo) SetCustomerId(v string) {
+	o.CustomerId = &v
 }
 
 // GetName returns the Name field value
@@ -188,7 +221,7 @@ func (o *CustomerInfo) SetObject(v string) {
 }
 
 func (o CustomerInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -197,6 +230,9 @@ func (o CustomerInfo) MarshalJSON() ([]byte, error) {
 
 func (o CustomerInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CustomerId) {
+		toSerialize["customer_id"] = o.CustomerId
+	}
 	toSerialize["name"] = o.Name
 	toSerialize["email"] = o.Email
 	toSerialize["phone"] = o.Phone
@@ -229,10 +265,10 @@ func (o *CustomerInfo) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -251,6 +287,7 @@ func (o *CustomerInfo) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "customer_id")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "email")
 		delete(additionalProperties, "phone")
@@ -297,3 +334,5 @@ func (v *NullableCustomerInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

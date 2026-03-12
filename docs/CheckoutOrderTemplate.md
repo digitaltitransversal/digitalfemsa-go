@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Currency** | **string** | It is the currency in which the order will be created. It must be a valid ISO 4217 currency code. | 
-**CustomerInfo** | Pointer to [**CheckoutOrderTemplateCustomerInfo**](CheckoutOrderTemplateCustomerInfo.md) |  | [optional] 
+**CustomerInfo** | Pointer to [**CustomerInfo**](CustomerInfo.md) |  | [optional] 
 **LineItems** | [**[]Product**](Product.md) | They are the products to buy. Each contains the \&quot;unit price\&quot; and \&quot;quantity\&quot; parameters that are used to calculate the total amount of the order. | 
 **Metadata** | Pointer to **map[string]interface{}** | It is a set of key-value pairs that you can attach to the order. It can be used to store additional information about the order in a structured format. | [optional] 
 
@@ -50,20 +50,20 @@ SetCurrency sets Currency field to given value.
 
 ### GetCustomerInfo
 
-`func (o *CheckoutOrderTemplate) GetCustomerInfo() CheckoutOrderTemplateCustomerInfo`
+`func (o *CheckoutOrderTemplate) GetCustomerInfo() CustomerInfo`
 
 GetCustomerInfo returns the CustomerInfo field if non-nil, zero value otherwise.
 
 ### GetCustomerInfoOk
 
-`func (o *CheckoutOrderTemplate) GetCustomerInfoOk() (*CheckoutOrderTemplateCustomerInfo, bool)`
+`func (o *CheckoutOrderTemplate) GetCustomerInfoOk() (*CustomerInfo, bool)`
 
 GetCustomerInfoOk returns a tuple with the CustomerInfo field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCustomerInfo
 
-`func (o *CheckoutOrderTemplate) SetCustomerInfo(v CheckoutOrderTemplateCustomerInfo)`
+`func (o *CheckoutOrderTemplate) SetCustomerInfo(v CustomerInfo)`
 
 SetCustomerInfo sets CustomerInfo field to given value.
 

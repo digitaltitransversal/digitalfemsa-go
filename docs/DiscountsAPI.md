@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**OrdersCreateDiscountLine**](DiscountsAPI.md#OrdersCreateDiscountLine) | **Post** /orders/{id}/discount_lines | Create Discount
 [**OrdersDeleteDiscountLines**](DiscountsAPI.md#OrdersDeleteDiscountLines) | **Delete** /orders/{id}/discount_lines/{discount_lines_id} | Delete Discount
 [**OrdersGetDiscountLine**](DiscountsAPI.md#OrdersGetDiscountLine) | **Get** /orders/{id}/discount_lines/{discount_lines_id} | Get Discount
-[**OrdersGetDiscountLines**](DiscountsAPI.md#OrdersGetDiscountLines) | **Get** /orders/{id}/discount_lines | Get a List of Discount
+[**OrdersGetDiscountLines**](DiscountsAPI.md#OrdersGetDiscountLines) | **Get** /orders/{id}/discount_lines | Get a List of Discounts
 [**OrdersUpdateDiscountLines**](DiscountsAPI.md#OrdersUpdateDiscountLines) | **Put** /orders/{id}/discount_lines/{discount_lines_id} | Update Discount
 
 
@@ -81,7 +81,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -158,7 +158,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -235,7 +235,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -246,7 +246,7 @@ Name | Type | Description  | Notes
 
 > GetOrderDiscountLinesResponse OrdersGetDiscountLines(ctx, id).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Limit(limit).Search(search).Next(next).Previous(previous).Execute()
 
-Get a List of Discount
+Get a List of Discounts
 
 
 
@@ -317,7 +317,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -396,7 +396,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

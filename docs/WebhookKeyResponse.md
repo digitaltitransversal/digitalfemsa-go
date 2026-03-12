@@ -4,19 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | Unique identifier of the webhook key | [optional] 
-**Active** | Pointer to **bool** | Indicates if the webhook key is active | [optional] 
-**CreatedAt** | Pointer to **int64** | Unix timestamp in seconds with the creation date of the webhook key | [optional] 
-**DeactivatedAt** | Pointer to **NullableInt64** | Unix timestamp in seconds with the deactivation date of the webhook key | [optional] 
-**PublicKey** | Pointer to **string** | Public key to be used in the webhook | [optional] 
-**Livemode** | Pointer to **bool** | Indicates if the webhook key is in live mode | [optional] 
-**Object** | Pointer to **string** | Object name, value is webhook_key | [optional] 
+**Id** | **string** | Unique identifier of the webhook key | 
+**Object** | **string** | Object name, value is webhook_key | 
+**Active** | **bool** | Indicates if the webhook key is active | 
+**Livemode** | **bool** | Indicates if the webhook key is in live mode | 
+**CreatedAt** | **int64** | Unix timestamp in seconds with the creation date of the webhook key | 
+**DeactivatedAt** | Pointer to **NullableInt64** | Unix timestamp in seconds when the webhook key was deactivated (if applicable). | [optional] 
+**Deleted** | Pointer to **NullableBool** | Present only when the webhook key is deleted. | [optional] 
+**PublicKey** | Pointer to **NullableString** | Public key to be used in the webhook. | [optional] 
 
 ## Methods
 
 ### NewWebhookKeyResponse
 
-`func NewWebhookKeyResponse() *WebhookKeyResponse`
+`func NewWebhookKeyResponse(id string, object string, active bool, livemode bool, createdAt int64, ) *WebhookKeyResponse`
 
 NewWebhookKeyResponse instantiates a new WebhookKeyResponse object
 This constructor will assign default values to properties that have it defined,
@@ -50,11 +51,26 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
 
-`func (o *WebhookKeyResponse) HasId() bool`
+### GetObject
 
-HasId returns a boolean if a field has been set.
+`func (o *WebhookKeyResponse) GetObject() string`
+
+GetObject returns the Object field if non-nil, zero value otherwise.
+
+### GetObjectOk
+
+`func (o *WebhookKeyResponse) GetObjectOk() (*string, bool)`
+
+GetObjectOk returns a tuple with the Object field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObject
+
+`func (o *WebhookKeyResponse) SetObject(v string)`
+
+SetObject sets Object field to given value.
+
 
 ### GetActive
 
@@ -75,11 +91,26 @@ and a boolean to check if the value has been set.
 
 SetActive sets Active field to given value.
 
-### HasActive
 
-`func (o *WebhookKeyResponse) HasActive() bool`
+### GetLivemode
 
-HasActive returns a boolean if a field has been set.
+`func (o *WebhookKeyResponse) GetLivemode() bool`
+
+GetLivemode returns the Livemode field if non-nil, zero value otherwise.
+
+### GetLivemodeOk
+
+`func (o *WebhookKeyResponse) GetLivemodeOk() (*bool, bool)`
+
+GetLivemodeOk returns a tuple with the Livemode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLivemode
+
+`func (o *WebhookKeyResponse) SetLivemode(v bool)`
+
+SetLivemode sets Livemode field to given value.
+
 
 ### GetCreatedAt
 
@@ -100,11 +131,6 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
-### HasCreatedAt
-
-`func (o *WebhookKeyResponse) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetDeactivatedAt
 
@@ -141,6 +167,41 @@ HasDeactivatedAt returns a boolean if a field has been set.
 `func (o *WebhookKeyResponse) UnsetDeactivatedAt()`
 
 UnsetDeactivatedAt ensures that no value is present for DeactivatedAt, not even an explicit nil
+### GetDeleted
+
+`func (o *WebhookKeyResponse) GetDeleted() bool`
+
+GetDeleted returns the Deleted field if non-nil, zero value otherwise.
+
+### GetDeletedOk
+
+`func (o *WebhookKeyResponse) GetDeletedOk() (*bool, bool)`
+
+GetDeletedOk returns a tuple with the Deleted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeleted
+
+`func (o *WebhookKeyResponse) SetDeleted(v bool)`
+
+SetDeleted sets Deleted field to given value.
+
+### HasDeleted
+
+`func (o *WebhookKeyResponse) HasDeleted() bool`
+
+HasDeleted returns a boolean if a field has been set.
+
+### SetDeletedNil
+
+`func (o *WebhookKeyResponse) SetDeletedNil(b bool)`
+
+ SetDeletedNil sets the value for Deleted to be an explicit nil
+
+### UnsetDeleted
+`func (o *WebhookKeyResponse) UnsetDeleted()`
+
+UnsetDeleted ensures that no value is present for Deleted, not even an explicit nil
 ### GetPublicKey
 
 `func (o *WebhookKeyResponse) GetPublicKey() string`
@@ -166,56 +227,16 @@ SetPublicKey sets PublicKey field to given value.
 
 HasPublicKey returns a boolean if a field has been set.
 
-### GetLivemode
+### SetPublicKeyNil
 
-`func (o *WebhookKeyResponse) GetLivemode() bool`
+`func (o *WebhookKeyResponse) SetPublicKeyNil(b bool)`
 
-GetLivemode returns the Livemode field if non-nil, zero value otherwise.
+ SetPublicKeyNil sets the value for PublicKey to be an explicit nil
 
-### GetLivemodeOk
+### UnsetPublicKey
+`func (o *WebhookKeyResponse) UnsetPublicKey()`
 
-`func (o *WebhookKeyResponse) GetLivemodeOk() (*bool, bool)`
-
-GetLivemodeOk returns a tuple with the Livemode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLivemode
-
-`func (o *WebhookKeyResponse) SetLivemode(v bool)`
-
-SetLivemode sets Livemode field to given value.
-
-### HasLivemode
-
-`func (o *WebhookKeyResponse) HasLivemode() bool`
-
-HasLivemode returns a boolean if a field has been set.
-
-### GetObject
-
-`func (o *WebhookKeyResponse) GetObject() string`
-
-GetObject returns the Object field if non-nil, zero value otherwise.
-
-### GetObjectOk
-
-`func (o *WebhookKeyResponse) GetObjectOk() (*string, bool)`
-
-GetObjectOk returns a tuple with the Object field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetObject
-
-`func (o *WebhookKeyResponse) SetObject(v string)`
-
-SetObject sets Object field to given value.
-
-### HasObject
-
-`func (o *WebhookKeyResponse) HasObject() bool`
-
-HasObject returns a boolean if a field has been set.
-
+UnsetPublicKey ensures that no value is present for PublicKey, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

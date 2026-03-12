@@ -4,9 +4,9 @@ All URIs are relative to *https://api.digitalfemsa.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateCustomerShippingContacts**](ShippingContactsAPI.md#CreateCustomerShippingContacts) | **Post** /customers/{id}/shipping_contacts | Create a shipping contacts
-[**DeleteCustomerShippingContacts**](ShippingContactsAPI.md#DeleteCustomerShippingContacts) | **Delete** /customers/{id}/shipping_contacts/{shipping_contacts_id} | Delete shipping contacts
-[**UpdateCustomerShippingContacts**](ShippingContactsAPI.md#UpdateCustomerShippingContacts) | **Put** /customers/{id}/shipping_contacts/{shipping_contacts_id} | Update shipping contacts
+[**CreateCustomerShippingContacts**](ShippingContactsAPI.md#CreateCustomerShippingContacts) | **Post** /customers/{id}/shipping_contacts | Create a shipping contact
+[**DeleteCustomerShippingContacts**](ShippingContactsAPI.md#DeleteCustomerShippingContacts) | **Delete** /customers/{id}/shipping_contacts/{shipping_contacts_id} | Delete shipping contact
+[**UpdateCustomerShippingContacts**](ShippingContactsAPI.md#UpdateCustomerShippingContacts) | **Put** /customers/{id}/shipping_contacts/{shipping_contacts_id} | Update shipping contact
 
 
 
@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 > CustomerShippingContactsResponse CreateCustomerShippingContacts(ctx, id).CustomerShippingContacts(customerShippingContacts).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 
-Create a shipping contacts
+Create a shipping contact
 
 
 
@@ -32,7 +32,7 @@ import (
 
 func main() {
 	id := "6307a60c41de27127515a575" // string | Identifier of the resource
-	customerShippingContacts := *openapiclient.NewCustomerShippingContacts(*openapiclient.NewCustomerShippingContactsAddress()) // CustomerShippingContacts | requested field for customer shippings contacts
+	customerShippingContacts := *openapiclient.NewCustomerShippingContacts(*openapiclient.NewCustomerShippingContactsAddress()) // CustomerShippingContacts | Request body for creating or updating a customer shipping contact.
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
 	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -64,7 +64,7 @@ Other parameters are passed through a pointer to a apiCreateCustomerShippingCont
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **customerShippingContacts** | [**CustomerShippingContacts**](CustomerShippingContacts.md) | requested field for customer shippings contacts | 
+ **customerShippingContacts** | [**CustomerShippingContacts**](CustomerShippingContacts.md) | Request body for creating or updating a customer shipping contact. | 
  **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
  **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
 
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 > CustomerShippingContactsResponse DeleteCustomerShippingContacts(ctx, id, shippingContactsId).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 
-Delete shipping contacts
+Delete shipping contact
 
 
 
@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -167,7 +167,7 @@ Name | Type | Description  | Notes
 
 > CustomerShippingContactsResponse UpdateCustomerShippingContacts(ctx, id, shippingContactsId).CustomerUpdateShippingContacts(customerUpdateShippingContacts).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 
-Update shipping contacts
+Update shipping contact
 
 
 
@@ -186,7 +186,7 @@ import (
 func main() {
 	id := "6307a60c41de27127515a575" // string | Identifier of the resource
 	shippingContactsId := "6307a60c41de27127515a575" // string | identifier
-	customerUpdateShippingContacts := *openapiclient.NewCustomerUpdateShippingContacts() // CustomerUpdateShippingContacts | requested field for customer update shippings contacts
+	customerUpdateShippingContacts := *openapiclient.NewCustomerUpdateShippingContacts() // CustomerUpdateShippingContacts | Request body for updating a customer shipping contact.
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
 	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -220,7 +220,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **customerUpdateShippingContacts** | [**CustomerUpdateShippingContacts**](CustomerUpdateShippingContacts.md) | requested field for customer update shippings contacts | 
+ **customerUpdateShippingContacts** | [**CustomerUpdateShippingContacts**](CustomerUpdateShippingContacts.md) | Request body for updating a customer shipping contact. | 
  **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
  **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
 
@@ -235,7 +235,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

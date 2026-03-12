@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -28,6 +28,7 @@ func PaymentMethodCashAsChargeOrderResponsePaymentMethod(v *PaymentMethodCash) C
 	}
 }
 
+
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *ChargeOrderResponsePaymentMethod) UnmarshalJSON(data []byte) error {
 	var err error
@@ -36,18 +37,6 @@ func (dst *ChargeOrderResponsePaymentMethod) UnmarshalJSON(data []byte) error {
 	err = newStrictDecoder(data).Decode(&jsonDict)
 	if err != nil {
 		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
-	}
-
-	// check if the discriminator value is 'cash_payment'
-	if jsonDict["object"] == "cash_payment" {
-		// try to unmarshal JSON data into PaymentMethodCash
-		err = json.Unmarshal(data, &dst.PaymentMethodCash)
-		if err == nil {
-			return nil // data stored in dst.PaymentMethodCash, return on the first match
-		} else {
-			dst.PaymentMethodCash = nil
-			return fmt.Errorf("failed to unmarshal ChargeOrderResponsePaymentMethod as PaymentMethodCash: %s", err.Error())
-		}
 	}
 
 	// check if the discriminator value is 'payment_method_cash'
@@ -75,7 +64,7 @@ func (src ChargeOrderResponsePaymentMethod) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *ChargeOrderResponsePaymentMethod) GetActualInstance() interface{} {
+func (obj *ChargeOrderResponsePaymentMethod) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -122,3 +111,5 @@ func (v *NullableChargeOrderResponsePaymentMethod) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -5,16 +5,16 @@ All URIs are relative to *https://api.digitalfemsa.io*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateWebhookKey**](WebhookKeysAPI.md#CreateWebhookKey) | **Post** /webhook_keys | Create Webhook Key
-[**DeleteWebhookKey**](WebhookKeysAPI.md#DeleteWebhookKey) | **Delete** /webhook_keys/{id} | Delete Webhook key
-[**GetWebhookKey**](WebhookKeysAPI.md#GetWebhookKey) | **Get** /webhook_keys/{id} | Get Webhook Key
+[**DeleteWebhookKey**](WebhookKeysAPI.md#DeleteWebhookKey) | **Delete** /webhook_keys/{id} | Delete webhook key
+[**GetWebhookKey**](WebhookKeysAPI.md#GetWebhookKey) | **Get** /webhook_keys/{id} | Get webhook key
 [**GetWebhookKeys**](WebhookKeysAPI.md#GetWebhookKeys) | **Get** /webhook_keys | Get List of Webhook Keys
-[**UpdateWebhookKey**](WebhookKeysAPI.md#UpdateWebhookKey) | **Put** /webhook_keys/{id} | Update Webhook Key
+[**UpdateWebhookKey**](WebhookKeysAPI.md#UpdateWebhookKey) | **Put** /webhook_keys/{id} | Update webhook key
 
 
 
 ## CreateWebhookKey
 
-> WebhookKeyCreateResponse CreateWebhookKey(ctx).AcceptLanguage(acceptLanguage).WebhookKeyRequest(webhookKeyRequest).Execute()
+> WebhookKeyCreateResponse CreateWebhookKey(ctx).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).WebhookKeyRequest(webhookKeyRequest).Execute()
 
 Create Webhook Key
 
@@ -34,11 +34,12 @@ import (
 
 func main() {
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
+	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 	webhookKeyRequest := *openapiclient.NewWebhookKeyRequest() // WebhookKeyRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WebhookKeysAPI.CreateWebhookKey(context.Background()).AcceptLanguage(acceptLanguage).WebhookKeyRequest(webhookKeyRequest).Execute()
+	resp, r, err := apiClient.WebhookKeysAPI.CreateWebhookKey(context.Background()).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).WebhookKeyRequest(webhookKeyRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `WebhookKeysAPI.CreateWebhookKey``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -60,6 +61,7 @@ Other parameters are passed through a pointer to a apiCreateWebhookKeyRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
+ **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
  **webhookKeyRequest** | [**WebhookKeyRequest**](WebhookKeyRequest.md) |  | 
 
 ### Return type
@@ -73,7 +75,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -84,7 +86,9 @@ Name | Type | Description  | Notes
 
 > WebhookKeyDeleteResponse DeleteWebhookKey(ctx, id).AcceptLanguage(acceptLanguage).Execute()
 
-Delete Webhook key
+Delete webhook key
+
+
 
 ### Example
 
@@ -143,7 +147,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -154,7 +158,9 @@ Name | Type | Description  | Notes
 
 > WebhookKeyResponse GetWebhookKey(ctx, id).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 
-Get Webhook Key
+Get webhook key
+
+
 
 ### Example
 
@@ -215,7 +221,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -291,7 +297,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -302,7 +308,7 @@ Name | Type | Description  | Notes
 
 > WebhookKeyResponse UpdateWebhookKey(ctx, id).AcceptLanguage(acceptLanguage).WebhookKeyUpdateRequest(webhookKeyUpdateRequest).Execute()
 
-Update Webhook Key
+Update webhook key
 
 
 
@@ -364,8 +370,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Content-Type**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

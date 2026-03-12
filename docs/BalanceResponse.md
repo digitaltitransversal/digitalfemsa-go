@@ -4,22 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Available** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | The balance&#39;s available | [optional] 
-**CashoutRetentionAmount** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | The balance&#39;s cashout retention amount | [optional] 
-**ConektaRetention** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | The balance&#39;s Femsa retention | [optional] 
-**Gateway** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | The balance&#39;s gateway | [optional] 
-**Pending** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | The balance&#39;s pending | [optional] 
-**Retained** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | The balance&#39;s retained | [optional] 
-**RetentionAmount** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | The balance&#39;s retention amount | [optional] 
-**TargetCollateralAmount** | Pointer to **map[string]interface{}** | The balance&#39;s target collateral amount | [optional] 
-**TargetRetentionAmount** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | The balance&#39;s target retention amount | [optional] 
-**TemporarilyRetained** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | The balance&#39;s temporarily retained | [optional] 
+**Available** | [**[]BalanceCommonField**](BalanceCommonField.md) | Amounts currently available, grouped by currency. | 
+**Pending** | [**[]BalanceCommonField**](BalanceCommonField.md) | Amounts pending settlement, grouped by currency. | 
+**RetentionAmount** | [**[]BalanceCommonField**](BalanceCommonField.md) | Retention amount applied, grouped by currency. | 
+**Retained** | [**[]BalanceCommonField**](BalanceCommonField.md) | Amounts currently retained, grouped by currency. | 
+**TemporarilyRetained** | [**[]BalanceCommonField**](BalanceCommonField.md) | Amounts temporarily retained, grouped by currency. | 
+**TargetRetentionAmount** | [**[]BalanceCommonField**](BalanceCommonField.md) | Target retention amount, grouped by currency. | 
+**TargetTemporaryRetentionAmount** | [**[]BalanceCommonField**](BalanceCommonField.md) | Target temporary retention amount, grouped by currency. | 
+**TargetCollateralAmount** | [**[]BalanceCommonField**](BalanceCommonField.md) | Target collateral amount, grouped by currency. | 
+**Gateway** | [**[]BalanceCommonField**](BalanceCommonField.md) | Gateway balance amounts, grouped by currency. | 
+**CashoutRetentionDebited** | [**[]BalanceCommonField**](BalanceCommonField.md) | Cashout retention debited amounts, grouped by currency. | 
 
 ## Methods
 
 ### NewBalanceResponse
 
-`func NewBalanceResponse() *BalanceResponse`
+`func NewBalanceResponse(available []BalanceCommonField, pending []BalanceCommonField, retentionAmount []BalanceCommonField, retained []BalanceCommonField, temporarilyRetained []BalanceCommonField, targetRetentionAmount []BalanceCommonField, targetTemporaryRetentionAmount []BalanceCommonField, targetCollateralAmount []BalanceCommonField, gateway []BalanceCommonField, cashoutRetentionDebited []BalanceCommonField, ) *BalanceResponse`
 
 NewBalanceResponse instantiates a new BalanceResponse object
 This constructor will assign default values to properties that have it defined,
@@ -53,86 +53,6 @@ and a boolean to check if the value has been set.
 
 SetAvailable sets Available field to given value.
 
-### HasAvailable
-
-`func (o *BalanceResponse) HasAvailable() bool`
-
-HasAvailable returns a boolean if a field has been set.
-
-### GetCashoutRetentionAmount
-
-`func (o *BalanceResponse) GetCashoutRetentionAmount() []BalanceCommonField`
-
-GetCashoutRetentionAmount returns the CashoutRetentionAmount field if non-nil, zero value otherwise.
-
-### GetCashoutRetentionAmountOk
-
-`func (o *BalanceResponse) GetCashoutRetentionAmountOk() (*[]BalanceCommonField, bool)`
-
-GetCashoutRetentionAmountOk returns a tuple with the CashoutRetentionAmount field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCashoutRetentionAmount
-
-`func (o *BalanceResponse) SetCashoutRetentionAmount(v []BalanceCommonField)`
-
-SetCashoutRetentionAmount sets CashoutRetentionAmount field to given value.
-
-### HasCashoutRetentionAmount
-
-`func (o *BalanceResponse) HasCashoutRetentionAmount() bool`
-
-HasCashoutRetentionAmount returns a boolean if a field has been set.
-
-### GetConektaRetention
-
-`func (o *BalanceResponse) GetConektaRetention() []BalanceCommonField`
-
-GetConektaRetention returns the ConektaRetention field if non-nil, zero value otherwise.
-
-### GetConektaRetentionOk
-
-`func (o *BalanceResponse) GetConektaRetentionOk() (*[]BalanceCommonField, bool)`
-
-GetConektaRetentionOk returns a tuple with the ConektaRetention field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetConektaRetention
-
-`func (o *BalanceResponse) SetConektaRetention(v []BalanceCommonField)`
-
-SetConektaRetention sets ConektaRetention field to given value.
-
-### HasConektaRetention
-
-`func (o *BalanceResponse) HasConektaRetention() bool`
-
-HasConektaRetention returns a boolean if a field has been set.
-
-### GetGateway
-
-`func (o *BalanceResponse) GetGateway() []BalanceCommonField`
-
-GetGateway returns the Gateway field if non-nil, zero value otherwise.
-
-### GetGatewayOk
-
-`func (o *BalanceResponse) GetGatewayOk() (*[]BalanceCommonField, bool)`
-
-GetGatewayOk returns a tuple with the Gateway field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetGateway
-
-`func (o *BalanceResponse) SetGateway(v []BalanceCommonField)`
-
-SetGateway sets Gateway field to given value.
-
-### HasGateway
-
-`func (o *BalanceResponse) HasGateway() bool`
-
-HasGateway returns a boolean if a field has been set.
 
 ### GetPending
 
@@ -153,36 +73,6 @@ and a boolean to check if the value has been set.
 
 SetPending sets Pending field to given value.
 
-### HasPending
-
-`func (o *BalanceResponse) HasPending() bool`
-
-HasPending returns a boolean if a field has been set.
-
-### GetRetained
-
-`func (o *BalanceResponse) GetRetained() []BalanceCommonField`
-
-GetRetained returns the Retained field if non-nil, zero value otherwise.
-
-### GetRetainedOk
-
-`func (o *BalanceResponse) GetRetainedOk() (*[]BalanceCommonField, bool)`
-
-GetRetainedOk returns a tuple with the Retained field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRetained
-
-`func (o *BalanceResponse) SetRetained(v []BalanceCommonField)`
-
-SetRetained sets Retained field to given value.
-
-### HasRetained
-
-`func (o *BalanceResponse) HasRetained() bool`
-
-HasRetained returns a boolean if a field has been set.
 
 ### GetRetentionAmount
 
@@ -203,61 +93,26 @@ and a boolean to check if the value has been set.
 
 SetRetentionAmount sets RetentionAmount field to given value.
 
-### HasRetentionAmount
 
-`func (o *BalanceResponse) HasRetentionAmount() bool`
+### GetRetained
 
-HasRetentionAmount returns a boolean if a field has been set.
+`func (o *BalanceResponse) GetRetained() []BalanceCommonField`
 
-### GetTargetCollateralAmount
+GetRetained returns the Retained field if non-nil, zero value otherwise.
 
-`func (o *BalanceResponse) GetTargetCollateralAmount() map[string]interface{}`
+### GetRetainedOk
 
-GetTargetCollateralAmount returns the TargetCollateralAmount field if non-nil, zero value otherwise.
+`func (o *BalanceResponse) GetRetainedOk() (*[]BalanceCommonField, bool)`
 
-### GetTargetCollateralAmountOk
-
-`func (o *BalanceResponse) GetTargetCollateralAmountOk() (*map[string]interface{}, bool)`
-
-GetTargetCollateralAmountOk returns a tuple with the TargetCollateralAmount field if it's non-nil, zero value otherwise
+GetRetainedOk returns a tuple with the Retained field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTargetCollateralAmount
+### SetRetained
 
-`func (o *BalanceResponse) SetTargetCollateralAmount(v map[string]interface{})`
+`func (o *BalanceResponse) SetRetained(v []BalanceCommonField)`
 
-SetTargetCollateralAmount sets TargetCollateralAmount field to given value.
+SetRetained sets Retained field to given value.
 
-### HasTargetCollateralAmount
-
-`func (o *BalanceResponse) HasTargetCollateralAmount() bool`
-
-HasTargetCollateralAmount returns a boolean if a field has been set.
-
-### GetTargetRetentionAmount
-
-`func (o *BalanceResponse) GetTargetRetentionAmount() []BalanceCommonField`
-
-GetTargetRetentionAmount returns the TargetRetentionAmount field if non-nil, zero value otherwise.
-
-### GetTargetRetentionAmountOk
-
-`func (o *BalanceResponse) GetTargetRetentionAmountOk() (*[]BalanceCommonField, bool)`
-
-GetTargetRetentionAmountOk returns a tuple with the TargetRetentionAmount field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTargetRetentionAmount
-
-`func (o *BalanceResponse) SetTargetRetentionAmount(v []BalanceCommonField)`
-
-SetTargetRetentionAmount sets TargetRetentionAmount field to given value.
-
-### HasTargetRetentionAmount
-
-`func (o *BalanceResponse) HasTargetRetentionAmount() bool`
-
-HasTargetRetentionAmount returns a boolean if a field has been set.
 
 ### GetTemporarilyRetained
 
@@ -278,11 +133,106 @@ and a boolean to check if the value has been set.
 
 SetTemporarilyRetained sets TemporarilyRetained field to given value.
 
-### HasTemporarilyRetained
 
-`func (o *BalanceResponse) HasTemporarilyRetained() bool`
+### GetTargetRetentionAmount
 
-HasTemporarilyRetained returns a boolean if a field has been set.
+`func (o *BalanceResponse) GetTargetRetentionAmount() []BalanceCommonField`
+
+GetTargetRetentionAmount returns the TargetRetentionAmount field if non-nil, zero value otherwise.
+
+### GetTargetRetentionAmountOk
+
+`func (o *BalanceResponse) GetTargetRetentionAmountOk() (*[]BalanceCommonField, bool)`
+
+GetTargetRetentionAmountOk returns a tuple with the TargetRetentionAmount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetRetentionAmount
+
+`func (o *BalanceResponse) SetTargetRetentionAmount(v []BalanceCommonField)`
+
+SetTargetRetentionAmount sets TargetRetentionAmount field to given value.
+
+
+### GetTargetTemporaryRetentionAmount
+
+`func (o *BalanceResponse) GetTargetTemporaryRetentionAmount() []BalanceCommonField`
+
+GetTargetTemporaryRetentionAmount returns the TargetTemporaryRetentionAmount field if non-nil, zero value otherwise.
+
+### GetTargetTemporaryRetentionAmountOk
+
+`func (o *BalanceResponse) GetTargetTemporaryRetentionAmountOk() (*[]BalanceCommonField, bool)`
+
+GetTargetTemporaryRetentionAmountOk returns a tuple with the TargetTemporaryRetentionAmount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetTemporaryRetentionAmount
+
+`func (o *BalanceResponse) SetTargetTemporaryRetentionAmount(v []BalanceCommonField)`
+
+SetTargetTemporaryRetentionAmount sets TargetTemporaryRetentionAmount field to given value.
+
+
+### GetTargetCollateralAmount
+
+`func (o *BalanceResponse) GetTargetCollateralAmount() []BalanceCommonField`
+
+GetTargetCollateralAmount returns the TargetCollateralAmount field if non-nil, zero value otherwise.
+
+### GetTargetCollateralAmountOk
+
+`func (o *BalanceResponse) GetTargetCollateralAmountOk() (*[]BalanceCommonField, bool)`
+
+GetTargetCollateralAmountOk returns a tuple with the TargetCollateralAmount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetCollateralAmount
+
+`func (o *BalanceResponse) SetTargetCollateralAmount(v []BalanceCommonField)`
+
+SetTargetCollateralAmount sets TargetCollateralAmount field to given value.
+
+
+### GetGateway
+
+`func (o *BalanceResponse) GetGateway() []BalanceCommonField`
+
+GetGateway returns the Gateway field if non-nil, zero value otherwise.
+
+### GetGatewayOk
+
+`func (o *BalanceResponse) GetGatewayOk() (*[]BalanceCommonField, bool)`
+
+GetGatewayOk returns a tuple with the Gateway field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGateway
+
+`func (o *BalanceResponse) SetGateway(v []BalanceCommonField)`
+
+SetGateway sets Gateway field to given value.
+
+
+### GetCashoutRetentionDebited
+
+`func (o *BalanceResponse) GetCashoutRetentionDebited() []BalanceCommonField`
+
+GetCashoutRetentionDebited returns the CashoutRetentionDebited field if non-nil, zero value otherwise.
+
+### GetCashoutRetentionDebitedOk
+
+`func (o *BalanceResponse) GetCashoutRetentionDebitedOk() (*[]BalanceCommonField, bool)`
+
+GetCashoutRetentionDebitedOk returns a tuple with the CashoutRetentionDebited field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCashoutRetentionDebited
+
+`func (o *BalanceResponse) SetCashoutRetentionDebited(v []BalanceCommonField)`
+
+SetCashoutRetentionDebited sets CashoutRetentionDebited field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

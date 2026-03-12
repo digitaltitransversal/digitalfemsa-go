@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Active** | Pointer to **bool** | Indicates if the webhook key is active | [optional] [default to true]
+**Active** | Pointer to **NullableBool** | Indicates if the webhook key is active | [optional] [default to true]
 
 ## Methods
 
@@ -50,6 +50,16 @@ SetActive sets Active field to given value.
 
 HasActive returns a boolean if a field has been set.
 
+### SetActiveNil
+
+`func (o *WebhookKeyRequest) SetActiveNil(b bool)`
+
+ SetActiveNil sets the value for Active to be an explicit nil
+
+### UnsetActive
+`func (o *WebhookKeyRequest) UnsetActive()`
+
+UnsetActive ensures that no value is present for Active, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

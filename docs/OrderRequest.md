@@ -4,26 +4,26 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Charges** | Pointer to [**[]ChargeRequest**](ChargeRequest.md) | List of [charges](https://developers.femsa.com/v2.1.0/reference/orderscreatecharge) that are applied to the order | [optional] 
+**Charges** | Pointer to [**[]ChargeRequest**](ChargeRequest.md) | List of [charges](https://developers.digitalfemsa.io/reference/orderscreatecharge) that are applied to the order | [optional] 
 **Checkout** | Pointer to [**CheckoutRequest**](CheckoutRequest.md) |  | [optional] 
+**ReturnUrl** | Pointer to **NullableString** | Optional return URL used by some payment/checkout flows. | [optional] 
 **Currency** | **string** | Currency with which the payment will be made. It uses the 3-letter code of the [International Standard ISO 4217.](https://es.wikipedia.org/wiki/ISO_4217) | 
-**CustomerInfo** | [**OrderRequestCustomerInfo**](OrderRequestCustomerInfo.md) |  | 
-**DiscountLines** | Pointer to [**[]OrderDiscountLinesRequest**](OrderDiscountLinesRequest.md) | List of [discounts](https://developers.femsa.com/v2.1.0/reference/orderscreatediscountline) that are applied to the order. You must have at least one discount. | [optional] 
-**FiscalEntity** | Pointer to [**OrderFiscalEntityRequest**](OrderFiscalEntityRequest.md) |  | [optional] 
-**LineItems** | [**[]Product**](Product.md) | List of [products](https://developers.femsa.com/v2.1.0/reference/orderscreateproduct) that are sold in the order. You must have at least one product. | 
+**CustomerInfo** | [**CustomerInfo**](CustomerInfo.md) |  | 
+**DiscountLines** | Pointer to [**[]OrderDiscountLinesRequest**](OrderDiscountLinesRequest.md) | List of [discounts](https://developers.digitalfemsa.io/reference/orderscreatediscountline) that are applied to the order. You must have at least one discount. | [optional] 
+**FiscalEntity** | Pointer to **map[string]interface{}** | Fiscal entity of the order, Currently it is a purely informative field | [optional] 
+**LineItems** | [**[]Product**](Product.md) | List of [products](https://developers.digitalfemsa.io/reference/orderscreateproduct) that are sold in the order. You must have at least one product. | 
 **Metadata** | Pointer to **map[string]interface{}** | Metadata associated with the order | [optional] 
 **NeedsShippingContact** | Pointer to **bool** | Allows you to fill out the shipping information at checkout | [optional] 
 **ProcessingMode** | Pointer to **string** | Indicates the processing mode for the order, either ecommerce, recurrent or validation. | [optional] 
-**ReturnUrl** | Pointer to **string** | Indicates the redirection callback upon completion of the 3DS2 flow. | [optional] 
 **ShippingContact** | Pointer to [**CustomerShippingContacts**](CustomerShippingContacts.md) |  | [optional] 
-**ShippingLines** | Pointer to [**[]ShippingRequest**](ShippingRequest.md) | List of [shipping costs](https://developers.femsa.com/v2.1.0/reference/orderscreateshipping). If the online store offers digital products. | [optional] 
-**TaxLines** | Pointer to [**[]OrderTaxRequest**](OrderTaxRequest.md) | List of [taxes](https://developers.femsa.com/v2.1.0/reference/orderscreatetaxes) that are applied to the order. | [optional] 
+**ShippingLines** | Pointer to [**[]ShippingRequest**](ShippingRequest.md) | List of [shipping costs](https://developers.digitalfemsa.io/reference/orderscreateshipping). If the online store offers digital products. | [optional] 
+**TaxLines** | Pointer to [**[]OrderTaxRequest**](OrderTaxRequest.md) | List of [taxes](https://developers.digitalfemsa.io/reference/orderscreatetaxes) that are applied to the order. | [optional] 
 
 ## Methods
 
 ### NewOrderRequest
 
-`func NewOrderRequest(currency string, customerInfo OrderRequestCustomerInfo, lineItems []Product, ) *OrderRequest`
+`func NewOrderRequest(currency string, customerInfo CustomerInfo, lineItems []Product, ) *OrderRequest`
 
 NewOrderRequest instantiates a new OrderRequest object
 This constructor will assign default values to properties that have it defined,
@@ -88,6 +88,41 @@ SetCheckout sets Checkout field to given value.
 
 HasCheckout returns a boolean if a field has been set.
 
+### GetReturnUrl
+
+`func (o *OrderRequest) GetReturnUrl() string`
+
+GetReturnUrl returns the ReturnUrl field if non-nil, zero value otherwise.
+
+### GetReturnUrlOk
+
+`func (o *OrderRequest) GetReturnUrlOk() (*string, bool)`
+
+GetReturnUrlOk returns a tuple with the ReturnUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReturnUrl
+
+`func (o *OrderRequest) SetReturnUrl(v string)`
+
+SetReturnUrl sets ReturnUrl field to given value.
+
+### HasReturnUrl
+
+`func (o *OrderRequest) HasReturnUrl() bool`
+
+HasReturnUrl returns a boolean if a field has been set.
+
+### SetReturnUrlNil
+
+`func (o *OrderRequest) SetReturnUrlNil(b bool)`
+
+ SetReturnUrlNil sets the value for ReturnUrl to be an explicit nil
+
+### UnsetReturnUrl
+`func (o *OrderRequest) UnsetReturnUrl()`
+
+UnsetReturnUrl ensures that no value is present for ReturnUrl, not even an explicit nil
 ### GetCurrency
 
 `func (o *OrderRequest) GetCurrency() string`
@@ -110,20 +145,20 @@ SetCurrency sets Currency field to given value.
 
 ### GetCustomerInfo
 
-`func (o *OrderRequest) GetCustomerInfo() OrderRequestCustomerInfo`
+`func (o *OrderRequest) GetCustomerInfo() CustomerInfo`
 
 GetCustomerInfo returns the CustomerInfo field if non-nil, zero value otherwise.
 
 ### GetCustomerInfoOk
 
-`func (o *OrderRequest) GetCustomerInfoOk() (*OrderRequestCustomerInfo, bool)`
+`func (o *OrderRequest) GetCustomerInfoOk() (*CustomerInfo, bool)`
 
 GetCustomerInfoOk returns a tuple with the CustomerInfo field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCustomerInfo
 
-`func (o *OrderRequest) SetCustomerInfo(v OrderRequestCustomerInfo)`
+`func (o *OrderRequest) SetCustomerInfo(v CustomerInfo)`
 
 SetCustomerInfo sets CustomerInfo field to given value.
 
@@ -155,20 +190,20 @@ HasDiscountLines returns a boolean if a field has been set.
 
 ### GetFiscalEntity
 
-`func (o *OrderRequest) GetFiscalEntity() OrderFiscalEntityRequest`
+`func (o *OrderRequest) GetFiscalEntity() map[string]interface{}`
 
 GetFiscalEntity returns the FiscalEntity field if non-nil, zero value otherwise.
 
 ### GetFiscalEntityOk
 
-`func (o *OrderRequest) GetFiscalEntityOk() (*OrderFiscalEntityRequest, bool)`
+`func (o *OrderRequest) GetFiscalEntityOk() (*map[string]interface{}, bool)`
 
 GetFiscalEntityOk returns a tuple with the FiscalEntity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFiscalEntity
 
-`func (o *OrderRequest) SetFiscalEntity(v OrderFiscalEntityRequest)`
+`func (o *OrderRequest) SetFiscalEntity(v map[string]interface{})`
 
 SetFiscalEntity sets FiscalEntity field to given value.
 
@@ -272,31 +307,6 @@ SetProcessingMode sets ProcessingMode field to given value.
 `func (o *OrderRequest) HasProcessingMode() bool`
 
 HasProcessingMode returns a boolean if a field has been set.
-
-### GetReturnUrl
-
-`func (o *OrderRequest) GetReturnUrl() string`
-
-GetReturnUrl returns the ReturnUrl field if non-nil, zero value otherwise.
-
-### GetReturnUrlOk
-
-`func (o *OrderRequest) GetReturnUrlOk() (*string, bool)`
-
-GetReturnUrlOk returns a tuple with the ReturnUrl field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetReturnUrl
-
-`func (o *OrderRequest) SetReturnUrl(v string)`
-
-SetReturnUrl sets ReturnUrl field to given value.
-
-### HasReturnUrl
-
-`func (o *OrderRequest) HasReturnUrl() bool`
-
-HasReturnUrl returns a boolean if a field has been set.
 
 ### GetShippingContact
 

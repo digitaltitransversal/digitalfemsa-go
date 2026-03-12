@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -13,6 +13,7 @@ package digitalfemsa
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the WebhookLog type satisfies the MappedNullable interface at compile time
@@ -20,14 +21,14 @@ var _ MappedNullable = &WebhookLog{}
 
 // WebhookLog struct for WebhookLog
 type WebhookLog struct {
-	FailedAttempts         *int32                 `json:"failed_attempts,omitempty"`
-	Id                     *string                `json:"id,omitempty"`
-	LastAttemptedAt        *int32                 `json:"last_attempted_at,omitempty"`
-	LastHttpResponseStatus *int32                 `json:"last_http_response_status,omitempty"`
-	Object                 *string                `json:"object,omitempty"`
-	ResponseData           map[string]interface{} `json:"response_data,omitempty"`
-	Url                    *string                `json:"url,omitempty"`
-	AdditionalProperties   map[string]interface{}
+	FailedAttempts int32 `json:"failed_attempts"`
+	Id string `json:"id"`
+	LastAttemptedAt int64 `json:"last_attempted_at"`
+	LastHttpResponseStatus int32 `json:"last_http_response_status"`
+	Object *string `json:"object,omitempty"`
+	ResponseData map[string]interface{} `json:"response_data,omitempty"`
+	Url string `json:"url"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _WebhookLog WebhookLog
@@ -36,8 +37,13 @@ type _WebhookLog WebhookLog
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWebhookLog() *WebhookLog {
+func NewWebhookLog(failedAttempts int32, id string, lastAttemptedAt int64, lastHttpResponseStatus int32, url string) *WebhookLog {
 	this := WebhookLog{}
+	this.FailedAttempts = failedAttempts
+	this.Id = id
+	this.LastAttemptedAt = lastAttemptedAt
+	this.LastHttpResponseStatus = lastHttpResponseStatus
+	this.Url = url
 	return &this
 }
 
@@ -49,132 +55,100 @@ func NewWebhookLogWithDefaults() *WebhookLog {
 	return &this
 }
 
-// GetFailedAttempts returns the FailedAttempts field value if set, zero value otherwise.
+// GetFailedAttempts returns the FailedAttempts field value
 func (o *WebhookLog) GetFailedAttempts() int32 {
-	if o == nil || IsNil(o.FailedAttempts) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.FailedAttempts
+
+	return o.FailedAttempts
 }
 
-// GetFailedAttemptsOk returns a tuple with the FailedAttempts field value if set, nil otherwise
+// GetFailedAttemptsOk returns a tuple with the FailedAttempts field value
 // and a boolean to check if the value has been set.
 func (o *WebhookLog) GetFailedAttemptsOk() (*int32, bool) {
-	if o == nil || IsNil(o.FailedAttempts) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FailedAttempts, true
+	return &o.FailedAttempts, true
 }
 
-// HasFailedAttempts returns a boolean if a field has been set.
-func (o *WebhookLog) HasFailedAttempts() bool {
-	if o != nil && !IsNil(o.FailedAttempts) {
-		return true
-	}
-
-	return false
-}
-
-// SetFailedAttempts gets a reference to the given int32 and assigns it to the FailedAttempts field.
+// SetFailedAttempts sets field value
 func (o *WebhookLog) SetFailedAttempts(v int32) {
-	o.FailedAttempts = &v
+	o.FailedAttempts = v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *WebhookLog) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *WebhookLog) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *WebhookLog) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *WebhookLog) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetLastAttemptedAt returns the LastAttemptedAt field value if set, zero value otherwise.
-func (o *WebhookLog) GetLastAttemptedAt() int32 {
-	if o == nil || IsNil(o.LastAttemptedAt) {
-		var ret int32
+// GetLastAttemptedAt returns the LastAttemptedAt field value
+func (o *WebhookLog) GetLastAttemptedAt() int64 {
+	if o == nil {
+		var ret int64
 		return ret
 	}
-	return *o.LastAttemptedAt
+
+	return o.LastAttemptedAt
 }
 
-// GetLastAttemptedAtOk returns a tuple with the LastAttemptedAt field value if set, nil otherwise
+// GetLastAttemptedAtOk returns a tuple with the LastAttemptedAt field value
 // and a boolean to check if the value has been set.
-func (o *WebhookLog) GetLastAttemptedAtOk() (*int32, bool) {
-	if o == nil || IsNil(o.LastAttemptedAt) {
+func (o *WebhookLog) GetLastAttemptedAtOk() (*int64, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LastAttemptedAt, true
+	return &o.LastAttemptedAt, true
 }
 
-// HasLastAttemptedAt returns a boolean if a field has been set.
-func (o *WebhookLog) HasLastAttemptedAt() bool {
-	if o != nil && !IsNil(o.LastAttemptedAt) {
-		return true
-	}
-
-	return false
+// SetLastAttemptedAt sets field value
+func (o *WebhookLog) SetLastAttemptedAt(v int64) {
+	o.LastAttemptedAt = v
 }
 
-// SetLastAttemptedAt gets a reference to the given int32 and assigns it to the LastAttemptedAt field.
-func (o *WebhookLog) SetLastAttemptedAt(v int32) {
-	o.LastAttemptedAt = &v
-}
-
-// GetLastHttpResponseStatus returns the LastHttpResponseStatus field value if set, zero value otherwise.
+// GetLastHttpResponseStatus returns the LastHttpResponseStatus field value
 func (o *WebhookLog) GetLastHttpResponseStatus() int32 {
-	if o == nil || IsNil(o.LastHttpResponseStatus) {
+	if o == nil {
 		var ret int32
 		return ret
 	}
-	return *o.LastHttpResponseStatus
+
+	return o.LastHttpResponseStatus
 }
 
-// GetLastHttpResponseStatusOk returns a tuple with the LastHttpResponseStatus field value if set, nil otherwise
+// GetLastHttpResponseStatusOk returns a tuple with the LastHttpResponseStatus field value
 // and a boolean to check if the value has been set.
 func (o *WebhookLog) GetLastHttpResponseStatusOk() (*int32, bool) {
-	if o == nil || IsNil(o.LastHttpResponseStatus) {
+	if o == nil {
 		return nil, false
 	}
-	return o.LastHttpResponseStatus, true
+	return &o.LastHttpResponseStatus, true
 }
 
-// HasLastHttpResponseStatus returns a boolean if a field has been set.
-func (o *WebhookLog) HasLastHttpResponseStatus() bool {
-	if o != nil && !IsNil(o.LastHttpResponseStatus) {
-		return true
-	}
-
-	return false
-}
-
-// SetLastHttpResponseStatus gets a reference to the given int32 and assigns it to the LastHttpResponseStatus field.
+// SetLastHttpResponseStatus sets field value
 func (o *WebhookLog) SetLastHttpResponseStatus(v int32) {
-	o.LastHttpResponseStatus = &v
+	o.LastHttpResponseStatus = v
 }
 
 // GetObject returns the Object field value if set, zero value otherwise.
@@ -209,9 +183,9 @@ func (o *WebhookLog) SetObject(v string) {
 	o.Object = &v
 }
 
-// GetResponseData returns the ResponseData field value if set, zero value otherwise.
+// GetResponseData returns the ResponseData field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WebhookLog) GetResponseData() map[string]interface{} {
-	if o == nil || IsNil(o.ResponseData) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
@@ -220,6 +194,7 @@ func (o *WebhookLog) GetResponseData() map[string]interface{} {
 
 // GetResponseDataOk returns a tuple with the ResponseData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WebhookLog) GetResponseDataOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.ResponseData) {
 		return map[string]interface{}{}, false
@@ -241,40 +216,32 @@ func (o *WebhookLog) SetResponseData(v map[string]interface{}) {
 	o.ResponseData = v
 }
 
-// GetUrl returns the Url field value if set, zero value otherwise.
+// GetUrl returns the Url field value
 func (o *WebhookLog) GetUrl() string {
-	if o == nil || IsNil(o.Url) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Url
+
+	return o.Url
 }
 
-// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
 func (o *WebhookLog) GetUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.Url) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Url, true
+	return &o.Url, true
 }
 
-// HasUrl returns a boolean if a field has been set.
-func (o *WebhookLog) HasUrl() bool {
-	if o != nil && !IsNil(o.Url) {
-		return true
-	}
-
-	return false
-}
-
-// SetUrl gets a reference to the given string and assigns it to the Url field.
+// SetUrl sets field value
 func (o *WebhookLog) SetUrl(v string) {
-	o.Url = &v
+	o.Url = v
 }
 
 func (o WebhookLog) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -283,27 +250,17 @@ func (o WebhookLog) MarshalJSON() ([]byte, error) {
 
 func (o WebhookLog) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.FailedAttempts) {
-		toSerialize["failed_attempts"] = o.FailedAttempts
-	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.LastAttemptedAt) {
-		toSerialize["last_attempted_at"] = o.LastAttemptedAt
-	}
-	if !IsNil(o.LastHttpResponseStatus) {
-		toSerialize["last_http_response_status"] = o.LastHttpResponseStatus
-	}
+	toSerialize["failed_attempts"] = o.FailedAttempts
+	toSerialize["id"] = o.Id
+	toSerialize["last_attempted_at"] = o.LastAttemptedAt
+	toSerialize["last_http_response_status"] = o.LastHttpResponseStatus
 	if !IsNil(o.Object) {
 		toSerialize["object"] = o.Object
 	}
-	if !IsNil(o.ResponseData) {
+	if o.ResponseData != nil {
 		toSerialize["response_data"] = o.ResponseData
 	}
-	if !IsNil(o.Url) {
-		toSerialize["url"] = o.Url
-	}
+	toSerialize["url"] = o.Url
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -313,6 +270,31 @@ func (o WebhookLog) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *WebhookLog) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"failed_attempts",
+		"id",
+		"last_attempted_at",
+		"last_http_response_status",
+		"url",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varWebhookLog := _WebhookLog{}
 
 	err = json.Unmarshal(data, &varWebhookLog)
@@ -374,3 +356,5 @@ func (v *NullableWebhookLog) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

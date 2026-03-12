@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -27,6 +27,7 @@ func PaymentMethodCashRequestAsCreateCustomerPaymentMethodsRequest(v *PaymentMet
 		PaymentMethodCashRequest: v,
 	}
 }
+
 
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *CreateCustomerPaymentMethodsRequest) UnmarshalJSON(data []byte) error {
@@ -67,7 +68,7 @@ func (src CreateCustomerPaymentMethodsRequest) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *CreateCustomerPaymentMethodsRequest) GetActualInstance() interface{} {
+func (obj *CreateCustomerPaymentMethodsRequest) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -114,3 +115,5 @@ func (v *NullableCreateCustomerPaymentMethodsRequest) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

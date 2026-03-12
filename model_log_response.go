@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -13,34 +13,36 @@ package digitalfemsa
 
 import (
 	"encoding/json"
+	"time"
 	"fmt"
 )
 
 // checks if the LogResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogResponse{}
 
-// LogResponse log model
+// LogResponse Log model representing a recorded request/response cycle for troubleshooting and auditing.
 type LogResponse struct {
-	CreatedAt            int64                  `json:"created_at"`
-	Id                   string                 `json:"id"`
-	IpAddress            *string                `json:"ip_address,omitempty"`
-	Livemode             bool                   `json:"livemode"`
-	LoggableId           NullableString         `json:"loggable_id,omitempty"`
-	LoggableType         NullableString         `json:"loggable_type,omitempty"`
-	Method               *string                `json:"method,omitempty"`
-	OauthTokenId         NullableString         `json:"oauth_token_id,omitempty"`
-	QueryString          map[string]interface{} `json:"query_string,omitempty"`
-	Related              *string                `json:"related,omitempty"`
-	RequestBody          map[string]interface{} `json:"request_body,omitempty"`
-	RequestHeaders       *map[string]string     `json:"request_headers,omitempty"`
-	ResponseBody         map[string]interface{} `json:"response_body,omitempty"`
-	ResponseHeaders      *map[string]string     `json:"response_headers,omitempty"`
-	SearchableTags       []string               `json:"searchable_tags,omitempty"`
-	Status               *string                `json:"status,omitempty"`
-	UpdatedAt            *string                `json:"updated_at,omitempty"`
-	Url                  *string                `json:"url,omitempty"`
-	UserAccountId        *string                `json:"user_account_id,omitempty"`
-	Version              *string                `json:"version,omitempty"`
+	Id string `json:"id"`
+	Object string `json:"object"`
+	CreatedAt int64 `json:"created_at"`
+	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	Livemode bool `json:"livemode"`
+	IpAddress *string `json:"ip_address,omitempty"`
+	LoggableId NullableString `json:"loggable_id,omitempty"`
+	LoggableType NullableString `json:"loggable_type,omitempty"`
+	Method *string `json:"method,omitempty"`
+	Url *string `json:"url,omitempty"`
+	Related *string `json:"related,omitempty"`
+	Version *string `json:"version,omitempty"`
+	UserAccountId NullableString `json:"user_account_id,omitempty"`
+	OauthTokenId NullableString `json:"oauth_token_id,omitempty"`
+	Status *string `json:"status,omitempty"`
+	QueryString map[string]interface{} `json:"query_string,omitempty"`
+	RequestHeaders map[string]string `json:"request_headers,omitempty"`
+	ResponseHeaders map[string]string `json:"response_headers,omitempty"`
+	RequestBody map[string]interface{} `json:"request_body,omitempty"`
+	ResponseBody map[string]interface{} `json:"response_body,omitempty"`
+	SearchableTags []string `json:"searchable_tags,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -50,10 +52,11 @@ type _LogResponse LogResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLogResponse(createdAt int64, id string, livemode bool) *LogResponse {
+func NewLogResponse(id string, object string, createdAt int64, livemode bool) *LogResponse {
 	this := LogResponse{}
-	this.CreatedAt = createdAt
 	this.Id = id
+	this.Object = object
+	this.CreatedAt = createdAt
 	this.Livemode = livemode
 	return &this
 }
@@ -64,6 +67,54 @@ func NewLogResponse(createdAt int64, id string, livemode bool) *LogResponse {
 func NewLogResponseWithDefaults() *LogResponse {
 	this := LogResponse{}
 	return &this
+}
+
+// GetId returns the Id field value
+func (o *LogResponse) GetId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value
+// and a boolean to check if the value has been set.
+func (o *LogResponse) GetIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Id, true
+}
+
+// SetId sets field value
+func (o *LogResponse) SetId(v string) {
+	o.Id = v
+}
+
+// GetObject returns the Object field value
+func (o *LogResponse) GetObject() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Object
+}
+
+// GetObjectOk returns a tuple with the Object field value
+// and a boolean to check if the value has been set.
+func (o *LogResponse) GetObjectOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Object, true
+}
+
+// SetObject sets field value
+func (o *LogResponse) SetObject(v string) {
+	o.Object = v
 }
 
 // GetCreatedAt returns the CreatedAt field value
@@ -90,28 +141,60 @@ func (o *LogResponse) SetCreatedAt(v int64) {
 	o.CreatedAt = v
 }
 
-// GetId returns the Id field value
-func (o *LogResponse) GetId() string {
+// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
+func (o *LogResponse) GetUpdatedAt() time.Time {
+	if o == nil || IsNil(o.UpdatedAt) {
+		var ret time.Time
+		return ret
+	}
+	return *o.UpdatedAt
+}
+
+// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LogResponse) GetUpdatedAtOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.UpdatedAt) {
+		return nil, false
+	}
+	return o.UpdatedAt, true
+}
+
+// HasUpdatedAt returns a boolean if a field has been set.
+func (o *LogResponse) HasUpdatedAt() bool {
+	if o != nil && !IsNil(o.UpdatedAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
+func (o *LogResponse) SetUpdatedAt(v time.Time) {
+	o.UpdatedAt = &v
+}
+
+// GetLivemode returns the Livemode field value
+func (o *LogResponse) GetLivemode() bool {
 	if o == nil {
-		var ret string
+		var ret bool
 		return ret
 	}
 
-	return o.Id
+	return o.Livemode
 }
 
-// GetIdOk returns a tuple with the Id field value
+// GetLivemodeOk returns a tuple with the Livemode field value
 // and a boolean to check if the value has been set.
-func (o *LogResponse) GetIdOk() (*string, bool) {
+func (o *LogResponse) GetLivemodeOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Id, true
+	return &o.Livemode, true
 }
 
-// SetId sets field value
-func (o *LogResponse) SetId(v string) {
-	o.Id = v
+// SetLivemode sets field value
+func (o *LogResponse) SetLivemode(v bool) {
+	o.Livemode = v
 }
 
 // GetIpAddress returns the IpAddress field value if set, zero value otherwise.
@@ -146,30 +229,6 @@ func (o *LogResponse) SetIpAddress(v string) {
 	o.IpAddress = &v
 }
 
-// GetLivemode returns the Livemode field value
-func (o *LogResponse) GetLivemode() bool {
-	if o == nil {
-		var ret bool
-		return ret
-	}
-
-	return o.Livemode
-}
-
-// GetLivemodeOk returns a tuple with the Livemode field value
-// and a boolean to check if the value has been set.
-func (o *LogResponse) GetLivemodeOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Livemode, true
-}
-
-// SetLivemode sets field value
-func (o *LogResponse) SetLivemode(v bool) {
-	o.Livemode = v
-}
-
 // GetLoggableId returns the LoggableId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *LogResponse) GetLoggableId() string {
 	if o == nil || IsNil(o.LoggableId.Get()) {
@@ -202,7 +261,6 @@ func (o *LogResponse) HasLoggableId() bool {
 func (o *LogResponse) SetLoggableId(v string) {
 	o.LoggableId.Set(&v)
 }
-
 // SetLoggableIdNil sets the value for LoggableId to be an explicit nil
 func (o *LogResponse) SetLoggableIdNil() {
 	o.LoggableId.Set(nil)
@@ -245,7 +303,6 @@ func (o *LogResponse) HasLoggableType() bool {
 func (o *LogResponse) SetLoggableType(v string) {
 	o.LoggableType.Set(&v)
 }
-
 // SetLoggableTypeNil sets the value for LoggableType to be an explicit nil
 func (o *LogResponse) SetLoggableTypeNil() {
 	o.LoggableType.Set(nil)
@@ -288,79 +345,36 @@ func (o *LogResponse) SetMethod(v string) {
 	o.Method = &v
 }
 
-// GetOauthTokenId returns the OauthTokenId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *LogResponse) GetOauthTokenId() string {
-	if o == nil || IsNil(o.OauthTokenId.Get()) {
+// GetUrl returns the Url field value if set, zero value otherwise.
+func (o *LogResponse) GetUrl() string {
+	if o == nil || IsNil(o.Url) {
 		var ret string
 		return ret
 	}
-	return *o.OauthTokenId.Get()
+	return *o.Url
 }
 
-// GetOauthTokenIdOk returns a tuple with the OauthTokenId field value if set, nil otherwise
+// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *LogResponse) GetOauthTokenIdOk() (*string, bool) {
-	if o == nil {
+func (o *LogResponse) GetUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.Url) {
 		return nil, false
 	}
-	return o.OauthTokenId.Get(), o.OauthTokenId.IsSet()
+	return o.Url, true
 }
 
-// HasOauthTokenId returns a boolean if a field has been set.
-func (o *LogResponse) HasOauthTokenId() bool {
-	if o != nil && o.OauthTokenId.IsSet() {
+// HasUrl returns a boolean if a field has been set.
+func (o *LogResponse) HasUrl() bool {
+	if o != nil && !IsNil(o.Url) {
 		return true
 	}
 
 	return false
 }
 
-// SetOauthTokenId gets a reference to the given NullableString and assigns it to the OauthTokenId field.
-func (o *LogResponse) SetOauthTokenId(v string) {
-	o.OauthTokenId.Set(&v)
-}
-
-// SetOauthTokenIdNil sets the value for OauthTokenId to be an explicit nil
-func (o *LogResponse) SetOauthTokenIdNil() {
-	o.OauthTokenId.Set(nil)
-}
-
-// UnsetOauthTokenId ensures that no value is present for OauthTokenId, not even an explicit nil
-func (o *LogResponse) UnsetOauthTokenId() {
-	o.OauthTokenId.Unset()
-}
-
-// GetQueryString returns the QueryString field value if set, zero value otherwise.
-func (o *LogResponse) GetQueryString() map[string]interface{} {
-	if o == nil || IsNil(o.QueryString) {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.QueryString
-}
-
-// GetQueryStringOk returns a tuple with the QueryString field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *LogResponse) GetQueryStringOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.QueryString) {
-		return map[string]interface{}{}, false
-	}
-	return o.QueryString, true
-}
-
-// HasQueryString returns a boolean if a field has been set.
-func (o *LogResponse) HasQueryString() bool {
-	if o != nil && !IsNil(o.QueryString) {
-		return true
-	}
-
-	return false
-}
-
-// SetQueryString gets a reference to the given map[string]interface{} and assigns it to the QueryString field.
-func (o *LogResponse) SetQueryString(v map[string]interface{}) {
-	o.QueryString = v
+// SetUrl gets a reference to the given string and assigns it to the Url field.
+func (o *LogResponse) SetUrl(v string) {
+	o.Url = &v
 }
 
 // GetRelated returns the Related field value if set, zero value otherwise.
@@ -395,164 +409,120 @@ func (o *LogResponse) SetRelated(v string) {
 	o.Related = &v
 }
 
-// GetRequestBody returns the RequestBody field value if set, zero value otherwise.
-func (o *LogResponse) GetRequestBody() map[string]interface{} {
-	if o == nil || IsNil(o.RequestBody) {
-		var ret map[string]interface{}
+// GetVersion returns the Version field value if set, zero value otherwise.
+func (o *LogResponse) GetVersion() string {
+	if o == nil || IsNil(o.Version) {
+		var ret string
 		return ret
 	}
-	return o.RequestBody
+	return *o.Version
 }
 
-// GetRequestBodyOk returns a tuple with the RequestBody field value if set, nil otherwise
+// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LogResponse) GetRequestBodyOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.RequestBody) {
-		return map[string]interface{}{}, false
-	}
-	return o.RequestBody, true
-}
-
-// HasRequestBody returns a boolean if a field has been set.
-func (o *LogResponse) HasRequestBody() bool {
-	if o != nil && !IsNil(o.RequestBody) {
-		return true
-	}
-
-	return false
-}
-
-// SetRequestBody gets a reference to the given map[string]interface{} and assigns it to the RequestBody field.
-func (o *LogResponse) SetRequestBody(v map[string]interface{}) {
-	o.RequestBody = v
-}
-
-// GetRequestHeaders returns the RequestHeaders field value if set, zero value otherwise.
-func (o *LogResponse) GetRequestHeaders() map[string]string {
-	if o == nil || IsNil(o.RequestHeaders) {
-		var ret map[string]string
-		return ret
-	}
-	return *o.RequestHeaders
-}
-
-// GetRequestHeadersOk returns a tuple with the RequestHeaders field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *LogResponse) GetRequestHeadersOk() (*map[string]string, bool) {
-	if o == nil || IsNil(o.RequestHeaders) {
+func (o *LogResponse) GetVersionOk() (*string, bool) {
+	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
-	return o.RequestHeaders, true
+	return o.Version, true
 }
 
-// HasRequestHeaders returns a boolean if a field has been set.
-func (o *LogResponse) HasRequestHeaders() bool {
-	if o != nil && !IsNil(o.RequestHeaders) {
+// HasVersion returns a boolean if a field has been set.
+func (o *LogResponse) HasVersion() bool {
+	if o != nil && !IsNil(o.Version) {
 		return true
 	}
 
 	return false
 }
 
-// SetRequestHeaders gets a reference to the given map[string]string and assigns it to the RequestHeaders field.
-func (o *LogResponse) SetRequestHeaders(v map[string]string) {
-	o.RequestHeaders = &v
+// SetVersion gets a reference to the given string and assigns it to the Version field.
+func (o *LogResponse) SetVersion(v string) {
+	o.Version = &v
 }
 
-// GetResponseBody returns the ResponseBody field value if set, zero value otherwise.
-func (o *LogResponse) GetResponseBody() map[string]interface{} {
-	if o == nil || IsNil(o.ResponseBody) {
-		var ret map[string]interface{}
+// GetUserAccountId returns the UserAccountId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *LogResponse) GetUserAccountId() string {
+	if o == nil || IsNil(o.UserAccountId.Get()) {
+		var ret string
 		return ret
 	}
-	return o.ResponseBody
+	return *o.UserAccountId.Get()
 }
 
-// GetResponseBodyOk returns a tuple with the ResponseBody field value if set, nil otherwise
+// GetUserAccountIdOk returns a tuple with the UserAccountId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LogResponse) GetResponseBodyOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.ResponseBody) {
-		return map[string]interface{}{}, false
-	}
-	return o.ResponseBody, true
-}
-
-// HasResponseBody returns a boolean if a field has been set.
-func (o *LogResponse) HasResponseBody() bool {
-	if o != nil && !IsNil(o.ResponseBody) {
-		return true
-	}
-
-	return false
-}
-
-// SetResponseBody gets a reference to the given map[string]interface{} and assigns it to the ResponseBody field.
-func (o *LogResponse) SetResponseBody(v map[string]interface{}) {
-	o.ResponseBody = v
-}
-
-// GetResponseHeaders returns the ResponseHeaders field value if set, zero value otherwise.
-func (o *LogResponse) GetResponseHeaders() map[string]string {
-	if o == nil || IsNil(o.ResponseHeaders) {
-		var ret map[string]string
-		return ret
-	}
-	return *o.ResponseHeaders
-}
-
-// GetResponseHeadersOk returns a tuple with the ResponseHeaders field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *LogResponse) GetResponseHeadersOk() (*map[string]string, bool) {
-	if o == nil || IsNil(o.ResponseHeaders) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *LogResponse) GetUserAccountIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ResponseHeaders, true
+	return o.UserAccountId.Get(), o.UserAccountId.IsSet()
 }
 
-// HasResponseHeaders returns a boolean if a field has been set.
-func (o *LogResponse) HasResponseHeaders() bool {
-	if o != nil && !IsNil(o.ResponseHeaders) {
+// HasUserAccountId returns a boolean if a field has been set.
+func (o *LogResponse) HasUserAccountId() bool {
+	if o != nil && o.UserAccountId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetResponseHeaders gets a reference to the given map[string]string and assigns it to the ResponseHeaders field.
-func (o *LogResponse) SetResponseHeaders(v map[string]string) {
-	o.ResponseHeaders = &v
+// SetUserAccountId gets a reference to the given NullableString and assigns it to the UserAccountId field.
+func (o *LogResponse) SetUserAccountId(v string) {
+	o.UserAccountId.Set(&v)
+}
+// SetUserAccountIdNil sets the value for UserAccountId to be an explicit nil
+func (o *LogResponse) SetUserAccountIdNil() {
+	o.UserAccountId.Set(nil)
 }
 
-// GetSearchableTags returns the SearchableTags field value if set, zero value otherwise.
-func (o *LogResponse) GetSearchableTags() []string {
-	if o == nil || IsNil(o.SearchableTags) {
-		var ret []string
+// UnsetUserAccountId ensures that no value is present for UserAccountId, not even an explicit nil
+func (o *LogResponse) UnsetUserAccountId() {
+	o.UserAccountId.Unset()
+}
+
+// GetOauthTokenId returns the OauthTokenId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *LogResponse) GetOauthTokenId() string {
+	if o == nil || IsNil(o.OauthTokenId.Get()) {
+		var ret string
 		return ret
 	}
-	return o.SearchableTags
+	return *o.OauthTokenId.Get()
 }
 
-// GetSearchableTagsOk returns a tuple with the SearchableTags field value if set, nil otherwise
+// GetOauthTokenIdOk returns a tuple with the OauthTokenId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LogResponse) GetSearchableTagsOk() ([]string, bool) {
-	if o == nil || IsNil(o.SearchableTags) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *LogResponse) GetOauthTokenIdOk() (*string, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.SearchableTags, true
+	return o.OauthTokenId.Get(), o.OauthTokenId.IsSet()
 }
 
-// HasSearchableTags returns a boolean if a field has been set.
-func (o *LogResponse) HasSearchableTags() bool {
-	if o != nil && !IsNil(o.SearchableTags) {
+// HasOauthTokenId returns a boolean if a field has been set.
+func (o *LogResponse) HasOauthTokenId() bool {
+	if o != nil && o.OauthTokenId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSearchableTags gets a reference to the given []string and assigns it to the SearchableTags field.
-func (o *LogResponse) SetSearchableTags(v []string) {
-	o.SearchableTags = v
+// SetOauthTokenId gets a reference to the given NullableString and assigns it to the OauthTokenId field.
+func (o *LogResponse) SetOauthTokenId(v string) {
+	o.OauthTokenId.Set(&v)
+}
+// SetOauthTokenIdNil sets the value for OauthTokenId to be an explicit nil
+func (o *LogResponse) SetOauthTokenIdNil() {
+	o.OauthTokenId.Set(nil)
+}
+
+// UnsetOauthTokenId ensures that no value is present for OauthTokenId, not even an explicit nil
+func (o *LogResponse) UnsetOauthTokenId() {
+	o.OauthTokenId.Unset()
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
@@ -587,136 +557,205 @@ func (o *LogResponse) SetStatus(v string) {
 	o.Status = &v
 }
 
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *LogResponse) GetUpdatedAt() string {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret string
+// GetQueryString returns the QueryString field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *LogResponse) GetQueryString() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
 		return ret
 	}
-	return *o.UpdatedAt
+	return o.QueryString
 }
 
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
+// GetQueryStringOk returns a tuple with the QueryString field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LogResponse) GetUpdatedAtOk() (*string, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *LogResponse) GetQueryStringOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.QueryString) {
+		return map[string]interface{}{}, false
 	}
-	return o.UpdatedAt, true
+	return o.QueryString, true
 }
 
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *LogResponse) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
+// HasQueryString returns a boolean if a field has been set.
+func (o *LogResponse) HasQueryString() bool {
+	if o != nil && !IsNil(o.QueryString) {
 		return true
 	}
 
 	return false
 }
 
-// SetUpdatedAt gets a reference to the given string and assigns it to the UpdatedAt field.
-func (o *LogResponse) SetUpdatedAt(v string) {
-	o.UpdatedAt = &v
+// SetQueryString gets a reference to the given map[string]interface{} and assigns it to the QueryString field.
+func (o *LogResponse) SetQueryString(v map[string]interface{}) {
+	o.QueryString = v
 }
 
-// GetUrl returns the Url field value if set, zero value otherwise.
-func (o *LogResponse) GetUrl() string {
-	if o == nil || IsNil(o.Url) {
-		var ret string
+// GetRequestHeaders returns the RequestHeaders field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *LogResponse) GetRequestHeaders() map[string]string {
+	if o == nil {
+		var ret map[string]string
 		return ret
 	}
-	return *o.Url
+	return o.RequestHeaders
 }
 
-// GetUrlOk returns a tuple with the Url field value if set, nil otherwise
+// GetRequestHeadersOk returns a tuple with the RequestHeaders field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LogResponse) GetUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.Url) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *LogResponse) GetRequestHeadersOk() (*map[string]string, bool) {
+	if o == nil || IsNil(o.RequestHeaders) {
 		return nil, false
 	}
-	return o.Url, true
+	return &o.RequestHeaders, true
 }
 
-// HasUrl returns a boolean if a field has been set.
-func (o *LogResponse) HasUrl() bool {
-	if o != nil && !IsNil(o.Url) {
+// HasRequestHeaders returns a boolean if a field has been set.
+func (o *LogResponse) HasRequestHeaders() bool {
+	if o != nil && !IsNil(o.RequestHeaders) {
 		return true
 	}
 
 	return false
 }
 
-// SetUrl gets a reference to the given string and assigns it to the Url field.
-func (o *LogResponse) SetUrl(v string) {
-	o.Url = &v
+// SetRequestHeaders gets a reference to the given map[string]string and assigns it to the RequestHeaders field.
+func (o *LogResponse) SetRequestHeaders(v map[string]string) {
+	o.RequestHeaders = v
 }
 
-// GetUserAccountId returns the UserAccountId field value if set, zero value otherwise.
-func (o *LogResponse) GetUserAccountId() string {
-	if o == nil || IsNil(o.UserAccountId) {
-		var ret string
+// GetResponseHeaders returns the ResponseHeaders field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *LogResponse) GetResponseHeaders() map[string]string {
+	if o == nil {
+		var ret map[string]string
 		return ret
 	}
-	return *o.UserAccountId
+	return o.ResponseHeaders
 }
 
-// GetUserAccountIdOk returns a tuple with the UserAccountId field value if set, nil otherwise
+// GetResponseHeadersOk returns a tuple with the ResponseHeaders field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LogResponse) GetUserAccountIdOk() (*string, bool) {
-	if o == nil || IsNil(o.UserAccountId) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *LogResponse) GetResponseHeadersOk() (*map[string]string, bool) {
+	if o == nil || IsNil(o.ResponseHeaders) {
 		return nil, false
 	}
-	return o.UserAccountId, true
+	return &o.ResponseHeaders, true
 }
 
-// HasUserAccountId returns a boolean if a field has been set.
-func (o *LogResponse) HasUserAccountId() bool {
-	if o != nil && !IsNil(o.UserAccountId) {
+// HasResponseHeaders returns a boolean if a field has been set.
+func (o *LogResponse) HasResponseHeaders() bool {
+	if o != nil && !IsNil(o.ResponseHeaders) {
 		return true
 	}
 
 	return false
 }
 
-// SetUserAccountId gets a reference to the given string and assigns it to the UserAccountId field.
-func (o *LogResponse) SetUserAccountId(v string) {
-	o.UserAccountId = &v
+// SetResponseHeaders gets a reference to the given map[string]string and assigns it to the ResponseHeaders field.
+func (o *LogResponse) SetResponseHeaders(v map[string]string) {
+	o.ResponseHeaders = v
 }
 
-// GetVersion returns the Version field value if set, zero value otherwise.
-func (o *LogResponse) GetVersion() string {
-	if o == nil || IsNil(o.Version) {
-		var ret string
+// GetRequestBody returns the RequestBody field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *LogResponse) GetRequestBody() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
 		return ret
 	}
-	return *o.Version
+	return o.RequestBody
 }
 
-// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// GetRequestBodyOk returns a tuple with the RequestBody field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LogResponse) GetVersionOk() (*string, bool) {
-	if o == nil || IsNil(o.Version) {
-		return nil, false
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *LogResponse) GetRequestBodyOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.RequestBody) {
+		return map[string]interface{}{}, false
 	}
-	return o.Version, true
+	return o.RequestBody, true
 }
 
-// HasVersion returns a boolean if a field has been set.
-func (o *LogResponse) HasVersion() bool {
-	if o != nil && !IsNil(o.Version) {
+// HasRequestBody returns a boolean if a field has been set.
+func (o *LogResponse) HasRequestBody() bool {
+	if o != nil && !IsNil(o.RequestBody) {
 		return true
 	}
 
 	return false
 }
 
-// SetVersion gets a reference to the given string and assigns it to the Version field.
-func (o *LogResponse) SetVersion(v string) {
-	o.Version = &v
+// SetRequestBody gets a reference to the given map[string]interface{} and assigns it to the RequestBody field.
+func (o *LogResponse) SetRequestBody(v map[string]interface{}) {
+	o.RequestBody = v
+}
+
+// GetResponseBody returns the ResponseBody field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *LogResponse) GetResponseBody() map[string]interface{} {
+	if o == nil {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.ResponseBody
+}
+
+// GetResponseBodyOk returns a tuple with the ResponseBody field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *LogResponse) GetResponseBodyOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.ResponseBody) {
+		return map[string]interface{}{}, false
+	}
+	return o.ResponseBody, true
+}
+
+// HasResponseBody returns a boolean if a field has been set.
+func (o *LogResponse) HasResponseBody() bool {
+	if o != nil && !IsNil(o.ResponseBody) {
+		return true
+	}
+
+	return false
+}
+
+// SetResponseBody gets a reference to the given map[string]interface{} and assigns it to the ResponseBody field.
+func (o *LogResponse) SetResponseBody(v map[string]interface{}) {
+	o.ResponseBody = v
+}
+
+// GetSearchableTags returns the SearchableTags field value if set, zero value otherwise.
+func (o *LogResponse) GetSearchableTags() []string {
+	if o == nil || IsNil(o.SearchableTags) {
+		var ret []string
+		return ret
+	}
+	return o.SearchableTags
+}
+
+// GetSearchableTagsOk returns a tuple with the SearchableTags field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *LogResponse) GetSearchableTagsOk() ([]string, bool) {
+	if o == nil || IsNil(o.SearchableTags) {
+		return nil, false
+	}
+	return o.SearchableTags, true
+}
+
+// HasSearchableTags returns a boolean if a field has been set.
+func (o *LogResponse) HasSearchableTags() bool {
+	if o != nil && !IsNil(o.SearchableTags) {
+		return true
+	}
+
+	return false
+}
+
+// SetSearchableTags gets a reference to the given []string and assigns it to the SearchableTags field.
+func (o *LogResponse) SetSearchableTags(v []string) {
+	o.SearchableTags = v
 }
 
 func (o LogResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -725,12 +764,16 @@ func (o LogResponse) MarshalJSON() ([]byte, error) {
 
 func (o LogResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["created_at"] = o.CreatedAt
 	toSerialize["id"] = o.Id
+	toSerialize["object"] = o.Object
+	toSerialize["created_at"] = o.CreatedAt
+	if !IsNil(o.UpdatedAt) {
+		toSerialize["updated_at"] = o.UpdatedAt
+	}
+	toSerialize["livemode"] = o.Livemode
 	if !IsNil(o.IpAddress) {
 		toSerialize["ip_address"] = o.IpAddress
 	}
-	toSerialize["livemode"] = o.Livemode
 	if o.LoggableId.IsSet() {
 		toSerialize["loggable_id"] = o.LoggableId.Get()
 	}
@@ -740,44 +783,41 @@ func (o LogResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Method) {
 		toSerialize["method"] = o.Method
 	}
-	if o.OauthTokenId.IsSet() {
-		toSerialize["oauth_token_id"] = o.OauthTokenId.Get()
-	}
-	if !IsNil(o.QueryString) {
-		toSerialize["query_string"] = o.QueryString
+	if !IsNil(o.Url) {
+		toSerialize["url"] = o.Url
 	}
 	if !IsNil(o.Related) {
 		toSerialize["related"] = o.Related
 	}
-	if !IsNil(o.RequestBody) {
-		toSerialize["request_body"] = o.RequestBody
+	if !IsNil(o.Version) {
+		toSerialize["version"] = o.Version
 	}
-	if !IsNil(o.RequestHeaders) {
-		toSerialize["request_headers"] = o.RequestHeaders
+	if o.UserAccountId.IsSet() {
+		toSerialize["user_account_id"] = o.UserAccountId.Get()
 	}
-	if !IsNil(o.ResponseBody) {
-		toSerialize["response_body"] = o.ResponseBody
-	}
-	if !IsNil(o.ResponseHeaders) {
-		toSerialize["response_headers"] = o.ResponseHeaders
-	}
-	if !IsNil(o.SearchableTags) {
-		toSerialize["searchable_tags"] = o.SearchableTags
+	if o.OauthTokenId.IsSet() {
+		toSerialize["oauth_token_id"] = o.OauthTokenId.Get()
 	}
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
 	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updated_at"] = o.UpdatedAt
+	if o.QueryString != nil {
+		toSerialize["query_string"] = o.QueryString
 	}
-	if !IsNil(o.Url) {
-		toSerialize["url"] = o.Url
+	if o.RequestHeaders != nil {
+		toSerialize["request_headers"] = o.RequestHeaders
 	}
-	if !IsNil(o.UserAccountId) {
-		toSerialize["user_account_id"] = o.UserAccountId
+	if o.ResponseHeaders != nil {
+		toSerialize["response_headers"] = o.ResponseHeaders
 	}
-	if !IsNil(o.Version) {
-		toSerialize["version"] = o.Version
+	if o.RequestBody != nil {
+		toSerialize["request_body"] = o.RequestBody
+	}
+	if o.ResponseBody != nil {
+		toSerialize["response_body"] = o.ResponseBody
+	}
+	if !IsNil(o.SearchableTags) {
+		toSerialize["searchable_tags"] = o.SearchableTags
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -792,8 +832,9 @@ func (o *LogResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"created_at",
 		"id",
+		"object",
+		"created_at",
 		"livemode",
 	}
 
@@ -802,10 +843,10 @@ func (o *LogResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -824,26 +865,27 @@ func (o *LogResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "created_at")
 		delete(additionalProperties, "id")
-		delete(additionalProperties, "ip_address")
+		delete(additionalProperties, "object")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "updated_at")
 		delete(additionalProperties, "livemode")
+		delete(additionalProperties, "ip_address")
 		delete(additionalProperties, "loggable_id")
 		delete(additionalProperties, "loggable_type")
 		delete(additionalProperties, "method")
-		delete(additionalProperties, "oauth_token_id")
-		delete(additionalProperties, "query_string")
-		delete(additionalProperties, "related")
-		delete(additionalProperties, "request_body")
-		delete(additionalProperties, "request_headers")
-		delete(additionalProperties, "response_body")
-		delete(additionalProperties, "response_headers")
-		delete(additionalProperties, "searchable_tags")
-		delete(additionalProperties, "status")
-		delete(additionalProperties, "updated_at")
 		delete(additionalProperties, "url")
-		delete(additionalProperties, "user_account_id")
+		delete(additionalProperties, "related")
 		delete(additionalProperties, "version")
+		delete(additionalProperties, "user_account_id")
+		delete(additionalProperties, "oauth_token_id")
+		delete(additionalProperties, "status")
+		delete(additionalProperties, "query_string")
+		delete(additionalProperties, "request_headers")
+		delete(additionalProperties, "response_headers")
+		delete(additionalProperties, "request_body")
+		delete(additionalProperties, "response_body")
+		delete(additionalProperties, "searchable_tags")
 		o.AdditionalProperties = additionalProperties
 	}
 
@@ -885,3 +927,5 @@ func (v *NullableLogResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

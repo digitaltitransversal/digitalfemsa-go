@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -20,12 +20,12 @@ var _ MappedNullable = &CustomerUpdateFiscalEntitiesRequest{}
 
 // CustomerUpdateFiscalEntitiesRequest struct for CustomerUpdateFiscalEntitiesRequest
 type CustomerUpdateFiscalEntitiesRequest struct {
-	Address              *CustomerAddress                  `json:"address,omitempty"`
-	TaxId                *string                           `json:"tax_id,omitempty"`
-	Email                *string                           `json:"email,omitempty"`
-	Phone                *string                           `json:"phone,omitempty"`
-	Metadata             map[string]map[string]interface{} `json:"metadata,omitempty"`
-	CompanyName          *string                           `json:"company_name,omitempty"`
+	Address *CustomerAddress `json:"address,omitempty"`
+	TaxId *string `json:"tax_id,omitempty"`
+	Email *string `json:"email,omitempty"`
+	Phone *string `json:"phone,omitempty"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	CompanyName *string `json:"company_name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -177,9 +177,9 @@ func (o *CustomerUpdateFiscalEntitiesRequest) SetPhone(v string) {
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *CustomerUpdateFiscalEntitiesRequest) GetMetadata() map[string]map[string]interface{} {
+func (o *CustomerUpdateFiscalEntitiesRequest) GetMetadata() map[string]interface{} {
 	if o == nil || IsNil(o.Metadata) {
-		var ret map[string]map[string]interface{}
+		var ret map[string]interface{}
 		return ret
 	}
 	return o.Metadata
@@ -187,9 +187,9 @@ func (o *CustomerUpdateFiscalEntitiesRequest) GetMetadata() map[string]map[strin
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CustomerUpdateFiscalEntitiesRequest) GetMetadataOk() (map[string]map[string]interface{}, bool) {
+func (o *CustomerUpdateFiscalEntitiesRequest) GetMetadataOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.Metadata) {
-		return map[string]map[string]interface{}{}, false
+		return map[string]interface{}{}, false
 	}
 	return o.Metadata, true
 }
@@ -203,8 +203,8 @@ func (o *CustomerUpdateFiscalEntitiesRequest) HasMetadata() bool {
 	return false
 }
 
-// SetMetadata gets a reference to the given map[string]map[string]interface{} and assigns it to the Metadata field.
-func (o *CustomerUpdateFiscalEntitiesRequest) SetMetadata(v map[string]map[string]interface{}) {
+// SetMetadata gets a reference to the given map[string]interface{} and assigns it to the Metadata field.
+func (o *CustomerUpdateFiscalEntitiesRequest) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
 }
 
@@ -241,7 +241,7 @@ func (o *CustomerUpdateFiscalEntitiesRequest) SetCompanyName(v string) {
 }
 
 func (o CustomerUpdateFiscalEntitiesRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -337,3 +337,5 @@ func (v *NullableCustomerUpdateFiscalEntitiesRequest) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

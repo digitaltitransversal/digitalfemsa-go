@@ -4,30 +4,31 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | Pointer to **int32** |  | [optional] 
+**Id** | **string** |  | 
+**Livemode** | **bool** |  | 
+**CreatedAt** | **int64** |  | 
+**Currency** | **string** |  | 
+**FailureCode** | Pointer to **NullableString** |  | [optional] 
+**FailureMessage** | Pointer to **NullableString** |  | [optional] 
 **Channel** | Pointer to [**ChargeResponseChannel**](ChargeResponseChannel.md) |  | [optional] 
-**CreatedAt** | Pointer to **int64** |  | [optional] 
-**Currency** | Pointer to **string** |  | [optional] 
-**CustomerId** | Pointer to **string** |  | [optional] 
-**Description** | Pointer to **string** |  | [optional] 
+**PaymentMethod** | [**ChargeResponsePaymentMethod**](ChargeResponsePaymentMethod.md) |  | 
+**Object** | **string** |  | 
 **DeviceFingerprint** | Pointer to **string** |  | [optional] 
-**FailureCode** | Pointer to **string** |  | [optional] 
-**FailureMessage** | Pointer to **string** |  | [optional] 
-**Id** | Pointer to **string** |  | [optional] 
-**Livemode** | Pointer to **bool** |  | [optional] 
-**Object** | Pointer to **string** |  | [optional] 
+**Description** | Pointer to **string** |  | [optional] 
+**IsRefundable** | Pointer to **bool** |  | [optional] 
+**ReferenceId** | Pointer to **NullableString** |  | [optional] 
+**Status** | **string** |  | 
+**Amount** | **int64** |  | 
+**PaidAt** | Pointer to **NullableInt64** |  | [optional] 
+**CustomerId** | Pointer to **string** |  | [optional] 
 **OrderId** | Pointer to **string** |  | [optional] 
-**PaidAt** | Pointer to **NullableInt32** |  | [optional] 
-**PaymentMethod** | Pointer to [**ChargeResponsePaymentMethod**](ChargeResponsePaymentMethod.md) |  | [optional] 
-**ReferenceId** | Pointer to **NullableString** | Reference ID of the charge | [optional] 
 **Refunds** | Pointer to [**NullableChargeResponseRefunds**](ChargeResponseRefunds.md) |  | [optional] 
-**Status** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewChargesDataResponse
 
-`func NewChargesDataResponse() *ChargesDataResponse`
+`func NewChargesDataResponse(id string, livemode bool, createdAt int64, currency string, paymentMethod ChargeResponsePaymentMethod, object string, status string, amount int64, ) *ChargesDataResponse`
 
 NewChargesDataResponse instantiates a new ChargesDataResponse object
 This constructor will assign default values to properties that have it defined,
@@ -42,55 +43,45 @@ NewChargesDataResponseWithDefaults instantiates a new ChargesDataResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetAmount
+### GetId
 
-`func (o *ChargesDataResponse) GetAmount() int32`
+`func (o *ChargesDataResponse) GetId() string`
 
-GetAmount returns the Amount field if non-nil, zero value otherwise.
+GetId returns the Id field if non-nil, zero value otherwise.
 
-### GetAmountOk
+### GetIdOk
 
-`func (o *ChargesDataResponse) GetAmountOk() (*int32, bool)`
+`func (o *ChargesDataResponse) GetIdOk() (*string, bool)`
 
-GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAmount
+### SetId
 
-`func (o *ChargesDataResponse) SetAmount(v int32)`
+`func (o *ChargesDataResponse) SetId(v string)`
 
-SetAmount sets Amount field to given value.
+SetId sets Id field to given value.
 
-### HasAmount
 
-`func (o *ChargesDataResponse) HasAmount() bool`
+### GetLivemode
 
-HasAmount returns a boolean if a field has been set.
+`func (o *ChargesDataResponse) GetLivemode() bool`
 
-### GetChannel
+GetLivemode returns the Livemode field if non-nil, zero value otherwise.
 
-`func (o *ChargesDataResponse) GetChannel() ChargeResponseChannel`
+### GetLivemodeOk
 
-GetChannel returns the Channel field if non-nil, zero value otherwise.
+`func (o *ChargesDataResponse) GetLivemodeOk() (*bool, bool)`
 
-### GetChannelOk
-
-`func (o *ChargesDataResponse) GetChannelOk() (*ChargeResponseChannel, bool)`
-
-GetChannelOk returns a tuple with the Channel field if it's non-nil, zero value otherwise
+GetLivemodeOk returns a tuple with the Livemode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetChannel
+### SetLivemode
 
-`func (o *ChargesDataResponse) SetChannel(v ChargeResponseChannel)`
+`func (o *ChargesDataResponse) SetLivemode(v bool)`
 
-SetChannel sets Channel field to given value.
+SetLivemode sets Livemode field to given value.
 
-### HasChannel
-
-`func (o *ChargesDataResponse) HasChannel() bool`
-
-HasChannel returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
@@ -111,11 +102,6 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
-### HasCreatedAt
-
-`func (o *ChargesDataResponse) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetCurrency
 
@@ -136,86 +122,6 @@ and a boolean to check if the value has been set.
 
 SetCurrency sets Currency field to given value.
 
-### HasCurrency
-
-`func (o *ChargesDataResponse) HasCurrency() bool`
-
-HasCurrency returns a boolean if a field has been set.
-
-### GetCustomerId
-
-`func (o *ChargesDataResponse) GetCustomerId() string`
-
-GetCustomerId returns the CustomerId field if non-nil, zero value otherwise.
-
-### GetCustomerIdOk
-
-`func (o *ChargesDataResponse) GetCustomerIdOk() (*string, bool)`
-
-GetCustomerIdOk returns a tuple with the CustomerId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCustomerId
-
-`func (o *ChargesDataResponse) SetCustomerId(v string)`
-
-SetCustomerId sets CustomerId field to given value.
-
-### HasCustomerId
-
-`func (o *ChargesDataResponse) HasCustomerId() bool`
-
-HasCustomerId returns a boolean if a field has been set.
-
-### GetDescription
-
-`func (o *ChargesDataResponse) GetDescription() string`
-
-GetDescription returns the Description field if non-nil, zero value otherwise.
-
-### GetDescriptionOk
-
-`func (o *ChargesDataResponse) GetDescriptionOk() (*string, bool)`
-
-GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDescription
-
-`func (o *ChargesDataResponse) SetDescription(v string)`
-
-SetDescription sets Description field to given value.
-
-### HasDescription
-
-`func (o *ChargesDataResponse) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
-
-### GetDeviceFingerprint
-
-`func (o *ChargesDataResponse) GetDeviceFingerprint() string`
-
-GetDeviceFingerprint returns the DeviceFingerprint field if non-nil, zero value otherwise.
-
-### GetDeviceFingerprintOk
-
-`func (o *ChargesDataResponse) GetDeviceFingerprintOk() (*string, bool)`
-
-GetDeviceFingerprintOk returns a tuple with the DeviceFingerprint field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDeviceFingerprint
-
-`func (o *ChargesDataResponse) SetDeviceFingerprint(v string)`
-
-SetDeviceFingerprint sets DeviceFingerprint field to given value.
-
-### HasDeviceFingerprint
-
-`func (o *ChargesDataResponse) HasDeviceFingerprint() bool`
-
-HasDeviceFingerprint returns a boolean if a field has been set.
 
 ### GetFailureCode
 
@@ -242,6 +148,16 @@ SetFailureCode sets FailureCode field to given value.
 
 HasFailureCode returns a boolean if a field has been set.
 
+### SetFailureCodeNil
+
+`func (o *ChargesDataResponse) SetFailureCodeNil(b bool)`
+
+ SetFailureCodeNil sets the value for FailureCode to be an explicit nil
+
+### UnsetFailureCode
+`func (o *ChargesDataResponse) UnsetFailureCode()`
+
+UnsetFailureCode ensures that no value is present for FailureCode, not even an explicit nil
 ### GetFailureMessage
 
 `func (o *ChargesDataResponse) GetFailureMessage() string`
@@ -267,55 +183,60 @@ SetFailureMessage sets FailureMessage field to given value.
 
 HasFailureMessage returns a boolean if a field has been set.
 
-### GetId
+### SetFailureMessageNil
 
-`func (o *ChargesDataResponse) GetId() string`
+`func (o *ChargesDataResponse) SetFailureMessageNil(b bool)`
 
-GetId returns the Id field if non-nil, zero value otherwise.
+ SetFailureMessageNil sets the value for FailureMessage to be an explicit nil
 
-### GetIdOk
+### UnsetFailureMessage
+`func (o *ChargesDataResponse) UnsetFailureMessage()`
 
-`func (o *ChargesDataResponse) GetIdOk() (*string, bool)`
+UnsetFailureMessage ensures that no value is present for FailureMessage, not even an explicit nil
+### GetChannel
 
-GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+`func (o *ChargesDataResponse) GetChannel() ChargeResponseChannel`
+
+GetChannel returns the Channel field if non-nil, zero value otherwise.
+
+### GetChannelOk
+
+`func (o *ChargesDataResponse) GetChannelOk() (*ChargeResponseChannel, bool)`
+
+GetChannelOk returns a tuple with the Channel field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetId
+### SetChannel
 
-`func (o *ChargesDataResponse) SetId(v string)`
+`func (o *ChargesDataResponse) SetChannel(v ChargeResponseChannel)`
 
-SetId sets Id field to given value.
+SetChannel sets Channel field to given value.
 
-### HasId
+### HasChannel
 
-`func (o *ChargesDataResponse) HasId() bool`
+`func (o *ChargesDataResponse) HasChannel() bool`
 
-HasId returns a boolean if a field has been set.
+HasChannel returns a boolean if a field has been set.
 
-### GetLivemode
+### GetPaymentMethod
 
-`func (o *ChargesDataResponse) GetLivemode() bool`
+`func (o *ChargesDataResponse) GetPaymentMethod() ChargeResponsePaymentMethod`
 
-GetLivemode returns the Livemode field if non-nil, zero value otherwise.
+GetPaymentMethod returns the PaymentMethod field if non-nil, zero value otherwise.
 
-### GetLivemodeOk
+### GetPaymentMethodOk
 
-`func (o *ChargesDataResponse) GetLivemodeOk() (*bool, bool)`
+`func (o *ChargesDataResponse) GetPaymentMethodOk() (*ChargeResponsePaymentMethod, bool)`
 
-GetLivemodeOk returns a tuple with the Livemode field if it's non-nil, zero value otherwise
+GetPaymentMethodOk returns a tuple with the PaymentMethod field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLivemode
+### SetPaymentMethod
 
-`func (o *ChargesDataResponse) SetLivemode(v bool)`
+`func (o *ChargesDataResponse) SetPaymentMethod(v ChargeResponsePaymentMethod)`
 
-SetLivemode sets Livemode field to given value.
+SetPaymentMethod sets PaymentMethod field to given value.
 
-### HasLivemode
-
-`func (o *ChargesDataResponse) HasLivemode() bool`
-
-HasLivemode returns a boolean if a field has been set.
 
 ### GetObject
 
@@ -336,96 +257,81 @@ and a boolean to check if the value has been set.
 
 SetObject sets Object field to given value.
 
-### HasObject
 
-`func (o *ChargesDataResponse) HasObject() bool`
+### GetDeviceFingerprint
 
-HasObject returns a boolean if a field has been set.
+`func (o *ChargesDataResponse) GetDeviceFingerprint() string`
 
-### GetOrderId
+GetDeviceFingerprint returns the DeviceFingerprint field if non-nil, zero value otherwise.
 
-`func (o *ChargesDataResponse) GetOrderId() string`
+### GetDeviceFingerprintOk
 
-GetOrderId returns the OrderId field if non-nil, zero value otherwise.
+`func (o *ChargesDataResponse) GetDeviceFingerprintOk() (*string, bool)`
 
-### GetOrderIdOk
-
-`func (o *ChargesDataResponse) GetOrderIdOk() (*string, bool)`
-
-GetOrderIdOk returns a tuple with the OrderId field if it's non-nil, zero value otherwise
+GetDeviceFingerprintOk returns a tuple with the DeviceFingerprint field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOrderId
+### SetDeviceFingerprint
 
-`func (o *ChargesDataResponse) SetOrderId(v string)`
+`func (o *ChargesDataResponse) SetDeviceFingerprint(v string)`
 
-SetOrderId sets OrderId field to given value.
+SetDeviceFingerprint sets DeviceFingerprint field to given value.
 
-### HasOrderId
+### HasDeviceFingerprint
 
-`func (o *ChargesDataResponse) HasOrderId() bool`
+`func (o *ChargesDataResponse) HasDeviceFingerprint() bool`
 
-HasOrderId returns a boolean if a field has been set.
+HasDeviceFingerprint returns a boolean if a field has been set.
 
-### GetPaidAt
+### GetDescription
 
-`func (o *ChargesDataResponse) GetPaidAt() int32`
+`func (o *ChargesDataResponse) GetDescription() string`
 
-GetPaidAt returns the PaidAt field if non-nil, zero value otherwise.
+GetDescription returns the Description field if non-nil, zero value otherwise.
 
-### GetPaidAtOk
+### GetDescriptionOk
 
-`func (o *ChargesDataResponse) GetPaidAtOk() (*int32, bool)`
+`func (o *ChargesDataResponse) GetDescriptionOk() (*string, bool)`
 
-GetPaidAtOk returns a tuple with the PaidAt field if it's non-nil, zero value otherwise
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPaidAt
+### SetDescription
 
-`func (o *ChargesDataResponse) SetPaidAt(v int32)`
+`func (o *ChargesDataResponse) SetDescription(v string)`
 
-SetPaidAt sets PaidAt field to given value.
+SetDescription sets Description field to given value.
 
-### HasPaidAt
+### HasDescription
 
-`func (o *ChargesDataResponse) HasPaidAt() bool`
+`func (o *ChargesDataResponse) HasDescription() bool`
 
-HasPaidAt returns a boolean if a field has been set.
+HasDescription returns a boolean if a field has been set.
 
-### SetPaidAtNil
+### GetIsRefundable
 
-`func (o *ChargesDataResponse) SetPaidAtNil(b bool)`
+`func (o *ChargesDataResponse) GetIsRefundable() bool`
 
- SetPaidAtNil sets the value for PaidAt to be an explicit nil
+GetIsRefundable returns the IsRefundable field if non-nil, zero value otherwise.
 
-### UnsetPaidAt
-`func (o *ChargesDataResponse) UnsetPaidAt()`
+### GetIsRefundableOk
 
-UnsetPaidAt ensures that no value is present for PaidAt, not even an explicit nil
-### GetPaymentMethod
+`func (o *ChargesDataResponse) GetIsRefundableOk() (*bool, bool)`
 
-`func (o *ChargesDataResponse) GetPaymentMethod() ChargeResponsePaymentMethod`
-
-GetPaymentMethod returns the PaymentMethod field if non-nil, zero value otherwise.
-
-### GetPaymentMethodOk
-
-`func (o *ChargesDataResponse) GetPaymentMethodOk() (*ChargeResponsePaymentMethod, bool)`
-
-GetPaymentMethodOk returns a tuple with the PaymentMethod field if it's non-nil, zero value otherwise
+GetIsRefundableOk returns a tuple with the IsRefundable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPaymentMethod
+### SetIsRefundable
 
-`func (o *ChargesDataResponse) SetPaymentMethod(v ChargeResponsePaymentMethod)`
+`func (o *ChargesDataResponse) SetIsRefundable(v bool)`
 
-SetPaymentMethod sets PaymentMethod field to given value.
+SetIsRefundable sets IsRefundable field to given value.
 
-### HasPaymentMethod
+### HasIsRefundable
 
-`func (o *ChargesDataResponse) HasPaymentMethod() bool`
+`func (o *ChargesDataResponse) HasIsRefundable() bool`
 
-HasPaymentMethod returns a boolean if a field has been set.
+HasIsRefundable returns a boolean if a field has been set.
 
 ### GetReferenceId
 
@@ -462,6 +368,131 @@ HasReferenceId returns a boolean if a field has been set.
 `func (o *ChargesDataResponse) UnsetReferenceId()`
 
 UnsetReferenceId ensures that no value is present for ReferenceId, not even an explicit nil
+### GetStatus
+
+`func (o *ChargesDataResponse) GetStatus() string`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *ChargesDataResponse) GetStatusOk() (*string, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *ChargesDataResponse) SetStatus(v string)`
+
+SetStatus sets Status field to given value.
+
+
+### GetAmount
+
+`func (o *ChargesDataResponse) GetAmount() int64`
+
+GetAmount returns the Amount field if non-nil, zero value otherwise.
+
+### GetAmountOk
+
+`func (o *ChargesDataResponse) GetAmountOk() (*int64, bool)`
+
+GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAmount
+
+`func (o *ChargesDataResponse) SetAmount(v int64)`
+
+SetAmount sets Amount field to given value.
+
+
+### GetPaidAt
+
+`func (o *ChargesDataResponse) GetPaidAt() int64`
+
+GetPaidAt returns the PaidAt field if non-nil, zero value otherwise.
+
+### GetPaidAtOk
+
+`func (o *ChargesDataResponse) GetPaidAtOk() (*int64, bool)`
+
+GetPaidAtOk returns a tuple with the PaidAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaidAt
+
+`func (o *ChargesDataResponse) SetPaidAt(v int64)`
+
+SetPaidAt sets PaidAt field to given value.
+
+### HasPaidAt
+
+`func (o *ChargesDataResponse) HasPaidAt() bool`
+
+HasPaidAt returns a boolean if a field has been set.
+
+### SetPaidAtNil
+
+`func (o *ChargesDataResponse) SetPaidAtNil(b bool)`
+
+ SetPaidAtNil sets the value for PaidAt to be an explicit nil
+
+### UnsetPaidAt
+`func (o *ChargesDataResponse) UnsetPaidAt()`
+
+UnsetPaidAt ensures that no value is present for PaidAt, not even an explicit nil
+### GetCustomerId
+
+`func (o *ChargesDataResponse) GetCustomerId() string`
+
+GetCustomerId returns the CustomerId field if non-nil, zero value otherwise.
+
+### GetCustomerIdOk
+
+`func (o *ChargesDataResponse) GetCustomerIdOk() (*string, bool)`
+
+GetCustomerIdOk returns a tuple with the CustomerId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomerId
+
+`func (o *ChargesDataResponse) SetCustomerId(v string)`
+
+SetCustomerId sets CustomerId field to given value.
+
+### HasCustomerId
+
+`func (o *ChargesDataResponse) HasCustomerId() bool`
+
+HasCustomerId returns a boolean if a field has been set.
+
+### GetOrderId
+
+`func (o *ChargesDataResponse) GetOrderId() string`
+
+GetOrderId returns the OrderId field if non-nil, zero value otherwise.
+
+### GetOrderIdOk
+
+`func (o *ChargesDataResponse) GetOrderIdOk() (*string, bool)`
+
+GetOrderIdOk returns a tuple with the OrderId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrderId
+
+`func (o *ChargesDataResponse) SetOrderId(v string)`
+
+SetOrderId sets OrderId field to given value.
+
+### HasOrderId
+
+`func (o *ChargesDataResponse) HasOrderId() bool`
+
+HasOrderId returns a boolean if a field has been set.
+
 ### GetRefunds
 
 `func (o *ChargesDataResponse) GetRefunds() ChargeResponseRefunds`
@@ -497,31 +528,6 @@ HasRefunds returns a boolean if a field has been set.
 `func (o *ChargesDataResponse) UnsetRefunds()`
 
 UnsetRefunds ensures that no value is present for Refunds, not even an explicit nil
-### GetStatus
-
-`func (o *ChargesDataResponse) GetStatus() string`
-
-GetStatus returns the Status field if non-nil, zero value otherwise.
-
-### GetStatusOk
-
-`func (o *ChargesDataResponse) GetStatusOk() (*string, bool)`
-
-GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStatus
-
-`func (o *ChargesDataResponse) SetStatus(v string)`
-
-SetStatus sets Status field to given value.
-
-### HasStatus
-
-`func (o *ChargesDataResponse) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
-
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

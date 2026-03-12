@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Carrier** | Pointer to **string** | Carrier name for the shipment | [optional] 
 **TrackingNumber** | Pointer to **string** | Tracking number can be used to track the shipment | [optional] 
 **Method** | Pointer to **string** | Method of shipment | [optional] 
+**Description** | Pointer to **string** | Shipping line description | [optional] 
 **Metadata** | Pointer to **map[string]interface{}** | Hash where the user can send additional information for each &#39;shipping&#39;. | [optional] 
 
 ## Methods
@@ -123,6 +124,31 @@ SetMethod sets Method field to given value.
 `func (o *ShippingRequest) HasMethod() bool`
 
 HasMethod returns a boolean if a field has been set.
+
+### GetDescription
+
+`func (o *ShippingRequest) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *ShippingRequest) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *ShippingRequest) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *ShippingRequest) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
 
 ### GetMetadata
 

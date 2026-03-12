@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -20,25 +20,25 @@ var _ MappedNullable = &ChargeOrderResponse{}
 
 // ChargeOrderResponse struct for ChargeOrderResponse
 type ChargeOrderResponse struct {
-	Amount            *int32                            `json:"amount,omitempty"`
-	Channel           *ChargeResponseChannel            `json:"channel,omitempty"`
-	CreatedAt         *int64                            `json:"created_at,omitempty"`
-	Currency          *string                           `json:"currency,omitempty"`
-	CustomerId        *string                           `json:"customer_id,omitempty"`
-	Description       *string                           `json:"description,omitempty"`
-	DeviceFingerprint NullableString                    `json:"device_fingerprint,omitempty"`
-	FailureCode       *string                           `json:"failure_code,omitempty"`
-	FailureMessage    *string                           `json:"failure_message,omitempty"`
-	Id                *string                           `json:"id,omitempty"`
-	Livemode          *bool                             `json:"livemode,omitempty"`
-	Object            *string                           `json:"object,omitempty"`
-	OrderId           *string                           `json:"order_id,omitempty"`
-	PaidAt            NullableInt32                     `json:"paid_at,omitempty"`
-	PaymentMethod     *ChargeOrderResponsePaymentMethod `json:"payment_method,omitempty"`
+	Amount *int32 `json:"amount,omitempty"`
+	Channel *ChargeOrderResponseChannel `json:"channel,omitempty"`
+	CreatedAt *int64 `json:"created_at,omitempty"`
+	Currency *string `json:"currency,omitempty"`
+	CustomerId *string `json:"customer_id,omitempty"`
+	Description *string `json:"description,omitempty"`
+	DeviceFingerprint NullableString `json:"device_fingerprint,omitempty"`
+	FailureCode *string `json:"failure_code,omitempty"`
+	FailureMessage *string `json:"failure_message,omitempty"`
+	Id *string `json:"id,omitempty"`
+	Livemode *bool `json:"livemode,omitempty"`
+	Object *string `json:"object,omitempty"`
+	OrderId *string `json:"order_id,omitempty"`
+	PaidAt NullableInt32 `json:"paid_at,omitempty"`
+	PaymentMethod *ChargeOrderResponsePaymentMethod `json:"payment_method,omitempty"`
 	// Reference ID of the charge
-	ReferenceId          NullableString           `json:"reference_id,omitempty"`
-	Refunds              []map[string]interface{} `json:"refunds,omitempty"`
-	Status               *string                  `json:"status,omitempty"`
+	ReferenceId NullableString `json:"reference_id,omitempty"`
+	Refunds []map[string]interface{} `json:"refunds,omitempty"`
+	Status *string `json:"status,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -94,9 +94,9 @@ func (o *ChargeOrderResponse) SetAmount(v int32) {
 }
 
 // GetChannel returns the Channel field value if set, zero value otherwise.
-func (o *ChargeOrderResponse) GetChannel() ChargeResponseChannel {
+func (o *ChargeOrderResponse) GetChannel() ChargeOrderResponseChannel {
 	if o == nil || IsNil(o.Channel) {
-		var ret ChargeResponseChannel
+		var ret ChargeOrderResponseChannel
 		return ret
 	}
 	return *o.Channel
@@ -104,7 +104,7 @@ func (o *ChargeOrderResponse) GetChannel() ChargeResponseChannel {
 
 // GetChannelOk returns a tuple with the Channel field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ChargeOrderResponse) GetChannelOk() (*ChargeResponseChannel, bool) {
+func (o *ChargeOrderResponse) GetChannelOk() (*ChargeOrderResponseChannel, bool) {
 	if o == nil || IsNil(o.Channel) {
 		return nil, false
 	}
@@ -120,8 +120,8 @@ func (o *ChargeOrderResponse) HasChannel() bool {
 	return false
 }
 
-// SetChannel gets a reference to the given ChargeResponseChannel and assigns it to the Channel field.
-func (o *ChargeOrderResponse) SetChannel(v ChargeResponseChannel) {
+// SetChannel gets a reference to the given ChargeOrderResponseChannel and assigns it to the Channel field.
+func (o *ChargeOrderResponse) SetChannel(v ChargeOrderResponseChannel) {
 	o.Channel = &v
 }
 
@@ -285,7 +285,6 @@ func (o *ChargeOrderResponse) HasDeviceFingerprint() bool {
 func (o *ChargeOrderResponse) SetDeviceFingerprint(v string) {
 	o.DeviceFingerprint.Set(&v)
 }
-
 // SetDeviceFingerprintNil sets the value for DeviceFingerprint to be an explicit nil
 func (o *ChargeOrderResponse) SetDeviceFingerprintNil() {
 	o.DeviceFingerprint.Set(nil)
@@ -520,7 +519,6 @@ func (o *ChargeOrderResponse) HasPaidAt() bool {
 func (o *ChargeOrderResponse) SetPaidAt(v int32) {
 	o.PaidAt.Set(&v)
 }
-
 // SetPaidAtNil sets the value for PaidAt to be an explicit nil
 func (o *ChargeOrderResponse) SetPaidAtNil() {
 	o.PaidAt.Set(nil)
@@ -595,7 +593,6 @@ func (o *ChargeOrderResponse) HasReferenceId() bool {
 func (o *ChargeOrderResponse) SetReferenceId(v string) {
 	o.ReferenceId.Set(&v)
 }
-
 // SetReferenceIdNil sets the value for ReferenceId to be an explicit nil
 func (o *ChargeOrderResponse) SetReferenceIdNil() {
 	o.ReferenceId.Set(nil)
@@ -671,7 +668,7 @@ func (o *ChargeOrderResponse) SetStatus(v string) {
 }
 
 func (o ChargeOrderResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -815,3 +812,5 @@ func (v *NullableChargeOrderResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

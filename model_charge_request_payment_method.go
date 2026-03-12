@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -19,12 +19,14 @@ import (
 // checks if the ChargeRequestPaymentMethod type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ChargeRequestPaymentMethod{}
 
-// ChargeRequestPaymentMethod Payment method used in the charge. Go to the [payment methods](https://developers.femsa.com/reference/m%C3%A9todos-de-pago) section for more details
+// ChargeRequestPaymentMethod Payment method used in the charge. 
 type ChargeRequestPaymentMethod struct {
-	// Method expiration date as unix timestamp
-	ExpiresAt            *int64  `json:"expires_at,omitempty"`
-	Type                 string  `json:"type"`
-	PaymentSourceId      *string `json:"payment_source_id,omitempty"`
+	// Payment method type.
+	Type string `json:"type"`
+	// Method expiration date as unix timestamp (applies to some payment methods, e.g. cash).
+	ExpiresAt NullableInt64 `json:"expires_at,omitempty"`
+	// Identifier of a saved payment source to be used for this charge (if applicable).
+	PaymentSourceId NullableString `json:"payment_source_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -46,38 +48,6 @@ func NewChargeRequestPaymentMethod(type_ string) *ChargeRequestPaymentMethod {
 func NewChargeRequestPaymentMethodWithDefaults() *ChargeRequestPaymentMethod {
 	this := ChargeRequestPaymentMethod{}
 	return &this
-}
-
-// GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
-func (o *ChargeRequestPaymentMethod) GetExpiresAt() int64 {
-	if o == nil || IsNil(o.ExpiresAt) {
-		var ret int64
-		return ret
-	}
-	return *o.ExpiresAt
-}
-
-// GetExpiresAtOk returns a tuple with the ExpiresAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ChargeRequestPaymentMethod) GetExpiresAtOk() (*int64, bool) {
-	if o == nil || IsNil(o.ExpiresAt) {
-		return nil, false
-	}
-	return o.ExpiresAt, true
-}
-
-// HasExpiresAt returns a boolean if a field has been set.
-func (o *ChargeRequestPaymentMethod) HasExpiresAt() bool {
-	if o != nil && !IsNil(o.ExpiresAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetExpiresAt gets a reference to the given int64 and assigns it to the ExpiresAt field.
-func (o *ChargeRequestPaymentMethod) SetExpiresAt(v int64) {
-	o.ExpiresAt = &v
 }
 
 // GetType returns the Type field value
@@ -104,40 +74,92 @@ func (o *ChargeRequestPaymentMethod) SetType(v string) {
 	o.Type = v
 }
 
-// GetPaymentSourceId returns the PaymentSourceId field value if set, zero value otherwise.
-func (o *ChargeRequestPaymentMethod) GetPaymentSourceId() string {
-	if o == nil || IsNil(o.PaymentSourceId) {
-		var ret string
+// GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ChargeRequestPaymentMethod) GetExpiresAt() int64 {
+	if o == nil || IsNil(o.ExpiresAt.Get()) {
+		var ret int64
 		return ret
 	}
-	return *o.PaymentSourceId
+	return *o.ExpiresAt.Get()
 }
 
-// GetPaymentSourceIdOk returns a tuple with the PaymentSourceId field value if set, nil otherwise
+// GetExpiresAtOk returns a tuple with the ExpiresAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ChargeRequestPaymentMethod) GetPaymentSourceIdOk() (*string, bool) {
-	if o == nil || IsNil(o.PaymentSourceId) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ChargeRequestPaymentMethod) GetExpiresAtOk() (*int64, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.PaymentSourceId, true
+	return o.ExpiresAt.Get(), o.ExpiresAt.IsSet()
 }
 
-// HasPaymentSourceId returns a boolean if a field has been set.
-func (o *ChargeRequestPaymentMethod) HasPaymentSourceId() bool {
-	if o != nil && !IsNil(o.PaymentSourceId) {
+// HasExpiresAt returns a boolean if a field has been set.
+func (o *ChargeRequestPaymentMethod) HasExpiresAt() bool {
+	if o != nil && o.ExpiresAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPaymentSourceId gets a reference to the given string and assigns it to the PaymentSourceId field.
+// SetExpiresAt gets a reference to the given NullableInt64 and assigns it to the ExpiresAt field.
+func (o *ChargeRequestPaymentMethod) SetExpiresAt(v int64) {
+	o.ExpiresAt.Set(&v)
+}
+// SetExpiresAtNil sets the value for ExpiresAt to be an explicit nil
+func (o *ChargeRequestPaymentMethod) SetExpiresAtNil() {
+	o.ExpiresAt.Set(nil)
+}
+
+// UnsetExpiresAt ensures that no value is present for ExpiresAt, not even an explicit nil
+func (o *ChargeRequestPaymentMethod) UnsetExpiresAt() {
+	o.ExpiresAt.Unset()
+}
+
+// GetPaymentSourceId returns the PaymentSourceId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ChargeRequestPaymentMethod) GetPaymentSourceId() string {
+	if o == nil || IsNil(o.PaymentSourceId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PaymentSourceId.Get()
+}
+
+// GetPaymentSourceIdOk returns a tuple with the PaymentSourceId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ChargeRequestPaymentMethod) GetPaymentSourceIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PaymentSourceId.Get(), o.PaymentSourceId.IsSet()
+}
+
+// HasPaymentSourceId returns a boolean if a field has been set.
+func (o *ChargeRequestPaymentMethod) HasPaymentSourceId() bool {
+	if o != nil && o.PaymentSourceId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentSourceId gets a reference to the given NullableString and assigns it to the PaymentSourceId field.
 func (o *ChargeRequestPaymentMethod) SetPaymentSourceId(v string) {
-	o.PaymentSourceId = &v
+	o.PaymentSourceId.Set(&v)
+}
+// SetPaymentSourceIdNil sets the value for PaymentSourceId to be an explicit nil
+func (o *ChargeRequestPaymentMethod) SetPaymentSourceIdNil() {
+	o.PaymentSourceId.Set(nil)
+}
+
+// UnsetPaymentSourceId ensures that no value is present for PaymentSourceId, not even an explicit nil
+func (o *ChargeRequestPaymentMethod) UnsetPaymentSourceId() {
+	o.PaymentSourceId.Unset()
 }
 
 func (o ChargeRequestPaymentMethod) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -146,12 +168,12 @@ func (o ChargeRequestPaymentMethod) MarshalJSON() ([]byte, error) {
 
 func (o ChargeRequestPaymentMethod) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ExpiresAt) {
-		toSerialize["expires_at"] = o.ExpiresAt
-	}
 	toSerialize["type"] = o.Type
-	if !IsNil(o.PaymentSourceId) {
-		toSerialize["payment_source_id"] = o.PaymentSourceId
+	if o.ExpiresAt.IsSet() {
+		toSerialize["expires_at"] = o.ExpiresAt.Get()
+	}
+	if o.PaymentSourceId.IsSet() {
+		toSerialize["payment_source_id"] = o.PaymentSourceId.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -174,10 +196,10 @@ func (o *ChargeRequestPaymentMethod) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -196,8 +218,8 @@ func (o *ChargeRequestPaymentMethod) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "expires_at")
 		delete(additionalProperties, "type")
+		delete(additionalProperties, "expires_at")
 		delete(additionalProperties, "payment_source_id")
 		o.AdditionalProperties = additionalProperties
 	}
@@ -240,3 +262,5 @@ func (v *NullableChargeRequestPaymentMethod) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **Id** | **string** |  | 
 **Livemode** | **bool** |  | 
 **Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
-**Name** | **string** | Reason for charge | 
+**Name** | **string** | Payment link name | 
 **NeedsShippingContact** | Pointer to **bool** |  | [optional] 
 **Object** | **string** |  | 
 **PaidPaymentsCount** | Pointer to **int32** |  | [optional] 

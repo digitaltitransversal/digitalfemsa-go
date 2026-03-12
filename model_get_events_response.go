@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -28,8 +28,8 @@ type GetEventsResponse struct {
 	// URL of the next page.
 	NextPageUrl NullableString `json:"next_page_url,omitempty"`
 	// Url of the previous page.
-	PreviousPageUrl      NullableString  `json:"previous_page_url,omitempty"`
-	Data                 []EventResponse `json:"data,omitempty"`
+	PreviousPageUrl NullableString `json:"previous_page_url,omitempty"`
+	Data []EventResponse `json:"data"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -39,10 +39,11 @@ type _GetEventsResponse GetEventsResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetEventsResponse(hasMore bool, object string) *GetEventsResponse {
+func NewGetEventsResponse(hasMore bool, object string, data []EventResponse) *GetEventsResponse {
 	this := GetEventsResponse{}
 	this.HasMore = hasMore
 	this.Object = object
+	this.Data = data
 	return &this
 }
 
@@ -134,7 +135,6 @@ func (o *GetEventsResponse) HasNextPageUrl() bool {
 func (o *GetEventsResponse) SetNextPageUrl(v string) {
 	o.NextPageUrl.Set(&v)
 }
-
 // SetNextPageUrlNil sets the value for NextPageUrl to be an explicit nil
 func (o *GetEventsResponse) SetNextPageUrlNil() {
 	o.NextPageUrl.Set(nil)
@@ -177,7 +177,6 @@ func (o *GetEventsResponse) HasPreviousPageUrl() bool {
 func (o *GetEventsResponse) SetPreviousPageUrl(v string) {
 	o.PreviousPageUrl.Set(&v)
 }
-
 // SetPreviousPageUrlNil sets the value for PreviousPageUrl to be an explicit nil
 func (o *GetEventsResponse) SetPreviousPageUrlNil() {
 	o.PreviousPageUrl.Set(nil)
@@ -188,40 +187,32 @@ func (o *GetEventsResponse) UnsetPreviousPageUrl() {
 	o.PreviousPageUrl.Unset()
 }
 
-// GetData returns the Data field value if set, zero value otherwise.
+// GetData returns the Data field value
 func (o *GetEventsResponse) GetData() []EventResponse {
-	if o == nil || IsNil(o.Data) {
+	if o == nil {
 		var ret []EventResponse
 		return ret
 	}
+
 	return o.Data
 }
 
-// GetDataOk returns a tuple with the Data field value if set, nil otherwise
+// GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
 func (o *GetEventsResponse) GetDataOk() ([]EventResponse, bool) {
-	if o == nil || IsNil(o.Data) {
+	if o == nil {
 		return nil, false
 	}
 	return o.Data, true
 }
 
-// HasData returns a boolean if a field has been set.
-func (o *GetEventsResponse) HasData() bool {
-	if o != nil && !IsNil(o.Data) {
-		return true
-	}
-
-	return false
-}
-
-// SetData gets a reference to the given []EventResponse and assigns it to the Data field.
+// SetData sets field value
 func (o *GetEventsResponse) SetData(v []EventResponse) {
 	o.Data = v
 }
 
 func (o GetEventsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -238,9 +229,7 @@ func (o GetEventsResponse) ToMap() (map[string]interface{}, error) {
 	if o.PreviousPageUrl.IsSet() {
 		toSerialize["previous_page_url"] = o.PreviousPageUrl.Get()
 	}
-	if !IsNil(o.Data) {
-		toSerialize["data"] = o.Data
-	}
+	toSerialize["data"] = o.Data
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -256,6 +245,7 @@ func (o *GetEventsResponse) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"has_more",
 		"object",
+		"data",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -263,10 +253,10 @@ func (o *GetEventsResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -331,3 +321,5 @@ func (v *NullableGetEventsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

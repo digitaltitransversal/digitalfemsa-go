@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -23,21 +23,19 @@ var _ MappedNullable = &Checkout{}
 type Checkout struct {
 	// Those are the payment methods that will be available for the link
 	AllowedPaymentMethods []string `json:"allowed_payment_methods"`
-	// It is the time when the link will expire. It is expressed in seconds since the Unix epoch. The valid range is from 2 to 365 days (the valid range will be taken from the next day of the creation date at 00:01 hrs)
+	// It is the time when the link will expire. It is expressed in seconds since the Unix epoch. The valid range is from 2 to 365 days (the valid range will be taken from the next day of the creation date at 00:01 hrs) 
 	ExpiresAt int64 `json:"expires_at"`
-	// Reason for charge
+	// Payment link name
 	Name string `json:"name"`
 	// This flag allows you to fill in the shipping information at checkout.
 	NeedsShippingContact *bool `json:"needs_shipping_contact,omitempty"`
-	// This flag allows you to specify if the link will be on demand.
-	OnDemandEnabled NullableBool          `json:"on_demand_enabled,omitempty"`
-	OrderTemplate   CheckoutOrderTemplate `json:"order_template"`
+	OrderTemplate CheckoutOrderTemplate `json:"order_template"`
 	// It is the number of payments that can be made through the link.
 	PaymentsLimitCount *int32 `json:"payments_limit_count,omitempty"`
 	// false: single use. true: multiple payments
 	Recurrent bool `json:"recurrent"`
 	// It is the type of link that will be created. It must be a valid type.
-	Type                 string `json:"type"`
+	Type string `json:"type"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -170,49 +168,6 @@ func (o *Checkout) SetNeedsShippingContact(v bool) {
 	o.NeedsShippingContact = &v
 }
 
-// GetOnDemandEnabled returns the OnDemandEnabled field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Checkout) GetOnDemandEnabled() bool {
-	if o == nil || IsNil(o.OnDemandEnabled.Get()) {
-		var ret bool
-		return ret
-	}
-	return *o.OnDemandEnabled.Get()
-}
-
-// GetOnDemandEnabledOk returns a tuple with the OnDemandEnabled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Checkout) GetOnDemandEnabledOk() (*bool, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.OnDemandEnabled.Get(), o.OnDemandEnabled.IsSet()
-}
-
-// HasOnDemandEnabled returns a boolean if a field has been set.
-func (o *Checkout) HasOnDemandEnabled() bool {
-	if o != nil && o.OnDemandEnabled.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetOnDemandEnabled gets a reference to the given NullableBool and assigns it to the OnDemandEnabled field.
-func (o *Checkout) SetOnDemandEnabled(v bool) {
-	o.OnDemandEnabled.Set(&v)
-}
-
-// SetOnDemandEnabledNil sets the value for OnDemandEnabled to be an explicit nil
-func (o *Checkout) SetOnDemandEnabledNil() {
-	o.OnDemandEnabled.Set(nil)
-}
-
-// UnsetOnDemandEnabled ensures that no value is present for OnDemandEnabled, not even an explicit nil
-func (o *Checkout) UnsetOnDemandEnabled() {
-	o.OnDemandEnabled.Unset()
-}
-
 // GetOrderTemplate returns the OrderTemplate field value
 func (o *Checkout) GetOrderTemplate() CheckoutOrderTemplate {
 	if o == nil {
@@ -318,7 +273,7 @@ func (o *Checkout) SetType(v string) {
 }
 
 func (o Checkout) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -332,9 +287,6 @@ func (o Checkout) ToMap() (map[string]interface{}, error) {
 	toSerialize["name"] = o.Name
 	if !IsNil(o.NeedsShippingContact) {
 		toSerialize["needs_shipping_contact"] = o.NeedsShippingContact
-	}
-	if o.OnDemandEnabled.IsSet() {
-		toSerialize["on_demand_enabled"] = o.OnDemandEnabled.Get()
 	}
 	toSerialize["order_template"] = o.OrderTemplate
 	if !IsNil(o.PaymentsLimitCount) {
@@ -368,10 +320,10 @@ func (o *Checkout) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -394,7 +346,6 @@ func (o *Checkout) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "expires_at")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "needs_shipping_contact")
-		delete(additionalProperties, "on_demand_enabled")
 		delete(additionalProperties, "order_template")
 		delete(additionalProperties, "payments_limit_count")
 		delete(additionalProperties, "recurrent")
@@ -440,3 +391,5 @@ func (v *NullableCheckout) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

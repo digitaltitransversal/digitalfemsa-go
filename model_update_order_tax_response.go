@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -24,11 +24,13 @@ type UpdateOrderTaxResponse struct {
 	// The amount to be collected for tax in cents
 	Amount int64 `json:"amount"`
 	// description or tax's name
-	Description          string                 `json:"description"`
-	Metadata             map[string]interface{} `json:"metadata,omitempty"`
-	Id                   string                 `json:"id"`
-	Object               *string                `json:"object,omitempty"`
-	ParentId             *string                `json:"parent_id,omitempty"`
+	Description string `json:"description"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	Id string `json:"id"`
+	Object *string `json:"object,omitempty"`
+	ParentId *string `json:"parent_id,omitempty"`
+	// Present only when the tax line was deleted.
+	Deleted NullableBool `json:"deleted,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -222,8 +224,50 @@ func (o *UpdateOrderTaxResponse) SetParentId(v string) {
 	o.ParentId = &v
 }
 
+// GetDeleted returns the Deleted field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UpdateOrderTaxResponse) GetDeleted() bool {
+	if o == nil || IsNil(o.Deleted.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.Deleted.Get()
+}
+
+// GetDeletedOk returns a tuple with the Deleted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UpdateOrderTaxResponse) GetDeletedOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Deleted.Get(), o.Deleted.IsSet()
+}
+
+// HasDeleted returns a boolean if a field has been set.
+func (o *UpdateOrderTaxResponse) HasDeleted() bool {
+	if o != nil && o.Deleted.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDeleted gets a reference to the given NullableBool and assigns it to the Deleted field.
+func (o *UpdateOrderTaxResponse) SetDeleted(v bool) {
+	o.Deleted.Set(&v)
+}
+// SetDeletedNil sets the value for Deleted to be an explicit nil
+func (o *UpdateOrderTaxResponse) SetDeletedNil() {
+	o.Deleted.Set(nil)
+}
+
+// UnsetDeleted ensures that no value is present for Deleted, not even an explicit nil
+func (o *UpdateOrderTaxResponse) UnsetDeleted() {
+	o.Deleted.Unset()
+}
+
 func (o UpdateOrderTaxResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -243,6 +287,9 @@ func (o UpdateOrderTaxResponse) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ParentId) {
 		toSerialize["parent_id"] = o.ParentId
+	}
+	if o.Deleted.IsSet() {
+		toSerialize["deleted"] = o.Deleted.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -267,10 +314,10 @@ func (o *UpdateOrderTaxResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -295,6 +342,7 @@ func (o *UpdateOrderTaxResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "object")
 		delete(additionalProperties, "parent_id")
+		delete(additionalProperties, "deleted")
 		o.AdditionalProperties = additionalProperties
 	}
 
@@ -336,3 +384,5 @@ func (v *NullableUpdateOrderTaxResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

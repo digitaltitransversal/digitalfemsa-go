@@ -4,15 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Url** | **string** | Here you must place the URL of your Webhook remember that you must program what you will do with the events received. Also do not forget to handle the HTTPS protocol for greater security. | 
-**Synchronous** | Pointer to **bool** | It is a value that allows to decide if the events will be synchronous or asynchronous. We recommend asynchronous &#x3D; false | [optional] [default to false]
-**Events** | Pointer to **[]string** |  | [optional] 
+**Url** | Pointer to **string** | Webhook endpoint URL. Local URLs are not allowed. | [optional] 
+**SubscribedEvents** | Pointer to **[]string** | List of event types the webhook is subscribed to. | [optional] 
+**Events** | Pointer to **[]string** | Alias for subscribed_events. | [optional] 
+**Synchronous** | Pointer to **bool** | Indicates whether the webhook uses synchronous delivery behavior. | [optional] [default to false]
+**Active** | Pointer to **bool** | Activates or deactivates the webhook. | [optional] 
+**Description** | Pointer to **NullableString** | Optional description of the webhook. | [optional] 
 
 ## Methods
 
 ### NewWebhookUpdateRequest
 
-`func NewWebhookUpdateRequest(url string, ) *WebhookUpdateRequest`
+`func NewWebhookUpdateRequest() *WebhookUpdateRequest`
 
 NewWebhookUpdateRequest instantiates a new WebhookUpdateRequest object
 This constructor will assign default values to properties that have it defined,
@@ -46,31 +49,36 @@ and a boolean to check if the value has been set.
 
 SetUrl sets Url field to given value.
 
+### HasUrl
 
-### GetSynchronous
+`func (o *WebhookUpdateRequest) HasUrl() bool`
 
-`func (o *WebhookUpdateRequest) GetSynchronous() bool`
+HasUrl returns a boolean if a field has been set.
 
-GetSynchronous returns the Synchronous field if non-nil, zero value otherwise.
+### GetSubscribedEvents
 
-### GetSynchronousOk
+`func (o *WebhookUpdateRequest) GetSubscribedEvents() []string`
 
-`func (o *WebhookUpdateRequest) GetSynchronousOk() (*bool, bool)`
+GetSubscribedEvents returns the SubscribedEvents field if non-nil, zero value otherwise.
 
-GetSynchronousOk returns a tuple with the Synchronous field if it's non-nil, zero value otherwise
+### GetSubscribedEventsOk
+
+`func (o *WebhookUpdateRequest) GetSubscribedEventsOk() (*[]string, bool)`
+
+GetSubscribedEventsOk returns a tuple with the SubscribedEvents field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSynchronous
+### SetSubscribedEvents
 
-`func (o *WebhookUpdateRequest) SetSynchronous(v bool)`
+`func (o *WebhookUpdateRequest) SetSubscribedEvents(v []string)`
 
-SetSynchronous sets Synchronous field to given value.
+SetSubscribedEvents sets SubscribedEvents field to given value.
 
-### HasSynchronous
+### HasSubscribedEvents
 
-`func (o *WebhookUpdateRequest) HasSynchronous() bool`
+`func (o *WebhookUpdateRequest) HasSubscribedEvents() bool`
 
-HasSynchronous returns a boolean if a field has been set.
+HasSubscribedEvents returns a boolean if a field has been set.
 
 ### GetEvents
 
@@ -97,6 +105,91 @@ SetEvents sets Events field to given value.
 
 HasEvents returns a boolean if a field has been set.
 
+### GetSynchronous
+
+`func (o *WebhookUpdateRequest) GetSynchronous() bool`
+
+GetSynchronous returns the Synchronous field if non-nil, zero value otherwise.
+
+### GetSynchronousOk
+
+`func (o *WebhookUpdateRequest) GetSynchronousOk() (*bool, bool)`
+
+GetSynchronousOk returns a tuple with the Synchronous field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSynchronous
+
+`func (o *WebhookUpdateRequest) SetSynchronous(v bool)`
+
+SetSynchronous sets Synchronous field to given value.
+
+### HasSynchronous
+
+`func (o *WebhookUpdateRequest) HasSynchronous() bool`
+
+HasSynchronous returns a boolean if a field has been set.
+
+### GetActive
+
+`func (o *WebhookUpdateRequest) GetActive() bool`
+
+GetActive returns the Active field if non-nil, zero value otherwise.
+
+### GetActiveOk
+
+`func (o *WebhookUpdateRequest) GetActiveOk() (*bool, bool)`
+
+GetActiveOk returns a tuple with the Active field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActive
+
+`func (o *WebhookUpdateRequest) SetActive(v bool)`
+
+SetActive sets Active field to given value.
+
+### HasActive
+
+`func (o *WebhookUpdateRequest) HasActive() bool`
+
+HasActive returns a boolean if a field has been set.
+
+### GetDescription
+
+`func (o *WebhookUpdateRequest) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *WebhookUpdateRequest) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *WebhookUpdateRequest) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *WebhookUpdateRequest) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
+
+### SetDescriptionNil
+
+`func (o *WebhookUpdateRequest) SetDescriptionNil(b bool)`
+
+ SetDescriptionNil sets the value for Description to be an explicit nil
+
+### UnsetDescription
+`func (o *WebhookUpdateRequest) UnsetDescription()`
+
+UnsetDescription ensures that no value is present for Description, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

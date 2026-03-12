@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -20,15 +20,16 @@ import (
 	"strings"
 )
 
+
 type WebhooksAPI interface {
 
 	/*
-		CreateWebhook Create Webhook
+	CreateWebhook Create webhook
 
-		What we do at Femsa translates into events. For example, an event of interest to us occurs at the time a payment is successfully processed. At that moment we will be interested in doing several things: Send an email to the buyer, generate an invoice, start the process of shipping the product, etc.
+	Creates a webhook and subscribes it to events so your system can receive notifications when those events occur.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiCreateWebhookRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateWebhookRequest
 	*/
 	CreateWebhook(ctx context.Context) ApiCreateWebhookRequest
 
@@ -37,11 +38,13 @@ type WebhooksAPI interface {
 	CreateWebhookExecute(r ApiCreateWebhookRequest) (*WebhookResponse, *http.Response, error)
 
 	/*
-		DeleteWebhook Delete Webhook
+	DeleteWebhook Delete webhook
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param id Identifier of the resource
-		@return ApiDeleteWebhookRequest
+	Deletes a webhook.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@return ApiDeleteWebhookRequest
 	*/
 	DeleteWebhook(ctx context.Context, id string) ApiDeleteWebhookRequest
 
@@ -50,11 +53,13 @@ type WebhooksAPI interface {
 	DeleteWebhookExecute(r ApiDeleteWebhookRequest) (*WebhookResponse, *http.Response, error)
 
 	/*
-		GetWebhook Get Webhook
+	GetWebhook Get webhook
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param id Identifier of the resource
-		@return ApiGetWebhookRequest
+	Retrieves the details of a webhook by its ID.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@return ApiGetWebhookRequest
 	*/
 	GetWebhook(ctx context.Context, id string) ApiGetWebhookRequest
 
@@ -63,12 +68,12 @@ type WebhooksAPI interface {
 	GetWebhookExecute(r ApiGetWebhookRequest) (*WebhookResponse, *http.Response, error)
 
 	/*
-		GetWebhooks Get List of Webhooks
+	GetWebhooks Get webhooks
 
-		Consume the list of webhooks you have, each environment supports 10 webhooks (For production and testing)
+	Consume the list of webhooks you have, each environment supports 10 webhooks (For production and testing)
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiGetWebhooksRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetWebhooksRequest
 	*/
 	GetWebhooks(ctx context.Context) ApiGetWebhooksRequest
 
@@ -77,13 +82,13 @@ type WebhooksAPI interface {
 	GetWebhooksExecute(r ApiGetWebhooksRequest) (*GetWebhooksResponse, *http.Response, error)
 
 	/*
-		TestWebhook Test Webhook
+	TestWebhook Test webhook
 
-		Send a webhook.ping event
+	Sends a test event to the specified webhook to verify it can receive events.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param id Identifier of the resource
-		@return ApiTestWebhookRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@return ApiTestWebhookRequest
 	*/
 	TestWebhook(ctx context.Context, id string) ApiTestWebhookRequest
 
@@ -92,13 +97,13 @@ type WebhooksAPI interface {
 	TestWebhookExecute(r ApiTestWebhookRequest) (*WebhookResponse, *http.Response, error)
 
 	/*
-		UpdateWebhook Update Webhook
+	UpdateWebhook Update webhook
 
-		updates an existing webhook
+	Updates an existing webhook.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param id Identifier of the resource
-		@return ApiUpdateWebhookRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@return ApiUpdateWebhookRequest
 	*/
 	UpdateWebhook(ctx context.Context, id string) ApiUpdateWebhookRequest
 
@@ -111,13 +116,14 @@ type WebhooksAPI interface {
 type WebhooksAPIService service
 
 type ApiCreateWebhookRequest struct {
-	ctx            context.Context
-	ApiService     WebhooksAPI
+	ctx context.Context
+	ApiService WebhooksAPI
 	webhookRequest *WebhookRequest
 	acceptLanguage *string
+	xChildCompanyId *string
 }
 
-// requested field for webhook
+// Webhook creation/update request payload.
 func (r ApiCreateWebhookRequest) WebhookRequest(webhookRequest WebhookRequest) ApiCreateWebhookRequest {
 	r.webhookRequest = &webhookRequest
 	return r
@@ -129,34 +135,39 @@ func (r ApiCreateWebhookRequest) AcceptLanguage(acceptLanguage string) ApiCreate
 	return r
 }
 
+// In the case of a holding company, the company id of the child company to which will process the request.
+func (r ApiCreateWebhookRequest) XChildCompanyId(xChildCompanyId string) ApiCreateWebhookRequest {
+	r.xChildCompanyId = &xChildCompanyId
+	return r
+}
+
 func (r ApiCreateWebhookRequest) Execute() (*WebhookResponse, *http.Response, error) {
 	return r.ApiService.CreateWebhookExecute(r)
 }
 
 /*
-CreateWebhook Create Webhook
+CreateWebhook Create webhook
 
-What we do at Femsa translates into events. For example, an event of interest to us occurs at the time a payment is successfully processed. At that moment we will be interested in doing several things: Send an email to the buyer, generate an invoice, start the process of shipping the product, etc.
+Creates a webhook and subscribes it to events so your system can receive notifications when those events occur.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateWebhookRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiCreateWebhookRequest
 */
 func (a *WebhooksAPIService) CreateWebhook(ctx context.Context) ApiCreateWebhookRequest {
 	return ApiCreateWebhookRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return WebhookResponse
+//  @return WebhookResponse
 func (a *WebhooksAPIService) CreateWebhookExecute(r ApiCreateWebhookRequest) (*WebhookResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *WebhookResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *WebhookResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksAPIService.CreateWebhook")
@@ -183,7 +194,7 @@ func (a *WebhooksAPIService) CreateWebhookExecute(r ApiCreateWebhookRequest) (*W
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -192,6 +203,9 @@ func (a *WebhooksAPIService) CreateWebhookExecute(r ApiCreateWebhookRequest) (*W
 	}
 	if r.acceptLanguage != nil {
 		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "")
+	}
+	if r.xChildCompanyId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Child-Company-Id", r.xChildCompanyId, "")
 	}
 	// body params
 	localVarPostBody = r.webhookRequest
@@ -224,8 +238,8 @@ func (a *WebhooksAPIService) CreateWebhookExecute(r ApiCreateWebhookRequest) (*W
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -235,8 +249,8 @@ func (a *WebhooksAPIService) CreateWebhookExecute(r ApiCreateWebhookRequest) (*W
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -254,9 +268,9 @@ func (a *WebhooksAPIService) CreateWebhookExecute(r ApiCreateWebhookRequest) (*W
 }
 
 type ApiDeleteWebhookRequest struct {
-	ctx            context.Context
-	ApiService     WebhooksAPI
-	id             string
+	ctx context.Context
+	ApiService WebhooksAPI
+	id string
 	acceptLanguage *string
 }
 
@@ -271,29 +285,30 @@ func (r ApiDeleteWebhookRequest) Execute() (*WebhookResponse, *http.Response, er
 }
 
 /*
-DeleteWebhook Delete Webhook
+DeleteWebhook Delete webhook
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@return ApiDeleteWebhookRequest
+Deletes a webhook.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @return ApiDeleteWebhookRequest
 */
 func (a *WebhooksAPIService) DeleteWebhook(ctx context.Context, id string) ApiDeleteWebhookRequest {
 	return ApiDeleteWebhookRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return WebhookResponse
+//  @return WebhookResponse
 func (a *WebhooksAPIService) DeleteWebhookExecute(r ApiDeleteWebhookRequest) (*WebhookResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *WebhookResponse
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *WebhookResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksAPIService.DeleteWebhook")
@@ -318,7 +333,7 @@ func (a *WebhooksAPIService) DeleteWebhookExecute(r ApiDeleteWebhookRequest) (*W
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -357,8 +372,8 @@ func (a *WebhooksAPIService) DeleteWebhookExecute(r ApiDeleteWebhookRequest) (*W
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -368,8 +383,8 @@ func (a *WebhooksAPIService) DeleteWebhookExecute(r ApiDeleteWebhookRequest) (*W
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -379,8 +394,8 @@ func (a *WebhooksAPIService) DeleteWebhookExecute(r ApiDeleteWebhookRequest) (*W
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -398,10 +413,10 @@ func (a *WebhooksAPIService) DeleteWebhookExecute(r ApiDeleteWebhookRequest) (*W
 }
 
 type ApiGetWebhookRequest struct {
-	ctx             context.Context
-	ApiService      WebhooksAPI
-	id              string
-	acceptLanguage  *string
+	ctx context.Context
+	ApiService WebhooksAPI
+	id string
+	acceptLanguage *string
 	xChildCompanyId *string
 }
 
@@ -422,29 +437,30 @@ func (r ApiGetWebhookRequest) Execute() (*WebhookResponse, *http.Response, error
 }
 
 /*
-GetWebhook Get Webhook
+GetWebhook Get webhook
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@return ApiGetWebhookRequest
+Retrieves the details of a webhook by its ID.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @return ApiGetWebhookRequest
 */
 func (a *WebhooksAPIService) GetWebhook(ctx context.Context, id string) ApiGetWebhookRequest {
 	return ApiGetWebhookRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return WebhookResponse
+//  @return WebhookResponse
 func (a *WebhooksAPIService) GetWebhookExecute(r ApiGetWebhookRequest) (*WebhookResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *WebhookResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *WebhookResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksAPIService.GetWebhook")
@@ -469,7 +485,7 @@ func (a *WebhooksAPIService) GetWebhookExecute(r ApiGetWebhookRequest) (*Webhook
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -511,8 +527,8 @@ func (a *WebhooksAPIService) GetWebhookExecute(r ApiGetWebhookRequest) (*Webhook
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -522,8 +538,8 @@ func (a *WebhooksAPIService) GetWebhookExecute(r ApiGetWebhookRequest) (*Webhook
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -533,8 +549,8 @@ func (a *WebhooksAPIService) GetWebhookExecute(r ApiGetWebhookRequest) (*Webhook
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -552,14 +568,22 @@ func (a *WebhooksAPIService) GetWebhookExecute(r ApiGetWebhookRequest) (*Webhook
 }
 
 type ApiGetWebhooksRequest struct {
-	ctx             context.Context
-	ApiService      WebhooksAPI
-	acceptLanguage  *string
+	ctx context.Context
+	ApiService WebhooksAPI
+	webhookRequest *WebhookRequest
+	acceptLanguage *string
 	xChildCompanyId *string
-	limit           *int32
-	search          *string
-	next            *string
-	previous        *string
+	limit *int32
+	search *string
+	url *string
+	next *string
+	previous *string
+}
+
+// Webhook creation/update request payload.
+func (r ApiGetWebhooksRequest) WebhookRequest(webhookRequest WebhookRequest) ApiGetWebhooksRequest {
+	r.webhookRequest = &webhookRequest
+	return r
 }
 
 // Use for knowing which language to use
@@ -586,6 +610,12 @@ func (r ApiGetWebhooksRequest) Search(search string) ApiGetWebhooksRequest {
 	return r
 }
 
+// url for webhook filter
+func (r ApiGetWebhooksRequest) Url(url string) ApiGetWebhooksRequest {
+	r.url = &url
+	return r
+}
+
 // next page
 func (r ApiGetWebhooksRequest) Next(next string) ApiGetWebhooksRequest {
 	r.next = &next
@@ -603,29 +633,28 @@ func (r ApiGetWebhooksRequest) Execute() (*GetWebhooksResponse, *http.Response, 
 }
 
 /*
-GetWebhooks Get List of Webhooks
+GetWebhooks Get webhooks
 
 Consume the list of webhooks you have, each environment supports 10 webhooks (For production and testing)
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetWebhooksRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetWebhooksRequest
 */
 func (a *WebhooksAPIService) GetWebhooks(ctx context.Context) ApiGetWebhooksRequest {
 	return ApiGetWebhooksRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetWebhooksResponse
+//  @return GetWebhooksResponse
 func (a *WebhooksAPIService) GetWebhooksExecute(r ApiGetWebhooksRequest) (*GetWebhooksResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetWebhooksResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetWebhooksResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksAPIService.GetWebhooks")
@@ -638,6 +667,9 @@ func (a *WebhooksAPIService) GetWebhooksExecute(r ApiGetWebhooksRequest) (*GetWe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.webhookRequest == nil {
+		return localVarReturnValue, nil, reportError("webhookRequest is required and must be specified")
+	}
 
 	if r.limit != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
@@ -648,6 +680,9 @@ func (a *WebhooksAPIService) GetWebhooksExecute(r ApiGetWebhooksRequest) (*GetWe
 	if r.search != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "")
 	}
+	if r.url != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "url", r.url, "")
+	}
 	if r.next != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "next", r.next, "")
 	}
@@ -655,7 +690,7 @@ func (a *WebhooksAPIService) GetWebhooksExecute(r ApiGetWebhooksRequest) (*GetWe
 		parameterAddToHeaderOrQuery(localVarQueryParams, "previous", r.previous, "")
 	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -664,7 +699,7 @@ func (a *WebhooksAPIService) GetWebhooksExecute(r ApiGetWebhooksRequest) (*GetWe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -677,6 +712,8 @@ func (a *WebhooksAPIService) GetWebhooksExecute(r ApiGetWebhooksRequest) (*GetWe
 	if r.xChildCompanyId != nil {
 		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Child-Company-Id", r.xChildCompanyId, "")
 	}
+	// body params
+	localVarPostBody = r.webhookRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -706,8 +743,8 @@ func (a *WebhooksAPIService) GetWebhooksExecute(r ApiGetWebhooksRequest) (*GetWe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -717,8 +754,8 @@ func (a *WebhooksAPIService) GetWebhooksExecute(r ApiGetWebhooksRequest) (*GetWe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -736,9 +773,9 @@ func (a *WebhooksAPIService) GetWebhooksExecute(r ApiGetWebhooksRequest) (*GetWe
 }
 
 type ApiTestWebhookRequest struct {
-	ctx            context.Context
-	ApiService     WebhooksAPI
-	id             string
+	ctx context.Context
+	ApiService WebhooksAPI
+	id string
 	acceptLanguage *string
 }
 
@@ -753,31 +790,30 @@ func (r ApiTestWebhookRequest) Execute() (*WebhookResponse, *http.Response, erro
 }
 
 /*
-TestWebhook Test Webhook
+TestWebhook Test webhook
 
-Send a webhook.ping event
+Sends a test event to the specified webhook to verify it can receive events.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@return ApiTestWebhookRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @return ApiTestWebhookRequest
 */
 func (a *WebhooksAPIService) TestWebhook(ctx context.Context, id string) ApiTestWebhookRequest {
 	return ApiTestWebhookRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return WebhookResponse
+//  @return WebhookResponse
 func (a *WebhooksAPIService) TestWebhookExecute(r ApiTestWebhookRequest) (*WebhookResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *WebhookResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *WebhookResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksAPIService.TestWebhook")
@@ -802,7 +838,7 @@ func (a *WebhooksAPIService) TestWebhookExecute(r ApiTestWebhookRequest) (*Webho
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -841,8 +877,8 @@ func (a *WebhooksAPIService) TestWebhookExecute(r ApiTestWebhookRequest) (*Webho
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -852,8 +888,8 @@ func (a *WebhooksAPIService) TestWebhookExecute(r ApiTestWebhookRequest) (*Webho
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -863,8 +899,8 @@ func (a *WebhooksAPIService) TestWebhookExecute(r ApiTestWebhookRequest) (*Webho
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -882,15 +918,15 @@ func (a *WebhooksAPIService) TestWebhookExecute(r ApiTestWebhookRequest) (*Webho
 }
 
 type ApiUpdateWebhookRequest struct {
-	ctx                  context.Context
-	ApiService           WebhooksAPI
-	id                   string
+	ctx context.Context
+	ApiService WebhooksAPI
+	id string
 	webhookUpdateRequest *WebhookUpdateRequest
-	acceptLanguage       *string
-	xChildCompanyId      *string
+	acceptLanguage *string
+	xChildCompanyId *string
 }
 
-// requested fields in order to update a webhook
+// Webhook update request payload.
 func (r ApiUpdateWebhookRequest) WebhookUpdateRequest(webhookUpdateRequest WebhookUpdateRequest) ApiUpdateWebhookRequest {
 	r.webhookUpdateRequest = &webhookUpdateRequest
 	return r
@@ -913,31 +949,30 @@ func (r ApiUpdateWebhookRequest) Execute() (*WebhookResponse, *http.Response, er
 }
 
 /*
-UpdateWebhook Update Webhook
+UpdateWebhook Update webhook
 
-updates an existing webhook
+Updates an existing webhook.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@return ApiUpdateWebhookRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @return ApiUpdateWebhookRequest
 */
 func (a *WebhooksAPIService) UpdateWebhook(ctx context.Context, id string) ApiUpdateWebhookRequest {
 	return ApiUpdateWebhookRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return WebhookResponse
+//  @return WebhookResponse
 func (a *WebhooksAPIService) UpdateWebhookExecute(r ApiUpdateWebhookRequest) (*WebhookResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *WebhookResponse
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *WebhookResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WebhooksAPIService.UpdateWebhook")
@@ -965,7 +1000,7 @@ func (a *WebhooksAPIService) UpdateWebhookExecute(r ApiUpdateWebhookRequest) (*W
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1002,17 +1037,6 @@ func (a *WebhooksAPIService) UpdateWebhookExecute(r ApiUpdateWebhookRequest) (*W
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ModelError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -1020,8 +1044,19 @@ func (a *WebhooksAPIService) UpdateWebhookExecute(r ApiUpdateWebhookRequest) (*W
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1031,8 +1066,8 @@ func (a *WebhooksAPIService) UpdateWebhookExecute(r ApiUpdateWebhookRequest) (*W
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

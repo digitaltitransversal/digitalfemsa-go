@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** | Type of payment method | 
-**ExpiresAt** | Pointer to **int64** |  | [optional] 
+**Type** | **string** | Type of payment method. | 
+**ExpiresAt** | Pointer to **NullableInt64** | Expiration date as unix timestamp (seconds). | [optional] 
 
 ## Methods
 
@@ -71,6 +71,16 @@ SetExpiresAt sets ExpiresAt field to given value.
 
 HasExpiresAt returns a boolean if a field has been set.
 
+### SetExpiresAtNil
+
+`func (o *CreateCustomerPaymentMethodsRequest) SetExpiresAtNil(b bool)`
+
+ SetExpiresAtNil sets the value for ExpiresAt to be an explicit nil
+
+### UnsetExpiresAt
+`func (o *CreateCustomerPaymentMethodsRequest) UnsetExpiresAt()`
+
+UnsetExpiresAt ensures that no value is present for ExpiresAt, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

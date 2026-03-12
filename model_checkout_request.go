@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -19,7 +19,7 @@ import (
 // checks if the CheckoutRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CheckoutRequest{}
 
-// CheckoutRequest [Checkout](https://developers.femsa.com/v2.1.0/reference/payment-link) details
+// CheckoutRequest [Checkout](https://developers.digitalfemsa.io/docs/checkout-redireccionado) details 
 type CheckoutRequest struct {
 	// Are the payment methods available for this link
 	AllowedPaymentMethods []string `json:"allowed_payment_methods"`
@@ -28,12 +28,12 @@ type CheckoutRequest struct {
 	// Redirection url back to the site in case of failed payment, applies only to HostedPayment.
 	FailureUrl *string `json:"failure_url,omitempty"`
 	// Reason for payment
-	Name            *string `json:"name,omitempty"`
-	OnDemandEnabled *bool   `json:"on_demand_enabled,omitempty"`
+	Name *string `json:"name,omitempty"`
+	OnDemandEnabled *bool `json:"on_demand_enabled,omitempty"`
 	// Redirection url back to the site in case of successful payment, applies only to HostedPayment
 	SuccessUrl *string `json:"success_url,omitempty"`
 	// This field represents the type of checkout
-	Type                 *string `json:"type,omitempty"`
+	Type *string `json:"type,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -274,7 +274,7 @@ func (o *CheckoutRequest) SetType(v string) {
 }
 
 func (o CheckoutRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -323,10 +323,10 @@ func (o *CheckoutRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -393,3 +393,5 @@ func (v *NullableCheckoutRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -21,9 +21,10 @@ var _ MappedNullable = &PaymentMethodCashRequest{}
 
 // PaymentMethodCashRequest struct for PaymentMethodCashRequest
 type PaymentMethodCashRequest struct {
-	// Type of payment method
-	Type                 string `json:"type"`
-	ExpiresAt            *int64 `json:"expires_at,omitempty"`
+	// Type of payment method.
+	Type string `json:"type"`
+	// Expiration date as unix timestamp (seconds).
+	ExpiresAt NullableInt64 `json:"expires_at,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -71,40 +72,50 @@ func (o *PaymentMethodCashRequest) SetType(v string) {
 	o.Type = v
 }
 
-// GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
+// GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaymentMethodCashRequest) GetExpiresAt() int64 {
-	if o == nil || IsNil(o.ExpiresAt) {
+	if o == nil || IsNil(o.ExpiresAt.Get()) {
 		var ret int64
 		return ret
 	}
-	return *o.ExpiresAt
+	return *o.ExpiresAt.Get()
 }
 
 // GetExpiresAtOk returns a tuple with the ExpiresAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaymentMethodCashRequest) GetExpiresAtOk() (*int64, bool) {
-	if o == nil || IsNil(o.ExpiresAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ExpiresAt, true
+	return o.ExpiresAt.Get(), o.ExpiresAt.IsSet()
 }
 
 // HasExpiresAt returns a boolean if a field has been set.
 func (o *PaymentMethodCashRequest) HasExpiresAt() bool {
-	if o != nil && !IsNil(o.ExpiresAt) {
+	if o != nil && o.ExpiresAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetExpiresAt gets a reference to the given int64 and assigns it to the ExpiresAt field.
+// SetExpiresAt gets a reference to the given NullableInt64 and assigns it to the ExpiresAt field.
 func (o *PaymentMethodCashRequest) SetExpiresAt(v int64) {
-	o.ExpiresAt = &v
+	o.ExpiresAt.Set(&v)
+}
+// SetExpiresAtNil sets the value for ExpiresAt to be an explicit nil
+func (o *PaymentMethodCashRequest) SetExpiresAtNil() {
+	o.ExpiresAt.Set(nil)
+}
+
+// UnsetExpiresAt ensures that no value is present for ExpiresAt, not even an explicit nil
+func (o *PaymentMethodCashRequest) UnsetExpiresAt() {
+	o.ExpiresAt.Unset()
 }
 
 func (o PaymentMethodCashRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -114,8 +125,8 @@ func (o PaymentMethodCashRequest) MarshalJSON() ([]byte, error) {
 func (o PaymentMethodCashRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["type"] = o.Type
-	if !IsNil(o.ExpiresAt) {
-		toSerialize["expires_at"] = o.ExpiresAt
+	if o.ExpiresAt.IsSet() {
+		toSerialize["expires_at"] = o.ExpiresAt.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -138,10 +149,10 @@ func (o *PaymentMethodCashRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -203,3 +214,5 @@ func (v *NullablePaymentMethodCashRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

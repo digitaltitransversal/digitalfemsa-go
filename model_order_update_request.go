@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -18,25 +18,32 @@ import (
 // checks if the OrderUpdateRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OrderUpdateRequest{}
 
-// OrderUpdateRequest a order
+// OrderUpdateRequest Order update payload. Only supported fields can be modified.
 type OrderUpdateRequest struct {
-	Charges  []ChargeRequest  `json:"charges,omitempty"`
-	Checkout *CheckoutRequest `json:"checkout,omitempty"`
-	// Currency with which the payment will be made. It uses the 3-letter code of the [International Standard ISO 4217.](https://es.wikipedia.org/wiki/ISO_4217)
-	Currency     *string                         `json:"currency,omitempty"`
-	CustomerInfo *OrderUpdateRequestCustomerInfo `json:"customer_info,omitempty"`
-	// List of [discounts](https://developers.femsa.com/v2.1.0/reference/orderscreatediscountline) that are applied to the order. You must have at least one discount.
-	DiscountLines []OrderDiscountLinesRequest     `json:"discount_lines,omitempty"`
-	FiscalEntity  *OrderUpdateFiscalEntityRequest `json:"fiscal_entity,omitempty"`
-	// List of [products](https://developers.femsa.com/v2.1.0/reference/orderscreateproduct) that are sold in the order. You must have at least one product.
-	LineItems []Product          `json:"line_items,omitempty"`
-	Metadata  *map[string]string `json:"metadata,omitempty"`
-	// Indicates whether the order charges must be preauthorized
-	PreAuthorize    *bool                     `json:"pre_authorize,omitempty"`
+	// Order status update. Allowed values depend on server-side validations.
+	Status *string `json:"status,omitempty"`
+	// Currency used for the order. Uses ISO 4217 (3-letter code). Allowed values depend on server-side validations.
+	Currency *string `json:"currency,omitempty"`
+	CustomerInfo *CustomerInfo `json:"customer_info,omitempty"`
+	// List of products sold in the order.
+	LineItems []Product `json:"line_items,omitempty"`
+	// List of shipping costs applied to the order.
+	ShippingLines []ShippingRequest `json:"shipping_lines,omitempty"`
+	TaxLines []OrderTaxRequest `json:"tax_lines,omitempty"`
+	// List of discounts applied to the order.
+	DiscountLines []OrderDiscountLinesRequest `json:"discount_lines,omitempty"`
+	// Additional information attached to the order.
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	// URL to redirect the customer after completing the flow (when applicable).
+	ReturnUrl *string `json:"return_url,omitempty"`
+	// Add new charges to the order. Subject to server-side validations (for example, maximum charges rules). 
+	Charges []ChargeRequest `json:"charges,omitempty"`
+	// References an existing customer shipping contact.
+	ShippingContactId NullableString `json:"shipping_contact_id,omitempty"`
 	ShippingContact *CustomerShippingContacts `json:"shipping_contact,omitempty"`
-	// List of [shipping costs](https://developers.femsa.com/v2.1.0/reference/orderscreateshipping). If the online store offers digital products.
-	ShippingLines        []ShippingRequest `json:"shipping_lines,omitempty"`
-	TaxLines             []OrderTaxRequest `json:"tax_lines,omitempty"`
+	// References an existing customer fiscal entity.
+	FiscalEntityId NullableString `json:"fiscal_entity_id,omitempty"`
+	FiscalEntity *OrderUpdateFiscalEntityRequest `json:"fiscal_entity,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -48,8 +55,6 @@ type _OrderUpdateRequest OrderUpdateRequest
 // will change when the set of required properties is changed
 func NewOrderUpdateRequest() *OrderUpdateRequest {
 	this := OrderUpdateRequest{}
-	var preAuthorize bool = false
-	this.PreAuthorize = &preAuthorize
 	return &this
 }
 
@@ -58,73 +63,39 @@ func NewOrderUpdateRequest() *OrderUpdateRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewOrderUpdateRequestWithDefaults() *OrderUpdateRequest {
 	this := OrderUpdateRequest{}
-	var preAuthorize bool = false
-	this.PreAuthorize = &preAuthorize
 	return &this
 }
 
-// GetCharges returns the Charges field value if set, zero value otherwise.
-func (o *OrderUpdateRequest) GetCharges() []ChargeRequest {
-	if o == nil || IsNil(o.Charges) {
-		var ret []ChargeRequest
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *OrderUpdateRequest) GetStatus() string {
+	if o == nil || IsNil(o.Status) {
+		var ret string
 		return ret
 	}
-	return o.Charges
+	return *o.Status
 }
 
-// GetChargesOk returns a tuple with the Charges field value if set, nil otherwise
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrderUpdateRequest) GetChargesOk() ([]ChargeRequest, bool) {
-	if o == nil || IsNil(o.Charges) {
+func (o *OrderUpdateRequest) GetStatusOk() (*string, bool) {
+	if o == nil || IsNil(o.Status) {
 		return nil, false
 	}
-	return o.Charges, true
+	return o.Status, true
 }
 
-// HasCharges returns a boolean if a field has been set.
-func (o *OrderUpdateRequest) HasCharges() bool {
-	if o != nil && !IsNil(o.Charges) {
+// HasStatus returns a boolean if a field has been set.
+func (o *OrderUpdateRequest) HasStatus() bool {
+	if o != nil && !IsNil(o.Status) {
 		return true
 	}
 
 	return false
 }
 
-// SetCharges gets a reference to the given []ChargeRequest and assigns it to the Charges field.
-func (o *OrderUpdateRequest) SetCharges(v []ChargeRequest) {
-	o.Charges = v
-}
-
-// GetCheckout returns the Checkout field value if set, zero value otherwise.
-func (o *OrderUpdateRequest) GetCheckout() CheckoutRequest {
-	if o == nil || IsNil(o.Checkout) {
-		var ret CheckoutRequest
-		return ret
-	}
-	return *o.Checkout
-}
-
-// GetCheckoutOk returns a tuple with the Checkout field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OrderUpdateRequest) GetCheckoutOk() (*CheckoutRequest, bool) {
-	if o == nil || IsNil(o.Checkout) {
-		return nil, false
-	}
-	return o.Checkout, true
-}
-
-// HasCheckout returns a boolean if a field has been set.
-func (o *OrderUpdateRequest) HasCheckout() bool {
-	if o != nil && !IsNil(o.Checkout) {
-		return true
-	}
-
-	return false
-}
-
-// SetCheckout gets a reference to the given CheckoutRequest and assigns it to the Checkout field.
-func (o *OrderUpdateRequest) SetCheckout(v CheckoutRequest) {
-	o.Checkout = &v
+// SetStatus gets a reference to the given string and assigns it to the Status field.
+func (o *OrderUpdateRequest) SetStatus(v string) {
+	o.Status = &v
 }
 
 // GetCurrency returns the Currency field value if set, zero value otherwise.
@@ -160,9 +131,9 @@ func (o *OrderUpdateRequest) SetCurrency(v string) {
 }
 
 // GetCustomerInfo returns the CustomerInfo field value if set, zero value otherwise.
-func (o *OrderUpdateRequest) GetCustomerInfo() OrderUpdateRequestCustomerInfo {
+func (o *OrderUpdateRequest) GetCustomerInfo() CustomerInfo {
 	if o == nil || IsNil(o.CustomerInfo) {
-		var ret OrderUpdateRequestCustomerInfo
+		var ret CustomerInfo
 		return ret
 	}
 	return *o.CustomerInfo
@@ -170,7 +141,7 @@ func (o *OrderUpdateRequest) GetCustomerInfo() OrderUpdateRequestCustomerInfo {
 
 // GetCustomerInfoOk returns a tuple with the CustomerInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OrderUpdateRequest) GetCustomerInfoOk() (*OrderUpdateRequestCustomerInfo, bool) {
+func (o *OrderUpdateRequest) GetCustomerInfoOk() (*CustomerInfo, bool) {
 	if o == nil || IsNil(o.CustomerInfo) {
 		return nil, false
 	}
@@ -186,73 +157,9 @@ func (o *OrderUpdateRequest) HasCustomerInfo() bool {
 	return false
 }
 
-// SetCustomerInfo gets a reference to the given OrderUpdateRequestCustomerInfo and assigns it to the CustomerInfo field.
-func (o *OrderUpdateRequest) SetCustomerInfo(v OrderUpdateRequestCustomerInfo) {
+// SetCustomerInfo gets a reference to the given CustomerInfo and assigns it to the CustomerInfo field.
+func (o *OrderUpdateRequest) SetCustomerInfo(v CustomerInfo) {
 	o.CustomerInfo = &v
-}
-
-// GetDiscountLines returns the DiscountLines field value if set, zero value otherwise.
-func (o *OrderUpdateRequest) GetDiscountLines() []OrderDiscountLinesRequest {
-	if o == nil || IsNil(o.DiscountLines) {
-		var ret []OrderDiscountLinesRequest
-		return ret
-	}
-	return o.DiscountLines
-}
-
-// GetDiscountLinesOk returns a tuple with the DiscountLines field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OrderUpdateRequest) GetDiscountLinesOk() ([]OrderDiscountLinesRequest, bool) {
-	if o == nil || IsNil(o.DiscountLines) {
-		return nil, false
-	}
-	return o.DiscountLines, true
-}
-
-// HasDiscountLines returns a boolean if a field has been set.
-func (o *OrderUpdateRequest) HasDiscountLines() bool {
-	if o != nil && !IsNil(o.DiscountLines) {
-		return true
-	}
-
-	return false
-}
-
-// SetDiscountLines gets a reference to the given []OrderDiscountLinesRequest and assigns it to the DiscountLines field.
-func (o *OrderUpdateRequest) SetDiscountLines(v []OrderDiscountLinesRequest) {
-	o.DiscountLines = v
-}
-
-// GetFiscalEntity returns the FiscalEntity field value if set, zero value otherwise.
-func (o *OrderUpdateRequest) GetFiscalEntity() OrderUpdateFiscalEntityRequest {
-	if o == nil || IsNil(o.FiscalEntity) {
-		var ret OrderUpdateFiscalEntityRequest
-		return ret
-	}
-	return *o.FiscalEntity
-}
-
-// GetFiscalEntityOk returns a tuple with the FiscalEntity field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OrderUpdateRequest) GetFiscalEntityOk() (*OrderUpdateFiscalEntityRequest, bool) {
-	if o == nil || IsNil(o.FiscalEntity) {
-		return nil, false
-	}
-	return o.FiscalEntity, true
-}
-
-// HasFiscalEntity returns a boolean if a field has been set.
-func (o *OrderUpdateRequest) HasFiscalEntity() bool {
-	if o != nil && !IsNil(o.FiscalEntity) {
-		return true
-	}
-
-	return false
-}
-
-// SetFiscalEntity gets a reference to the given OrderUpdateFiscalEntityRequest and assigns it to the FiscalEntity field.
-func (o *OrderUpdateRequest) SetFiscalEntity(v OrderUpdateFiscalEntityRequest) {
-	o.FiscalEntity = &v
 }
 
 // GetLineItems returns the LineItems field value if set, zero value otherwise.
@@ -285,102 +192,6 @@ func (o *OrderUpdateRequest) HasLineItems() bool {
 // SetLineItems gets a reference to the given []Product and assigns it to the LineItems field.
 func (o *OrderUpdateRequest) SetLineItems(v []Product) {
 	o.LineItems = v
-}
-
-// GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *OrderUpdateRequest) GetMetadata() map[string]string {
-	if o == nil || IsNil(o.Metadata) {
-		var ret map[string]string
-		return ret
-	}
-	return *o.Metadata
-}
-
-// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OrderUpdateRequest) GetMetadataOk() (*map[string]string, bool) {
-	if o == nil || IsNil(o.Metadata) {
-		return nil, false
-	}
-	return o.Metadata, true
-}
-
-// HasMetadata returns a boolean if a field has been set.
-func (o *OrderUpdateRequest) HasMetadata() bool {
-	if o != nil && !IsNil(o.Metadata) {
-		return true
-	}
-
-	return false
-}
-
-// SetMetadata gets a reference to the given map[string]string and assigns it to the Metadata field.
-func (o *OrderUpdateRequest) SetMetadata(v map[string]string) {
-	o.Metadata = &v
-}
-
-// GetPreAuthorize returns the PreAuthorize field value if set, zero value otherwise.
-func (o *OrderUpdateRequest) GetPreAuthorize() bool {
-	if o == nil || IsNil(o.PreAuthorize) {
-		var ret bool
-		return ret
-	}
-	return *o.PreAuthorize
-}
-
-// GetPreAuthorizeOk returns a tuple with the PreAuthorize field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OrderUpdateRequest) GetPreAuthorizeOk() (*bool, bool) {
-	if o == nil || IsNil(o.PreAuthorize) {
-		return nil, false
-	}
-	return o.PreAuthorize, true
-}
-
-// HasPreAuthorize returns a boolean if a field has been set.
-func (o *OrderUpdateRequest) HasPreAuthorize() bool {
-	if o != nil && !IsNil(o.PreAuthorize) {
-		return true
-	}
-
-	return false
-}
-
-// SetPreAuthorize gets a reference to the given bool and assigns it to the PreAuthorize field.
-func (o *OrderUpdateRequest) SetPreAuthorize(v bool) {
-	o.PreAuthorize = &v
-}
-
-// GetShippingContact returns the ShippingContact field value if set, zero value otherwise.
-func (o *OrderUpdateRequest) GetShippingContact() CustomerShippingContacts {
-	if o == nil || IsNil(o.ShippingContact) {
-		var ret CustomerShippingContacts
-		return ret
-	}
-	return *o.ShippingContact
-}
-
-// GetShippingContactOk returns a tuple with the ShippingContact field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OrderUpdateRequest) GetShippingContactOk() (*CustomerShippingContacts, bool) {
-	if o == nil || IsNil(o.ShippingContact) {
-		return nil, false
-	}
-	return o.ShippingContact, true
-}
-
-// HasShippingContact returns a boolean if a field has been set.
-func (o *OrderUpdateRequest) HasShippingContact() bool {
-	if o != nil && !IsNil(o.ShippingContact) {
-		return true
-	}
-
-	return false
-}
-
-// SetShippingContact gets a reference to the given CustomerShippingContacts and assigns it to the ShippingContact field.
-func (o *OrderUpdateRequest) SetShippingContact(v CustomerShippingContacts) {
-	o.ShippingContact = &v
 }
 
 // GetShippingLines returns the ShippingLines field value if set, zero value otherwise.
@@ -447,8 +258,284 @@ func (o *OrderUpdateRequest) SetTaxLines(v []OrderTaxRequest) {
 	o.TaxLines = v
 }
 
+// GetDiscountLines returns the DiscountLines field value if set, zero value otherwise.
+func (o *OrderUpdateRequest) GetDiscountLines() []OrderDiscountLinesRequest {
+	if o == nil || IsNil(o.DiscountLines) {
+		var ret []OrderDiscountLinesRequest
+		return ret
+	}
+	return o.DiscountLines
+}
+
+// GetDiscountLinesOk returns a tuple with the DiscountLines field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrderUpdateRequest) GetDiscountLinesOk() ([]OrderDiscountLinesRequest, bool) {
+	if o == nil || IsNil(o.DiscountLines) {
+		return nil, false
+	}
+	return o.DiscountLines, true
+}
+
+// HasDiscountLines returns a boolean if a field has been set.
+func (o *OrderUpdateRequest) HasDiscountLines() bool {
+	if o != nil && !IsNil(o.DiscountLines) {
+		return true
+	}
+
+	return false
+}
+
+// SetDiscountLines gets a reference to the given []OrderDiscountLinesRequest and assigns it to the DiscountLines field.
+func (o *OrderUpdateRequest) SetDiscountLines(v []OrderDiscountLinesRequest) {
+	o.DiscountLines = v
+}
+
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
+func (o *OrderUpdateRequest) GetMetadata() map[string]interface{} {
+	if o == nil || IsNil(o.Metadata) {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Metadata
+}
+
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrderUpdateRequest) GetMetadataOk() (map[string]interface{}, bool) {
+	if o == nil || IsNil(o.Metadata) {
+		return map[string]interface{}{}, false
+	}
+	return o.Metadata, true
+}
+
+// HasMetadata returns a boolean if a field has been set.
+func (o *OrderUpdateRequest) HasMetadata() bool {
+	if o != nil && !IsNil(o.Metadata) {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given map[string]interface{} and assigns it to the Metadata field.
+func (o *OrderUpdateRequest) SetMetadata(v map[string]interface{}) {
+	o.Metadata = v
+}
+
+// GetReturnUrl returns the ReturnUrl field value if set, zero value otherwise.
+func (o *OrderUpdateRequest) GetReturnUrl() string {
+	if o == nil || IsNil(o.ReturnUrl) {
+		var ret string
+		return ret
+	}
+	return *o.ReturnUrl
+}
+
+// GetReturnUrlOk returns a tuple with the ReturnUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrderUpdateRequest) GetReturnUrlOk() (*string, bool) {
+	if o == nil || IsNil(o.ReturnUrl) {
+		return nil, false
+	}
+	return o.ReturnUrl, true
+}
+
+// HasReturnUrl returns a boolean if a field has been set.
+func (o *OrderUpdateRequest) HasReturnUrl() bool {
+	if o != nil && !IsNil(o.ReturnUrl) {
+		return true
+	}
+
+	return false
+}
+
+// SetReturnUrl gets a reference to the given string and assigns it to the ReturnUrl field.
+func (o *OrderUpdateRequest) SetReturnUrl(v string) {
+	o.ReturnUrl = &v
+}
+
+// GetCharges returns the Charges field value if set, zero value otherwise.
+func (o *OrderUpdateRequest) GetCharges() []ChargeRequest {
+	if o == nil || IsNil(o.Charges) {
+		var ret []ChargeRequest
+		return ret
+	}
+	return o.Charges
+}
+
+// GetChargesOk returns a tuple with the Charges field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrderUpdateRequest) GetChargesOk() ([]ChargeRequest, bool) {
+	if o == nil || IsNil(o.Charges) {
+		return nil, false
+	}
+	return o.Charges, true
+}
+
+// HasCharges returns a boolean if a field has been set.
+func (o *OrderUpdateRequest) HasCharges() bool {
+	if o != nil && !IsNil(o.Charges) {
+		return true
+	}
+
+	return false
+}
+
+// SetCharges gets a reference to the given []ChargeRequest and assigns it to the Charges field.
+func (o *OrderUpdateRequest) SetCharges(v []ChargeRequest) {
+	o.Charges = v
+}
+
+// GetShippingContactId returns the ShippingContactId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OrderUpdateRequest) GetShippingContactId() string {
+	if o == nil || IsNil(o.ShippingContactId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ShippingContactId.Get()
+}
+
+// GetShippingContactIdOk returns a tuple with the ShippingContactId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OrderUpdateRequest) GetShippingContactIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ShippingContactId.Get(), o.ShippingContactId.IsSet()
+}
+
+// HasShippingContactId returns a boolean if a field has been set.
+func (o *OrderUpdateRequest) HasShippingContactId() bool {
+	if o != nil && o.ShippingContactId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetShippingContactId gets a reference to the given NullableString and assigns it to the ShippingContactId field.
+func (o *OrderUpdateRequest) SetShippingContactId(v string) {
+	o.ShippingContactId.Set(&v)
+}
+// SetShippingContactIdNil sets the value for ShippingContactId to be an explicit nil
+func (o *OrderUpdateRequest) SetShippingContactIdNil() {
+	o.ShippingContactId.Set(nil)
+}
+
+// UnsetShippingContactId ensures that no value is present for ShippingContactId, not even an explicit nil
+func (o *OrderUpdateRequest) UnsetShippingContactId() {
+	o.ShippingContactId.Unset()
+}
+
+// GetShippingContact returns the ShippingContact field value if set, zero value otherwise.
+func (o *OrderUpdateRequest) GetShippingContact() CustomerShippingContacts {
+	if o == nil || IsNil(o.ShippingContact) {
+		var ret CustomerShippingContacts
+		return ret
+	}
+	return *o.ShippingContact
+}
+
+// GetShippingContactOk returns a tuple with the ShippingContact field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrderUpdateRequest) GetShippingContactOk() (*CustomerShippingContacts, bool) {
+	if o == nil || IsNil(o.ShippingContact) {
+		return nil, false
+	}
+	return o.ShippingContact, true
+}
+
+// HasShippingContact returns a boolean if a field has been set.
+func (o *OrderUpdateRequest) HasShippingContact() bool {
+	if o != nil && !IsNil(o.ShippingContact) {
+		return true
+	}
+
+	return false
+}
+
+// SetShippingContact gets a reference to the given CustomerShippingContacts and assigns it to the ShippingContact field.
+func (o *OrderUpdateRequest) SetShippingContact(v CustomerShippingContacts) {
+	o.ShippingContact = &v
+}
+
+// GetFiscalEntityId returns the FiscalEntityId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OrderUpdateRequest) GetFiscalEntityId() string {
+	if o == nil || IsNil(o.FiscalEntityId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.FiscalEntityId.Get()
+}
+
+// GetFiscalEntityIdOk returns a tuple with the FiscalEntityId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OrderUpdateRequest) GetFiscalEntityIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.FiscalEntityId.Get(), o.FiscalEntityId.IsSet()
+}
+
+// HasFiscalEntityId returns a boolean if a field has been set.
+func (o *OrderUpdateRequest) HasFiscalEntityId() bool {
+	if o != nil && o.FiscalEntityId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFiscalEntityId gets a reference to the given NullableString and assigns it to the FiscalEntityId field.
+func (o *OrderUpdateRequest) SetFiscalEntityId(v string) {
+	o.FiscalEntityId.Set(&v)
+}
+// SetFiscalEntityIdNil sets the value for FiscalEntityId to be an explicit nil
+func (o *OrderUpdateRequest) SetFiscalEntityIdNil() {
+	o.FiscalEntityId.Set(nil)
+}
+
+// UnsetFiscalEntityId ensures that no value is present for FiscalEntityId, not even an explicit nil
+func (o *OrderUpdateRequest) UnsetFiscalEntityId() {
+	o.FiscalEntityId.Unset()
+}
+
+// GetFiscalEntity returns the FiscalEntity field value if set, zero value otherwise.
+func (o *OrderUpdateRequest) GetFiscalEntity() OrderUpdateFiscalEntityRequest {
+	if o == nil || IsNil(o.FiscalEntity) {
+		var ret OrderUpdateFiscalEntityRequest
+		return ret
+	}
+	return *o.FiscalEntity
+}
+
+// GetFiscalEntityOk returns a tuple with the FiscalEntity field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrderUpdateRequest) GetFiscalEntityOk() (*OrderUpdateFiscalEntityRequest, bool) {
+	if o == nil || IsNil(o.FiscalEntity) {
+		return nil, false
+	}
+	return o.FiscalEntity, true
+}
+
+// HasFiscalEntity returns a boolean if a field has been set.
+func (o *OrderUpdateRequest) HasFiscalEntity() bool {
+	if o != nil && !IsNil(o.FiscalEntity) {
+		return true
+	}
+
+	return false
+}
+
+// SetFiscalEntity gets a reference to the given OrderUpdateFiscalEntityRequest and assigns it to the FiscalEntity field.
+func (o *OrderUpdateRequest) SetFiscalEntity(v OrderUpdateFiscalEntityRequest) {
+	o.FiscalEntity = &v
+}
+
 func (o OrderUpdateRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -457,11 +544,8 @@ func (o OrderUpdateRequest) MarshalJSON() ([]byte, error) {
 
 func (o OrderUpdateRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Charges) {
-		toSerialize["charges"] = o.Charges
-	}
-	if !IsNil(o.Checkout) {
-		toSerialize["checkout"] = o.Checkout
+	if !IsNil(o.Status) {
+		toSerialize["status"] = o.Status
 	}
 	if !IsNil(o.Currency) {
 		toSerialize["currency"] = o.Currency
@@ -469,29 +553,38 @@ func (o OrderUpdateRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.CustomerInfo) {
 		toSerialize["customer_info"] = o.CustomerInfo
 	}
-	if !IsNil(o.DiscountLines) {
-		toSerialize["discount_lines"] = o.DiscountLines
-	}
-	if !IsNil(o.FiscalEntity) {
-		toSerialize["fiscal_entity"] = o.FiscalEntity
-	}
 	if !IsNil(o.LineItems) {
 		toSerialize["line_items"] = o.LineItems
-	}
-	if !IsNil(o.Metadata) {
-		toSerialize["metadata"] = o.Metadata
-	}
-	if !IsNil(o.PreAuthorize) {
-		toSerialize["pre_authorize"] = o.PreAuthorize
-	}
-	if !IsNil(o.ShippingContact) {
-		toSerialize["shipping_contact"] = o.ShippingContact
 	}
 	if !IsNil(o.ShippingLines) {
 		toSerialize["shipping_lines"] = o.ShippingLines
 	}
 	if !IsNil(o.TaxLines) {
 		toSerialize["tax_lines"] = o.TaxLines
+	}
+	if !IsNil(o.DiscountLines) {
+		toSerialize["discount_lines"] = o.DiscountLines
+	}
+	if !IsNil(o.Metadata) {
+		toSerialize["metadata"] = o.Metadata
+	}
+	if !IsNil(o.ReturnUrl) {
+		toSerialize["return_url"] = o.ReturnUrl
+	}
+	if !IsNil(o.Charges) {
+		toSerialize["charges"] = o.Charges
+	}
+	if o.ShippingContactId.IsSet() {
+		toSerialize["shipping_contact_id"] = o.ShippingContactId.Get()
+	}
+	if !IsNil(o.ShippingContact) {
+		toSerialize["shipping_contact"] = o.ShippingContact
+	}
+	if o.FiscalEntityId.IsSet() {
+		toSerialize["fiscal_entity_id"] = o.FiscalEntityId.Get()
+	}
+	if !IsNil(o.FiscalEntity) {
+		toSerialize["fiscal_entity"] = o.FiscalEntity
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -515,18 +608,20 @@ func (o *OrderUpdateRequest) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "charges")
-		delete(additionalProperties, "checkout")
+		delete(additionalProperties, "status")
 		delete(additionalProperties, "currency")
 		delete(additionalProperties, "customer_info")
-		delete(additionalProperties, "discount_lines")
-		delete(additionalProperties, "fiscal_entity")
 		delete(additionalProperties, "line_items")
-		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "pre_authorize")
-		delete(additionalProperties, "shipping_contact")
 		delete(additionalProperties, "shipping_lines")
 		delete(additionalProperties, "tax_lines")
+		delete(additionalProperties, "discount_lines")
+		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "return_url")
+		delete(additionalProperties, "charges")
+		delete(additionalProperties, "shipping_contact_id")
+		delete(additionalProperties, "shipping_contact")
+		delete(additionalProperties, "fiscal_entity_id")
+		delete(additionalProperties, "fiscal_entity")
 		o.AdditionalProperties = additionalProperties
 	}
 
@@ -568,3 +663,5 @@ func (v *NullableOrderUpdateRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

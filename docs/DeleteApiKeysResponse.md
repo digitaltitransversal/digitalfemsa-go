@@ -4,21 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Active** | Pointer to **bool** | Indicates if the api key is active | [optional] 
-**CreatedAt** | Pointer to **int64** | Unix timestamp in seconds of when the api key was created | [optional] 
-**Description** | Pointer to **string** | A name or brief explanation of what this api key is used for | [optional] 
-**Livemode** | Pointer to **bool** | Indicates if the api key is in production | [optional] 
-**Prefix** | Pointer to **string** | The first few characters of the authentication_token | [optional] 
-**Id** | Pointer to **string** | Unique identifier of the api key | [optional] 
-**Object** | Pointer to **string** | Object name, value is &#39;api_key&#39; | [optional] 
-**Deleted** | Pointer to **bool** |  | [optional] 
-**Role** | Pointer to **string** | Indicates if the api key is private or public | [optional] 
+**Active** | **bool** | Indicates if the api key is active | 
+**CreatedAt** | **int64** | Unix timestamp in seconds of when the api key was created | 
+**Description** | **string** | A name or brief explanation of what this api key is used for | 
+**Livemode** | **bool** | Indicates if the api key is in production | 
+**Prefix** | **string** | The first few characters of the authentication_token | 
+**Id** | **string** | Unique identifier of the api key | 
+**Object** | **string** | Object name, value is &#39;api_key&#39; | 
+**Deleted** | **bool** |  | 
+**Role** | **string** | Indicates if the api key is private or public | 
 
 ## Methods
 
 ### NewDeleteApiKeysResponse
 
-`func NewDeleteApiKeysResponse() *DeleteApiKeysResponse`
+`func NewDeleteApiKeysResponse(active bool, createdAt int64, description string, livemode bool, prefix string, id string, object string, deleted bool, role string, ) *DeleteApiKeysResponse`
 
 NewDeleteApiKeysResponse instantiates a new DeleteApiKeysResponse object
 This constructor will assign default values to properties that have it defined,
@@ -52,11 +52,6 @@ and a boolean to check if the value has been set.
 
 SetActive sets Active field to given value.
 
-### HasActive
-
-`func (o *DeleteApiKeysResponse) HasActive() bool`
-
-HasActive returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
@@ -77,11 +72,6 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
-### HasCreatedAt
-
-`func (o *DeleteApiKeysResponse) HasCreatedAt() bool`
-
-HasCreatedAt returns a boolean if a field has been set.
 
 ### GetDescription
 
@@ -102,11 +92,6 @@ and a boolean to check if the value has been set.
 
 SetDescription sets Description field to given value.
 
-### HasDescription
-
-`func (o *DeleteApiKeysResponse) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
 
 ### GetLivemode
 
@@ -127,11 +112,6 @@ and a boolean to check if the value has been set.
 
 SetLivemode sets Livemode field to given value.
 
-### HasLivemode
-
-`func (o *DeleteApiKeysResponse) HasLivemode() bool`
-
-HasLivemode returns a boolean if a field has been set.
 
 ### GetPrefix
 
@@ -152,11 +132,6 @@ and a boolean to check if the value has been set.
 
 SetPrefix sets Prefix field to given value.
 
-### HasPrefix
-
-`func (o *DeleteApiKeysResponse) HasPrefix() bool`
-
-HasPrefix returns a boolean if a field has been set.
 
 ### GetId
 
@@ -177,11 +152,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-### HasId
-
-`func (o *DeleteApiKeysResponse) HasId() bool`
-
-HasId returns a boolean if a field has been set.
 
 ### GetObject
 
@@ -202,11 +172,6 @@ and a boolean to check if the value has been set.
 
 SetObject sets Object field to given value.
 
-### HasObject
-
-`func (o *DeleteApiKeysResponse) HasObject() bool`
-
-HasObject returns a boolean if a field has been set.
 
 ### GetDeleted
 
@@ -227,11 +192,6 @@ and a boolean to check if the value has been set.
 
 SetDeleted sets Deleted field to given value.
 
-### HasDeleted
-
-`func (o *DeleteApiKeysResponse) HasDeleted() bool`
-
-HasDeleted returns a boolean if a field has been set.
 
 ### GetRole
 
@@ -252,11 +212,6 @@ and a boolean to check if the value has been set.
 
 SetRole sets Role field to given value.
 
-### HasRole
-
-`func (o *DeleteApiKeysResponse) HasRole() bool`
-
-HasRole returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

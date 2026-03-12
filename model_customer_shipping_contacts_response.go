@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -20,18 +20,21 @@ var _ MappedNullable = &CustomerShippingContactsResponse{}
 
 // CustomerShippingContactsResponse Contains the detail of the shipping addresses that the client has active or has used in Femsa
 type CustomerShippingContactsResponse struct {
-	Phone          *string                                  `json:"phone,omitempty"`
-	Receiver       *string                                  `json:"receiver,omitempty"`
-	BetweenStreets NullableString                           `json:"between_streets,omitempty"`
-	Address        *CustomerShippingContactsResponseAddress `json:"address,omitempty"`
-	ParentId       *string                                  `json:"parent_id,omitempty"`
-	Default        *bool                                    `json:"default,omitempty"`
-	Id             *string                                  `json:"id,omitempty"`
-	CreatedAt      *int64                                   `json:"created_at,omitempty"`
+	Phone *string `json:"phone,omitempty"`
+	Receiver *string `json:"receiver,omitempty"`
+	BetweenStreets NullableString `json:"between_streets,omitempty"`
+	Address *CustomerShippingContactsResponseAddress `json:"address,omitempty"`
+	// Customer ID that owns this shipping contact.
+	ParentId *string `json:"parent_id,omitempty"`
+	// True if this is the customer's default shipping contact.
+	Default *bool `json:"default,omitempty"`
+	Id *string `json:"id,omitempty"`
+	CreatedAt *int64 `json:"created_at,omitempty"`
 	// Metadata associated with the shipping contact
-	Metadata             map[string]interface{} `json:"metadata,omitempty"`
-	Object               *string                `json:"object,omitempty"`
-	Deleted              *bool                  `json:"deleted,omitempty"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	Object *string `json:"object,omitempty"`
+	// Present only when the shipping contact was deleted.
+	Deleted NullableBool `json:"deleted,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -150,7 +153,6 @@ func (o *CustomerShippingContactsResponse) HasBetweenStreets() bool {
 func (o *CustomerShippingContactsResponse) SetBetweenStreets(v string) {
 	o.BetweenStreets.Set(&v)
 }
-
 // SetBetweenStreetsNil sets the value for BetweenStreets to be an explicit nil
 func (o *CustomerShippingContactsResponse) SetBetweenStreetsNil() {
 	o.BetweenStreets.Set(nil)
@@ -385,40 +387,50 @@ func (o *CustomerShippingContactsResponse) SetObject(v string) {
 	o.Object = &v
 }
 
-// GetDeleted returns the Deleted field value if set, zero value otherwise.
+// GetDeleted returns the Deleted field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CustomerShippingContactsResponse) GetDeleted() bool {
-	if o == nil || IsNil(o.Deleted) {
+	if o == nil || IsNil(o.Deleted.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.Deleted
+	return *o.Deleted.Get()
 }
 
 // GetDeletedOk returns a tuple with the Deleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CustomerShippingContactsResponse) GetDeletedOk() (*bool, bool) {
-	if o == nil || IsNil(o.Deleted) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Deleted, true
+	return o.Deleted.Get(), o.Deleted.IsSet()
 }
 
 // HasDeleted returns a boolean if a field has been set.
 func (o *CustomerShippingContactsResponse) HasDeleted() bool {
-	if o != nil && !IsNil(o.Deleted) {
+	if o != nil && o.Deleted.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDeleted gets a reference to the given bool and assigns it to the Deleted field.
+// SetDeleted gets a reference to the given NullableBool and assigns it to the Deleted field.
 func (o *CustomerShippingContactsResponse) SetDeleted(v bool) {
-	o.Deleted = &v
+	o.Deleted.Set(&v)
+}
+// SetDeletedNil sets the value for Deleted to be an explicit nil
+func (o *CustomerShippingContactsResponse) SetDeletedNil() {
+	o.Deleted.Set(nil)
+}
+
+// UnsetDeleted ensures that no value is present for Deleted, not even an explicit nil
+func (o *CustomerShippingContactsResponse) UnsetDeleted() {
+	o.Deleted.Unset()
 }
 
 func (o CustomerShippingContactsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -457,8 +469,8 @@ func (o CustomerShippingContactsResponse) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Object) {
 		toSerialize["object"] = o.Object
 	}
-	if !IsNil(o.Deleted) {
-		toSerialize["deleted"] = o.Deleted
+	if o.Deleted.IsSet() {
+		toSerialize["deleted"] = o.Deleted.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -534,3 +546,5 @@ func (v *NullableCustomerShippingContactsResponse) UnmarshalJSON(src []byte) err
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

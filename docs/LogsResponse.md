@@ -4,17 +4,28 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**HasMore** | Pointer to **bool** | True, if there are more pages. | [optional] [readonly] 
-**Object** | Pointer to **string** | The object type | [optional] [readonly] 
-**NextPageUrl** | Pointer to **NullableString** | URL of the next page. | [optional] 
-**PreviousPageUrl** | Pointer to **NullableString** | Url of the previous page. | [optional] 
-**Data** | Pointer to [**[]LogsResponseData**](LogsResponseData.md) | set to page results. | [optional] 
+**Id** | **string** |  | 
+**Object** | **string** |  | 
+**CreatedAt** | **int64** |  | 
+**Livemode** | **bool** |  | 
+**Method** | **string** |  | 
+**Url** | **string** |  | 
+**Status** | **string** |  | 
+**Version** | **string** |  | 
+**IpAddress** | **string** |  | 
+**Related** | **string** |  | 
+**QueryString** | Pointer to **map[string]interface{}** |  | [optional] 
+**RequestBody** | Pointer to **map[string]interface{}** |  | [optional] 
+**ResponseBody** | Pointer to **map[string]interface{}** |  | [optional] 
+**RequestHeaders** | Pointer to **map[string]string** |  | [optional] 
+**ResponseHeaders** | Pointer to **map[string]string** |  | [optional] 
+**SearchableTags** | Pointer to **[]string** |  | [optional] 
 
 ## Methods
 
 ### NewLogsResponse
 
-`func NewLogsResponse() *LogsResponse`
+`func NewLogsResponse(id string, object string, createdAt int64, livemode bool, method string, url string, status string, version string, ipAddress string, related string, ) *LogsResponse`
 
 NewLogsResponse instantiates a new LogsResponse object
 This constructor will assign default values to properties that have it defined,
@@ -29,30 +40,25 @@ NewLogsResponseWithDefaults instantiates a new LogsResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetHasMore
+### GetId
 
-`func (o *LogsResponse) GetHasMore() bool`
+`func (o *LogsResponse) GetId() string`
 
-GetHasMore returns the HasMore field if non-nil, zero value otherwise.
+GetId returns the Id field if non-nil, zero value otherwise.
 
-### GetHasMoreOk
+### GetIdOk
 
-`func (o *LogsResponse) GetHasMoreOk() (*bool, bool)`
+`func (o *LogsResponse) GetIdOk() (*string, bool)`
 
-GetHasMoreOk returns a tuple with the HasMore field if it's non-nil, zero value otherwise
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetHasMore
+### SetId
 
-`func (o *LogsResponse) SetHasMore(v bool)`
+`func (o *LogsResponse) SetId(v string)`
 
-SetHasMore sets HasMore field to given value.
+SetId sets Id field to given value.
 
-### HasHasMore
-
-`func (o *LogsResponse) HasHasMore() bool`
-
-HasHasMore returns a boolean if a field has been set.
 
 ### GetObject
 
@@ -73,117 +79,367 @@ and a boolean to check if the value has been set.
 
 SetObject sets Object field to given value.
 
-### HasObject
 
-`func (o *LogsResponse) HasObject() bool`
+### GetCreatedAt
 
-HasObject returns a boolean if a field has been set.
+`func (o *LogsResponse) GetCreatedAt() int64`
 
-### GetNextPageUrl
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
-`func (o *LogsResponse) GetNextPageUrl() string`
+### GetCreatedAtOk
 
-GetNextPageUrl returns the NextPageUrl field if non-nil, zero value otherwise.
+`func (o *LogsResponse) GetCreatedAtOk() (*int64, bool)`
 
-### GetNextPageUrlOk
-
-`func (o *LogsResponse) GetNextPageUrlOk() (*string, bool)`
-
-GetNextPageUrlOk returns a tuple with the NextPageUrl field if it's non-nil, zero value otherwise
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNextPageUrl
+### SetCreatedAt
 
-`func (o *LogsResponse) SetNextPageUrl(v string)`
+`func (o *LogsResponse) SetCreatedAt(v int64)`
 
-SetNextPageUrl sets NextPageUrl field to given value.
+SetCreatedAt sets CreatedAt field to given value.
 
-### HasNextPageUrl
 
-`func (o *LogsResponse) HasNextPageUrl() bool`
+### GetLivemode
 
-HasNextPageUrl returns a boolean if a field has been set.
+`func (o *LogsResponse) GetLivemode() bool`
 
-### SetNextPageUrlNil
+GetLivemode returns the Livemode field if non-nil, zero value otherwise.
 
-`func (o *LogsResponse) SetNextPageUrlNil(b bool)`
+### GetLivemodeOk
 
- SetNextPageUrlNil sets the value for NextPageUrl to be an explicit nil
+`func (o *LogsResponse) GetLivemodeOk() (*bool, bool)`
 
-### UnsetNextPageUrl
-`func (o *LogsResponse) UnsetNextPageUrl()`
-
-UnsetNextPageUrl ensures that no value is present for NextPageUrl, not even an explicit nil
-### GetPreviousPageUrl
-
-`func (o *LogsResponse) GetPreviousPageUrl() string`
-
-GetPreviousPageUrl returns the PreviousPageUrl field if non-nil, zero value otherwise.
-
-### GetPreviousPageUrlOk
-
-`func (o *LogsResponse) GetPreviousPageUrlOk() (*string, bool)`
-
-GetPreviousPageUrlOk returns a tuple with the PreviousPageUrl field if it's non-nil, zero value otherwise
+GetLivemodeOk returns a tuple with the Livemode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPreviousPageUrl
+### SetLivemode
 
-`func (o *LogsResponse) SetPreviousPageUrl(v string)`
+`func (o *LogsResponse) SetLivemode(v bool)`
 
-SetPreviousPageUrl sets PreviousPageUrl field to given value.
+SetLivemode sets Livemode field to given value.
 
-### HasPreviousPageUrl
 
-`func (o *LogsResponse) HasPreviousPageUrl() bool`
+### GetMethod
 
-HasPreviousPageUrl returns a boolean if a field has been set.
+`func (o *LogsResponse) GetMethod() string`
 
-### SetPreviousPageUrlNil
+GetMethod returns the Method field if non-nil, zero value otherwise.
 
-`func (o *LogsResponse) SetPreviousPageUrlNil(b bool)`
+### GetMethodOk
 
- SetPreviousPageUrlNil sets the value for PreviousPageUrl to be an explicit nil
+`func (o *LogsResponse) GetMethodOk() (*string, bool)`
 
-### UnsetPreviousPageUrl
-`func (o *LogsResponse) UnsetPreviousPageUrl()`
-
-UnsetPreviousPageUrl ensures that no value is present for PreviousPageUrl, not even an explicit nil
-### GetData
-
-`func (o *LogsResponse) GetData() []LogsResponseData`
-
-GetData returns the Data field if non-nil, zero value otherwise.
-
-### GetDataOk
-
-`func (o *LogsResponse) GetDataOk() (*[]LogsResponseData, bool)`
-
-GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
+GetMethodOk returns a tuple with the Method field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetData
+### SetMethod
 
-`func (o *LogsResponse) SetData(v []LogsResponseData)`
+`func (o *LogsResponse) SetMethod(v string)`
 
-SetData sets Data field to given value.
+SetMethod sets Method field to given value.
 
-### HasData
 
-`func (o *LogsResponse) HasData() bool`
+### GetUrl
 
-HasData returns a boolean if a field has been set.
+`func (o *LogsResponse) GetUrl() string`
 
-### SetDataNil
+GetUrl returns the Url field if non-nil, zero value otherwise.
 
-`func (o *LogsResponse) SetDataNil(b bool)`
+### GetUrlOk
 
- SetDataNil sets the value for Data to be an explicit nil
+`func (o *LogsResponse) GetUrlOk() (*string, bool)`
 
-### UnsetData
-`func (o *LogsResponse) UnsetData()`
+GetUrlOk returns a tuple with the Url field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
 
-UnsetData ensures that no value is present for Data, not even an explicit nil
+### SetUrl
+
+`func (o *LogsResponse) SetUrl(v string)`
+
+SetUrl sets Url field to given value.
+
+
+### GetStatus
+
+`func (o *LogsResponse) GetStatus() string`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *LogsResponse) GetStatusOk() (*string, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *LogsResponse) SetStatus(v string)`
+
+SetStatus sets Status field to given value.
+
+
+### GetVersion
+
+`func (o *LogsResponse) GetVersion() string`
+
+GetVersion returns the Version field if non-nil, zero value otherwise.
+
+### GetVersionOk
+
+`func (o *LogsResponse) GetVersionOk() (*string, bool)`
+
+GetVersionOk returns a tuple with the Version field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVersion
+
+`func (o *LogsResponse) SetVersion(v string)`
+
+SetVersion sets Version field to given value.
+
+
+### GetIpAddress
+
+`func (o *LogsResponse) GetIpAddress() string`
+
+GetIpAddress returns the IpAddress field if non-nil, zero value otherwise.
+
+### GetIpAddressOk
+
+`func (o *LogsResponse) GetIpAddressOk() (*string, bool)`
+
+GetIpAddressOk returns a tuple with the IpAddress field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIpAddress
+
+`func (o *LogsResponse) SetIpAddress(v string)`
+
+SetIpAddress sets IpAddress field to given value.
+
+
+### GetRelated
+
+`func (o *LogsResponse) GetRelated() string`
+
+GetRelated returns the Related field if non-nil, zero value otherwise.
+
+### GetRelatedOk
+
+`func (o *LogsResponse) GetRelatedOk() (*string, bool)`
+
+GetRelatedOk returns a tuple with the Related field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRelated
+
+`func (o *LogsResponse) SetRelated(v string)`
+
+SetRelated sets Related field to given value.
+
+
+### GetQueryString
+
+`func (o *LogsResponse) GetQueryString() map[string]interface{}`
+
+GetQueryString returns the QueryString field if non-nil, zero value otherwise.
+
+### GetQueryStringOk
+
+`func (o *LogsResponse) GetQueryStringOk() (*map[string]interface{}, bool)`
+
+GetQueryStringOk returns a tuple with the QueryString field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQueryString
+
+`func (o *LogsResponse) SetQueryString(v map[string]interface{})`
+
+SetQueryString sets QueryString field to given value.
+
+### HasQueryString
+
+`func (o *LogsResponse) HasQueryString() bool`
+
+HasQueryString returns a boolean if a field has been set.
+
+### SetQueryStringNil
+
+`func (o *LogsResponse) SetQueryStringNil(b bool)`
+
+ SetQueryStringNil sets the value for QueryString to be an explicit nil
+
+### UnsetQueryString
+`func (o *LogsResponse) UnsetQueryString()`
+
+UnsetQueryString ensures that no value is present for QueryString, not even an explicit nil
+### GetRequestBody
+
+`func (o *LogsResponse) GetRequestBody() map[string]interface{}`
+
+GetRequestBody returns the RequestBody field if non-nil, zero value otherwise.
+
+### GetRequestBodyOk
+
+`func (o *LogsResponse) GetRequestBodyOk() (*map[string]interface{}, bool)`
+
+GetRequestBodyOk returns a tuple with the RequestBody field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestBody
+
+`func (o *LogsResponse) SetRequestBody(v map[string]interface{})`
+
+SetRequestBody sets RequestBody field to given value.
+
+### HasRequestBody
+
+`func (o *LogsResponse) HasRequestBody() bool`
+
+HasRequestBody returns a boolean if a field has been set.
+
+### SetRequestBodyNil
+
+`func (o *LogsResponse) SetRequestBodyNil(b bool)`
+
+ SetRequestBodyNil sets the value for RequestBody to be an explicit nil
+
+### UnsetRequestBody
+`func (o *LogsResponse) UnsetRequestBody()`
+
+UnsetRequestBody ensures that no value is present for RequestBody, not even an explicit nil
+### GetResponseBody
+
+`func (o *LogsResponse) GetResponseBody() map[string]interface{}`
+
+GetResponseBody returns the ResponseBody field if non-nil, zero value otherwise.
+
+### GetResponseBodyOk
+
+`func (o *LogsResponse) GetResponseBodyOk() (*map[string]interface{}, bool)`
+
+GetResponseBodyOk returns a tuple with the ResponseBody field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResponseBody
+
+`func (o *LogsResponse) SetResponseBody(v map[string]interface{})`
+
+SetResponseBody sets ResponseBody field to given value.
+
+### HasResponseBody
+
+`func (o *LogsResponse) HasResponseBody() bool`
+
+HasResponseBody returns a boolean if a field has been set.
+
+### SetResponseBodyNil
+
+`func (o *LogsResponse) SetResponseBodyNil(b bool)`
+
+ SetResponseBodyNil sets the value for ResponseBody to be an explicit nil
+
+### UnsetResponseBody
+`func (o *LogsResponse) UnsetResponseBody()`
+
+UnsetResponseBody ensures that no value is present for ResponseBody, not even an explicit nil
+### GetRequestHeaders
+
+`func (o *LogsResponse) GetRequestHeaders() map[string]string`
+
+GetRequestHeaders returns the RequestHeaders field if non-nil, zero value otherwise.
+
+### GetRequestHeadersOk
+
+`func (o *LogsResponse) GetRequestHeadersOk() (*map[string]string, bool)`
+
+GetRequestHeadersOk returns a tuple with the RequestHeaders field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequestHeaders
+
+`func (o *LogsResponse) SetRequestHeaders(v map[string]string)`
+
+SetRequestHeaders sets RequestHeaders field to given value.
+
+### HasRequestHeaders
+
+`func (o *LogsResponse) HasRequestHeaders() bool`
+
+HasRequestHeaders returns a boolean if a field has been set.
+
+### SetRequestHeadersNil
+
+`func (o *LogsResponse) SetRequestHeadersNil(b bool)`
+
+ SetRequestHeadersNil sets the value for RequestHeaders to be an explicit nil
+
+### UnsetRequestHeaders
+`func (o *LogsResponse) UnsetRequestHeaders()`
+
+UnsetRequestHeaders ensures that no value is present for RequestHeaders, not even an explicit nil
+### GetResponseHeaders
+
+`func (o *LogsResponse) GetResponseHeaders() map[string]string`
+
+GetResponseHeaders returns the ResponseHeaders field if non-nil, zero value otherwise.
+
+### GetResponseHeadersOk
+
+`func (o *LogsResponse) GetResponseHeadersOk() (*map[string]string, bool)`
+
+GetResponseHeadersOk returns a tuple with the ResponseHeaders field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetResponseHeaders
+
+`func (o *LogsResponse) SetResponseHeaders(v map[string]string)`
+
+SetResponseHeaders sets ResponseHeaders field to given value.
+
+### HasResponseHeaders
+
+`func (o *LogsResponse) HasResponseHeaders() bool`
+
+HasResponseHeaders returns a boolean if a field has been set.
+
+### SetResponseHeadersNil
+
+`func (o *LogsResponse) SetResponseHeadersNil(b bool)`
+
+ SetResponseHeadersNil sets the value for ResponseHeaders to be an explicit nil
+
+### UnsetResponseHeaders
+`func (o *LogsResponse) UnsetResponseHeaders()`
+
+UnsetResponseHeaders ensures that no value is present for ResponseHeaders, not even an explicit nil
+### GetSearchableTags
+
+`func (o *LogsResponse) GetSearchableTags() []string`
+
+GetSearchableTags returns the SearchableTags field if non-nil, zero value otherwise.
+
+### GetSearchableTagsOk
+
+`func (o *LogsResponse) GetSearchableTagsOk() (*[]string, bool)`
+
+GetSearchableTagsOk returns a tuple with the SearchableTags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSearchableTags
+
+`func (o *LogsResponse) SetSearchableTags(v []string)`
+
+SetSearchableTags sets SearchableTags field to given value.
+
+### HasSearchableTags
+
+`func (o *LogsResponse) HasSearchableTags() bool`
+
+HasSearchableTags returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -20,16 +20,17 @@ import (
 	"strings"
 )
 
+
 type TaxesAPI interface {
 
 	/*
-		OrdersCreateTaxes Create Tax
+	OrdersCreateTaxes Create Tax
 
-		Create new taxes for an existing orden
+	Creates a new tax line for an existing order. The tax line is added to the order identified by `id`. The response returns the created tax line.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param id Identifier of the resource
-		@return ApiOrdersCreateTaxesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@return ApiOrdersCreateTaxesRequest
 	*/
 	OrdersCreateTaxes(ctx context.Context, id string) ApiOrdersCreateTaxesRequest
 
@@ -38,14 +39,14 @@ type TaxesAPI interface {
 	OrdersCreateTaxesExecute(r ApiOrdersCreateTaxesRequest) (*UpdateOrderTaxResponse, *http.Response, error)
 
 	/*
-		OrdersDeleteTaxes Delete Tax
+	OrdersDeleteTaxes Delete Tax
 
-		Delete taxes for an existing orden
+	Deletes an existing tax line from an order. The tax line identified by `tax_id` belongs to the order identified by `id`. The response includes the deleted resource with `deleted: true`.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param id Identifier of the resource
-		@param taxId identifier
-		@return ApiOrdersDeleteTaxesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@param taxId identifier
+	@return ApiOrdersDeleteTaxesRequest
 	*/
 	OrdersDeleteTaxes(ctx context.Context, id string, taxId string) ApiOrdersDeleteTaxesRequest
 
@@ -54,14 +55,14 @@ type TaxesAPI interface {
 	OrdersDeleteTaxesExecute(r ApiOrdersDeleteTaxesRequest) (*UpdateOrderTaxResponse, *http.Response, error)
 
 	/*
-		OrdersUpdateTaxes Update Tax
+	OrdersUpdateTaxes Update Tax
 
-		Update taxes for an existing orden
+	Updates an existing tax line for an order. The tax line identified by `tax_id` belongs to the order identified by `id`. Only the fields provided in the request body are updated.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param id Identifier of the resource
-		@param taxId identifier
-		@return ApiOrdersUpdateTaxesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@param taxId identifier
+	@return ApiOrdersUpdateTaxesRequest
 	*/
 	OrdersUpdateTaxes(ctx context.Context, id string, taxId string) ApiOrdersUpdateTaxesRequest
 
@@ -74,15 +75,15 @@ type TaxesAPI interface {
 type TaxesAPIService service
 
 type ApiOrdersCreateTaxesRequest struct {
-	ctx             context.Context
-	ApiService      TaxesAPI
-	id              string
+	ctx context.Context
+	ApiService TaxesAPI
+	id string
 	orderTaxRequest *OrderTaxRequest
-	acceptLanguage  *string
+	acceptLanguage *string
 	xChildCompanyId *string
 }
 
-// requested field for a taxes
+// Request body for creating a tax line.
 func (r ApiOrdersCreateTaxesRequest) OrderTaxRequest(orderTaxRequest OrderTaxRequest) ApiOrdersCreateTaxesRequest {
 	r.orderTaxRequest = &orderTaxRequest
 	return r
@@ -107,29 +108,28 @@ func (r ApiOrdersCreateTaxesRequest) Execute() (*UpdateOrderTaxResponse, *http.R
 /*
 OrdersCreateTaxes Create Tax
 
-Create new taxes for an existing orden
+Creates a new tax line for an existing order. The tax line is added to the order identified by `id`. The response returns the created tax line.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@return ApiOrdersCreateTaxesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @return ApiOrdersCreateTaxesRequest
 */
 func (a *TaxesAPIService) OrdersCreateTaxes(ctx context.Context, id string) ApiOrdersCreateTaxesRequest {
 	return ApiOrdersCreateTaxesRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UpdateOrderTaxResponse
+//  @return UpdateOrderTaxResponse
 func (a *TaxesAPIService) OrdersCreateTaxesExecute(r ApiOrdersCreateTaxesRequest) (*UpdateOrderTaxResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *UpdateOrderTaxResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UpdateOrderTaxResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TaxesAPIService.OrdersCreateTaxes")
@@ -157,7 +157,7 @@ func (a *TaxesAPIService) OrdersCreateTaxesExecute(r ApiOrdersCreateTaxesRequest
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -201,8 +201,8 @@ func (a *TaxesAPIService) OrdersCreateTaxesExecute(r ApiOrdersCreateTaxesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -212,8 +212,19 @@ func (a *TaxesAPIService) OrdersCreateTaxesExecute(r ApiOrdersCreateTaxesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -223,8 +234,8 @@ func (a *TaxesAPIService) OrdersCreateTaxesExecute(r ApiOrdersCreateTaxesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -242,11 +253,11 @@ func (a *TaxesAPIService) OrdersCreateTaxesExecute(r ApiOrdersCreateTaxesRequest
 }
 
 type ApiOrdersDeleteTaxesRequest struct {
-	ctx             context.Context
-	ApiService      TaxesAPI
-	id              string
-	taxId           string
-	acceptLanguage  *string
+	ctx context.Context
+	ApiService TaxesAPI
+	id string
+	taxId string
+	acceptLanguage *string
 	xChildCompanyId *string
 }
 
@@ -269,31 +280,30 @@ func (r ApiOrdersDeleteTaxesRequest) Execute() (*UpdateOrderTaxResponse, *http.R
 /*
 OrdersDeleteTaxes Delete Tax
 
-Delete taxes for an existing orden
+Deletes an existing tax line from an order. The tax line identified by `tax_id` belongs to the order identified by `id`. The response includes the deleted resource with `deleted: true`.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@param taxId identifier
-	@return ApiOrdersDeleteTaxesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @param taxId identifier
+ @return ApiOrdersDeleteTaxesRequest
 */
 func (a *TaxesAPIService) OrdersDeleteTaxes(ctx context.Context, id string, taxId string) ApiOrdersDeleteTaxesRequest {
 	return ApiOrdersDeleteTaxesRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-		taxId:      taxId,
+		ctx: ctx,
+		id: id,
+		taxId: taxId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UpdateOrderTaxResponse
+//  @return UpdateOrderTaxResponse
 func (a *TaxesAPIService) OrdersDeleteTaxesExecute(r ApiOrdersDeleteTaxesRequest) (*UpdateOrderTaxResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *UpdateOrderTaxResponse
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UpdateOrderTaxResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TaxesAPIService.OrdersDeleteTaxes")
@@ -319,7 +329,7 @@ func (a *TaxesAPIService) OrdersDeleteTaxesExecute(r ApiOrdersDeleteTaxesRequest
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -361,19 +371,8 @@ func (a *TaxesAPIService) OrdersDeleteTaxesExecute(r ApiOrdersDeleteTaxesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v ModelError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -383,8 +382,19 @@ func (a *TaxesAPIService) OrdersDeleteTaxesExecute(r ApiOrdersDeleteTaxesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -394,8 +404,8 @@ func (a *TaxesAPIService) OrdersDeleteTaxesExecute(r ApiOrdersDeleteTaxesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -413,16 +423,16 @@ func (a *TaxesAPIService) OrdersDeleteTaxesExecute(r ApiOrdersDeleteTaxesRequest
 }
 
 type ApiOrdersUpdateTaxesRequest struct {
-	ctx                   context.Context
-	ApiService            TaxesAPI
-	id                    string
-	taxId                 string
+	ctx context.Context
+	ApiService TaxesAPI
+	id string
+	taxId string
 	updateOrderTaxRequest *UpdateOrderTaxRequest
-	acceptLanguage        *string
-	xChildCompanyId       *string
+	acceptLanguage *string
+	xChildCompanyId *string
 }
 
-// requested field for taxes
+// Request body for creating a tax line.
 func (r ApiOrdersUpdateTaxesRequest) UpdateOrderTaxRequest(updateOrderTaxRequest UpdateOrderTaxRequest) ApiOrdersUpdateTaxesRequest {
 	r.updateOrderTaxRequest = &updateOrderTaxRequest
 	return r
@@ -447,31 +457,30 @@ func (r ApiOrdersUpdateTaxesRequest) Execute() (*UpdateOrderTaxResponse, *http.R
 /*
 OrdersUpdateTaxes Update Tax
 
-Update taxes for an existing orden
+Updates an existing tax line for an order. The tax line identified by `tax_id` belongs to the order identified by `id`. Only the fields provided in the request body are updated.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@param taxId identifier
-	@return ApiOrdersUpdateTaxesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @param taxId identifier
+ @return ApiOrdersUpdateTaxesRequest
 */
 func (a *TaxesAPIService) OrdersUpdateTaxes(ctx context.Context, id string, taxId string) ApiOrdersUpdateTaxesRequest {
 	return ApiOrdersUpdateTaxesRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
-		taxId:      taxId,
+		ctx: ctx,
+		id: id,
+		taxId: taxId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UpdateOrderTaxResponse
+//  @return UpdateOrderTaxResponse
 func (a *TaxesAPIService) OrdersUpdateTaxesExecute(r ApiOrdersUpdateTaxesRequest) (*UpdateOrderTaxResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *UpdateOrderTaxResponse
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *UpdateOrderTaxResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TaxesAPIService.OrdersUpdateTaxes")
@@ -500,7 +509,7 @@ func (a *TaxesAPIService) OrdersUpdateTaxesExecute(r ApiOrdersUpdateTaxesRequest
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -544,19 +553,8 @@ func (a *TaxesAPIService) OrdersUpdateTaxesExecute(r ApiOrdersUpdateTaxesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v ModelError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -566,8 +564,19 @@ func (a *TaxesAPIService) OrdersUpdateTaxesExecute(r ApiOrdersUpdateTaxesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -577,8 +586,8 @@ func (a *TaxesAPIService) OrdersUpdateTaxesExecute(r ApiOrdersUpdateTaxesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

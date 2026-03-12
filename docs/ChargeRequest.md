@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Amount** | Pointer to **int32** |  | [optional] 
 **PaymentMethod** | [**ChargeRequestPaymentMethod**](ChargeRequestPaymentMethod.md) |  | 
-**ReferenceId** | Pointer to **string** | Custom reference to add to the charge | [optional] 
+**ReferenceId** | Pointer to **NullableString** | Custom reference to add to the charge | [optional] 
 
 ## Methods
 
@@ -97,6 +97,16 @@ SetReferenceId sets ReferenceId field to given value.
 
 HasReferenceId returns a boolean if a field has been set.
 
+### SetReferenceIdNil
+
+`func (o *ChargeRequest) SetReferenceIdNil(b bool)`
+
+ SetReferenceIdNil sets the value for ReferenceId to be an explicit nil
+
+### UnsetReferenceId
+`func (o *ChargeRequest) UnsetReferenceId()`
+
+UnsetReferenceId ensures that no value is present for ReferenceId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

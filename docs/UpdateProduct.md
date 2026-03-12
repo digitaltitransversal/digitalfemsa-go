@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AntifraudInfo** | Pointer to **map[string]map[string]interface{}** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **Sku** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
@@ -32,31 +31,6 @@ will change when the set of required properties is changed
 NewUpdateProductWithDefaults instantiates a new UpdateProduct object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetAntifraudInfo
-
-`func (o *UpdateProduct) GetAntifraudInfo() map[string]map[string]interface{}`
-
-GetAntifraudInfo returns the AntifraudInfo field if non-nil, zero value otherwise.
-
-### GetAntifraudInfoOk
-
-`func (o *UpdateProduct) GetAntifraudInfoOk() (*map[string]map[string]interface{}, bool)`
-
-GetAntifraudInfoOk returns a tuple with the AntifraudInfo field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAntifraudInfo
-
-`func (o *UpdateProduct) SetAntifraudInfo(v map[string]map[string]interface{})`
-
-SetAntifraudInfo sets AntifraudInfo field to given value.
-
-### HasAntifraudInfo
-
-`func (o *UpdateProduct) HasAntifraudInfo() bool`
-
-HasAntifraudInfo returns a boolean if a field has been set.
 
 ### GetDescription
 

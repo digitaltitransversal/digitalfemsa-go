@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**CustomerId** | Pointer to **string** |  | [optional] 
 **Name** | **string** |  | 
 **Email** | **string** |  | 
 **Phone** | **string** |  | 
@@ -28,6 +29,31 @@ will change when the set of required properties is changed
 NewCustomerInfoWithDefaults instantiates a new CustomerInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetCustomerId
+
+`func (o *CustomerInfo) GetCustomerId() string`
+
+GetCustomerId returns the CustomerId field if non-nil, zero value otherwise.
+
+### GetCustomerIdOk
+
+`func (o *CustomerInfo) GetCustomerIdOk() (*string, bool)`
+
+GetCustomerIdOk returns a tuple with the CustomerId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomerId
+
+`func (o *CustomerInfo) SetCustomerId(v string)`
+
+SetCustomerId sets CustomerId field to given value.
+
+### HasCustomerId
+
+`func (o *CustomerInfo) HasCustomerId() bool`
+
+HasCustomerId returns a boolean if a field has been set.
 
 ### GetName
 

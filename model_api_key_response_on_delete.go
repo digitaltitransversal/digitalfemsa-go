@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -13,6 +13,7 @@ package digitalfemsa
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the ApiKeyResponseOnDelete type satisfies the MappedNullable interface at compile time
@@ -21,23 +22,23 @@ var _ MappedNullable = &ApiKeyResponseOnDelete{}
 // ApiKeyResponseOnDelete api keys model
 type ApiKeyResponseOnDelete struct {
 	// Indicates if the api key is active
-	Active *bool `json:"active,omitempty"`
+	Active bool `json:"active"`
 	// Unix timestamp in seconds of when the api key was created
-	CreatedAt *int64 `json:"created_at,omitempty"`
+	CreatedAt int64 `json:"created_at"`
 	// A name or brief explanation of what this api key is used for
-	Description *string `json:"description,omitempty"`
+	Description string `json:"description"`
 	// Indicates if the api key is in production
-	Livemode *bool `json:"livemode,omitempty"`
+	Livemode bool `json:"livemode"`
 	// The first few characters of the authentication_token
-	Prefix *string `json:"prefix,omitempty"`
+	Prefix string `json:"prefix"`
 	// Unique identifier of the api key
-	Id *string `json:"id,omitempty"`
+	Id string `json:"id"`
 	// Object name, value is 'api_key'
-	Object *string `json:"object,omitempty"`
+	Object string `json:"object"`
 	// Indicates if the api key was deleted
-	Deleted *bool `json:"deleted,omitempty"`
+	Deleted bool `json:"deleted"`
 	// Indicates if the api key is private or public
-	Role                 *string `json:"role,omitempty"`
+	Role string `json:"role"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -47,8 +48,17 @@ type _ApiKeyResponseOnDelete ApiKeyResponseOnDelete
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewApiKeyResponseOnDelete() *ApiKeyResponseOnDelete {
+func NewApiKeyResponseOnDelete(active bool, createdAt int64, description string, livemode bool, prefix string, id string, object string, deleted bool, role string) *ApiKeyResponseOnDelete {
 	this := ApiKeyResponseOnDelete{}
+	this.Active = active
+	this.CreatedAt = createdAt
+	this.Description = description
+	this.Livemode = livemode
+	this.Prefix = prefix
+	this.Id = id
+	this.Object = object
+	this.Deleted = deleted
+	this.Role = role
 	return &this
 }
 
@@ -60,296 +70,224 @@ func NewApiKeyResponseOnDeleteWithDefaults() *ApiKeyResponseOnDelete {
 	return &this
 }
 
-// GetActive returns the Active field value if set, zero value otherwise.
+// GetActive returns the Active field value
 func (o *ApiKeyResponseOnDelete) GetActive() bool {
-	if o == nil || IsNil(o.Active) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Active
+
+	return o.Active
 }
 
-// GetActiveOk returns a tuple with the Active field value if set, nil otherwise
+// GetActiveOk returns a tuple with the Active field value
 // and a boolean to check if the value has been set.
 func (o *ApiKeyResponseOnDelete) GetActiveOk() (*bool, bool) {
-	if o == nil || IsNil(o.Active) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Active, true
+	return &o.Active, true
 }
 
-// HasActive returns a boolean if a field has been set.
-func (o *ApiKeyResponseOnDelete) HasActive() bool {
-	if o != nil && !IsNil(o.Active) {
-		return true
-	}
-
-	return false
-}
-
-// SetActive gets a reference to the given bool and assigns it to the Active field.
+// SetActive sets field value
 func (o *ApiKeyResponseOnDelete) SetActive(v bool) {
-	o.Active = &v
+	o.Active = v
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// GetCreatedAt returns the CreatedAt field value
 func (o *ApiKeyResponseOnDelete) GetCreatedAt() int64 {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.CreatedAt
+
+	return o.CreatedAt
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *ApiKeyResponseOnDelete) GetCreatedAtOk() (*int64, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return &o.CreatedAt, true
 }
 
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *ApiKeyResponseOnDelete) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given int64 and assigns it to the CreatedAt field.
+// SetCreatedAt sets field value
 func (o *ApiKeyResponseOnDelete) SetCreatedAt(v int64) {
-	o.CreatedAt = &v
+	o.CreatedAt = v
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
+// GetDescription returns the Description field value
 func (o *ApiKeyResponseOnDelete) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Description
+
+	return o.Description
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
 func (o *ApiKeyResponseOnDelete) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return &o.Description, true
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *ApiKeyResponseOnDelete) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
+// SetDescription sets field value
 func (o *ApiKeyResponseOnDelete) SetDescription(v string) {
-	o.Description = &v
+	o.Description = v
 }
 
-// GetLivemode returns the Livemode field value if set, zero value otherwise.
+// GetLivemode returns the Livemode field value
 func (o *ApiKeyResponseOnDelete) GetLivemode() bool {
-	if o == nil || IsNil(o.Livemode) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Livemode
+
+	return o.Livemode
 }
 
-// GetLivemodeOk returns a tuple with the Livemode field value if set, nil otherwise
+// GetLivemodeOk returns a tuple with the Livemode field value
 // and a boolean to check if the value has been set.
 func (o *ApiKeyResponseOnDelete) GetLivemodeOk() (*bool, bool) {
-	if o == nil || IsNil(o.Livemode) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Livemode, true
+	return &o.Livemode, true
 }
 
-// HasLivemode returns a boolean if a field has been set.
-func (o *ApiKeyResponseOnDelete) HasLivemode() bool {
-	if o != nil && !IsNil(o.Livemode) {
-		return true
-	}
-
-	return false
-}
-
-// SetLivemode gets a reference to the given bool and assigns it to the Livemode field.
+// SetLivemode sets field value
 func (o *ApiKeyResponseOnDelete) SetLivemode(v bool) {
-	o.Livemode = &v
+	o.Livemode = v
 }
 
-// GetPrefix returns the Prefix field value if set, zero value otherwise.
+// GetPrefix returns the Prefix field value
 func (o *ApiKeyResponseOnDelete) GetPrefix() string {
-	if o == nil || IsNil(o.Prefix) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Prefix
+
+	return o.Prefix
 }
 
-// GetPrefixOk returns a tuple with the Prefix field value if set, nil otherwise
+// GetPrefixOk returns a tuple with the Prefix field value
 // and a boolean to check if the value has been set.
 func (o *ApiKeyResponseOnDelete) GetPrefixOk() (*string, bool) {
-	if o == nil || IsNil(o.Prefix) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Prefix, true
+	return &o.Prefix, true
 }
 
-// HasPrefix returns a boolean if a field has been set.
-func (o *ApiKeyResponseOnDelete) HasPrefix() bool {
-	if o != nil && !IsNil(o.Prefix) {
-		return true
-	}
-
-	return false
-}
-
-// SetPrefix gets a reference to the given string and assigns it to the Prefix field.
+// SetPrefix sets field value
 func (o *ApiKeyResponseOnDelete) SetPrefix(v string) {
-	o.Prefix = &v
+	o.Prefix = v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *ApiKeyResponseOnDelete) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *ApiKeyResponseOnDelete) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *ApiKeyResponseOnDelete) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *ApiKeyResponseOnDelete) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetObject returns the Object field value if set, zero value otherwise.
+// GetObject returns the Object field value
 func (o *ApiKeyResponseOnDelete) GetObject() string {
-	if o == nil || IsNil(o.Object) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Object
+
+	return o.Object
 }
 
-// GetObjectOk returns a tuple with the Object field value if set, nil otherwise
+// GetObjectOk returns a tuple with the Object field value
 // and a boolean to check if the value has been set.
 func (o *ApiKeyResponseOnDelete) GetObjectOk() (*string, bool) {
-	if o == nil || IsNil(o.Object) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Object, true
+	return &o.Object, true
 }
 
-// HasObject returns a boolean if a field has been set.
-func (o *ApiKeyResponseOnDelete) HasObject() bool {
-	if o != nil && !IsNil(o.Object) {
-		return true
-	}
-
-	return false
-}
-
-// SetObject gets a reference to the given string and assigns it to the Object field.
+// SetObject sets field value
 func (o *ApiKeyResponseOnDelete) SetObject(v string) {
-	o.Object = &v
+	o.Object = v
 }
 
-// GetDeleted returns the Deleted field value if set, zero value otherwise.
+// GetDeleted returns the Deleted field value
 func (o *ApiKeyResponseOnDelete) GetDeleted() bool {
-	if o == nil || IsNil(o.Deleted) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Deleted
+
+	return o.Deleted
 }
 
-// GetDeletedOk returns a tuple with the Deleted field value if set, nil otherwise
+// GetDeletedOk returns a tuple with the Deleted field value
 // and a boolean to check if the value has been set.
 func (o *ApiKeyResponseOnDelete) GetDeletedOk() (*bool, bool) {
-	if o == nil || IsNil(o.Deleted) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Deleted, true
+	return &o.Deleted, true
 }
 
-// HasDeleted returns a boolean if a field has been set.
-func (o *ApiKeyResponseOnDelete) HasDeleted() bool {
-	if o != nil && !IsNil(o.Deleted) {
-		return true
-	}
-
-	return false
-}
-
-// SetDeleted gets a reference to the given bool and assigns it to the Deleted field.
+// SetDeleted sets field value
 func (o *ApiKeyResponseOnDelete) SetDeleted(v bool) {
-	o.Deleted = &v
+	o.Deleted = v
 }
 
-// GetRole returns the Role field value if set, zero value otherwise.
+// GetRole returns the Role field value
 func (o *ApiKeyResponseOnDelete) GetRole() string {
-	if o == nil || IsNil(o.Role) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Role
+
+	return o.Role
 }
 
-// GetRoleOk returns a tuple with the Role field value if set, nil otherwise
+// GetRoleOk returns a tuple with the Role field value
 // and a boolean to check if the value has been set.
 func (o *ApiKeyResponseOnDelete) GetRoleOk() (*string, bool) {
-	if o == nil || IsNil(o.Role) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Role, true
+	return &o.Role, true
 }
 
-// HasRole returns a boolean if a field has been set.
-func (o *ApiKeyResponseOnDelete) HasRole() bool {
-	if o != nil && !IsNil(o.Role) {
-		return true
-	}
-
-	return false
-}
-
-// SetRole gets a reference to the given string and assigns it to the Role field.
+// SetRole sets field value
 func (o *ApiKeyResponseOnDelete) SetRole(v string) {
-	o.Role = &v
+	o.Role = v
 }
 
 func (o ApiKeyResponseOnDelete) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -358,33 +296,15 @@ func (o ApiKeyResponseOnDelete) MarshalJSON() ([]byte, error) {
 
 func (o ApiKeyResponseOnDelete) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Active) {
-		toSerialize["active"] = o.Active
-	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
-	if !IsNil(o.Livemode) {
-		toSerialize["livemode"] = o.Livemode
-	}
-	if !IsNil(o.Prefix) {
-		toSerialize["prefix"] = o.Prefix
-	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.Object) {
-		toSerialize["object"] = o.Object
-	}
-	if !IsNil(o.Deleted) {
-		toSerialize["deleted"] = o.Deleted
-	}
-	if !IsNil(o.Role) {
-		toSerialize["role"] = o.Role
-	}
+	toSerialize["active"] = o.Active
+	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["description"] = o.Description
+	toSerialize["livemode"] = o.Livemode
+	toSerialize["prefix"] = o.Prefix
+	toSerialize["id"] = o.Id
+	toSerialize["object"] = o.Object
+	toSerialize["deleted"] = o.Deleted
+	toSerialize["role"] = o.Role
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -394,6 +314,35 @@ func (o ApiKeyResponseOnDelete) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *ApiKeyResponseOnDelete) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"active",
+		"created_at",
+		"description",
+		"livemode",
+		"prefix",
+		"id",
+		"object",
+		"deleted",
+		"role",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varApiKeyResponseOnDelete := _ApiKeyResponseOnDelete{}
 
 	err = json.Unmarshal(data, &varApiKeyResponseOnDelete)
@@ -457,3 +406,5 @@ func (v *NullableApiKeyResponseOnDelete) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FirstPaidAt** | Pointer to **int32** |  | [optional] 
-**AccountCreatedAt** | Pointer to **int64** |  | [optional] 
+**FirstPaidAt** | Pointer to **NullableInt64** |  | [optional] 
+**AccountCreatedAt** | Pointer to **NullableInt64** |  | [optional] 
 
 ## Methods
 
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetFirstPaidAt
 
-`func (o *CustomerAntifraudInfoResponse) GetFirstPaidAt() int32`
+`func (o *CustomerAntifraudInfoResponse) GetFirstPaidAt() int64`
 
 GetFirstPaidAt returns the FirstPaidAt field if non-nil, zero value otherwise.
 
 ### GetFirstPaidAtOk
 
-`func (o *CustomerAntifraudInfoResponse) GetFirstPaidAtOk() (*int32, bool)`
+`func (o *CustomerAntifraudInfoResponse) GetFirstPaidAtOk() (*int64, bool)`
 
 GetFirstPaidAtOk returns a tuple with the FirstPaidAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFirstPaidAt
 
-`func (o *CustomerAntifraudInfoResponse) SetFirstPaidAt(v int32)`
+`func (o *CustomerAntifraudInfoResponse) SetFirstPaidAt(v int64)`
 
 SetFirstPaidAt sets FirstPaidAt field to given value.
 
@@ -51,6 +51,16 @@ SetFirstPaidAt sets FirstPaidAt field to given value.
 
 HasFirstPaidAt returns a boolean if a field has been set.
 
+### SetFirstPaidAtNil
+
+`func (o *CustomerAntifraudInfoResponse) SetFirstPaidAtNil(b bool)`
+
+ SetFirstPaidAtNil sets the value for FirstPaidAt to be an explicit nil
+
+### UnsetFirstPaidAt
+`func (o *CustomerAntifraudInfoResponse) UnsetFirstPaidAt()`
+
+UnsetFirstPaidAt ensures that no value is present for FirstPaidAt, not even an explicit nil
 ### GetAccountCreatedAt
 
 `func (o *CustomerAntifraudInfoResponse) GetAccountCreatedAt() int64`
@@ -76,6 +86,16 @@ SetAccountCreatedAt sets AccountCreatedAt field to given value.
 
 HasAccountCreatedAt returns a boolean if a field has been set.
 
+### SetAccountCreatedAtNil
+
+`func (o *CustomerAntifraudInfoResponse) SetAccountCreatedAtNil(b bool)`
+
+ SetAccountCreatedAtNil sets the value for AccountCreatedAt to be an explicit nil
+
+### UnsetAccountCreatedAt
+`func (o *CustomerAntifraudInfoResponse) UnsetAccountCreatedAt()`
+
+UnsetAccountCreatedAt ensures that no value is present for AccountCreatedAt, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

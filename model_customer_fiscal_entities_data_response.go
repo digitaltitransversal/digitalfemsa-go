@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -21,17 +21,17 @@ var _ MappedNullable = &CustomerFiscalEntitiesDataResponse{}
 
 // CustomerFiscalEntitiesDataResponse struct for CustomerFiscalEntitiesDataResponse
 type CustomerFiscalEntitiesDataResponse struct {
-	Address              CustomerAddress                   `json:"address"`
-	TaxId                *string                           `json:"tax_id,omitempty"`
-	Email                *string                           `json:"email,omitempty"`
-	Phone                *string                           `json:"phone,omitempty"`
-	Metadata             map[string]map[string]interface{} `json:"metadata,omitempty"`
-	CompanyName          *string                           `json:"company_name,omitempty"`
-	Id                   string                            `json:"id"`
-	Object               string                            `json:"object"`
-	CreatedAt            int64                             `json:"created_at"`
-	ParentId             *string                           `json:"parent_id,omitempty"`
-	Default              *bool                             `json:"default,omitempty"`
+	Address CustomerAddress `json:"address"`
+	TaxId *string `json:"tax_id,omitempty"`
+	Email *string `json:"email,omitempty"`
+	Phone *string `json:"phone,omitempty"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	CompanyName *string `json:"company_name,omitempty"`
+	Id string `json:"id"`
+	Object string `json:"object"`
+	CreatedAt int64 `json:"created_at"`
+	ParentId *string `json:"parent_id,omitempty"`
+	Default *bool `json:"default,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -179,9 +179,9 @@ func (o *CustomerFiscalEntitiesDataResponse) SetPhone(v string) {
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *CustomerFiscalEntitiesDataResponse) GetMetadata() map[string]map[string]interface{} {
+func (o *CustomerFiscalEntitiesDataResponse) GetMetadata() map[string]interface{} {
 	if o == nil || IsNil(o.Metadata) {
-		var ret map[string]map[string]interface{}
+		var ret map[string]interface{}
 		return ret
 	}
 	return o.Metadata
@@ -189,9 +189,9 @@ func (o *CustomerFiscalEntitiesDataResponse) GetMetadata() map[string]map[string
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CustomerFiscalEntitiesDataResponse) GetMetadataOk() (map[string]map[string]interface{}, bool) {
+func (o *CustomerFiscalEntitiesDataResponse) GetMetadataOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.Metadata) {
-		return map[string]map[string]interface{}{}, false
+		return map[string]interface{}{}, false
 	}
 	return o.Metadata, true
 }
@@ -205,8 +205,8 @@ func (o *CustomerFiscalEntitiesDataResponse) HasMetadata() bool {
 	return false
 }
 
-// SetMetadata gets a reference to the given map[string]map[string]interface{} and assigns it to the Metadata field.
-func (o *CustomerFiscalEntitiesDataResponse) SetMetadata(v map[string]map[string]interface{}) {
+// SetMetadata gets a reference to the given map[string]interface{} and assigns it to the Metadata field.
+func (o *CustomerFiscalEntitiesDataResponse) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
 }
 
@@ -379,7 +379,7 @@ func (o *CustomerFiscalEntitiesDataResponse) SetDefault(v bool) {
 }
 
 func (o CustomerFiscalEntitiesDataResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -437,10 +437,10 @@ func (o *CustomerFiscalEntitiesDataResponse) UnmarshalJSON(data []byte) (err err
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -511,3 +511,5 @@ func (v *NullableCustomerFiscalEntitiesDataResponse) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

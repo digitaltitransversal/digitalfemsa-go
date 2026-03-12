@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -13,18 +13,19 @@ package digitalfemsa
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the UpdateOrderTaxRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateOrderTaxRequest{}
 
-// UpdateOrderTaxRequest create new taxes for an existing order
+// UpdateOrderTaxRequest Create a new tax line for an existing order.
 type UpdateOrderTaxRequest struct {
 	// The amount to be collected for tax in cents
-	Amount *int64 `json:"amount,omitempty"`
-	// description or tax's name
-	Description          *string                           `json:"description,omitempty"`
-	Metadata             map[string]map[string]interface{} `json:"metadata,omitempty"`
+	Amount int64 `json:"amount"`
+	// Description or tax name
+	Description string `json:"description"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,8 +35,10 @@ type _UpdateOrderTaxRequest UpdateOrderTaxRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUpdateOrderTaxRequest() *UpdateOrderTaxRequest {
+func NewUpdateOrderTaxRequest(amount int64, description string) *UpdateOrderTaxRequest {
 	this := UpdateOrderTaxRequest{}
+	this.Amount = amount
+	this.Description = description
 	return &this
 }
 
@@ -47,74 +50,58 @@ func NewUpdateOrderTaxRequestWithDefaults() *UpdateOrderTaxRequest {
 	return &this
 }
 
-// GetAmount returns the Amount field value if set, zero value otherwise.
+// GetAmount returns the Amount field value
 func (o *UpdateOrderTaxRequest) GetAmount() int64 {
-	if o == nil || IsNil(o.Amount) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.Amount
+
+	return o.Amount
 }
 
-// GetAmountOk returns a tuple with the Amount field value if set, nil otherwise
+// GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
 func (o *UpdateOrderTaxRequest) GetAmountOk() (*int64, bool) {
-	if o == nil || IsNil(o.Amount) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Amount, true
+	return &o.Amount, true
 }
 
-// HasAmount returns a boolean if a field has been set.
-func (o *UpdateOrderTaxRequest) HasAmount() bool {
-	if o != nil && !IsNil(o.Amount) {
-		return true
-	}
-
-	return false
-}
-
-// SetAmount gets a reference to the given int64 and assigns it to the Amount field.
+// SetAmount sets field value
 func (o *UpdateOrderTaxRequest) SetAmount(v int64) {
-	o.Amount = &v
+	o.Amount = v
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
+// GetDescription returns the Description field value
 func (o *UpdateOrderTaxRequest) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Description
+
+	return o.Description
 }
 
-// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// GetDescriptionOk returns a tuple with the Description field value
 // and a boolean to check if the value has been set.
 func (o *UpdateOrderTaxRequest) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return &o.Description, true
 }
 
-// HasDescription returns a boolean if a field has been set.
-func (o *UpdateOrderTaxRequest) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
-		return true
-	}
-
-	return false
-}
-
-// SetDescription gets a reference to the given string and assigns it to the Description field.
+// SetDescription sets field value
 func (o *UpdateOrderTaxRequest) SetDescription(v string) {
-	o.Description = &v
+	o.Description = v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *UpdateOrderTaxRequest) GetMetadata() map[string]map[string]interface{} {
+func (o *UpdateOrderTaxRequest) GetMetadata() map[string]interface{} {
 	if o == nil || IsNil(o.Metadata) {
-		var ret map[string]map[string]interface{}
+		var ret map[string]interface{}
 		return ret
 	}
 	return o.Metadata
@@ -122,9 +109,9 @@ func (o *UpdateOrderTaxRequest) GetMetadata() map[string]map[string]interface{} 
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateOrderTaxRequest) GetMetadataOk() (map[string]map[string]interface{}, bool) {
+func (o *UpdateOrderTaxRequest) GetMetadataOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.Metadata) {
-		return map[string]map[string]interface{}{}, false
+		return map[string]interface{}{}, false
 	}
 	return o.Metadata, true
 }
@@ -138,13 +125,13 @@ func (o *UpdateOrderTaxRequest) HasMetadata() bool {
 	return false
 }
 
-// SetMetadata gets a reference to the given map[string]map[string]interface{} and assigns it to the Metadata field.
-func (o *UpdateOrderTaxRequest) SetMetadata(v map[string]map[string]interface{}) {
+// SetMetadata gets a reference to the given map[string]interface{} and assigns it to the Metadata field.
+func (o *UpdateOrderTaxRequest) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
 }
 
 func (o UpdateOrderTaxRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,12 +140,8 @@ func (o UpdateOrderTaxRequest) MarshalJSON() ([]byte, error) {
 
 func (o UpdateOrderTaxRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Amount) {
-		toSerialize["amount"] = o.Amount
-	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
-	}
+	toSerialize["amount"] = o.Amount
+	toSerialize["description"] = o.Description
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
@@ -171,6 +154,28 @@ func (o UpdateOrderTaxRequest) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *UpdateOrderTaxRequest) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"amount",
+		"description",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varUpdateOrderTaxRequest := _UpdateOrderTaxRequest{}
 
 	err = json.Unmarshal(data, &varUpdateOrderTaxRequest)
@@ -228,3 +233,5 @@ func (v *NullableUpdateOrderTaxRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

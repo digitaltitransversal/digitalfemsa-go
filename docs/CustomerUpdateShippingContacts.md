@@ -8,9 +8,7 @@ Name | Type | Description | Notes
 **Receiver** | Pointer to **string** | Name of the person who will receive the order | [optional] 
 **BetweenStreets** | Pointer to **string** | The street names between which the order will be delivered. | [optional] 
 **Address** | Pointer to [**CustomerShippingContactsAddress**](CustomerShippingContactsAddress.md) |  | [optional] 
-**ParentId** | Pointer to **string** |  | [optional] 
-**Default** | Pointer to **NullableBool** |  | [optional] 
-**Deleted** | Pointer to **NullableBool** |  | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Metadata associated with the shipping contact | [optional] 
 
 ## Methods
 
@@ -131,101 +129,31 @@ SetAddress sets Address field to given value.
 
 HasAddress returns a boolean if a field has been set.
 
-### GetParentId
+### GetMetadata
 
-`func (o *CustomerUpdateShippingContacts) GetParentId() string`
+`func (o *CustomerUpdateShippingContacts) GetMetadata() map[string]interface{}`
 
-GetParentId returns the ParentId field if non-nil, zero value otherwise.
+GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
-### GetParentIdOk
+### GetMetadataOk
 
-`func (o *CustomerUpdateShippingContacts) GetParentIdOk() (*string, bool)`
+`func (o *CustomerUpdateShippingContacts) GetMetadataOk() (*map[string]interface{}, bool)`
 
-GetParentIdOk returns a tuple with the ParentId field if it's non-nil, zero value otherwise
+GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetParentId
+### SetMetadata
 
-`func (o *CustomerUpdateShippingContacts) SetParentId(v string)`
+`func (o *CustomerUpdateShippingContacts) SetMetadata(v map[string]interface{})`
 
-SetParentId sets ParentId field to given value.
+SetMetadata sets Metadata field to given value.
 
-### HasParentId
+### HasMetadata
 
-`func (o *CustomerUpdateShippingContacts) HasParentId() bool`
+`func (o *CustomerUpdateShippingContacts) HasMetadata() bool`
 
-HasParentId returns a boolean if a field has been set.
+HasMetadata returns a boolean if a field has been set.
 
-### GetDefault
-
-`func (o *CustomerUpdateShippingContacts) GetDefault() bool`
-
-GetDefault returns the Default field if non-nil, zero value otherwise.
-
-### GetDefaultOk
-
-`func (o *CustomerUpdateShippingContacts) GetDefaultOk() (*bool, bool)`
-
-GetDefaultOk returns a tuple with the Default field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDefault
-
-`func (o *CustomerUpdateShippingContacts) SetDefault(v bool)`
-
-SetDefault sets Default field to given value.
-
-### HasDefault
-
-`func (o *CustomerUpdateShippingContacts) HasDefault() bool`
-
-HasDefault returns a boolean if a field has been set.
-
-### SetDefaultNil
-
-`func (o *CustomerUpdateShippingContacts) SetDefaultNil(b bool)`
-
- SetDefaultNil sets the value for Default to be an explicit nil
-
-### UnsetDefault
-`func (o *CustomerUpdateShippingContacts) UnsetDefault()`
-
-UnsetDefault ensures that no value is present for Default, not even an explicit nil
-### GetDeleted
-
-`func (o *CustomerUpdateShippingContacts) GetDeleted() bool`
-
-GetDeleted returns the Deleted field if non-nil, zero value otherwise.
-
-### GetDeletedOk
-
-`func (o *CustomerUpdateShippingContacts) GetDeletedOk() (*bool, bool)`
-
-GetDeletedOk returns a tuple with the Deleted field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDeleted
-
-`func (o *CustomerUpdateShippingContacts) SetDeleted(v bool)`
-
-SetDeleted sets Deleted field to given value.
-
-### HasDeleted
-
-`func (o *CustomerUpdateShippingContacts) HasDeleted() bool`
-
-HasDeleted returns a boolean if a field has been set.
-
-### SetDeletedNil
-
-`func (o *CustomerUpdateShippingContacts) SetDeletedNil(b bool)`
-
- SetDeletedNil sets the value for Deleted to be an explicit nil
-
-### UnsetDeleted
-`func (o *CustomerUpdateShippingContacts) UnsetDeleted()`
-
-UnsetDeleted ensures that no value is present for Deleted, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

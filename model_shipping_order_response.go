@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -29,11 +29,13 @@ type ShippingOrderResponse struct {
 	TrackingNumber *string `json:"tracking_number,omitempty"`
 	// Method of shipment
 	Method *string `json:"method,omitempty"`
+	// Shipping line description
+	Description *string `json:"description,omitempty"`
 	// Hash where the user can send additional information for each 'shipping'.
-	Metadata             map[string]interface{} `json:"metadata,omitempty"`
-	Id                   *string                `json:"id,omitempty"`
-	Object               *string                `json:"object,omitempty"`
-	ParentId             *string                `json:"parent_id,omitempty"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	Id *string `json:"id,omitempty"`
+	Object *string `json:"object,omitempty"`
+	ParentId *string `json:"parent_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -177,6 +179,38 @@ func (o *ShippingOrderResponse) SetMethod(v string) {
 	o.Method = &v
 }
 
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *ShippingOrderResponse) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ShippingOrderResponse) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *ShippingOrderResponse) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *ShippingOrderResponse) SetDescription(v string) {
+	o.Description = &v
+}
+
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
 func (o *ShippingOrderResponse) GetMetadata() map[string]interface{} {
 	if o == nil || IsNil(o.Metadata) {
@@ -306,7 +340,7 @@ func (o *ShippingOrderResponse) SetParentId(v string) {
 }
 
 func (o ShippingOrderResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -324,6 +358,9 @@ func (o ShippingOrderResponse) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Method) {
 		toSerialize["method"] = o.Method
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
@@ -358,10 +395,10 @@ func (o *ShippingOrderResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -384,6 +421,7 @@ func (o *ShippingOrderResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "carrier")
 		delete(additionalProperties, "tracking_number")
 		delete(additionalProperties, "method")
+		delete(additionalProperties, "description")
 		delete(additionalProperties, "metadata")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "object")
@@ -429,3 +467,5 @@ func (v *NullableShippingOrderResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

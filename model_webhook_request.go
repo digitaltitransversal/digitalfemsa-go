@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -19,12 +19,21 @@ import (
 // checks if the WebhookRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookRequest{}
 
-// WebhookRequest a webhook
+// WebhookRequest Parameters used to create or update a webhook.
 type WebhookRequest struct {
-	// Here you must place the URL of your Webhook remember that you must program what you will do with the events received. Also do not forget to handle the HTTPS protocol for greater security.
+	// Webhook endpoint URL. Local URLs are not allowed.
 	Url string `json:"url"`
-	// It is a value that allows to decide if the events will be synchronous or asynchronous. We recommend asynchronous = false
-	Synchronous          bool `json:"synchronous"`
+	// List of event types the webhook is subscribed to.
+	SubscribedEvents []string `json:"subscribed_events,omitempty"`
+	// Alias for subscribed_events.
+	// Deprecated
+	Events []string `json:"events,omitempty"`
+	// Indicates whether the webhook uses synchronous delivery behavior.
+	Synchronous *bool `json:"synchronous,omitempty"`
+	// Indicates whether the webhook is active.
+	Active *bool `json:"active,omitempty"`
+	// Optional description of the webhook.
+	Description NullableString `json:"description,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,10 +43,13 @@ type _WebhookRequest WebhookRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWebhookRequest(url string, synchronous bool) *WebhookRequest {
+func NewWebhookRequest(url string) *WebhookRequest {
 	this := WebhookRequest{}
 	this.Url = url
-	this.Synchronous = synchronous
+	var synchronous bool = false
+	this.Synchronous = &synchronous
+	var active bool = true
+	this.Active = &active
 	return &this
 }
 
@@ -47,7 +59,9 @@ func NewWebhookRequest(url string, synchronous bool) *WebhookRequest {
 func NewWebhookRequestWithDefaults() *WebhookRequest {
 	this := WebhookRequest{}
 	var synchronous bool = false
-	this.Synchronous = synchronous
+	this.Synchronous = &synchronous
+	var active bool = true
+	this.Active = &active
 	return &this
 }
 
@@ -75,32 +89,181 @@ func (o *WebhookRequest) SetUrl(v string) {
 	o.Url = v
 }
 
-// GetSynchronous returns the Synchronous field value
+// GetSubscribedEvents returns the SubscribedEvents field value if set, zero value otherwise.
+func (o *WebhookRequest) GetSubscribedEvents() []string {
+	if o == nil || IsNil(o.SubscribedEvents) {
+		var ret []string
+		return ret
+	}
+	return o.SubscribedEvents
+}
+
+// GetSubscribedEventsOk returns a tuple with the SubscribedEvents field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WebhookRequest) GetSubscribedEventsOk() ([]string, bool) {
+	if o == nil || IsNil(o.SubscribedEvents) {
+		return nil, false
+	}
+	return o.SubscribedEvents, true
+}
+
+// HasSubscribedEvents returns a boolean if a field has been set.
+func (o *WebhookRequest) HasSubscribedEvents() bool {
+	if o != nil && !IsNil(o.SubscribedEvents) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubscribedEvents gets a reference to the given []string and assigns it to the SubscribedEvents field.
+func (o *WebhookRequest) SetSubscribedEvents(v []string) {
+	o.SubscribedEvents = v
+}
+
+// GetEvents returns the Events field value if set, zero value otherwise.
+// Deprecated
+func (o *WebhookRequest) GetEvents() []string {
+	if o == nil || IsNil(o.Events) {
+		var ret []string
+		return ret
+	}
+	return o.Events
+}
+
+// GetEventsOk returns a tuple with the Events field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// Deprecated
+func (o *WebhookRequest) GetEventsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Events) {
+		return nil, false
+	}
+	return o.Events, true
+}
+
+// HasEvents returns a boolean if a field has been set.
+func (o *WebhookRequest) HasEvents() bool {
+	if o != nil && !IsNil(o.Events) {
+		return true
+	}
+
+	return false
+}
+
+// SetEvents gets a reference to the given []string and assigns it to the Events field.
+// Deprecated
+func (o *WebhookRequest) SetEvents(v []string) {
+	o.Events = v
+}
+
+// GetSynchronous returns the Synchronous field value if set, zero value otherwise.
 func (o *WebhookRequest) GetSynchronous() bool {
-	if o == nil {
+	if o == nil || IsNil(o.Synchronous) {
 		var ret bool
 		return ret
 	}
-
-	return o.Synchronous
+	return *o.Synchronous
 }
 
-// GetSynchronousOk returns a tuple with the Synchronous field value
+// GetSynchronousOk returns a tuple with the Synchronous field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *WebhookRequest) GetSynchronousOk() (*bool, bool) {
+	if o == nil || IsNil(o.Synchronous) {
+		return nil, false
+	}
+	return o.Synchronous, true
+}
+
+// HasSynchronous returns a boolean if a field has been set.
+func (o *WebhookRequest) HasSynchronous() bool {
+	if o != nil && !IsNil(o.Synchronous) {
+		return true
+	}
+
+	return false
+}
+
+// SetSynchronous gets a reference to the given bool and assigns it to the Synchronous field.
+func (o *WebhookRequest) SetSynchronous(v bool) {
+	o.Synchronous = &v
+}
+
+// GetActive returns the Active field value if set, zero value otherwise.
+func (o *WebhookRequest) GetActive() bool {
+	if o == nil || IsNil(o.Active) {
+		var ret bool
+		return ret
+	}
+	return *o.Active
+}
+
+// GetActiveOk returns a tuple with the Active field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *WebhookRequest) GetActiveOk() (*bool, bool) {
+	if o == nil || IsNil(o.Active) {
+		return nil, false
+	}
+	return o.Active, true
+}
+
+// HasActive returns a boolean if a field has been set.
+func (o *WebhookRequest) HasActive() bool {
+	if o != nil && !IsNil(o.Active) {
+		return true
+	}
+
+	return false
+}
+
+// SetActive gets a reference to the given bool and assigns it to the Active field.
+func (o *WebhookRequest) SetActive(v bool) {
+	o.Active = &v
+}
+
+// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *WebhookRequest) GetDescription() string {
+	if o == nil || IsNil(o.Description.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Description.Get()
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *WebhookRequest) GetDescriptionOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Synchronous, true
+	return o.Description.Get(), o.Description.IsSet()
 }
 
-// SetSynchronous sets field value
-func (o *WebhookRequest) SetSynchronous(v bool) {
-	o.Synchronous = v
+// HasDescription returns a boolean if a field has been set.
+func (o *WebhookRequest) HasDescription() bool {
+	if o != nil && o.Description.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
+func (o *WebhookRequest) SetDescription(v string) {
+	o.Description.Set(&v)
+}
+// SetDescriptionNil sets the value for Description to be an explicit nil
+func (o *WebhookRequest) SetDescriptionNil() {
+	o.Description.Set(nil)
+}
+
+// UnsetDescription ensures that no value is present for Description, not even an explicit nil
+func (o *WebhookRequest) UnsetDescription() {
+	o.Description.Unset()
 }
 
 func (o WebhookRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -110,7 +273,21 @@ func (o WebhookRequest) MarshalJSON() ([]byte, error) {
 func (o WebhookRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["url"] = o.Url
-	toSerialize["synchronous"] = o.Synchronous
+	if !IsNil(o.SubscribedEvents) {
+		toSerialize["subscribed_events"] = o.SubscribedEvents
+	}
+	if !IsNil(o.Events) {
+		toSerialize["events"] = o.Events
+	}
+	if !IsNil(o.Synchronous) {
+		toSerialize["synchronous"] = o.Synchronous
+	}
+	if !IsNil(o.Active) {
+		toSerialize["active"] = o.Active
+	}
+	if o.Description.IsSet() {
+		toSerialize["description"] = o.Description.Get()
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -125,7 +302,6 @@ func (o *WebhookRequest) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"url",
-		"synchronous",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -133,10 +309,10 @@ func (o *WebhookRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -156,7 +332,11 @@ func (o *WebhookRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "url")
+		delete(additionalProperties, "subscribed_events")
+		delete(additionalProperties, "events")
 		delete(additionalProperties, "synchronous")
+		delete(additionalProperties, "active")
+		delete(additionalProperties, "description")
 		o.AdditionalProperties = additionalProperties
 	}
 
@@ -198,3 +378,5 @@ func (v *NullableWebhookRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

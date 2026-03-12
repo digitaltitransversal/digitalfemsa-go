@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -20,15 +20,16 @@ import (
 	"strings"
 )
 
+
 type CompaniesAPI interface {
 
 	/*
-		GetCompanies Get List of Companies
+	GetCompanies Get List of Companies
 
-		Consume the list of child companies.  This is used for holding companies with several child entities.
+	Consume the list of child companies.  This is used for holding companies with several child entities.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiGetCompaniesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetCompaniesRequest
 	*/
 	GetCompanies(ctx context.Context) ApiGetCompaniesRequest
 
@@ -37,11 +38,11 @@ type CompaniesAPI interface {
 	GetCompaniesExecute(r ApiGetCompaniesRequest) (*GetCompaniesResponse, *http.Response, error)
 
 	/*
-		GetCompany Get Company
+	GetCompany Get Company
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param id Identifier of the resource
-		@return ApiGetCompanyRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@return ApiGetCompanyRequest
 	*/
 	GetCompany(ctx context.Context, id string) ApiGetCompanyRequest
 
@@ -54,13 +55,13 @@ type CompaniesAPI interface {
 type CompaniesAPIService service
 
 type ApiGetCompaniesRequest struct {
-	ctx            context.Context
-	ApiService     CompaniesAPI
+	ctx context.Context
+	ApiService CompaniesAPI
 	acceptLanguage *string
-	limit          *int32
-	search         *string
-	next           *string
-	previous       *string
+	limit *int32
+	search *string
+	next *string
+	previous *string
 }
 
 // Use for knowing which language to use
@@ -102,25 +103,24 @@ GetCompanies Get List of Companies
 
 Consume the list of child companies.  This is used for holding companies with several child entities.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetCompaniesRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetCompaniesRequest
 */
 func (a *CompaniesAPIService) GetCompanies(ctx context.Context) ApiGetCompaniesRequest {
 	return ApiGetCompaniesRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetCompaniesResponse
+//  @return GetCompaniesResponse
 func (a *CompaniesAPIService) GetCompaniesExecute(r ApiGetCompaniesRequest) (*GetCompaniesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetCompaniesResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetCompaniesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CompaniesAPIService.GetCompanies")
@@ -159,7 +159,7 @@ func (a *CompaniesAPIService) GetCompaniesExecute(r ApiGetCompaniesRequest) (*Ge
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -198,8 +198,8 @@ func (a *CompaniesAPIService) GetCompaniesExecute(r ApiGetCompaniesRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -209,8 +209,8 @@ func (a *CompaniesAPIService) GetCompaniesExecute(r ApiGetCompaniesRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -228,9 +228,9 @@ func (a *CompaniesAPIService) GetCompaniesExecute(r ApiGetCompaniesRequest) (*Ge
 }
 
 type ApiGetCompanyRequest struct {
-	ctx            context.Context
-	ApiService     CompaniesAPI
-	id             string
+	ctx context.Context
+	ApiService CompaniesAPI
+	id string
 	acceptLanguage *string
 }
 
@@ -247,27 +247,26 @@ func (r ApiGetCompanyRequest) Execute() (*CompanyResponse, *http.Response, error
 /*
 GetCompany Get Company
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@return ApiGetCompanyRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @return ApiGetCompanyRequest
 */
 func (a *CompaniesAPIService) GetCompany(ctx context.Context, id string) ApiGetCompanyRequest {
 	return ApiGetCompanyRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CompanyResponse
+//  @return CompanyResponse
 func (a *CompaniesAPIService) GetCompanyExecute(r ApiGetCompanyRequest) (*CompanyResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *CompanyResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *CompanyResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CompaniesAPIService.GetCompany")
@@ -292,7 +291,7 @@ func (a *CompaniesAPIService) GetCompanyExecute(r ApiGetCompanyRequest) (*Compan
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -331,8 +330,8 @@ func (a *CompaniesAPIService) GetCompanyExecute(r ApiGetCompanyRequest) (*Compan
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -342,8 +341,8 @@ func (a *CompaniesAPIService) GetCompanyExecute(r ApiGetCompanyRequest) (*Compan
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -353,8 +352,8 @@ func (a *CompaniesAPIService) GetCompanyExecute(r ApiGetCompanyRequest) (*Compan
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | Pointer to **int64** | The amount to be collected for tax in cents | [optional] 
-**Description** | Pointer to **string** | description or tax&#39;s name | [optional] 
-**Metadata** | Pointer to **map[string]map[string]interface{}** |  | [optional] 
+**Amount** | **int64** | The amount to be collected for tax in cents | 
+**Description** | **string** | Description or tax name | 
+**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
 
 ## Methods
 
 ### NewUpdateOrderTaxRequest
 
-`func NewUpdateOrderTaxRequest() *UpdateOrderTaxRequest`
+`func NewUpdateOrderTaxRequest(amount int64, description string, ) *UpdateOrderTaxRequest`
 
 NewUpdateOrderTaxRequest instantiates a new UpdateOrderTaxRequest object
 This constructor will assign default values to properties that have it defined,
@@ -46,11 +46,6 @@ and a boolean to check if the value has been set.
 
 SetAmount sets Amount field to given value.
 
-### HasAmount
-
-`func (o *UpdateOrderTaxRequest) HasAmount() bool`
-
-HasAmount returns a boolean if a field has been set.
 
 ### GetDescription
 
@@ -71,28 +66,23 @@ and a boolean to check if the value has been set.
 
 SetDescription sets Description field to given value.
 
-### HasDescription
-
-`func (o *UpdateOrderTaxRequest) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *UpdateOrderTaxRequest) GetMetadata() map[string]map[string]interface{}`
+`func (o *UpdateOrderTaxRequest) GetMetadata() map[string]interface{}`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *UpdateOrderTaxRequest) GetMetadataOk() (*map[string]map[string]interface{}, bool)`
+`func (o *UpdateOrderTaxRequest) GetMetadataOk() (*map[string]interface{}, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *UpdateOrderTaxRequest) SetMetadata(v map[string]map[string]interface{})`
+`func (o *UpdateOrderTaxRequest) SetMetadata(v map[string]interface{})`
 
 SetMetadata sets Metadata field to given value.
 

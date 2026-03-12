@@ -4,18 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AntifraudInfo** | Pointer to [**NullableUpdateCustomerAntifraudInfo**](UpdateCustomerAntifraudInfo.md) |  | [optional] 
-**DefaultPaymentSourceId** | Pointer to **string** | It is a parameter that allows to identify in the response, the Femsa ID of a payment method (payment_id) | [optional] 
-**Email** | Pointer to **string** | An email address is a series of customizable characters followed by a universal Internet symbol, the at symbol (@), the name of a host server, and a web domain ending (.mx, .com, .org, . net, etc). | [optional] 
-**Name** | Pointer to **string** | Client&#39;s name | [optional] 
-**Phone** | Pointer to **string** | Is the customer&#39;s phone number | [optional] 
-**DefaultShippingContactId** | Pointer to **string** | It is a parameter that allows to identify in the response, the Femsa ID of the shipping address (shipping_contact) | [optional] 
-**Corporate** | Pointer to **bool** | It is a value that allows identifying if the email is corporate or not. | [optional] [default to false]
-**CustomReference** | Pointer to **string** | It is an undefined value. | [optional] 
-**FiscalEntities** | Pointer to [**[]CustomerFiscalEntitiesRequest**](CustomerFiscalEntitiesRequest.md) |  | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
+**Name** | Pointer to **string** | Customer&#39;s name. | [optional] 
+**Email** | Pointer to **string** | Customer email address. | [optional] 
+**Phone** | Pointer to **NullableString** | Customer phone number. | [optional] 
+**Corporate** | Pointer to **bool** | Indicates whether the customer email is corporate. | [optional] [default to false]
+**CustomReference** | Pointer to **NullableString** | Merchant-defined reference used to identify the customer in your system. | [optional] 
+**Referrer** | Pointer to **NullableString** | Referrer value (if applicable). | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Arbitrary metadata associated with the customer. | [optional] 
 **PaymentSources** | Pointer to [**[]CustomerPaymentMethodsRequest**](CustomerPaymentMethodsRequest.md) | Contains details of the payment methods that the customer has active or has used in Femsa | [optional] 
-**ShippingContacts** | Pointer to [**[]CustomerShippingContacts**](CustomerShippingContacts.md) | Contains the detail of the shipping addresses that the client has active or has used in Femsa | [optional] 
+**DefaultPaymentSourceId** | Pointer to **string** | Sets the default payment source for the customer (must be an existing payment source on the customer). | [optional] 
+**DefaultFiscalEntityId** | Pointer to **string** | Sets the default fiscal entity for the customer (must be an existing fiscal entity on the customer). | [optional] 
+**DefaultShippingContactId** | Pointer to **string** | Sets the default shipping contact for the customer (must be an existing shipping contact on the customer). | [optional] 
 
 ## Methods
 
@@ -35,91 +34,6 @@ will change when the set of required properties is changed
 NewUpdateCustomerWithDefaults instantiates a new UpdateCustomer object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetAntifraudInfo
-
-`func (o *UpdateCustomer) GetAntifraudInfo() UpdateCustomerAntifraudInfo`
-
-GetAntifraudInfo returns the AntifraudInfo field if non-nil, zero value otherwise.
-
-### GetAntifraudInfoOk
-
-`func (o *UpdateCustomer) GetAntifraudInfoOk() (*UpdateCustomerAntifraudInfo, bool)`
-
-GetAntifraudInfoOk returns a tuple with the AntifraudInfo field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAntifraudInfo
-
-`func (o *UpdateCustomer) SetAntifraudInfo(v UpdateCustomerAntifraudInfo)`
-
-SetAntifraudInfo sets AntifraudInfo field to given value.
-
-### HasAntifraudInfo
-
-`func (o *UpdateCustomer) HasAntifraudInfo() bool`
-
-HasAntifraudInfo returns a boolean if a field has been set.
-
-### SetAntifraudInfoNil
-
-`func (o *UpdateCustomer) SetAntifraudInfoNil(b bool)`
-
- SetAntifraudInfoNil sets the value for AntifraudInfo to be an explicit nil
-
-### UnsetAntifraudInfo
-`func (o *UpdateCustomer) UnsetAntifraudInfo()`
-
-UnsetAntifraudInfo ensures that no value is present for AntifraudInfo, not even an explicit nil
-### GetDefaultPaymentSourceId
-
-`func (o *UpdateCustomer) GetDefaultPaymentSourceId() string`
-
-GetDefaultPaymentSourceId returns the DefaultPaymentSourceId field if non-nil, zero value otherwise.
-
-### GetDefaultPaymentSourceIdOk
-
-`func (o *UpdateCustomer) GetDefaultPaymentSourceIdOk() (*string, bool)`
-
-GetDefaultPaymentSourceIdOk returns a tuple with the DefaultPaymentSourceId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDefaultPaymentSourceId
-
-`func (o *UpdateCustomer) SetDefaultPaymentSourceId(v string)`
-
-SetDefaultPaymentSourceId sets DefaultPaymentSourceId field to given value.
-
-### HasDefaultPaymentSourceId
-
-`func (o *UpdateCustomer) HasDefaultPaymentSourceId() bool`
-
-HasDefaultPaymentSourceId returns a boolean if a field has been set.
-
-### GetEmail
-
-`func (o *UpdateCustomer) GetEmail() string`
-
-GetEmail returns the Email field if non-nil, zero value otherwise.
-
-### GetEmailOk
-
-`func (o *UpdateCustomer) GetEmailOk() (*string, bool)`
-
-GetEmailOk returns a tuple with the Email field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEmail
-
-`func (o *UpdateCustomer) SetEmail(v string)`
-
-SetEmail sets Email field to given value.
-
-### HasEmail
-
-`func (o *UpdateCustomer) HasEmail() bool`
-
-HasEmail returns a boolean if a field has been set.
 
 ### GetName
 
@@ -146,6 +60,31 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetEmail
+
+`func (o *UpdateCustomer) GetEmail() string`
+
+GetEmail returns the Email field if non-nil, zero value otherwise.
+
+### GetEmailOk
+
+`func (o *UpdateCustomer) GetEmailOk() (*string, bool)`
+
+GetEmailOk returns a tuple with the Email field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEmail
+
+`func (o *UpdateCustomer) SetEmail(v string)`
+
+SetEmail sets Email field to given value.
+
+### HasEmail
+
+`func (o *UpdateCustomer) HasEmail() bool`
+
+HasEmail returns a boolean if a field has been set.
+
 ### GetPhone
 
 `func (o *UpdateCustomer) GetPhone() string`
@@ -171,31 +110,16 @@ SetPhone sets Phone field to given value.
 
 HasPhone returns a boolean if a field has been set.
 
-### GetDefaultShippingContactId
+### SetPhoneNil
 
-`func (o *UpdateCustomer) GetDefaultShippingContactId() string`
+`func (o *UpdateCustomer) SetPhoneNil(b bool)`
 
-GetDefaultShippingContactId returns the DefaultShippingContactId field if non-nil, zero value otherwise.
+ SetPhoneNil sets the value for Phone to be an explicit nil
 
-### GetDefaultShippingContactIdOk
+### UnsetPhone
+`func (o *UpdateCustomer) UnsetPhone()`
 
-`func (o *UpdateCustomer) GetDefaultShippingContactIdOk() (*string, bool)`
-
-GetDefaultShippingContactIdOk returns a tuple with the DefaultShippingContactId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDefaultShippingContactId
-
-`func (o *UpdateCustomer) SetDefaultShippingContactId(v string)`
-
-SetDefaultShippingContactId sets DefaultShippingContactId field to given value.
-
-### HasDefaultShippingContactId
-
-`func (o *UpdateCustomer) HasDefaultShippingContactId() bool`
-
-HasDefaultShippingContactId returns a boolean if a field has been set.
-
+UnsetPhone ensures that no value is present for Phone, not even an explicit nil
 ### GetCorporate
 
 `func (o *UpdateCustomer) GetCorporate() bool`
@@ -246,31 +170,51 @@ SetCustomReference sets CustomReference field to given value.
 
 HasCustomReference returns a boolean if a field has been set.
 
-### GetFiscalEntities
+### SetCustomReferenceNil
 
-`func (o *UpdateCustomer) GetFiscalEntities() []CustomerFiscalEntitiesRequest`
+`func (o *UpdateCustomer) SetCustomReferenceNil(b bool)`
 
-GetFiscalEntities returns the FiscalEntities field if non-nil, zero value otherwise.
+ SetCustomReferenceNil sets the value for CustomReference to be an explicit nil
 
-### GetFiscalEntitiesOk
+### UnsetCustomReference
+`func (o *UpdateCustomer) UnsetCustomReference()`
 
-`func (o *UpdateCustomer) GetFiscalEntitiesOk() (*[]CustomerFiscalEntitiesRequest, bool)`
+UnsetCustomReference ensures that no value is present for CustomReference, not even an explicit nil
+### GetReferrer
 
-GetFiscalEntitiesOk returns a tuple with the FiscalEntities field if it's non-nil, zero value otherwise
+`func (o *UpdateCustomer) GetReferrer() string`
+
+GetReferrer returns the Referrer field if non-nil, zero value otherwise.
+
+### GetReferrerOk
+
+`func (o *UpdateCustomer) GetReferrerOk() (*string, bool)`
+
+GetReferrerOk returns a tuple with the Referrer field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFiscalEntities
+### SetReferrer
 
-`func (o *UpdateCustomer) SetFiscalEntities(v []CustomerFiscalEntitiesRequest)`
+`func (o *UpdateCustomer) SetReferrer(v string)`
 
-SetFiscalEntities sets FiscalEntities field to given value.
+SetReferrer sets Referrer field to given value.
 
-### HasFiscalEntities
+### HasReferrer
 
-`func (o *UpdateCustomer) HasFiscalEntities() bool`
+`func (o *UpdateCustomer) HasReferrer() bool`
 
-HasFiscalEntities returns a boolean if a field has been set.
+HasReferrer returns a boolean if a field has been set.
 
+### SetReferrerNil
+
+`func (o *UpdateCustomer) SetReferrerNil(b bool)`
+
+ SetReferrerNil sets the value for Referrer to be an explicit nil
+
+### UnsetReferrer
+`func (o *UpdateCustomer) UnsetReferrer()`
+
+UnsetReferrer ensures that no value is present for Referrer, not even an explicit nil
 ### GetMetadata
 
 `func (o *UpdateCustomer) GetMetadata() map[string]interface{}`
@@ -321,30 +265,90 @@ SetPaymentSources sets PaymentSources field to given value.
 
 HasPaymentSources returns a boolean if a field has been set.
 
-### GetShippingContacts
+### SetPaymentSourcesNil
 
-`func (o *UpdateCustomer) GetShippingContacts() []CustomerShippingContacts`
+`func (o *UpdateCustomer) SetPaymentSourcesNil(b bool)`
 
-GetShippingContacts returns the ShippingContacts field if non-nil, zero value otherwise.
+ SetPaymentSourcesNil sets the value for PaymentSources to be an explicit nil
 
-### GetShippingContactsOk
+### UnsetPaymentSources
+`func (o *UpdateCustomer) UnsetPaymentSources()`
 
-`func (o *UpdateCustomer) GetShippingContactsOk() (*[]CustomerShippingContacts, bool)`
+UnsetPaymentSources ensures that no value is present for PaymentSources, not even an explicit nil
+### GetDefaultPaymentSourceId
 
-GetShippingContactsOk returns a tuple with the ShippingContacts field if it's non-nil, zero value otherwise
+`func (o *UpdateCustomer) GetDefaultPaymentSourceId() string`
+
+GetDefaultPaymentSourceId returns the DefaultPaymentSourceId field if non-nil, zero value otherwise.
+
+### GetDefaultPaymentSourceIdOk
+
+`func (o *UpdateCustomer) GetDefaultPaymentSourceIdOk() (*string, bool)`
+
+GetDefaultPaymentSourceIdOk returns a tuple with the DefaultPaymentSourceId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetShippingContacts
+### SetDefaultPaymentSourceId
 
-`func (o *UpdateCustomer) SetShippingContacts(v []CustomerShippingContacts)`
+`func (o *UpdateCustomer) SetDefaultPaymentSourceId(v string)`
 
-SetShippingContacts sets ShippingContacts field to given value.
+SetDefaultPaymentSourceId sets DefaultPaymentSourceId field to given value.
 
-### HasShippingContacts
+### HasDefaultPaymentSourceId
 
-`func (o *UpdateCustomer) HasShippingContacts() bool`
+`func (o *UpdateCustomer) HasDefaultPaymentSourceId() bool`
 
-HasShippingContacts returns a boolean if a field has been set.
+HasDefaultPaymentSourceId returns a boolean if a field has been set.
+
+### GetDefaultFiscalEntityId
+
+`func (o *UpdateCustomer) GetDefaultFiscalEntityId() string`
+
+GetDefaultFiscalEntityId returns the DefaultFiscalEntityId field if non-nil, zero value otherwise.
+
+### GetDefaultFiscalEntityIdOk
+
+`func (o *UpdateCustomer) GetDefaultFiscalEntityIdOk() (*string, bool)`
+
+GetDefaultFiscalEntityIdOk returns a tuple with the DefaultFiscalEntityId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefaultFiscalEntityId
+
+`func (o *UpdateCustomer) SetDefaultFiscalEntityId(v string)`
+
+SetDefaultFiscalEntityId sets DefaultFiscalEntityId field to given value.
+
+### HasDefaultFiscalEntityId
+
+`func (o *UpdateCustomer) HasDefaultFiscalEntityId() bool`
+
+HasDefaultFiscalEntityId returns a boolean if a field has been set.
+
+### GetDefaultShippingContactId
+
+`func (o *UpdateCustomer) GetDefaultShippingContactId() string`
+
+GetDefaultShippingContactId returns the DefaultShippingContactId field if non-nil, zero value otherwise.
+
+### GetDefaultShippingContactIdOk
+
+`func (o *UpdateCustomer) GetDefaultShippingContactIdOk() (*string, bool)`
+
+GetDefaultShippingContactIdOk returns a tuple with the DefaultShippingContactId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDefaultShippingContactId
+
+`func (o *UpdateCustomer) SetDefaultShippingContactId(v string)`
+
+SetDefaultShippingContactId sets DefaultShippingContactId field to given value.
+
+### HasDefaultShippingContactId
+
+`func (o *UpdateCustomer) HasDefaultShippingContactId() bool`
+
+HasDefaultShippingContactId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

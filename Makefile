@@ -4,7 +4,7 @@ ci-test:
 go:
 	docker run --rm \
       -v ${PWD}:/local openapitools/openapi-generator-cli:v7.5.0 generate \
-      -i https://raw.githubusercontent.com/digitalfemsa/openapi/main/_build/api.yaml \
+      -i https://raw.githubusercontent.com/digitaltitransversal/openapi/refs/heads/docs/OPR-2151-fix-openapi-specs/_build/api.yaml \
       -g go \
       -o /local \
       -c /local/config-go.json \

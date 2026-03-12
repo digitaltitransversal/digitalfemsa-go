@@ -9,7 +9,6 @@ Method | HTTP request | Description
 [**EmailCheckout**](PaymentLinkAPI.md#EmailCheckout) | **Post** /checkouts/{id}/email | Send an email
 [**GetCheckout**](PaymentLinkAPI.md#GetCheckout) | **Get** /checkouts/{id} | Get a payment link by ID
 [**GetCheckouts**](PaymentLinkAPI.md#GetCheckouts) | **Get** /checkouts | Get a list of payment links
-[**SmsCheckout**](PaymentLinkAPI.md#SmsCheckout) | **Post** /checkouts/{id}/sms | Send an sms
 
 
 
@@ -18,6 +17,8 @@ Method | HTTP request | Description
 > CheckoutResponse CancelCheckout(ctx, id).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 
 Cancel Payment Link
+
+
 
 ### Example
 
@@ -78,7 +79,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -90,6 +91,8 @@ Name | Type | Description  | Notes
 > CheckoutResponse CreateCheckout(ctx).Checkout(checkout).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 
 Create Unique Payment Link
+
+
 
 ### Example
 
@@ -146,7 +149,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -220,7 +223,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -232,6 +235,8 @@ Name | Type | Description  | Notes
 > CheckoutResponse GetCheckout(ctx, id).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 
 Get a payment link by ID
+
+
 
 ### Example
 
@@ -292,7 +297,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -368,81 +373,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.1.0+json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## SmsCheckout
-
-> CheckoutResponse SmsCheckout(ctx, id).SmsCheckoutRequest(smsCheckoutRequest).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
-
-Send an sms
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/digitalfemsa/digitalfemsa-go"
-)
-
-func main() {
-	id := "6307a60c41de27127515a575" // string | Identifier of the resource
-	smsCheckoutRequest := *openapiclient.NewSmsCheckoutRequest("5566982090") // SmsCheckoutRequest | requested field for sms checkout
-	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
-	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.PaymentLinkAPI.SmsCheckout(context.Background(), id).SmsCheckoutRequest(smsCheckoutRequest).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `PaymentLinkAPI.SmsCheckout``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `SmsCheckout`: CheckoutResponse
-	fmt.Fprintf(os.Stdout, "Response from `PaymentLinkAPI.SmsCheckout`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Identifier of the resource | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiSmsCheckoutRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **smsCheckoutRequest** | [**SmsCheckoutRequest**](SmsCheckoutRequest.md) | requested field for sms checkout | 
- **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
- **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
-
-### Return type
-
-[**CheckoutResponse**](CheckoutResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

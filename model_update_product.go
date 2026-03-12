@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -20,15 +20,14 @@ var _ MappedNullable = &UpdateProduct{}
 
 // UpdateProduct struct for UpdateProduct
 type UpdateProduct struct {
-	AntifraudInfo        map[string]map[string]interface{} `json:"antifraud_info,omitempty"`
-	Description          *string                           `json:"description,omitempty"`
-	Sku                  *string                           `json:"sku,omitempty"`
-	Name                 *string                           `json:"name,omitempty"`
-	UnitPrice            *int64                            `json:"unit_price,omitempty"`
-	Quantity             *int32                            `json:"quantity,omitempty"`
-	Tags                 []string                          `json:"tags,omitempty"`
-	Brand                *string                           `json:"brand,omitempty"`
-	Metadata             *map[string]string                `json:"metadata,omitempty"`
+	Description *string `json:"description,omitempty"`
+	Sku *string `json:"sku,omitempty"`
+	Name *string `json:"name,omitempty"`
+	UnitPrice *int64 `json:"unit_price,omitempty"`
+	Quantity *int32 `json:"quantity,omitempty"`
+	Tags []string `json:"tags,omitempty"`
+	Brand *string `json:"brand,omitempty"`
+	Metadata *map[string]string `json:"metadata,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -49,38 +48,6 @@ func NewUpdateProduct() *UpdateProduct {
 func NewUpdateProductWithDefaults() *UpdateProduct {
 	this := UpdateProduct{}
 	return &this
-}
-
-// GetAntifraudInfo returns the AntifraudInfo field value if set, zero value otherwise.
-func (o *UpdateProduct) GetAntifraudInfo() map[string]map[string]interface{} {
-	if o == nil || IsNil(o.AntifraudInfo) {
-		var ret map[string]map[string]interface{}
-		return ret
-	}
-	return o.AntifraudInfo
-}
-
-// GetAntifraudInfoOk returns a tuple with the AntifraudInfo field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateProduct) GetAntifraudInfoOk() (map[string]map[string]interface{}, bool) {
-	if o == nil || IsNil(o.AntifraudInfo) {
-		return map[string]map[string]interface{}{}, false
-	}
-	return o.AntifraudInfo, true
-}
-
-// HasAntifraudInfo returns a boolean if a field has been set.
-func (o *UpdateProduct) HasAntifraudInfo() bool {
-	if o != nil && !IsNil(o.AntifraudInfo) {
-		return true
-	}
-
-	return false
-}
-
-// SetAntifraudInfo gets a reference to the given map[string]map[string]interface{} and assigns it to the AntifraudInfo field.
-func (o *UpdateProduct) SetAntifraudInfo(v map[string]map[string]interface{}) {
-	o.AntifraudInfo = v
 }
 
 // GetDescription returns the Description field value if set, zero value otherwise.
@@ -340,7 +307,7 @@ func (o *UpdateProduct) SetMetadata(v map[string]string) {
 }
 
 func (o UpdateProduct) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -349,9 +316,6 @@ func (o UpdateProduct) MarshalJSON() ([]byte, error) {
 
 func (o UpdateProduct) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.AntifraudInfo) {
-		toSerialize["antifraud_info"] = o.AntifraudInfo
-	}
 	if !IsNil(o.Description) {
 		toSerialize["description"] = o.Description
 	}
@@ -398,7 +362,6 @@ func (o *UpdateProduct) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "antifraud_info")
 		delete(additionalProperties, "description")
 		delete(additionalProperties, "sku")
 		delete(additionalProperties, "name")
@@ -448,3 +411,5 @@ func (v *NullableUpdateProduct) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

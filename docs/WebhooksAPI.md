@@ -4,20 +4,20 @@ All URIs are relative to *https://api.digitalfemsa.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateWebhook**](WebhooksAPI.md#CreateWebhook) | **Post** /webhooks | Create Webhook
-[**DeleteWebhook**](WebhooksAPI.md#DeleteWebhook) | **Delete** /webhooks/{id} | Delete Webhook
-[**GetWebhook**](WebhooksAPI.md#GetWebhook) | **Get** /webhooks/{id} | Get Webhook
-[**GetWebhooks**](WebhooksAPI.md#GetWebhooks) | **Get** /webhooks | Get List of Webhooks
-[**TestWebhook**](WebhooksAPI.md#TestWebhook) | **Post** /webhooks/{id}/test | Test Webhook
-[**UpdateWebhook**](WebhooksAPI.md#UpdateWebhook) | **Put** /webhooks/{id} | Update Webhook
+[**CreateWebhook**](WebhooksAPI.md#CreateWebhook) | **Post** /webhooks | Create webhook
+[**DeleteWebhook**](WebhooksAPI.md#DeleteWebhook) | **Delete** /webhooks/{id} | Delete webhook
+[**GetWebhook**](WebhooksAPI.md#GetWebhook) | **Get** /webhooks/{id} | Get webhook
+[**GetWebhooks**](WebhooksAPI.md#GetWebhooks) | **Get** /webhooks | Get webhooks
+[**TestWebhook**](WebhooksAPI.md#TestWebhook) | **Post** /webhooks/{id}/test | Test webhook
+[**UpdateWebhook**](WebhooksAPI.md#UpdateWebhook) | **Put** /webhooks/{id} | Update webhook
 
 
 
 ## CreateWebhook
 
-> WebhookResponse CreateWebhook(ctx).WebhookRequest(webhookRequest).AcceptLanguage(acceptLanguage).Execute()
+> WebhookResponse CreateWebhook(ctx).WebhookRequest(webhookRequest).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 
-Create Webhook
+Create webhook
 
 
 
@@ -34,12 +34,13 @@ import (
 )
 
 func main() {
-	webhookRequest := *openapiclient.NewWebhookRequest("https://webhook.site/89277eaa-a8e4-4306-8dc5-f55c80703dc8", false) // WebhookRequest | requested field for webhook
+	webhookRequest := *openapiclient.NewWebhookRequest("https://webhook.site/89277eaa-a8e4-4306-8dc5-f55c80703dc8") // WebhookRequest | Webhook creation/update request payload.
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
+	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WebhooksAPI.CreateWebhook(context.Background()).WebhookRequest(webhookRequest).AcceptLanguage(acceptLanguage).Execute()
+	resp, r, err := apiClient.WebhooksAPI.CreateWebhook(context.Background()).WebhookRequest(webhookRequest).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.CreateWebhook``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -60,8 +61,9 @@ Other parameters are passed through a pointer to a apiCreateWebhookRequest struc
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **webhookRequest** | [**WebhookRequest**](WebhookRequest.md) | requested field for webhook | 
+ **webhookRequest** | [**WebhookRequest**](WebhookRequest.md) | Webhook creation/update request payload. | 
  **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
+ **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
 
 ### Return type
 
@@ -74,7 +76,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -85,7 +87,9 @@ Name | Type | Description  | Notes
 
 > WebhookResponse DeleteWebhook(ctx, id).AcceptLanguage(acceptLanguage).Execute()
 
-Delete Webhook
+Delete webhook
+
+
 
 ### Example
 
@@ -144,7 +148,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -155,7 +159,9 @@ Name | Type | Description  | Notes
 
 > WebhookResponse GetWebhook(ctx, id).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 
-Get Webhook
+Get webhook
+
+
 
 ### Example
 
@@ -216,7 +222,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -225,9 +231,9 @@ Name | Type | Description  | Notes
 
 ## GetWebhooks
 
-> GetWebhooksResponse GetWebhooks(ctx).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Limit(limit).Search(search).Next(next).Previous(previous).Execute()
+> GetWebhooksResponse GetWebhooks(ctx).WebhookRequest(webhookRequest).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Limit(limit).Search(search).Url(url).Next(next).Previous(previous).Execute()
 
-Get List of Webhooks
+Get webhooks
 
 
 
@@ -244,16 +250,18 @@ import (
 )
 
 func main() {
+	webhookRequest := *openapiclient.NewWebhookRequest("https://webhook.site/89277eaa-a8e4-4306-8dc5-f55c80703dc8") // WebhookRequest | Webhook creation/update request payload.
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
 	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 	limit := int32(56) // int32 | The numbers of items to return, the maximum value is 250 (optional) (default to 20)
 	search := "search_example" // string | General order search, e.g. by mail, reference etc. (optional)
+	url := "https://api.digitalfemsa.io/webhook" // string | url for webhook filter (optional)
 	next := "next_example" // string | next page (optional)
 	previous := "previous_example" // string | previous page (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WebhooksAPI.GetWebhooks(context.Background()).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Limit(limit).Search(search).Next(next).Previous(previous).Execute()
+	resp, r, err := apiClient.WebhooksAPI.GetWebhooks(context.Background()).WebhookRequest(webhookRequest).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Limit(limit).Search(search).Url(url).Next(next).Previous(previous).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `WebhooksAPI.GetWebhooks``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -274,10 +282,12 @@ Other parameters are passed through a pointer to a apiGetWebhooksRequest struct 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **webhookRequest** | [**WebhookRequest**](WebhookRequest.md) | Webhook creation/update request payload. | 
  **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
  **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
  **limit** | **int32** | The numbers of items to return, the maximum value is 250 | [default to 20]
  **search** | **string** | General order search, e.g. by mail, reference etc. | 
+ **url** | **string** | url for webhook filter | 
  **next** | **string** | next page | 
  **previous** | **string** | previous page | 
 
@@ -291,8 +301,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Content-Type**: application/json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -303,7 +313,7 @@ Name | Type | Description  | Notes
 
 > WebhookResponse TestWebhook(ctx, id).AcceptLanguage(acceptLanguage).Execute()
 
-Test Webhook
+Test webhook
 
 
 
@@ -364,7 +374,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -375,7 +385,7 @@ Name | Type | Description  | Notes
 
 > WebhookResponse UpdateWebhook(ctx, id).WebhookUpdateRequest(webhookUpdateRequest).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 
-Update Webhook
+Update webhook
 
 
 
@@ -393,7 +403,7 @@ import (
 
 func main() {
 	id := "6307a60c41de27127515a575" // string | Identifier of the resource
-	webhookUpdateRequest := *openapiclient.NewWebhookUpdateRequest("https://webhook.site/89277eaa-a8e4-4306-8dc5-f55c80703dc8") // WebhookUpdateRequest | requested fields in order to update a webhook
+	webhookUpdateRequest := *openapiclient.NewWebhookUpdateRequest() // WebhookUpdateRequest | Webhook update request payload.
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
 	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -425,7 +435,7 @@ Other parameters are passed through a pointer to a apiUpdateWebhookRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **webhookUpdateRequest** | [**WebhookUpdateRequest**](WebhookUpdateRequest.md) | requested fields in order to update a webhook | 
+ **webhookUpdateRequest** | [**WebhookUpdateRequest**](WebhookUpdateRequest.md) | Webhook update request payload. | 
  **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
  **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
 
@@ -440,7 +450,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.1.0+json
+- **Accept**: application/vnd.app-v2.2.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

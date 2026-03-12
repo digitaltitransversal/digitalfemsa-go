@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Active** | Pointer to **bool** | Indicates if the webhook key is active | [optional] 
-**Description** | Pointer to **string** | A name or brief explanation of what this api key is used for | [optional] 
+**Active** | Pointer to **bool** | Indicates whether the API key is active. | [optional] 
+**Description** | Pointer to **string** | A name or brief explanation of what this API key is used for. | [optional] 
 
 ## Methods
 

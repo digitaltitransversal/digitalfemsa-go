@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -13,6 +13,7 @@ package digitalfemsa
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the EventResponse type satisfies the MappedNullable interface at compile time
@@ -20,14 +21,14 @@ var _ MappedNullable = &EventResponse{}
 
 // EventResponse event model
 type EventResponse struct {
-	CreatedAt            *int64                 `json:"created_at,omitempty"`
-	Data                 map[string]interface{} `json:"data,omitempty"`
-	Id                   *string                `json:"id,omitempty"`
-	Livemode             *bool                  `json:"livemode,omitempty"`
-	Object               *string                `json:"object,omitempty"`
-	Type                 *string                `json:"type,omitempty"`
-	WebhookLogs          []WebhookLog           `json:"webhook_logs,omitempty"`
-	WebhookStatus        *string                `json:"webhook_status,omitempty"`
+	CreatedAt int64 `json:"created_at"`
+	Data map[string]interface{} `json:"data"`
+	Id string `json:"id"`
+	Livemode bool `json:"livemode"`
+	Object string `json:"object"`
+	Type string `json:"type"`
+	WebhookLogs []WebhookLog `json:"webhook_logs"`
+	WebhookStatus string `json:"webhook_status"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -37,8 +38,16 @@ type _EventResponse EventResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewEventResponse() *EventResponse {
+func NewEventResponse(createdAt int64, data map[string]interface{}, id string, livemode bool, object string, type_ string, webhookLogs []WebhookLog, webhookStatus string) *EventResponse {
 	this := EventResponse{}
+	this.CreatedAt = createdAt
+	this.Data = data
+	this.Id = id
+	this.Livemode = livemode
+	this.Object = object
+	this.Type = type_
+	this.WebhookLogs = webhookLogs
+	this.WebhookStatus = webhookStatus
 	return &this
 }
 
@@ -50,264 +59,200 @@ func NewEventResponseWithDefaults() *EventResponse {
 	return &this
 }
 
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
+// GetCreatedAt returns the CreatedAt field value
 func (o *EventResponse) GetCreatedAt() int64 {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.CreatedAt
+
+	return o.CreatedAt
 }
 
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
 // and a boolean to check if the value has been set.
 func (o *EventResponse) GetCreatedAtOk() (*int64, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CreatedAt, true
+	return &o.CreatedAt, true
 }
 
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *EventResponse) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given int64 and assigns it to the CreatedAt field.
+// SetCreatedAt sets field value
 func (o *EventResponse) SetCreatedAt(v int64) {
-	o.CreatedAt = &v
+	o.CreatedAt = v
 }
 
-// GetData returns the Data field value if set, zero value otherwise.
+// GetData returns the Data field value
 func (o *EventResponse) GetData() map[string]interface{} {
-	if o == nil || IsNil(o.Data) {
+	if o == nil {
 		var ret map[string]interface{}
 		return ret
 	}
+
 	return o.Data
 }
 
-// GetDataOk returns a tuple with the Data field value if set, nil otherwise
+// GetDataOk returns a tuple with the Data field value
 // and a boolean to check if the value has been set.
 func (o *EventResponse) GetDataOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Data) {
+	if o == nil {
 		return map[string]interface{}{}, false
 	}
 	return o.Data, true
 }
 
-// HasData returns a boolean if a field has been set.
-func (o *EventResponse) HasData() bool {
-	if o != nil && !IsNil(o.Data) {
-		return true
-	}
-
-	return false
-}
-
-// SetData gets a reference to the given map[string]interface{} and assigns it to the Data field.
+// SetData sets field value
 func (o *EventResponse) SetData(v map[string]interface{}) {
 	o.Data = v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *EventResponse) GetId() string {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *EventResponse) GetIdOk() (*string, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *EventResponse) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId sets field value
 func (o *EventResponse) SetId(v string) {
-	o.Id = &v
+	o.Id = v
 }
 
-// GetLivemode returns the Livemode field value if set, zero value otherwise.
+// GetLivemode returns the Livemode field value
 func (o *EventResponse) GetLivemode() bool {
-	if o == nil || IsNil(o.Livemode) {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.Livemode
+
+	return o.Livemode
 }
 
-// GetLivemodeOk returns a tuple with the Livemode field value if set, nil otherwise
+// GetLivemodeOk returns a tuple with the Livemode field value
 // and a boolean to check if the value has been set.
 func (o *EventResponse) GetLivemodeOk() (*bool, bool) {
-	if o == nil || IsNil(o.Livemode) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Livemode, true
+	return &o.Livemode, true
 }
 
-// HasLivemode returns a boolean if a field has been set.
-func (o *EventResponse) HasLivemode() bool {
-	if o != nil && !IsNil(o.Livemode) {
-		return true
-	}
-
-	return false
-}
-
-// SetLivemode gets a reference to the given bool and assigns it to the Livemode field.
+// SetLivemode sets field value
 func (o *EventResponse) SetLivemode(v bool) {
-	o.Livemode = &v
+	o.Livemode = v
 }
 
-// GetObject returns the Object field value if set, zero value otherwise.
+// GetObject returns the Object field value
 func (o *EventResponse) GetObject() string {
-	if o == nil || IsNil(o.Object) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Object
+
+	return o.Object
 }
 
-// GetObjectOk returns a tuple with the Object field value if set, nil otherwise
+// GetObjectOk returns a tuple with the Object field value
 // and a boolean to check if the value has been set.
 func (o *EventResponse) GetObjectOk() (*string, bool) {
-	if o == nil || IsNil(o.Object) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Object, true
+	return &o.Object, true
 }
 
-// HasObject returns a boolean if a field has been set.
-func (o *EventResponse) HasObject() bool {
-	if o != nil && !IsNil(o.Object) {
-		return true
-	}
-
-	return false
-}
-
-// SetObject gets a reference to the given string and assigns it to the Object field.
+// SetObject sets field value
 func (o *EventResponse) SetObject(v string) {
-	o.Object = &v
+	o.Object = v
 }
 
-// GetType returns the Type field value if set, zero value otherwise.
+// GetType returns the Type field value
 func (o *EventResponse) GetType() string {
-	if o == nil || IsNil(o.Type) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Type
+
+	return o.Type
 }
 
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
 func (o *EventResponse) GetTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.Type) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Type, true
+	return &o.Type, true
 }
 
-// HasType returns a boolean if a field has been set.
-func (o *EventResponse) HasType() bool {
-	if o != nil && !IsNil(o.Type) {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given string and assigns it to the Type field.
+// SetType sets field value
 func (o *EventResponse) SetType(v string) {
-	o.Type = &v
+	o.Type = v
 }
 
-// GetWebhookLogs returns the WebhookLogs field value if set, zero value otherwise.
+// GetWebhookLogs returns the WebhookLogs field value
 func (o *EventResponse) GetWebhookLogs() []WebhookLog {
-	if o == nil || IsNil(o.WebhookLogs) {
+	if o == nil {
 		var ret []WebhookLog
 		return ret
 	}
+
 	return o.WebhookLogs
 }
 
-// GetWebhookLogsOk returns a tuple with the WebhookLogs field value if set, nil otherwise
+// GetWebhookLogsOk returns a tuple with the WebhookLogs field value
 // and a boolean to check if the value has been set.
 func (o *EventResponse) GetWebhookLogsOk() ([]WebhookLog, bool) {
-	if o == nil || IsNil(o.WebhookLogs) {
+	if o == nil {
 		return nil, false
 	}
 	return o.WebhookLogs, true
 }
 
-// HasWebhookLogs returns a boolean if a field has been set.
-func (o *EventResponse) HasWebhookLogs() bool {
-	if o != nil && !IsNil(o.WebhookLogs) {
-		return true
-	}
-
-	return false
-}
-
-// SetWebhookLogs gets a reference to the given []WebhookLog and assigns it to the WebhookLogs field.
+// SetWebhookLogs sets field value
 func (o *EventResponse) SetWebhookLogs(v []WebhookLog) {
 	o.WebhookLogs = v
 }
 
-// GetWebhookStatus returns the WebhookStatus field value if set, zero value otherwise.
+// GetWebhookStatus returns the WebhookStatus field value
 func (o *EventResponse) GetWebhookStatus() string {
-	if o == nil || IsNil(o.WebhookStatus) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.WebhookStatus
+
+	return o.WebhookStatus
 }
 
-// GetWebhookStatusOk returns a tuple with the WebhookStatus field value if set, nil otherwise
+// GetWebhookStatusOk returns a tuple with the WebhookStatus field value
 // and a boolean to check if the value has been set.
 func (o *EventResponse) GetWebhookStatusOk() (*string, bool) {
-	if o == nil || IsNil(o.WebhookStatus) {
+	if o == nil {
 		return nil, false
 	}
-	return o.WebhookStatus, true
+	return &o.WebhookStatus, true
 }
 
-// HasWebhookStatus returns a boolean if a field has been set.
-func (o *EventResponse) HasWebhookStatus() bool {
-	if o != nil && !IsNil(o.WebhookStatus) {
-		return true
-	}
-
-	return false
-}
-
-// SetWebhookStatus gets a reference to the given string and assigns it to the WebhookStatus field.
+// SetWebhookStatus sets field value
 func (o *EventResponse) SetWebhookStatus(v string) {
-	o.WebhookStatus = &v
+	o.WebhookStatus = v
 }
 
 func (o EventResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -316,30 +261,14 @@ func (o EventResponse) MarshalJSON() ([]byte, error) {
 
 func (o EventResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["created_at"] = o.CreatedAt
-	}
-	if !IsNil(o.Data) {
-		toSerialize["data"] = o.Data
-	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
-	if !IsNil(o.Livemode) {
-		toSerialize["livemode"] = o.Livemode
-	}
-	if !IsNil(o.Object) {
-		toSerialize["object"] = o.Object
-	}
-	if !IsNil(o.Type) {
-		toSerialize["type"] = o.Type
-	}
-	if !IsNil(o.WebhookLogs) {
-		toSerialize["webhook_logs"] = o.WebhookLogs
-	}
-	if !IsNil(o.WebhookStatus) {
-		toSerialize["webhook_status"] = o.WebhookStatus
-	}
+	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["data"] = o.Data
+	toSerialize["id"] = o.Id
+	toSerialize["livemode"] = o.Livemode
+	toSerialize["object"] = o.Object
+	toSerialize["type"] = o.Type
+	toSerialize["webhook_logs"] = o.WebhookLogs
+	toSerialize["webhook_status"] = o.WebhookStatus
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -349,6 +278,34 @@ func (o EventResponse) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *EventResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"created_at",
+		"data",
+		"id",
+		"livemode",
+		"object",
+		"type",
+		"webhook_logs",
+		"webhook_status",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varEventResponse := _EventResponse{}
 
 	err = json.Unmarshal(data, &varEventResponse)
@@ -411,3 +368,5 @@ func (v *NullableEventResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

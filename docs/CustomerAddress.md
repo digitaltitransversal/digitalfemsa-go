@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **PostalCode** | **string** |  | 
 **City** | **string** |  | 
 **State** | Pointer to **string** |  | [optional] 
-**Country** | Pointer to **string** | this field follows the [ISO 3166-1 alpha-2 standard](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) | [optional] 
+**Country** | **string** | this field follows the [ISO 3166-1 alpha-2 standard](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) | 
 **Residential** | Pointer to **bool** |  | [optional] [default to false]
 **ExternalNumber** | Pointer to **string** |  | [optional] 
 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewCustomerAddress
 
-`func NewCustomerAddress(street1 string, postalCode string, city string, ) *CustomerAddress`
+`func NewCustomerAddress(street1 string, postalCode string, city string, country string, ) *CustomerAddress`
 
 NewCustomerAddress instantiates a new CustomerAddress object
 This constructor will assign default values to properties that have it defined,
@@ -161,11 +161,6 @@ and a boolean to check if the value has been set.
 
 SetCountry sets Country field to given value.
 
-### HasCountry
-
-`func (o *CustomerAddress) HasCountry() bool`
-
-HasCountry returns a boolean if a field has been set.
 
 ### GetResidential
 

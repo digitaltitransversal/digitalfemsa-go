@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AntifraudInfo** | Pointer to **map[string]interface{}** |  | [optional] 
 **Brand** | Pointer to **string** | The brand of the item. | [optional] 
 **Description** | Pointer to **string** | Short description of the item | [optional] 
 **Metadata** | Pointer to **map[string]string** | It is a key/value hash that can hold custom fields. Maximum 100 elements and allows special characters. | [optional] 
@@ -35,31 +34,6 @@ will change when the set of required properties is changed
 NewProductDataResponseWithDefaults instantiates a new ProductDataResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetAntifraudInfo
-
-`func (o *ProductDataResponse) GetAntifraudInfo() map[string]interface{}`
-
-GetAntifraudInfo returns the AntifraudInfo field if non-nil, zero value otherwise.
-
-### GetAntifraudInfoOk
-
-`func (o *ProductDataResponse) GetAntifraudInfoOk() (*map[string]interface{}, bool)`
-
-GetAntifraudInfoOk returns a tuple with the AntifraudInfo field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAntifraudInfo
-
-`func (o *ProductDataResponse) SetAntifraudInfo(v map[string]interface{})`
-
-SetAntifraudInfo sets AntifraudInfo field to given value.
-
-### HasAntifraudInfo
-
-`func (o *ProductDataResponse) HasAntifraudInfo() bool`
-
-HasAntifraudInfo returns a boolean if a field has been set.
 
 ### GetBrand
 
