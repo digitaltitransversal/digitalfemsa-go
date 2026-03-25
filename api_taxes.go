@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -157,7 +157,7 @@ func (a *TaxesAPIService) OrdersCreateTaxesExecute(r ApiOrdersCreateTaxesRequest
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -329,7 +329,7 @@ func (a *TaxesAPIService) OrdersDeleteTaxesExecute(r ApiOrdersDeleteTaxesRequest
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -432,7 +432,7 @@ type ApiOrdersUpdateTaxesRequest struct {
 	xChildCompanyId *string
 }
 
-// Request body for creating a tax line.
+// Request body for updating a tax line.
 func (r ApiOrdersUpdateTaxesRequest) UpdateOrderTaxRequest(updateOrderTaxRequest UpdateOrderTaxRequest) ApiOrdersUpdateTaxesRequest {
 	r.updateOrderTaxRequest = &updateOrderTaxRequest
 	return r
@@ -509,7 +509,7 @@ func (a *TaxesAPIService) OrdersUpdateTaxesExecute(r ApiOrdersUpdateTaxesRequest
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

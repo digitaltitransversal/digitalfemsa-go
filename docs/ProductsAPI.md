@@ -32,7 +32,7 @@ import (
 
 func main() {
 	id := "6307a60c41de27127515a575" // string | Identifier of the resource
-	product := *openapiclient.NewProduct("Box of Cohiba S1s", int32(1), int32(20000)) // Product | Fields required to create a new product (line item) for an existing order. This request adds a new item to the order.
+	product := *openapiclient.NewProduct("Box of Cohiba", int32(20000), int32(1)) // Product | Fields required to create a new product (line item) for an existing order. This request adds a new item to the order.
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
 	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -235,7 +235,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

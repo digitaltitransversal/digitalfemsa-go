@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -21,7 +21,6 @@ var _ MappedNullable = &PaymentMethodCash{}
 
 // PaymentMethodCash struct for PaymentMethodCash
 type PaymentMethodCash struct {
-	// Cash payment type
 	Type *string `json:"type,omitempty"`
 	Object string `json:"object"`
 	AuthCode NullableString `json:"auth_code,omitempty"`

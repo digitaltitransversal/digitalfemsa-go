@@ -8,13 +8,13 @@ Name | Type | Description | Notes
 **Object** | **string** | Object type, in this case is list | 
 **NextPageUrl** | Pointer to **NullableString** | URL of the next page. | [optional] 
 **PreviousPageUrl** | Pointer to **NullableString** | Url of the previous page. | [optional] 
-**Data** | [**[]EventResponse**](EventResponse.md) |  | 
+**Data** | Pointer to [**[]EventResponse**](EventResponse.md) |  | [optional] 
 
 ## Methods
 
 ### NewGetEventsResponse
 
-`func NewGetEventsResponse(hasMore bool, object string, data []EventResponse, ) *GetEventsResponse`
+`func NewGetEventsResponse(hasMore bool, object string, ) *GetEventsResponse`
 
 NewGetEventsResponse instantiates a new GetEventsResponse object
 This constructor will assign default values to properties that have it defined,
@@ -158,6 +158,11 @@ and a boolean to check if the value has been set.
 
 SetData sets Data field to given value.
 
+### HasData
+
+`func (o *GetEventsResponse) HasData() bool`
+
+HasData returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

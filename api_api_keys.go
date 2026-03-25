@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -42,10 +42,9 @@ Copy and store it securely.
 	CreateApiKeyExecute(r ApiCreateApiKeyRequest) (*ApiKeyCreateResponse, *http.Response, error)
 
 	/*
-	DeleteApiKey Delete API key
+	DeleteApiKey Delete Api Key
 
-	Deletes an API key by its ID.
-
+	Deletes a api key that corresponds to a api key ID
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Identifier of the resource
@@ -58,10 +57,9 @@ Copy and store it securely.
 	DeleteApiKeyExecute(r ApiDeleteApiKeyRequest) (*DeleteApiKeysResponse, *http.Response, error)
 
 	/*
-	GetApiKey Get API key
+	GetApiKey Get Api Key
 
-	Retrieves the details of an API key by its ID.
-
+	Gets a api key that corresponds to a api key ID
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Identifier of the resource
@@ -92,12 +90,9 @@ Use the `search` query parameter to perform a general search (for example by key
 	GetApiKeysExecute(r ApiGetApiKeysRequest) (*GetApiKeysResponse, *http.Response, error)
 
 	/*
-	UpdateApiKey Update API key
+	UpdateApiKey Update Api Key
 
-	Updates an existing API key by its ID.
-
-Use this endpoint to change the key's status (active/inactive) or update its description.
-
+	Update an existing api key
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Identifier of the resource
@@ -196,7 +191,7 @@ func (a *ApiKeysAPIService) CreateApiKeyExecute(r ApiCreateApiKeyRequest) (*ApiK
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -298,10 +293,9 @@ func (r ApiDeleteApiKeyRequest) Execute() (*DeleteApiKeysResponse, *http.Respons
 }
 
 /*
-DeleteApiKey Delete API key
+DeleteApiKey Delete Api Key
 
-Deletes an API key by its ID.
-
+Deletes a api key that corresponds to a api key ID
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Identifier of the resource
@@ -347,7 +341,7 @@ func (a *ApiKeysAPIService) DeleteApiKeyExecute(r ApiDeleteApiKeyRequest) (*Dele
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -391,17 +385,6 @@ func (a *ApiKeysAPIService) DeleteApiKeyExecute(r ApiDeleteApiKeyRequest) (*Dele
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ModelError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -462,10 +445,9 @@ func (r ApiGetApiKeyRequest) Execute() (*ApiKeyResponse, *http.Response, error) 
 }
 
 /*
-GetApiKey Get API key
+GetApiKey Get Api Key
 
-Retrieves the details of an API key by its ID.
-
+Gets a api key that corresponds to a api key ID
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Identifier of the resource
@@ -511,7 +493,7 @@ func (a *ApiKeysAPIService) GetApiKeyExecute(r ApiGetApiKeyRequest) (*ApiKeyResp
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -634,7 +616,7 @@ func (r ApiGetApiKeysRequest) Previous(previous string) ApiGetApiKeysRequest {
 	return r
 }
 
-// General search, e.g. by id or description
+// General search, e.g. by id, description, prefix
 func (r ApiGetApiKeysRequest) Search(search string) ApiGetApiKeysRequest {
 	r.search = &search
 	return r
@@ -709,7 +691,7 @@ func (a *ApiKeysAPIService) GetApiKeysExecute(r ApiGetApiKeysRequest) (*GetApiKe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -804,12 +786,9 @@ func (r ApiUpdateApiKeyRequest) Execute() (*ApiKeyResponse, *http.Response, erro
 }
 
 /*
-UpdateApiKey Update API key
+UpdateApiKey Update Api Key
 
-Updates an existing API key by its ID.
-
-Use this endpoint to change the key's status (active/inactive) or update its description.
-
+Update an existing api key
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Identifier of the resource
@@ -855,7 +834,7 @@ func (a *ApiKeysAPIService) UpdateApiKeyExecute(r ApiUpdateApiKeyRequest) (*ApiK
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -889,17 +868,6 @@ func (a *ApiKeysAPIService) UpdateApiKeyExecute(r ApiUpdateApiKeyRequest) (*ApiK
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ModelError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -911,7 +879,7 @@ func (a *ApiKeysAPIService) UpdateApiKeyExecute(r ApiUpdateApiKeyRequest) (*ApiK
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 422 {
+		if localVarHTTPResponse.StatusCode == 401 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

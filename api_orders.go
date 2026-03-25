@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -37,37 +37,6 @@ type OrdersAPI interface {
 	// CancelOrderExecute executes the request
 	//  @return OrderResponse
 	CancelOrderExecute(r ApiCancelOrderRequest) (*OrderResponse, *http.Response, error)
-
-	/*
-	CancelOrderRefund Cancel Refund
-
-	Cancels a refund previously created for an order. This operation is only available when the refund is still cancellable according to its current status and the payment method rules. If the refund cannot be cancelled, the API returns an error response.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@param refundId refund identifier
-	@return ApiCancelOrderRefundRequest
-	*/
-	CancelOrderRefund(ctx context.Context, id string, refundId string) ApiCancelOrderRefundRequest
-
-	// CancelOrderRefundExecute executes the request
-	//  @return OrderResponse
-	CancelOrderRefundExecute(r ApiCancelOrderRefundRequest) (*OrderResponse, *http.Response, error)
-
-	/*
-	CaptureOrder Capture Order
-
-	Captures (finalizes) an order that has been previously authorized. Use this endpoint to capture a specific amount. The captured amount must be greater than 0 and must comply with the order and charge constraints enforced by the API.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@return ApiCaptureOrderRequest
-	*/
-	CaptureOrder(ctx context.Context, id string) ApiCaptureOrderRequest
-
-	// CaptureOrderExecute executes the request
-	//  @return OrderResponse
-	CaptureOrderExecute(r ApiCaptureOrderRequest) (*OrderResponse, *http.Response, error)
 
 	/*
 	CreateOrder Create order
@@ -134,6 +103,22 @@ Use pagination parameters to navigate through results, and `search` to filter by
 	GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersResponse, *http.Response, error)
 
 	/*
+	OrderCancelRefund Cancel Refund
+
+	Cancels a refund previously created for an order. This operation is only available when the refund is still cancellable according to its current status and the payment method rules. If the refund cannot be cancelled, the API returns an error response.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@param refundId refund identifier
+	@return ApiOrderCancelRefundRequest
+	*/
+	OrderCancelRefund(ctx context.Context, id string, refundId string) ApiOrderCancelRefundRequest
+
+	// OrderCancelRefundExecute executes the request
+	//  @return OrderResponse
+	OrderCancelRefundExecute(r ApiOrderCancelRefundRequest) (*OrderResponse, *http.Response, error)
+
+	/*
 	OrderRefund Refund Order
 
 	Creates a refund for an order. This operation is used to refund a previously paid order (fully or partially, depending on the request body). The API will validate the order and its related charges before processing the refund. If the refund cannot be created due to business rules or state, an error response is returned.
@@ -147,6 +132,21 @@ Use pagination parameters to navigate through results, and `search` to filter by
 	// OrderRefundExecute executes the request
 	//  @return OrderResponse
 	OrderRefundExecute(r ApiOrderRefundRequest) (*OrderResponse, *http.Response, error)
+
+	/*
+	OrdersCreateCapture Capture Order
+
+	Captures (finalizes) an order that has been previously authorized. Use this endpoint to capture a specific amount. The captured amount must be greater than 0 and must comply with the order and charge constraints enforced by the API.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@return ApiOrdersCreateCaptureRequest
+	*/
+	OrdersCreateCapture(ctx context.Context, id string) ApiOrdersCreateCaptureRequest
+
+	// OrdersCreateCaptureExecute executes the request
+	//  @return OrderResponse
+	OrdersCreateCaptureExecute(r ApiOrdersCreateCaptureRequest) (*OrderResponse, *http.Response, error)
 
 	/*
 	UpdateOrder Update order
@@ -245,7 +245,7 @@ func (a *OrdersAPIService) CancelOrderExecute(r ApiCancelOrderRequest) (*OrderRe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -292,362 +292,6 @@ func (a *OrdersAPIService) CancelOrderExecute(r ApiCancelOrderRequest) (*OrderRe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 402 {
-			var v ModelError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ModelError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 428 {
-			var v ModelError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ModelError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiCancelOrderRefundRequest struct {
-	ctx context.Context
-	ApiService OrdersAPI
-	id string
-	refundId string
-	acceptLanguage *string
-	xChildCompanyId *string
-}
-
-// Use for knowing which language to use
-func (r ApiCancelOrderRefundRequest) AcceptLanguage(acceptLanguage string) ApiCancelOrderRefundRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
-}
-
-// In the case of a holding company, the company id of the child company to which will process the request.
-func (r ApiCancelOrderRefundRequest) XChildCompanyId(xChildCompanyId string) ApiCancelOrderRefundRequest {
-	r.xChildCompanyId = &xChildCompanyId
-	return r
-}
-
-func (r ApiCancelOrderRefundRequest) Execute() (*OrderResponse, *http.Response, error) {
-	return r.ApiService.CancelOrderRefundExecute(r)
-}
-
-/*
-CancelOrderRefund Cancel Refund
-
-Cancels a refund previously created for an order. This operation is only available when the refund is still cancellable according to its current status and the payment method rules. If the refund cannot be cancelled, the API returns an error response.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Identifier of the resource
- @param refundId refund identifier
- @return ApiCancelOrderRefundRequest
-*/
-func (a *OrdersAPIService) CancelOrderRefund(ctx context.Context, id string, refundId string) ApiCancelOrderRefundRequest {
-	return ApiCancelOrderRefundRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-		refundId: refundId,
-	}
-}
-
-// Execute executes the request
-//  @return OrderResponse
-func (a *OrdersAPIService) CancelOrderRefundExecute(r ApiCancelOrderRefundRequest) (*OrderResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrderResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersAPIService.CancelOrderRefund")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/orders/{id}/refunds/{refund_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"refund_id"+"}", url.PathEscape(parameterValueToString(r.refundId, "refundId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "")
-	}
-	if r.xChildCompanyId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Child-Company-Id", r.xChildCompanyId, "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ModelError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 402 {
-			var v ModelError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ModelError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v ModelError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ModelError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiCaptureOrderRequest struct {
-	ctx context.Context
-	ApiService OrdersAPI
-	id string
-	acceptLanguage *string
-	xChildCompanyId *string
-	orderCaptureRequest *OrderCaptureRequest
-}
-
-// Use for knowing which language to use
-func (r ApiCaptureOrderRequest) AcceptLanguage(acceptLanguage string) ApiCaptureOrderRequest {
-	r.acceptLanguage = &acceptLanguage
-	return r
-}
-
-// In the case of a holding company, the company id of the child company to which will process the request.
-func (r ApiCaptureOrderRequest) XChildCompanyId(xChildCompanyId string) ApiCaptureOrderRequest {
-	r.xChildCompanyId = &xChildCompanyId
-	return r
-}
-
-// Requested fields for capturing an order
-func (r ApiCaptureOrderRequest) OrderCaptureRequest(orderCaptureRequest OrderCaptureRequest) ApiCaptureOrderRequest {
-	r.orderCaptureRequest = &orderCaptureRequest
-	return r
-}
-
-func (r ApiCaptureOrderRequest) Execute() (*OrderResponse, *http.Response, error) {
-	return r.ApiService.CaptureOrderExecute(r)
-}
-
-/*
-CaptureOrder Capture Order
-
-Captures (finalizes) an order that has been previously authorized. Use this endpoint to capture a specific amount. The captured amount must be greater than 0 and must comply with the order and charge constraints enforced by the API.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Identifier of the resource
- @return ApiCaptureOrderRequest
-*/
-func (a *OrdersAPIService) CaptureOrder(ctx context.Context, id string) ApiCaptureOrderRequest {
-	return ApiCaptureOrderRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return OrderResponse
-func (a *OrdersAPIService) CaptureOrderExecute(r ApiCaptureOrderRequest) (*OrderResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *OrderResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersAPIService.CaptureOrder")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/orders/{id}/capture"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.acceptLanguage != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "")
-	}
-	if r.xChildCompanyId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Child-Company-Id", r.xChildCompanyId, "")
-	}
-	// body params
-	localVarPostBody = r.orderCaptureRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -803,7 +447,7 @@ func (a *OrdersAPIService) CreateOrderExecute(r ApiCreateOrderRequest) (*OrderRe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -971,7 +615,7 @@ func (a *OrdersAPIService) GetOrderByIdExecute(r ApiGetOrderByIdRequest) (*Order
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1167,7 +811,7 @@ func (a *OrdersAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1203,6 +847,187 @@ func (a *OrdersAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRe
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiOrderCancelRefundRequest struct {
+	ctx context.Context
+	ApiService OrdersAPI
+	id string
+	refundId string
+	acceptLanguage *string
+	xChildCompanyId *string
+}
+
+// Use for knowing which language to use
+func (r ApiOrderCancelRefundRequest) AcceptLanguage(acceptLanguage string) ApiOrderCancelRefundRequest {
+	r.acceptLanguage = &acceptLanguage
+	return r
+}
+
+// In the case of a holding company, the company id of the child company to which will process the request.
+func (r ApiOrderCancelRefundRequest) XChildCompanyId(xChildCompanyId string) ApiOrderCancelRefundRequest {
+	r.xChildCompanyId = &xChildCompanyId
+	return r
+}
+
+func (r ApiOrderCancelRefundRequest) Execute() (*OrderResponse, *http.Response, error) {
+	return r.ApiService.OrderCancelRefundExecute(r)
+}
+
+/*
+OrderCancelRefund Cancel Refund
+
+Cancels a refund previously created for an order. This operation is only available when the refund is still cancellable according to its current status and the payment method rules. If the refund cannot be cancelled, the API returns an error response.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @param refundId refund identifier
+ @return ApiOrderCancelRefundRequest
+*/
+func (a *OrdersAPIService) OrderCancelRefund(ctx context.Context, id string, refundId string) ApiOrderCancelRefundRequest {
+	return ApiOrderCancelRefundRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+		refundId: refundId,
+	}
+}
+
+// Execute executes the request
+//  @return OrderResponse
+func (a *OrdersAPIService) OrderCancelRefundExecute(r ApiOrderCancelRefundRequest) (*OrderResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *OrderResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersAPIService.OrderCancelRefund")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/orders/{id}/refunds/{refund_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"refund_id"+"}", url.PathEscape(parameterValueToString(r.refundId, "refundId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.acceptLanguage != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "")
+	}
+	if r.xChildCompanyId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Child-Company-Id", r.xChildCompanyId, "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 402 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1321,7 +1146,7 @@ func (a *OrdersAPIService) OrderRefundExecute(r ApiOrderRefundRequest) (*OrderRe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1392,6 +1217,181 @@ func (a *OrdersAPIService) OrderRefundExecute(r ApiOrderRefundRequest) (*OrderRe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 422 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiOrdersCreateCaptureRequest struct {
+	ctx context.Context
+	ApiService OrdersAPI
+	id string
+	acceptLanguage *string
+	xChildCompanyId *string
+	orderCaptureRequest *OrderCaptureRequest
+}
+
+// Use for knowing which language to use
+func (r ApiOrdersCreateCaptureRequest) AcceptLanguage(acceptLanguage string) ApiOrdersCreateCaptureRequest {
+	r.acceptLanguage = &acceptLanguage
+	return r
+}
+
+// In the case of a holding company, the company id of the child company to which will process the request.
+func (r ApiOrdersCreateCaptureRequest) XChildCompanyId(xChildCompanyId string) ApiOrdersCreateCaptureRequest {
+	r.xChildCompanyId = &xChildCompanyId
+	return r
+}
+
+// Requested fields for capturing an order
+func (r ApiOrdersCreateCaptureRequest) OrderCaptureRequest(orderCaptureRequest OrderCaptureRequest) ApiOrdersCreateCaptureRequest {
+	r.orderCaptureRequest = &orderCaptureRequest
+	return r
+}
+
+func (r ApiOrdersCreateCaptureRequest) Execute() (*OrderResponse, *http.Response, error) {
+	return r.ApiService.OrdersCreateCaptureExecute(r)
+}
+
+/*
+OrdersCreateCapture Capture Order
+
+Captures (finalizes) an order that has been previously authorized. Use this endpoint to capture a specific amount. The captured amount must be greater than 0 and must comply with the order and charge constraints enforced by the API.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @return ApiOrdersCreateCaptureRequest
+*/
+func (a *OrdersAPIService) OrdersCreateCapture(ctx context.Context, id string) ApiOrdersCreateCaptureRequest {
+	return ApiOrdersCreateCaptureRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return OrderResponse
+func (a *OrdersAPIService) OrdersCreateCaptureExecute(r ApiOrdersCreateCaptureRequest) (*OrderResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *OrderResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersAPIService.OrdersCreateCapture")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/orders/{id}/capture"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.acceptLanguage != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "")
+	}
+	if r.xChildCompanyId != nil {
+		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Child-Company-Id", r.xChildCompanyId, "")
+	}
+	// body params
+	localVarPostBody = r.orderCaptureRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 428 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -1508,7 +1508,7 @@ func (a *OrdersAPIService) UpdateOrderExecute(r ApiUpdateOrderRequest) (*OrderRe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

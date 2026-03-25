@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FailedAttempts** | **int32** |  | 
-**Id** | **string** |  | 
-**LastAttemptedAt** | **int32** |  | 
-**LastHttpResponseStatus** | **int32** |  | 
-**ResponseData** | **map[string]interface{}** |  | 
-**Url** | **string** |  | 
+**FailedAttempts** | Pointer to **int32** |  | [optional] 
+**Id** | Pointer to **string** |  | [optional] 
+**LastAttemptedAt** | Pointer to **int32** |  | [optional] 
+**LastHttpResponseStatus** | Pointer to **int32** |  | [optional] 
+**ResponseData** | Pointer to **map[string]interface{}** |  | [optional] 
+**Url** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewEventsResendResponse
 
-`func NewEventsResendResponse(failedAttempts int32, id string, lastAttemptedAt int32, lastHttpResponseStatus int32, responseData map[string]interface{}, url string, ) *EventsResendResponse`
+`func NewEventsResendResponse() *EventsResendResponse`
 
 NewEventsResendResponse instantiates a new EventsResendResponse object
 This constructor will assign default values to properties that have it defined,
@@ -49,6 +49,11 @@ and a boolean to check if the value has been set.
 
 SetFailedAttempts sets FailedAttempts field to given value.
 
+### HasFailedAttempts
+
+`func (o *EventsResendResponse) HasFailedAttempts() bool`
+
+HasFailedAttempts returns a boolean if a field has been set.
 
 ### GetId
 
@@ -69,6 +74,11 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
+### HasId
+
+`func (o *EventsResendResponse) HasId() bool`
+
+HasId returns a boolean if a field has been set.
 
 ### GetLastAttemptedAt
 
@@ -89,6 +99,11 @@ and a boolean to check if the value has been set.
 
 SetLastAttemptedAt sets LastAttemptedAt field to given value.
 
+### HasLastAttemptedAt
+
+`func (o *EventsResendResponse) HasLastAttemptedAt() bool`
+
+HasLastAttemptedAt returns a boolean if a field has been set.
 
 ### GetLastHttpResponseStatus
 
@@ -109,6 +124,11 @@ and a boolean to check if the value has been set.
 
 SetLastHttpResponseStatus sets LastHttpResponseStatus field to given value.
 
+### HasLastHttpResponseStatus
+
+`func (o *EventsResendResponse) HasLastHttpResponseStatus() bool`
+
+HasLastHttpResponseStatus returns a boolean if a field has been set.
 
 ### GetResponseData
 
@@ -129,6 +149,11 @@ and a boolean to check if the value has been set.
 
 SetResponseData sets ResponseData field to given value.
 
+### HasResponseData
+
+`func (o *EventsResendResponse) HasResponseData() bool`
+
+HasResponseData returns a boolean if a field has been set.
 
 ### GetUrl
 
@@ -149,6 +174,11 @@ and a boolean to check if the value has been set.
 
 SetUrl sets Url field to given value.
 
+### HasUrl
+
+`func (o *EventsResendResponse) HasUrl() bool`
+
+HasUrl returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

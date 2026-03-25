@@ -4,20 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | Pointer to **string** | Order status update. Allowed values depend on server-side validations. | [optional] 
-**Currency** | Pointer to **string** | Currency used for the order. Uses ISO 4217 (3-letter code). Allowed values depend on server-side validations. | [optional] 
-**CustomerInfo** | Pointer to [**CustomerInfo**](CustomerInfo.md) |  | [optional] 
-**LineItems** | Pointer to [**[]Product**](Product.md) | List of products sold in the order. | [optional] 
-**ShippingLines** | Pointer to [**[]ShippingRequest**](ShippingRequest.md) | List of shipping costs applied to the order. | [optional] 
+**Currency** | Pointer to **string** | Currency code in ISO 4217 (3-letter uppercase). | [optional] 
+**CustomerInfo** | Pointer to [**OrderUpdateRequestCustomerInfo**](OrderUpdateRequestCustomerInfo.md) |  | [optional] 
+**LineItems** | Pointer to [**[]Product**](Product.md) | List of [products](https://developers.femsa.com/v2.1.0/reference/orderscreateproduct) that are sold in the order. You must have at least one product. | [optional] 
+**Charges** | Pointer to [**[]ChargeRequest**](ChargeRequest.md) |  | [optional] 
+**DiscountLines** | Pointer to [**[]OrderDiscountLinesRequest**](OrderDiscountLinesRequest.md) | List of [discounts](https://developers.femsa.com/v2.1.0/reference/orderscreatediscountline) that are applied to the order. You must have at least one discount. | [optional] 
 **TaxLines** | Pointer to [**[]OrderTaxRequest**](OrderTaxRequest.md) |  | [optional] 
-**DiscountLines** | Pointer to [**[]OrderDiscountLinesRequest**](OrderDiscountLinesRequest.md) | List of discounts applied to the order. | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** | Additional information attached to the order. | [optional] 
-**ReturnUrl** | Pointer to **string** | URL to redirect the customer after completing the flow (when applicable). | [optional] 
-**Charges** | Pointer to [**[]ChargeRequest**](ChargeRequest.md) | Add new charges to the order. Subject to server-side validations (for example, maximum charges rules).  | [optional] 
-**ShippingContactId** | Pointer to **NullableString** | References an existing customer shipping contact. | [optional] 
+**ShippingContactId** | Pointer to **NullableString** | Existing shipping contact id from the customer to link to this order. | [optional] 
 **ShippingContact** | Pointer to [**CustomerShippingContacts**](CustomerShippingContacts.md) |  | [optional] 
-**FiscalEntityId** | Pointer to **NullableString** | References an existing customer fiscal entity. | [optional] 
+**ShippingLines** | Pointer to [**[]ShippingRequest**](ShippingRequest.md) | List of [shipping costs](https://developers.femsa.com/v2.1.0/reference/orderscreateshipping). If the online store offers digital products. | [optional] 
+**FiscalEntityId** | Pointer to **NullableString** | Existing fiscal entity id from the customer to link to this order. | [optional] 
 **FiscalEntity** | Pointer to [**OrderUpdateFiscalEntityRequest**](OrderUpdateFiscalEntityRequest.md) |  | [optional] 
+**ReturnUrl** | Pointer to **string** | URL where the customer should be redirected after completing a payment flow (if applicable). | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Arbitrary key-value data that you can attach to the order for your internal use. It is not used for payment processing. Keys should be strings; values can be any JSON value.  | [optional] 
+**Status** | Pointer to **string** | Order status update (only allowed transitions will be accepted). | [optional] 
 
 ## Methods
 
@@ -37,31 +37,6 @@ will change when the set of required properties is changed
 NewOrderUpdateRequestWithDefaults instantiates a new OrderUpdateRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetStatus
-
-`func (o *OrderUpdateRequest) GetStatus() string`
-
-GetStatus returns the Status field if non-nil, zero value otherwise.
-
-### GetStatusOk
-
-`func (o *OrderUpdateRequest) GetStatusOk() (*string, bool)`
-
-GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStatus
-
-`func (o *OrderUpdateRequest) SetStatus(v string)`
-
-SetStatus sets Status field to given value.
-
-### HasStatus
-
-`func (o *OrderUpdateRequest) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
 
 ### GetCurrency
 
@@ -90,20 +65,20 @@ HasCurrency returns a boolean if a field has been set.
 
 ### GetCustomerInfo
 
-`func (o *OrderUpdateRequest) GetCustomerInfo() CustomerInfo`
+`func (o *OrderUpdateRequest) GetCustomerInfo() OrderUpdateRequestCustomerInfo`
 
 GetCustomerInfo returns the CustomerInfo field if non-nil, zero value otherwise.
 
 ### GetCustomerInfoOk
 
-`func (o *OrderUpdateRequest) GetCustomerInfoOk() (*CustomerInfo, bool)`
+`func (o *OrderUpdateRequest) GetCustomerInfoOk() (*OrderUpdateRequestCustomerInfo, bool)`
 
 GetCustomerInfoOk returns a tuple with the CustomerInfo field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCustomerInfo
 
-`func (o *OrderUpdateRequest) SetCustomerInfo(v CustomerInfo)`
+`func (o *OrderUpdateRequest) SetCustomerInfo(v OrderUpdateRequestCustomerInfo)`
 
 SetCustomerInfo sets CustomerInfo field to given value.
 
@@ -138,55 +113,30 @@ SetLineItems sets LineItems field to given value.
 
 HasLineItems returns a boolean if a field has been set.
 
-### GetShippingLines
+### GetCharges
 
-`func (o *OrderUpdateRequest) GetShippingLines() []ShippingRequest`
+`func (o *OrderUpdateRequest) GetCharges() []ChargeRequest`
 
-GetShippingLines returns the ShippingLines field if non-nil, zero value otherwise.
+GetCharges returns the Charges field if non-nil, zero value otherwise.
 
-### GetShippingLinesOk
+### GetChargesOk
 
-`func (o *OrderUpdateRequest) GetShippingLinesOk() (*[]ShippingRequest, bool)`
+`func (o *OrderUpdateRequest) GetChargesOk() (*[]ChargeRequest, bool)`
 
-GetShippingLinesOk returns a tuple with the ShippingLines field if it's non-nil, zero value otherwise
+GetChargesOk returns a tuple with the Charges field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetShippingLines
+### SetCharges
 
-`func (o *OrderUpdateRequest) SetShippingLines(v []ShippingRequest)`
+`func (o *OrderUpdateRequest) SetCharges(v []ChargeRequest)`
 
-SetShippingLines sets ShippingLines field to given value.
+SetCharges sets Charges field to given value.
 
-### HasShippingLines
+### HasCharges
 
-`func (o *OrderUpdateRequest) HasShippingLines() bool`
+`func (o *OrderUpdateRequest) HasCharges() bool`
 
-HasShippingLines returns a boolean if a field has been set.
-
-### GetTaxLines
-
-`func (o *OrderUpdateRequest) GetTaxLines() []OrderTaxRequest`
-
-GetTaxLines returns the TaxLines field if non-nil, zero value otherwise.
-
-### GetTaxLinesOk
-
-`func (o *OrderUpdateRequest) GetTaxLinesOk() (*[]OrderTaxRequest, bool)`
-
-GetTaxLinesOk returns a tuple with the TaxLines field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetTaxLines
-
-`func (o *OrderUpdateRequest) SetTaxLines(v []OrderTaxRequest)`
-
-SetTaxLines sets TaxLines field to given value.
-
-### HasTaxLines
-
-`func (o *OrderUpdateRequest) HasTaxLines() bool`
-
-HasTaxLines returns a boolean if a field has been set.
+HasCharges returns a boolean if a field has been set.
 
 ### GetDiscountLines
 
@@ -213,80 +163,30 @@ SetDiscountLines sets DiscountLines field to given value.
 
 HasDiscountLines returns a boolean if a field has been set.
 
-### GetMetadata
+### GetTaxLines
 
-`func (o *OrderUpdateRequest) GetMetadata() map[string]interface{}`
+`func (o *OrderUpdateRequest) GetTaxLines() []OrderTaxRequest`
 
-GetMetadata returns the Metadata field if non-nil, zero value otherwise.
+GetTaxLines returns the TaxLines field if non-nil, zero value otherwise.
 
-### GetMetadataOk
+### GetTaxLinesOk
 
-`func (o *OrderUpdateRequest) GetMetadataOk() (*map[string]interface{}, bool)`
+`func (o *OrderUpdateRequest) GetTaxLinesOk() (*[]OrderTaxRequest, bool)`
 
-GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
+GetTaxLinesOk returns a tuple with the TaxLines field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMetadata
+### SetTaxLines
 
-`func (o *OrderUpdateRequest) SetMetadata(v map[string]interface{})`
+`func (o *OrderUpdateRequest) SetTaxLines(v []OrderTaxRequest)`
 
-SetMetadata sets Metadata field to given value.
+SetTaxLines sets TaxLines field to given value.
 
-### HasMetadata
+### HasTaxLines
 
-`func (o *OrderUpdateRequest) HasMetadata() bool`
+`func (o *OrderUpdateRequest) HasTaxLines() bool`
 
-HasMetadata returns a boolean if a field has been set.
-
-### GetReturnUrl
-
-`func (o *OrderUpdateRequest) GetReturnUrl() string`
-
-GetReturnUrl returns the ReturnUrl field if non-nil, zero value otherwise.
-
-### GetReturnUrlOk
-
-`func (o *OrderUpdateRequest) GetReturnUrlOk() (*string, bool)`
-
-GetReturnUrlOk returns a tuple with the ReturnUrl field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetReturnUrl
-
-`func (o *OrderUpdateRequest) SetReturnUrl(v string)`
-
-SetReturnUrl sets ReturnUrl field to given value.
-
-### HasReturnUrl
-
-`func (o *OrderUpdateRequest) HasReturnUrl() bool`
-
-HasReturnUrl returns a boolean if a field has been set.
-
-### GetCharges
-
-`func (o *OrderUpdateRequest) GetCharges() []ChargeRequest`
-
-GetCharges returns the Charges field if non-nil, zero value otherwise.
-
-### GetChargesOk
-
-`func (o *OrderUpdateRequest) GetChargesOk() (*[]ChargeRequest, bool)`
-
-GetChargesOk returns a tuple with the Charges field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCharges
-
-`func (o *OrderUpdateRequest) SetCharges(v []ChargeRequest)`
-
-SetCharges sets Charges field to given value.
-
-### HasCharges
-
-`func (o *OrderUpdateRequest) HasCharges() bool`
-
-HasCharges returns a boolean if a field has been set.
+HasTaxLines returns a boolean if a field has been set.
 
 ### GetShippingContactId
 
@@ -348,6 +248,31 @@ SetShippingContact sets ShippingContact field to given value.
 
 HasShippingContact returns a boolean if a field has been set.
 
+### GetShippingLines
+
+`func (o *OrderUpdateRequest) GetShippingLines() []ShippingRequest`
+
+GetShippingLines returns the ShippingLines field if non-nil, zero value otherwise.
+
+### GetShippingLinesOk
+
+`func (o *OrderUpdateRequest) GetShippingLinesOk() (*[]ShippingRequest, bool)`
+
+GetShippingLinesOk returns a tuple with the ShippingLines field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShippingLines
+
+`func (o *OrderUpdateRequest) SetShippingLines(v []ShippingRequest)`
+
+SetShippingLines sets ShippingLines field to given value.
+
+### HasShippingLines
+
+`func (o *OrderUpdateRequest) HasShippingLines() bool`
+
+HasShippingLines returns a boolean if a field has been set.
+
 ### GetFiscalEntityId
 
 `func (o *OrderUpdateRequest) GetFiscalEntityId() string`
@@ -407,6 +332,81 @@ SetFiscalEntity sets FiscalEntity field to given value.
 `func (o *OrderUpdateRequest) HasFiscalEntity() bool`
 
 HasFiscalEntity returns a boolean if a field has been set.
+
+### GetReturnUrl
+
+`func (o *OrderUpdateRequest) GetReturnUrl() string`
+
+GetReturnUrl returns the ReturnUrl field if non-nil, zero value otherwise.
+
+### GetReturnUrlOk
+
+`func (o *OrderUpdateRequest) GetReturnUrlOk() (*string, bool)`
+
+GetReturnUrlOk returns a tuple with the ReturnUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReturnUrl
+
+`func (o *OrderUpdateRequest) SetReturnUrl(v string)`
+
+SetReturnUrl sets ReturnUrl field to given value.
+
+### HasReturnUrl
+
+`func (o *OrderUpdateRequest) HasReturnUrl() bool`
+
+HasReturnUrl returns a boolean if a field has been set.
+
+### GetMetadata
+
+`func (o *OrderUpdateRequest) GetMetadata() map[string]interface{}`
+
+GetMetadata returns the Metadata field if non-nil, zero value otherwise.
+
+### GetMetadataOk
+
+`func (o *OrderUpdateRequest) GetMetadataOk() (*map[string]interface{}, bool)`
+
+GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetadata
+
+`func (o *OrderUpdateRequest) SetMetadata(v map[string]interface{})`
+
+SetMetadata sets Metadata field to given value.
+
+### HasMetadata
+
+`func (o *OrderUpdateRequest) HasMetadata() bool`
+
+HasMetadata returns a boolean if a field has been set.
+
+### GetStatus
+
+`func (o *OrderUpdateRequest) GetStatus() string`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *OrderUpdateRequest) GetStatusOk() (*string, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *OrderUpdateRequest) SetStatus(v string)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *OrderUpdateRequest) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

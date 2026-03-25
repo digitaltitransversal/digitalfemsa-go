@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -18,7 +18,7 @@ import (
 // checks if the CustomerUpdateShippingContacts type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CustomerUpdateShippingContacts{}
 
-// CustomerUpdateShippingContacts [Shipping Contacts](https://developers.femsa.com/v2.2.0/reference/createcustomershippingcontacts) details for updating a customer shipping contact. Only the fields provided in the request body are updated.
+// CustomerUpdateShippingContacts [Shipping](https://developers.femsa.com/v2.1.0/reference/createcustomershippingcontacts) details, required in case of sending a shipping. If we do not receive a shipping_contact on the order, the default shipping_contact of the customer will be used.
 type CustomerUpdateShippingContacts struct {
 	// Phone contact
 	Phone *string `json:"phone,omitempty"`
@@ -27,8 +27,9 @@ type CustomerUpdateShippingContacts struct {
 	// The street names between which the order will be delivered.
 	BetweenStreets *string `json:"between_streets,omitempty"`
 	Address *CustomerShippingContactsAddress `json:"address,omitempty"`
-	// Metadata associated with the shipping contact
-	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	ParentId *string `json:"parent_id,omitempty"`
+	Default NullableBool `json:"default,omitempty"`
+	Deleted NullableBool `json:"deleted,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -179,36 +180,120 @@ func (o *CustomerUpdateShippingContacts) SetAddress(v CustomerShippingContactsAd
 	o.Address = &v
 }
 
-// GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *CustomerUpdateShippingContacts) GetMetadata() map[string]interface{} {
-	if o == nil || IsNil(o.Metadata) {
-		var ret map[string]interface{}
+// GetParentId returns the ParentId field value if set, zero value otherwise.
+func (o *CustomerUpdateShippingContacts) GetParentId() string {
+	if o == nil || IsNil(o.ParentId) {
+		var ret string
 		return ret
 	}
-	return o.Metadata
+	return *o.ParentId
 }
 
-// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// GetParentIdOk returns a tuple with the ParentId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CustomerUpdateShippingContacts) GetMetadataOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Metadata) {
-		return map[string]interface{}{}, false
+func (o *CustomerUpdateShippingContacts) GetParentIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ParentId) {
+		return nil, false
 	}
-	return o.Metadata, true
+	return o.ParentId, true
 }
 
-// HasMetadata returns a boolean if a field has been set.
-func (o *CustomerUpdateShippingContacts) HasMetadata() bool {
-	if o != nil && !IsNil(o.Metadata) {
+// HasParentId returns a boolean if a field has been set.
+func (o *CustomerUpdateShippingContacts) HasParentId() bool {
+	if o != nil && !IsNil(o.ParentId) {
 		return true
 	}
 
 	return false
 }
 
-// SetMetadata gets a reference to the given map[string]interface{} and assigns it to the Metadata field.
-func (o *CustomerUpdateShippingContacts) SetMetadata(v map[string]interface{}) {
-	o.Metadata = v
+// SetParentId gets a reference to the given string and assigns it to the ParentId field.
+func (o *CustomerUpdateShippingContacts) SetParentId(v string) {
+	o.ParentId = &v
+}
+
+// GetDefault returns the Default field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CustomerUpdateShippingContacts) GetDefault() bool {
+	if o == nil || IsNil(o.Default.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.Default.Get()
+}
+
+// GetDefaultOk returns a tuple with the Default field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CustomerUpdateShippingContacts) GetDefaultOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Default.Get(), o.Default.IsSet()
+}
+
+// HasDefault returns a boolean if a field has been set.
+func (o *CustomerUpdateShippingContacts) HasDefault() bool {
+	if o != nil && o.Default.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDefault gets a reference to the given NullableBool and assigns it to the Default field.
+func (o *CustomerUpdateShippingContacts) SetDefault(v bool) {
+	o.Default.Set(&v)
+}
+// SetDefaultNil sets the value for Default to be an explicit nil
+func (o *CustomerUpdateShippingContacts) SetDefaultNil() {
+	o.Default.Set(nil)
+}
+
+// UnsetDefault ensures that no value is present for Default, not even an explicit nil
+func (o *CustomerUpdateShippingContacts) UnsetDefault() {
+	o.Default.Unset()
+}
+
+// GetDeleted returns the Deleted field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CustomerUpdateShippingContacts) GetDeleted() bool {
+	if o == nil || IsNil(o.Deleted.Get()) {
+		var ret bool
+		return ret
+	}
+	return *o.Deleted.Get()
+}
+
+// GetDeletedOk returns a tuple with the Deleted field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CustomerUpdateShippingContacts) GetDeletedOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Deleted.Get(), o.Deleted.IsSet()
+}
+
+// HasDeleted returns a boolean if a field has been set.
+func (o *CustomerUpdateShippingContacts) HasDeleted() bool {
+	if o != nil && o.Deleted.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDeleted gets a reference to the given NullableBool and assigns it to the Deleted field.
+func (o *CustomerUpdateShippingContacts) SetDeleted(v bool) {
+	o.Deleted.Set(&v)
+}
+// SetDeletedNil sets the value for Deleted to be an explicit nil
+func (o *CustomerUpdateShippingContacts) SetDeletedNil() {
+	o.Deleted.Set(nil)
+}
+
+// UnsetDeleted ensures that no value is present for Deleted, not even an explicit nil
+func (o *CustomerUpdateShippingContacts) UnsetDeleted() {
+	o.Deleted.Unset()
 }
 
 func (o CustomerUpdateShippingContacts) MarshalJSON() ([]byte, error) {
@@ -233,8 +318,14 @@ func (o CustomerUpdateShippingContacts) ToMap() (map[string]interface{}, error) 
 	if !IsNil(o.Address) {
 		toSerialize["address"] = o.Address
 	}
-	if !IsNil(o.Metadata) {
-		toSerialize["metadata"] = o.Metadata
+	if !IsNil(o.ParentId) {
+		toSerialize["parent_id"] = o.ParentId
+	}
+	if o.Default.IsSet() {
+		toSerialize["default"] = o.Default.Get()
+	}
+	if o.Deleted.IsSet() {
+		toSerialize["deleted"] = o.Deleted.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -262,7 +353,9 @@ func (o *CustomerUpdateShippingContacts) UnmarshalJSON(data []byte) (err error) 
 		delete(additionalProperties, "receiver")
 		delete(additionalProperties, "between_streets")
 		delete(additionalProperties, "address")
-		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "parent_id")
+		delete(additionalProperties, "default")
+		delete(additionalProperties, "deleted")
 		o.AdditionalProperties = additionalProperties
 	}
 

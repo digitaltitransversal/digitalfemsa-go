@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -39,9 +39,9 @@ type ShippingContactsAPI interface {
 	CreateCustomerShippingContactsExecute(r ApiCreateCustomerShippingContactsRequest) (*CustomerShippingContactsResponse, *http.Response, error)
 
 	/*
-	DeleteCustomerShippingContacts Delete shipping contact
+	DeleteCustomerShippingContacts Delete shipping contacts
 
-	Deletes an existing shipping contact for a customer. The shipping contact identified by `shipping_contacts_id` belongs to the customer identified by `id`. The response includes the deleted resource with `deleted: true`.
+	Delete shipping contact that corresponds to a customer ID.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Identifier of the resource
@@ -55,9 +55,9 @@ type ShippingContactsAPI interface {
 	DeleteCustomerShippingContactsExecute(r ApiDeleteCustomerShippingContactsRequest) (*CustomerShippingContactsResponse, *http.Response, error)
 
 	/*
-	UpdateCustomerShippingContacts Update shipping contact
+	UpdateCustomerShippingContacts Update shipping contacts
 
-	Updates an existing shipping contact for a customer. The shipping contact identified by `shipping_contacts_id` belongs to the customer identified by `id`. Only the fields provided in the request body are updated.
+	Update shipping contact that corresponds to a customer ID.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Identifier of the resource
@@ -157,7 +157,7 @@ func (a *ShippingContactsAPIService) CreateCustomerShippingContactsExecute(r Api
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -278,9 +278,9 @@ func (r ApiDeleteCustomerShippingContactsRequest) Execute() (*CustomerShippingCo
 }
 
 /*
-DeleteCustomerShippingContacts Delete shipping contact
+DeleteCustomerShippingContacts Delete shipping contacts
 
-Deletes an existing shipping contact for a customer. The shipping contact identified by `shipping_contacts_id` belongs to the customer identified by `id`. The response includes the deleted resource with `deleted: true`.
+Delete shipping contact that corresponds to a customer ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Identifier of the resource
@@ -329,7 +329,7 @@ func (a *ShippingContactsAPIService) DeleteCustomerShippingContactsExecute(r Api
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -455,9 +455,9 @@ func (r ApiUpdateCustomerShippingContactsRequest) Execute() (*CustomerShippingCo
 }
 
 /*
-UpdateCustomerShippingContacts Update shipping contact
+UpdateCustomerShippingContacts Update shipping contacts
 
-Updates an existing shipping contact for a customer. The shipping contact identified by `shipping_contacts_id` belongs to the customer identified by `id`. Only the fields provided in the request body are updated.
+Update shipping contact that corresponds to a customer ID.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Identifier of the resource
@@ -509,7 +509,7 @@ func (a *ShippingContactsAPIService) UpdateCustomerShippingContactsExecute(r Api
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

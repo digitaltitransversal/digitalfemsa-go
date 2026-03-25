@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -19,23 +19,27 @@ import (
 // checks if the Checkout type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &Checkout{}
 
-// Checkout It is a sub-resource of the Order model that can be stipulated in order to configure its corresponding checkout
+// Checkout Creates a Payment Link. This is a sub-resource related to an Order template: each time a customer pays using the link, the API will create an Order using `order_template`. 
 type Checkout struct {
-	// Those are the payment methods that will be available for the link
-	AllowedPaymentMethods []string `json:"allowed_payment_methods"`
-	// It is the time when the link will expire. It is expressed in seconds since the Unix epoch. The valid range is from 2 to 365 days (the valid range will be taken from the next day of the creation date at 00:01 hrs) 
-	ExpiresAt int64 `json:"expires_at"`
-	// Payment link name
+	// Payment link name.
 	Name string `json:"name"`
-	// This flag allows you to fill in the shipping information at checkout.
-	NeedsShippingContact *bool `json:"needs_shipping_contact,omitempty"`
-	OrderTemplate CheckoutOrderTemplate `json:"order_template"`
-	// It is the number of payments that can be made through the link.
-	PaymentsLimitCount *int32 `json:"payments_limit_count,omitempty"`
+	// Checkout type.
+	Type string `json:"type"`
 	// false: single use. true: multiple payments
 	Recurrent bool `json:"recurrent"`
-	// It is the type of link that will be created. It must be a valid type.
-	Type string `json:"type"`
+	// Required when `recurrent` is true. Maximum number of payments allowed through the link.
+	PaymentsLimitCount *int32 `json:"payments_limit_count,omitempty"`
+	// Payment methods available in the payment link.
+	AllowedPaymentMethods []string `json:"allowed_payment_methods"`
+	// This flag allows you to fill in the shipping information at checkout.
+	NeedsShippingContact bool `json:"needs_shipping_contact"`
+	// Start time for the link. Unix timestamp in seconds.
+	StartsAt *int64 `json:"starts_at,omitempty"`
+	// Expiration time for the link (Unix timestamp in seconds). Valid range is between 2 and 365 days (calculated from the next day of creation at 00:01). 
+	ExpiresAt int64 `json:"expires_at"`
+	// If true, the link does not expire.
+	CanNotExpire *bool `json:"can_not_expire,omitempty"`
+	OrderTemplate CheckoutOrderTemplate `json:"order_template"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,14 +49,15 @@ type _Checkout Checkout
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCheckout(allowedPaymentMethods []string, expiresAt int64, name string, orderTemplate CheckoutOrderTemplate, recurrent bool, type_ string) *Checkout {
+func NewCheckout(name string, type_ string, recurrent bool, allowedPaymentMethods []string, needsShippingContact bool, expiresAt int64, orderTemplate CheckoutOrderTemplate) *Checkout {
 	this := Checkout{}
-	this.AllowedPaymentMethods = allowedPaymentMethods
-	this.ExpiresAt = expiresAt
 	this.Name = name
-	this.OrderTemplate = orderTemplate
-	this.Recurrent = recurrent
 	this.Type = type_
+	this.Recurrent = recurrent
+	this.AllowedPaymentMethods = allowedPaymentMethods
+	this.NeedsShippingContact = needsShippingContact
+	this.ExpiresAt = expiresAt
+	this.OrderTemplate = orderTemplate
 	return &this
 }
 
@@ -62,54 +67,6 @@ func NewCheckout(allowedPaymentMethods []string, expiresAt int64, name string, o
 func NewCheckoutWithDefaults() *Checkout {
 	this := Checkout{}
 	return &this
-}
-
-// GetAllowedPaymentMethods returns the AllowedPaymentMethods field value
-func (o *Checkout) GetAllowedPaymentMethods() []string {
-	if o == nil {
-		var ret []string
-		return ret
-	}
-
-	return o.AllowedPaymentMethods
-}
-
-// GetAllowedPaymentMethodsOk returns a tuple with the AllowedPaymentMethods field value
-// and a boolean to check if the value has been set.
-func (o *Checkout) GetAllowedPaymentMethodsOk() ([]string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.AllowedPaymentMethods, true
-}
-
-// SetAllowedPaymentMethods sets field value
-func (o *Checkout) SetAllowedPaymentMethods(v []string) {
-	o.AllowedPaymentMethods = v
-}
-
-// GetExpiresAt returns the ExpiresAt field value
-func (o *Checkout) GetExpiresAt() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.ExpiresAt
-}
-
-// GetExpiresAtOk returns a tuple with the ExpiresAt field value
-// and a boolean to check if the value has been set.
-func (o *Checkout) GetExpiresAtOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.ExpiresAt, true
-}
-
-// SetExpiresAt sets field value
-func (o *Checkout) SetExpiresAt(v int64) {
-	o.ExpiresAt = v
 }
 
 // GetName returns the Name field value
@@ -136,60 +93,52 @@ func (o *Checkout) SetName(v string) {
 	o.Name = v
 }
 
-// GetNeedsShippingContact returns the NeedsShippingContact field value if set, zero value otherwise.
-func (o *Checkout) GetNeedsShippingContact() bool {
-	if o == nil || IsNil(o.NeedsShippingContact) {
+// GetType returns the Type field value
+func (o *Checkout) GetType() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value
+// and a boolean to check if the value has been set.
+func (o *Checkout) GetTypeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Type, true
+}
+
+// SetType sets field value
+func (o *Checkout) SetType(v string) {
+	o.Type = v
+}
+
+// GetRecurrent returns the Recurrent field value
+func (o *Checkout) GetRecurrent() bool {
+	if o == nil {
 		var ret bool
 		return ret
 	}
-	return *o.NeedsShippingContact
+
+	return o.Recurrent
 }
 
-// GetNeedsShippingContactOk returns a tuple with the NeedsShippingContact field value if set, nil otherwise
+// GetRecurrentOk returns a tuple with the Recurrent field value
 // and a boolean to check if the value has been set.
-func (o *Checkout) GetNeedsShippingContactOk() (*bool, bool) {
-	if o == nil || IsNil(o.NeedsShippingContact) {
-		return nil, false
-	}
-	return o.NeedsShippingContact, true
-}
-
-// HasNeedsShippingContact returns a boolean if a field has been set.
-func (o *Checkout) HasNeedsShippingContact() bool {
-	if o != nil && !IsNil(o.NeedsShippingContact) {
-		return true
-	}
-
-	return false
-}
-
-// SetNeedsShippingContact gets a reference to the given bool and assigns it to the NeedsShippingContact field.
-func (o *Checkout) SetNeedsShippingContact(v bool) {
-	o.NeedsShippingContact = &v
-}
-
-// GetOrderTemplate returns the OrderTemplate field value
-func (o *Checkout) GetOrderTemplate() CheckoutOrderTemplate {
-	if o == nil {
-		var ret CheckoutOrderTemplate
-		return ret
-	}
-
-	return o.OrderTemplate
-}
-
-// GetOrderTemplateOk returns a tuple with the OrderTemplate field value
-// and a boolean to check if the value has been set.
-func (o *Checkout) GetOrderTemplateOk() (*CheckoutOrderTemplate, bool) {
+func (o *Checkout) GetRecurrentOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.OrderTemplate, true
+	return &o.Recurrent, true
 }
 
-// SetOrderTemplate sets field value
-func (o *Checkout) SetOrderTemplate(v CheckoutOrderTemplate) {
-	o.OrderTemplate = v
+// SetRecurrent sets field value
+func (o *Checkout) SetRecurrent(v bool) {
+	o.Recurrent = v
 }
 
 // GetPaymentsLimitCount returns the PaymentsLimitCount field value if set, zero value otherwise.
@@ -224,52 +173,164 @@ func (o *Checkout) SetPaymentsLimitCount(v int32) {
 	o.PaymentsLimitCount = &v
 }
 
-// GetRecurrent returns the Recurrent field value
-func (o *Checkout) GetRecurrent() bool {
+// GetAllowedPaymentMethods returns the AllowedPaymentMethods field value
+func (o *Checkout) GetAllowedPaymentMethods() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+
+	return o.AllowedPaymentMethods
+}
+
+// GetAllowedPaymentMethodsOk returns a tuple with the AllowedPaymentMethods field value
+// and a boolean to check if the value has been set.
+func (o *Checkout) GetAllowedPaymentMethodsOk() ([]string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.AllowedPaymentMethods, true
+}
+
+// SetAllowedPaymentMethods sets field value
+func (o *Checkout) SetAllowedPaymentMethods(v []string) {
+	o.AllowedPaymentMethods = v
+}
+
+// GetNeedsShippingContact returns the NeedsShippingContact field value
+func (o *Checkout) GetNeedsShippingContact() bool {
 	if o == nil {
 		var ret bool
 		return ret
 	}
 
-	return o.Recurrent
+	return o.NeedsShippingContact
 }
 
-// GetRecurrentOk returns a tuple with the Recurrent field value
+// GetNeedsShippingContactOk returns a tuple with the NeedsShippingContact field value
 // and a boolean to check if the value has been set.
-func (o *Checkout) GetRecurrentOk() (*bool, bool) {
+func (o *Checkout) GetNeedsShippingContactOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Recurrent, true
+	return &o.NeedsShippingContact, true
 }
 
-// SetRecurrent sets field value
-func (o *Checkout) SetRecurrent(v bool) {
-	o.Recurrent = v
+// SetNeedsShippingContact sets field value
+func (o *Checkout) SetNeedsShippingContact(v bool) {
+	o.NeedsShippingContact = v
 }
 
-// GetType returns the Type field value
-func (o *Checkout) GetType() string {
+// GetStartsAt returns the StartsAt field value if set, zero value otherwise.
+func (o *Checkout) GetStartsAt() int64 {
+	if o == nil || IsNil(o.StartsAt) {
+		var ret int64
+		return ret
+	}
+	return *o.StartsAt
+}
+
+// GetStartsAtOk returns a tuple with the StartsAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Checkout) GetStartsAtOk() (*int64, bool) {
+	if o == nil || IsNil(o.StartsAt) {
+		return nil, false
+	}
+	return o.StartsAt, true
+}
+
+// HasStartsAt returns a boolean if a field has been set.
+func (o *Checkout) HasStartsAt() bool {
+	if o != nil && !IsNil(o.StartsAt) {
+		return true
+	}
+
+	return false
+}
+
+// SetStartsAt gets a reference to the given int64 and assigns it to the StartsAt field.
+func (o *Checkout) SetStartsAt(v int64) {
+	o.StartsAt = &v
+}
+
+// GetExpiresAt returns the ExpiresAt field value
+func (o *Checkout) GetExpiresAt() int64 {
 	if o == nil {
-		var ret string
+		var ret int64
 		return ret
 	}
 
-	return o.Type
+	return o.ExpiresAt
 }
 
-// GetTypeOk returns a tuple with the Type field value
+// GetExpiresAtOk returns a tuple with the ExpiresAt field value
 // and a boolean to check if the value has been set.
-func (o *Checkout) GetTypeOk() (*string, bool) {
+func (o *Checkout) GetExpiresAtOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Type, true
+	return &o.ExpiresAt, true
 }
 
-// SetType sets field value
-func (o *Checkout) SetType(v string) {
-	o.Type = v
+// SetExpiresAt sets field value
+func (o *Checkout) SetExpiresAt(v int64) {
+	o.ExpiresAt = v
+}
+
+// GetCanNotExpire returns the CanNotExpire field value if set, zero value otherwise.
+func (o *Checkout) GetCanNotExpire() bool {
+	if o == nil || IsNil(o.CanNotExpire) {
+		var ret bool
+		return ret
+	}
+	return *o.CanNotExpire
+}
+
+// GetCanNotExpireOk returns a tuple with the CanNotExpire field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Checkout) GetCanNotExpireOk() (*bool, bool) {
+	if o == nil || IsNil(o.CanNotExpire) {
+		return nil, false
+	}
+	return o.CanNotExpire, true
+}
+
+// HasCanNotExpire returns a boolean if a field has been set.
+func (o *Checkout) HasCanNotExpire() bool {
+	if o != nil && !IsNil(o.CanNotExpire) {
+		return true
+	}
+
+	return false
+}
+
+// SetCanNotExpire gets a reference to the given bool and assigns it to the CanNotExpire field.
+func (o *Checkout) SetCanNotExpire(v bool) {
+	o.CanNotExpire = &v
+}
+
+// GetOrderTemplate returns the OrderTemplate field value
+func (o *Checkout) GetOrderTemplate() CheckoutOrderTemplate {
+	if o == nil {
+		var ret CheckoutOrderTemplate
+		return ret
+	}
+
+	return o.OrderTemplate
+}
+
+// GetOrderTemplateOk returns a tuple with the OrderTemplate field value
+// and a boolean to check if the value has been set.
+func (o *Checkout) GetOrderTemplateOk() (*CheckoutOrderTemplate, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.OrderTemplate, true
+}
+
+// SetOrderTemplate sets field value
+func (o *Checkout) SetOrderTemplate(v CheckoutOrderTemplate) {
+	o.OrderTemplate = v
 }
 
 func (o Checkout) MarshalJSON() ([]byte, error) {
@@ -282,18 +343,22 @@ func (o Checkout) MarshalJSON() ([]byte, error) {
 
 func (o Checkout) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["allowed_payment_methods"] = o.AllowedPaymentMethods
-	toSerialize["expires_at"] = o.ExpiresAt
 	toSerialize["name"] = o.Name
-	if !IsNil(o.NeedsShippingContact) {
-		toSerialize["needs_shipping_contact"] = o.NeedsShippingContact
-	}
-	toSerialize["order_template"] = o.OrderTemplate
+	toSerialize["type"] = o.Type
+	toSerialize["recurrent"] = o.Recurrent
 	if !IsNil(o.PaymentsLimitCount) {
 		toSerialize["payments_limit_count"] = o.PaymentsLimitCount
 	}
-	toSerialize["recurrent"] = o.Recurrent
-	toSerialize["type"] = o.Type
+	toSerialize["allowed_payment_methods"] = o.AllowedPaymentMethods
+	toSerialize["needs_shipping_contact"] = o.NeedsShippingContact
+	if !IsNil(o.StartsAt) {
+		toSerialize["starts_at"] = o.StartsAt
+	}
+	toSerialize["expires_at"] = o.ExpiresAt
+	if !IsNil(o.CanNotExpire) {
+		toSerialize["can_not_expire"] = o.CanNotExpire
+	}
+	toSerialize["order_template"] = o.OrderTemplate
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -307,12 +372,13 @@ func (o *Checkout) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"allowed_payment_methods",
-		"expires_at",
 		"name",
-		"order_template",
-		"recurrent",
 		"type",
+		"recurrent",
+		"allowed_payment_methods",
+		"needs_shipping_contact",
+		"expires_at",
+		"order_template",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -342,14 +408,16 @@ func (o *Checkout) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "allowed_payment_methods")
-		delete(additionalProperties, "expires_at")
 		delete(additionalProperties, "name")
-		delete(additionalProperties, "needs_shipping_contact")
-		delete(additionalProperties, "order_template")
-		delete(additionalProperties, "payments_limit_count")
-		delete(additionalProperties, "recurrent")
 		delete(additionalProperties, "type")
+		delete(additionalProperties, "recurrent")
+		delete(additionalProperties, "payments_limit_count")
+		delete(additionalProperties, "allowed_payment_methods")
+		delete(additionalProperties, "needs_shipping_contact")
+		delete(additionalProperties, "starts_at")
+		delete(additionalProperties, "expires_at")
+		delete(additionalProperties, "can_not_expire")
+		delete(additionalProperties, "order_template")
 		o.AdditionalProperties = additionalProperties
 	}
 

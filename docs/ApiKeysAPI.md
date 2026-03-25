@@ -5,10 +5,10 @@ All URIs are relative to *https://api.digitalfemsa.io*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateApiKey**](ApiKeysAPI.md#CreateApiKey) | **Post** /api_keys | Create API key
-[**DeleteApiKey**](ApiKeysAPI.md#DeleteApiKey) | **Delete** /api_keys/{id} | Delete API key
-[**GetApiKey**](ApiKeysAPI.md#GetApiKey) | **Get** /api_keys/{id} | Get API key
+[**DeleteApiKey**](ApiKeysAPI.md#DeleteApiKey) | **Delete** /api_keys/{id} | Delete Api Key
+[**GetApiKey**](ApiKeysAPI.md#GetApiKey) | **Get** /api_keys/{id} | Get Api Key
 [**GetApiKeys**](ApiKeysAPI.md#GetApiKeys) | **Get** /api_keys | List API keys
-[**UpdateApiKey**](ApiKeysAPI.md#UpdateApiKey) | **Put** /api_keys/{id} | Update API key
+[**UpdateApiKey**](ApiKeysAPI.md#UpdateApiKey) | **Put** /api_keys/{id} | Update Api Key
 
 
 
@@ -75,7 +75,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 > DeleteApiKeysResponse DeleteApiKey(ctx, id).AcceptLanguage(acceptLanguage).Execute()
 
-Delete API key
+Delete Api Key
 
 
 
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -158,7 +158,7 @@ Name | Type | Description  | Notes
 
 > ApiKeyResponse GetApiKey(ctx, id).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 
-Get API key
+Get Api Key
 
 
 
@@ -221,7 +221,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -254,7 +254,7 @@ func main() {
 	limit := int32(56) // int32 | The numbers of items to return, the maximum value is 250 (optional) (default to 20)
 	next := "next_example" // string | next page (optional)
 	previous := "previous_example" // string | previous page (optional)
-	search := "search_example" // string | General search, e.g. by id or description (optional)
+	search := "search_example" // string | General search, e.g. by id, description, prefix (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -284,7 +284,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** | The numbers of items to return, the maximum value is 250 | [default to 20]
  **next** | **string** | next page | 
  **previous** | **string** | previous page | 
- **search** | **string** | General search, e.g. by id or description | 
+ **search** | **string** | General search, e.g. by id, description, prefix | 
 
 ### Return type
 
@@ -297,7 +297,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -308,7 +308,7 @@ Name | Type | Description  | Notes
 
 > ApiKeyResponse UpdateApiKey(ctx, id).AcceptLanguage(acceptLanguage).ApiKeyUpdateRequest(apiKeyUpdateRequest).Execute()
 
-Update API key
+Update Api Key
 
 
 
@@ -371,7 +371,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

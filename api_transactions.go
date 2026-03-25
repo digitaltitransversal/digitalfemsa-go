@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -135,7 +135,7 @@ func (a *TransactionsAPIService) GetTransactionExecute(r ApiGetTransactionReques
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -225,7 +225,7 @@ type ApiGetTransactionsRequest struct {
 	limit *int32
 	next *string
 	previous *string
-	search *string
+	id *string
 	chargeId *string
 	type_ *string
 	currency *string
@@ -261,9 +261,9 @@ func (r ApiGetTransactionsRequest) Previous(previous string) ApiGetTransactionsR
 	return r
 }
 
-// General order search, e.g. by mail, reference etc.
-func (r ApiGetTransactionsRequest) Search(search string) ApiGetTransactionsRequest {
-	r.search = &search
+// id of the object to be retrieved
+func (r ApiGetTransactionsRequest) Id(id string) ApiGetTransactionsRequest {
+	r.id = &id
 	return r
 }
 
@@ -343,8 +343,8 @@ func (a *TransactionsAPIService) GetTransactionsExecute(r ApiGetTransactionsRequ
 	if r.previous != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "previous", r.previous, "")
 	}
-	if r.search != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "")
+	if r.id != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "id", r.id, "")
 	}
 	if r.chargeId != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "charge_id", r.chargeId, "")
@@ -365,7 +365,7 @@ func (a *TransactionsAPIService) GetTransactionsExecute(r ApiGetTransactionsRequ
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -37,6 +37,18 @@ func (dst *ChargeResponsePaymentMethod) UnmarshalJSON(data []byte) error {
 	err = newStrictDecoder(data).Decode(&jsonDict)
 	if err != nil {
 		return fmt.Errorf("failed to unmarshal JSON into map for the discriminator lookup")
+	}
+
+	// check if the discriminator value is 'cash_payment'
+	if jsonDict["object"] == "cash_payment" {
+		// try to unmarshal JSON data into PaymentMethodCash
+		err = json.Unmarshal(data, &dst.PaymentMethodCash)
+		if err == nil {
+			return nil // data stored in dst.PaymentMethodCash, return on the first match
+		} else {
+			dst.PaymentMethodCash = nil
+			return fmt.Errorf("failed to unmarshal ChargeResponsePaymentMethod as PaymentMethodCash: %s", err.Error())
+		}
 	}
 
 	// check if the discriminator value is 'payment_method_cash'

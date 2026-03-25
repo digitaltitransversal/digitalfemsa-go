@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -30,17 +30,15 @@ type Customer struct {
 	// Indicates whether the customer email is corporate.
 	Corporate *bool `json:"corporate,omitempty"`
 	// Merchant-defined reference used to identify the customer in your system.
-	CustomReference NullableString `json:"custom_reference,omitempty"`
-	// Referrer value (if applicable).
-	Referrer NullableString `json:"referrer,omitempty"`
+	CustomReference *string `json:"custom_reference,omitempty"`
 	// Arbitrary metadata associated with the customer.
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	// Customer payment sources to be created with the customer (optional).
+	PaymentSources []CustomerPaymentMethodsRequest `json:"payment_sources,omitempty"`
 	// Customer fiscal entities to be created with the customer (optional).
 	FiscalEntities []CustomerFiscalEntitiesRequest `json:"fiscal_entities,omitempty"`
 	// Customer shipping contacts to be created with the customer (optional).
 	ShippingContacts []CustomerShippingContacts `json:"shipping_contacts,omitempty"`
-	// Customer payment sources to be created with the customer (optional).
-	PaymentSources []CustomerPaymentSourcesInner `json:"payment_sources,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -191,88 +189,36 @@ func (o *Customer) SetCorporate(v bool) {
 	o.Corporate = &v
 }
 
-// GetCustomReference returns the CustomReference field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetCustomReference returns the CustomReference field value if set, zero value otherwise.
 func (o *Customer) GetCustomReference() string {
-	if o == nil || IsNil(o.CustomReference.Get()) {
+	if o == nil || IsNil(o.CustomReference) {
 		var ret string
 		return ret
 	}
-	return *o.CustomReference.Get()
+	return *o.CustomReference
 }
 
 // GetCustomReferenceOk returns a tuple with the CustomReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Customer) GetCustomReferenceOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.CustomReference) {
 		return nil, false
 	}
-	return o.CustomReference.Get(), o.CustomReference.IsSet()
+	return o.CustomReference, true
 }
 
 // HasCustomReference returns a boolean if a field has been set.
 func (o *Customer) HasCustomReference() bool {
-	if o != nil && o.CustomReference.IsSet() {
+	if o != nil && !IsNil(o.CustomReference) {
 		return true
 	}
 
 	return false
 }
 
-// SetCustomReference gets a reference to the given NullableString and assigns it to the CustomReference field.
+// SetCustomReference gets a reference to the given string and assigns it to the CustomReference field.
 func (o *Customer) SetCustomReference(v string) {
-	o.CustomReference.Set(&v)
-}
-// SetCustomReferenceNil sets the value for CustomReference to be an explicit nil
-func (o *Customer) SetCustomReferenceNil() {
-	o.CustomReference.Set(nil)
-}
-
-// UnsetCustomReference ensures that no value is present for CustomReference, not even an explicit nil
-func (o *Customer) UnsetCustomReference() {
-	o.CustomReference.Unset()
-}
-
-// GetReferrer returns the Referrer field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Customer) GetReferrer() string {
-	if o == nil || IsNil(o.Referrer.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.Referrer.Get()
-}
-
-// GetReferrerOk returns a tuple with the Referrer field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Customer) GetReferrerOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Referrer.Get(), o.Referrer.IsSet()
-}
-
-// HasReferrer returns a boolean if a field has been set.
-func (o *Customer) HasReferrer() bool {
-	if o != nil && o.Referrer.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetReferrer gets a reference to the given NullableString and assigns it to the Referrer field.
-func (o *Customer) SetReferrer(v string) {
-	o.Referrer.Set(&v)
-}
-// SetReferrerNil sets the value for Referrer to be an explicit nil
-func (o *Customer) SetReferrerNil() {
-	o.Referrer.Set(nil)
-}
-
-// UnsetReferrer ensures that no value is present for Referrer, not even an explicit nil
-func (o *Customer) UnsetReferrer() {
-	o.Referrer.Unset()
+	o.CustomReference = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
@@ -307,9 +253,41 @@ func (o *Customer) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
 }
 
-// GetFiscalEntities returns the FiscalEntities field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetPaymentSources returns the PaymentSources field value if set, zero value otherwise.
+func (o *Customer) GetPaymentSources() []CustomerPaymentMethodsRequest {
+	if o == nil || IsNil(o.PaymentSources) {
+		var ret []CustomerPaymentMethodsRequest
+		return ret
+	}
+	return o.PaymentSources
+}
+
+// GetPaymentSourcesOk returns a tuple with the PaymentSources field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Customer) GetPaymentSourcesOk() ([]CustomerPaymentMethodsRequest, bool) {
+	if o == nil || IsNil(o.PaymentSources) {
+		return nil, false
+	}
+	return o.PaymentSources, true
+}
+
+// HasPaymentSources returns a boolean if a field has been set.
+func (o *Customer) HasPaymentSources() bool {
+	if o != nil && !IsNil(o.PaymentSources) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentSources gets a reference to the given []CustomerPaymentMethodsRequest and assigns it to the PaymentSources field.
+func (o *Customer) SetPaymentSources(v []CustomerPaymentMethodsRequest) {
+	o.PaymentSources = v
+}
+
+// GetFiscalEntities returns the FiscalEntities field value if set, zero value otherwise.
 func (o *Customer) GetFiscalEntities() []CustomerFiscalEntitiesRequest {
-	if o == nil {
+	if o == nil || IsNil(o.FiscalEntities) {
 		var ret []CustomerFiscalEntitiesRequest
 		return ret
 	}
@@ -318,7 +296,6 @@ func (o *Customer) GetFiscalEntities() []CustomerFiscalEntitiesRequest {
 
 // GetFiscalEntitiesOk returns a tuple with the FiscalEntities field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Customer) GetFiscalEntitiesOk() ([]CustomerFiscalEntitiesRequest, bool) {
 	if o == nil || IsNil(o.FiscalEntities) {
 		return nil, false
@@ -340,9 +317,9 @@ func (o *Customer) SetFiscalEntities(v []CustomerFiscalEntitiesRequest) {
 	o.FiscalEntities = v
 }
 
-// GetShippingContacts returns the ShippingContacts field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetShippingContacts returns the ShippingContacts field value if set, zero value otherwise.
 func (o *Customer) GetShippingContacts() []CustomerShippingContacts {
-	if o == nil {
+	if o == nil || IsNil(o.ShippingContacts) {
 		var ret []CustomerShippingContacts
 		return ret
 	}
@@ -351,7 +328,6 @@ func (o *Customer) GetShippingContacts() []CustomerShippingContacts {
 
 // GetShippingContactsOk returns a tuple with the ShippingContacts field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Customer) GetShippingContactsOk() ([]CustomerShippingContacts, bool) {
 	if o == nil || IsNil(o.ShippingContacts) {
 		return nil, false
@@ -373,39 +349,6 @@ func (o *Customer) SetShippingContacts(v []CustomerShippingContacts) {
 	o.ShippingContacts = v
 }
 
-// GetPaymentSources returns the PaymentSources field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Customer) GetPaymentSources() []CustomerPaymentSourcesInner {
-	if o == nil {
-		var ret []CustomerPaymentSourcesInner
-		return ret
-	}
-	return o.PaymentSources
-}
-
-// GetPaymentSourcesOk returns a tuple with the PaymentSources field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Customer) GetPaymentSourcesOk() ([]CustomerPaymentSourcesInner, bool) {
-	if o == nil || IsNil(o.PaymentSources) {
-		return nil, false
-	}
-	return o.PaymentSources, true
-}
-
-// HasPaymentSources returns a boolean if a field has been set.
-func (o *Customer) HasPaymentSources() bool {
-	if o != nil && !IsNil(o.PaymentSources) {
-		return true
-	}
-
-	return false
-}
-
-// SetPaymentSources gets a reference to the given []CustomerPaymentSourcesInner and assigns it to the PaymentSources field.
-func (o *Customer) SetPaymentSources(v []CustomerPaymentSourcesInner) {
-	o.PaymentSources = v
-}
-
 func (o Customer) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -424,23 +367,20 @@ func (o Customer) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Corporate) {
 		toSerialize["corporate"] = o.Corporate
 	}
-	if o.CustomReference.IsSet() {
-		toSerialize["custom_reference"] = o.CustomReference.Get()
-	}
-	if o.Referrer.IsSet() {
-		toSerialize["referrer"] = o.Referrer.Get()
+	if !IsNil(o.CustomReference) {
+		toSerialize["custom_reference"] = o.CustomReference
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.FiscalEntities != nil {
+	if !IsNil(o.PaymentSources) {
+		toSerialize["payment_sources"] = o.PaymentSources
+	}
+	if !IsNil(o.FiscalEntities) {
 		toSerialize["fiscal_entities"] = o.FiscalEntities
 	}
-	if o.ShippingContacts != nil {
+	if !IsNil(o.ShippingContacts) {
 		toSerialize["shipping_contacts"] = o.ShippingContacts
-	}
-	if o.PaymentSources != nil {
-		toSerialize["payment_sources"] = o.PaymentSources
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -491,11 +431,10 @@ func (o *Customer) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "phone")
 		delete(additionalProperties, "corporate")
 		delete(additionalProperties, "custom_reference")
-		delete(additionalProperties, "referrer")
 		delete(additionalProperties, "metadata")
+		delete(additionalProperties, "payment_sources")
 		delete(additionalProperties, "fiscal_entities")
 		delete(additionalProperties, "shipping_contacts")
-		delete(additionalProperties, "payment_sources")
 		o.AdditionalProperties = additionalProperties
 	}
 

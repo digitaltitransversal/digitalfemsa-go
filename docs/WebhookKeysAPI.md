@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## CreateWebhookKey
 
-> WebhookKeyCreateResponse CreateWebhookKey(ctx).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).WebhookKeyRequest(webhookKeyRequest).Execute()
+> WebhookKeyCreateResponse CreateWebhookKey(ctx).AcceptLanguage(acceptLanguage).WebhookKeyRequest(webhookKeyRequest).Execute()
 
 Create Webhook Key
 
@@ -34,12 +34,11 @@ import (
 
 func main() {
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
-	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 	webhookKeyRequest := *openapiclient.NewWebhookKeyRequest() // WebhookKeyRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.WebhookKeysAPI.CreateWebhookKey(context.Background()).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).WebhookKeyRequest(webhookKeyRequest).Execute()
+	resp, r, err := apiClient.WebhookKeysAPI.CreateWebhookKey(context.Background()).AcceptLanguage(acceptLanguage).WebhookKeyRequest(webhookKeyRequest).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `WebhookKeysAPI.CreateWebhookKey``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -61,7 +60,6 @@ Other parameters are passed through a pointer to a apiCreateWebhookKeyRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
- **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
  **webhookKeyRequest** | [**WebhookKeyRequest**](WebhookKeyRequest.md) |  | 
 
 ### Return type
@@ -75,7 +73,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -147,7 +145,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -221,7 +219,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -297,7 +295,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -370,8 +368,8 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: application/vnd.app-v2.2.0+json
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Content-Type**: application/json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -22,7 +22,7 @@ var _ MappedNullable = &OrderRefundRequest{}
 // OrderRefundRequest struct for OrderRefundRequest
 type OrderRefundRequest struct {
 	// Amount to refund. If not provided, the API refunds the refundable amount of the selected charge.
-	Amount int64 `json:"amount"`
+	Amount int32 `json:"amount"`
 	// Charge ID to refund. If not provided, the API selects a refundable charge from the order.
 	ChargeId NullableString `json:"charge_id,omitempty"`
 	// Refund reason. If not provided, the API uses a default reason.
@@ -38,7 +38,7 @@ type _OrderRefundRequest OrderRefundRequest
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrderRefundRequest(amount int64, reason string) *OrderRefundRequest {
+func NewOrderRefundRequest(amount int32, reason string) *OrderRefundRequest {
 	this := OrderRefundRequest{}
 	this.Amount = amount
 	this.Reason = reason
@@ -54,9 +54,9 @@ func NewOrderRefundRequestWithDefaults() *OrderRefundRequest {
 }
 
 // GetAmount returns the Amount field value
-func (o *OrderRefundRequest) GetAmount() int64 {
+func (o *OrderRefundRequest) GetAmount() int32 {
 	if o == nil {
-		var ret int64
+		var ret int32
 		return ret
 	}
 
@@ -65,7 +65,7 @@ func (o *OrderRefundRequest) GetAmount() int64 {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *OrderRefundRequest) GetAmountOk() (*int64, bool) {
+func (o *OrderRefundRequest) GetAmountOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -73,7 +73,7 @@ func (o *OrderRefundRequest) GetAmountOk() (*int64, bool) {
 }
 
 // SetAmount sets field value
-func (o *OrderRefundRequest) SetAmount(v int64) {
+func (o *OrderRefundRequest) SetAmount(v int32) {
 	o.Amount = v
 }
 

@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Address** | [**CustomerAddress**](CustomerAddress.md) |  | 
 **TaxId** | Pointer to **string** |  | [optional] 
+**Name** | Pointer to **string** |  | [optional] 
 **Email** | Pointer to **string** |  | [optional] 
 **Phone** | Pointer to **string** |  | [optional] 
 **Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
-**CompanyName** | Pointer to **string** |  | [optional] 
 **Id** | **string** |  | 
 **Object** | **string** |  | 
 **CreatedAt** | **int64** |  | 
@@ -79,6 +79,31 @@ SetTaxId sets TaxId field to given value.
 `func (o *UpdateCustomerFiscalEntitiesResponse) HasTaxId() bool`
 
 HasTaxId returns a boolean if a field has been set.
+
+### GetName
+
+`func (o *UpdateCustomerFiscalEntitiesResponse) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *UpdateCustomerFiscalEntitiesResponse) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *UpdateCustomerFiscalEntitiesResponse) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *UpdateCustomerFiscalEntitiesResponse) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetEmail
 
@@ -154,31 +179,6 @@ SetMetadata sets Metadata field to given value.
 `func (o *UpdateCustomerFiscalEntitiesResponse) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
-
-### GetCompanyName
-
-`func (o *UpdateCustomerFiscalEntitiesResponse) GetCompanyName() string`
-
-GetCompanyName returns the CompanyName field if non-nil, zero value otherwise.
-
-### GetCompanyNameOk
-
-`func (o *UpdateCustomerFiscalEntitiesResponse) GetCompanyNameOk() (*string, bool)`
-
-GetCompanyNameOk returns a tuple with the CompanyName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCompanyName
-
-`func (o *UpdateCustomerFiscalEntitiesResponse) SetCompanyName(v string)`
-
-SetCompanyName sets CompanyName field to given value.
-
-### HasCompanyName
-
-`func (o *UpdateCustomerFiscalEntitiesResponse) HasCompanyName() bool`
-
-HasCompanyName returns a boolean if a field has been set.
 
 ### GetId
 

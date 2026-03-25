@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -20,9 +20,9 @@ var _ MappedNullable = &ApiKeyUpdateRequest{}
 
 // ApiKeyUpdateRequest struct for ApiKeyUpdateRequest
 type ApiKeyUpdateRequest struct {
-	// Indicates whether the API key is active.
+	// Indicates if the webhook key is active
 	Active *bool `json:"active,omitempty"`
-	// A name or brief explanation of what this API key is used for.
+	// A name or brief explanation of what this api key is used for
 	Description *string `json:"description,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

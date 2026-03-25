@@ -8,12 +8,11 @@ Name | Type | Description | Notes
 **Email** | **string** | Customer email address. | 
 **Phone** | Pointer to **NullableString** | Customer phone number. | [optional] 
 **Corporate** | Pointer to **bool** | Indicates whether the customer email is corporate. | [optional] [default to false]
-**CustomReference** | Pointer to **NullableString** | Merchant-defined reference used to identify the customer in your system. | [optional] 
-**Referrer** | Pointer to **NullableString** | Referrer value (if applicable). | [optional] 
+**CustomReference** | Pointer to **string** | Merchant-defined reference used to identify the customer in your system. | [optional] 
 **Metadata** | Pointer to **map[string]interface{}** | Arbitrary metadata associated with the customer. | [optional] 
+**PaymentSources** | Pointer to [**[]CustomerPaymentMethodsRequest**](CustomerPaymentMethodsRequest.md) | Customer payment sources to be created with the customer (optional). | [optional] 
 **FiscalEntities** | Pointer to [**[]CustomerFiscalEntitiesRequest**](CustomerFiscalEntitiesRequest.md) | Customer fiscal entities to be created with the customer (optional). | [optional] 
 **ShippingContacts** | Pointer to [**[]CustomerShippingContacts**](CustomerShippingContacts.md) | Customer shipping contacts to be created with the customer (optional). | [optional] 
-**PaymentSources** | Pointer to [**[]CustomerPaymentSourcesInner**](CustomerPaymentSourcesInner.md) | Customer payment sources to be created with the customer (optional). | [optional] 
 
 ## Methods
 
@@ -159,51 +158,6 @@ SetCustomReference sets CustomReference field to given value.
 
 HasCustomReference returns a boolean if a field has been set.
 
-### SetCustomReferenceNil
-
-`func (o *Customer) SetCustomReferenceNil(b bool)`
-
- SetCustomReferenceNil sets the value for CustomReference to be an explicit nil
-
-### UnsetCustomReference
-`func (o *Customer) UnsetCustomReference()`
-
-UnsetCustomReference ensures that no value is present for CustomReference, not even an explicit nil
-### GetReferrer
-
-`func (o *Customer) GetReferrer() string`
-
-GetReferrer returns the Referrer field if non-nil, zero value otherwise.
-
-### GetReferrerOk
-
-`func (o *Customer) GetReferrerOk() (*string, bool)`
-
-GetReferrerOk returns a tuple with the Referrer field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetReferrer
-
-`func (o *Customer) SetReferrer(v string)`
-
-SetReferrer sets Referrer field to given value.
-
-### HasReferrer
-
-`func (o *Customer) HasReferrer() bool`
-
-HasReferrer returns a boolean if a field has been set.
-
-### SetReferrerNil
-
-`func (o *Customer) SetReferrerNil(b bool)`
-
- SetReferrerNil sets the value for Referrer to be an explicit nil
-
-### UnsetReferrer
-`func (o *Customer) UnsetReferrer()`
-
-UnsetReferrer ensures that no value is present for Referrer, not even an explicit nil
 ### GetMetadata
 
 `func (o *Customer) GetMetadata() map[string]interface{}`
@@ -228,6 +182,31 @@ SetMetadata sets Metadata field to given value.
 `func (o *Customer) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
+
+### GetPaymentSources
+
+`func (o *Customer) GetPaymentSources() []CustomerPaymentMethodsRequest`
+
+GetPaymentSources returns the PaymentSources field if non-nil, zero value otherwise.
+
+### GetPaymentSourcesOk
+
+`func (o *Customer) GetPaymentSourcesOk() (*[]CustomerPaymentMethodsRequest, bool)`
+
+GetPaymentSourcesOk returns a tuple with the PaymentSources field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentSources
+
+`func (o *Customer) SetPaymentSources(v []CustomerPaymentMethodsRequest)`
+
+SetPaymentSources sets PaymentSources field to given value.
+
+### HasPaymentSources
+
+`func (o *Customer) HasPaymentSources() bool`
+
+HasPaymentSources returns a boolean if a field has been set.
 
 ### GetFiscalEntities
 
@@ -254,16 +233,6 @@ SetFiscalEntities sets FiscalEntities field to given value.
 
 HasFiscalEntities returns a boolean if a field has been set.
 
-### SetFiscalEntitiesNil
-
-`func (o *Customer) SetFiscalEntitiesNil(b bool)`
-
- SetFiscalEntitiesNil sets the value for FiscalEntities to be an explicit nil
-
-### UnsetFiscalEntities
-`func (o *Customer) UnsetFiscalEntities()`
-
-UnsetFiscalEntities ensures that no value is present for FiscalEntities, not even an explicit nil
 ### GetShippingContacts
 
 `func (o *Customer) GetShippingContacts() []CustomerShippingContacts`
@@ -289,51 +258,6 @@ SetShippingContacts sets ShippingContacts field to given value.
 
 HasShippingContacts returns a boolean if a field has been set.
 
-### SetShippingContactsNil
-
-`func (o *Customer) SetShippingContactsNil(b bool)`
-
- SetShippingContactsNil sets the value for ShippingContacts to be an explicit nil
-
-### UnsetShippingContacts
-`func (o *Customer) UnsetShippingContacts()`
-
-UnsetShippingContacts ensures that no value is present for ShippingContacts, not even an explicit nil
-### GetPaymentSources
-
-`func (o *Customer) GetPaymentSources() []CustomerPaymentSourcesInner`
-
-GetPaymentSources returns the PaymentSources field if non-nil, zero value otherwise.
-
-### GetPaymentSourcesOk
-
-`func (o *Customer) GetPaymentSourcesOk() (*[]CustomerPaymentSourcesInner, bool)`
-
-GetPaymentSourcesOk returns a tuple with the PaymentSources field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPaymentSources
-
-`func (o *Customer) SetPaymentSources(v []CustomerPaymentSourcesInner)`
-
-SetPaymentSources sets PaymentSources field to given value.
-
-### HasPaymentSources
-
-`func (o *Customer) HasPaymentSources() bool`
-
-HasPaymentSources returns a boolean if a field has been set.
-
-### SetPaymentSourcesNil
-
-`func (o *Customer) SetPaymentSourcesNil(b bool)`
-
- SetPaymentSourcesNil sets the value for PaymentSources to be an explicit nil
-
-### UnsetPaymentSources
-`func (o *Customer) UnsetPaymentSources()`
-
-UnsetPaymentSources ensures that no value is present for PaymentSources, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

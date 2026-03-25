@@ -6,12 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** | Customer&#39;s name. | [optional] 
 **Email** | Pointer to **string** | Customer email address. | [optional] 
-**Phone** | Pointer to **NullableString** | Customer phone number. | [optional] 
-**Corporate** | Pointer to **bool** | Indicates whether the customer email is corporate. | [optional] [default to false]
-**CustomReference** | Pointer to **NullableString** | Merchant-defined reference used to identify the customer in your system. | [optional] 
-**Referrer** | Pointer to **NullableString** | Referrer value (if applicable). | [optional] 
+**Phone** | Pointer to **string** | Customer phone number. | [optional] 
+**Corporate** | Pointer to **bool** | True if the customer represents a company. | [optional] 
+**CustomReference** | Pointer to **string** | Merchant-defined reference used to identify the customer in your system. | [optional] 
 **Metadata** | Pointer to **map[string]interface{}** | Arbitrary metadata associated with the customer. | [optional] 
-**PaymentSources** | Pointer to [**[]CustomerPaymentMethodsRequest**](CustomerPaymentMethodsRequest.md) | Contains details of the payment methods that the customer has active or has used in Femsa | [optional] 
+**PaymentSources** | Pointer to [**[]CustomerPaymentMethodsRequest**](CustomerPaymentMethodsRequest.md) | Customer payment sources to create/attach (offline recurrent references). | [optional] 
 **DefaultPaymentSourceId** | Pointer to **string** | Sets the default payment source for the customer (must be an existing payment source on the customer). | [optional] 
 **DefaultFiscalEntityId** | Pointer to **string** | Sets the default fiscal entity for the customer (must be an existing fiscal entity on the customer). | [optional] 
 **DefaultShippingContactId** | Pointer to **string** | Sets the default shipping contact for the customer (must be an existing shipping contact on the customer). | [optional] 
@@ -110,16 +109,6 @@ SetPhone sets Phone field to given value.
 
 HasPhone returns a boolean if a field has been set.
 
-### SetPhoneNil
-
-`func (o *UpdateCustomer) SetPhoneNil(b bool)`
-
- SetPhoneNil sets the value for Phone to be an explicit nil
-
-### UnsetPhone
-`func (o *UpdateCustomer) UnsetPhone()`
-
-UnsetPhone ensures that no value is present for Phone, not even an explicit nil
 ### GetCorporate
 
 `func (o *UpdateCustomer) GetCorporate() bool`
@@ -170,51 +159,6 @@ SetCustomReference sets CustomReference field to given value.
 
 HasCustomReference returns a boolean if a field has been set.
 
-### SetCustomReferenceNil
-
-`func (o *UpdateCustomer) SetCustomReferenceNil(b bool)`
-
- SetCustomReferenceNil sets the value for CustomReference to be an explicit nil
-
-### UnsetCustomReference
-`func (o *UpdateCustomer) UnsetCustomReference()`
-
-UnsetCustomReference ensures that no value is present for CustomReference, not even an explicit nil
-### GetReferrer
-
-`func (o *UpdateCustomer) GetReferrer() string`
-
-GetReferrer returns the Referrer field if non-nil, zero value otherwise.
-
-### GetReferrerOk
-
-`func (o *UpdateCustomer) GetReferrerOk() (*string, bool)`
-
-GetReferrerOk returns a tuple with the Referrer field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetReferrer
-
-`func (o *UpdateCustomer) SetReferrer(v string)`
-
-SetReferrer sets Referrer field to given value.
-
-### HasReferrer
-
-`func (o *UpdateCustomer) HasReferrer() bool`
-
-HasReferrer returns a boolean if a field has been set.
-
-### SetReferrerNil
-
-`func (o *UpdateCustomer) SetReferrerNil(b bool)`
-
- SetReferrerNil sets the value for Referrer to be an explicit nil
-
-### UnsetReferrer
-`func (o *UpdateCustomer) UnsetReferrer()`
-
-UnsetReferrer ensures that no value is present for Referrer, not even an explicit nil
 ### GetMetadata
 
 `func (o *UpdateCustomer) GetMetadata() map[string]interface{}`
@@ -265,16 +209,6 @@ SetPaymentSources sets PaymentSources field to given value.
 
 HasPaymentSources returns a boolean if a field has been set.
 
-### SetPaymentSourcesNil
-
-`func (o *UpdateCustomer) SetPaymentSourcesNil(b bool)`
-
- SetPaymentSourcesNil sets the value for PaymentSources to be an explicit nil
-
-### UnsetPaymentSources
-`func (o *UpdateCustomer) UnsetPaymentSources()`
-
-UnsetPaymentSources ensures that no value is present for PaymentSources, not even an explicit nil
 ### GetDefaultPaymentSourceId
 
 `func (o *UpdateCustomer) GetDefaultPaymentSourceId() string`

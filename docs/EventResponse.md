@@ -4,20 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CreatedAt** | **int64** |  | 
-**Data** | **map[string]interface{}** |  | 
-**Id** | **string** |  | 
-**Livemode** | **bool** |  | 
-**Object** | **string** |  | 
-**Type** | **string** |  | 
-**WebhookLogs** | [**[]WebhookLog**](WebhookLog.md) |  | 
-**WebhookStatus** | **string** |  | 
+**CreatedAt** | Pointer to **int64** |  | [optional] 
+**Data** | Pointer to **map[string]interface{}** |  | [optional] 
+**Id** | Pointer to **string** |  | [optional] 
+**Livemode** | Pointer to **bool** |  | [optional] 
+**Object** | Pointer to **string** |  | [optional] 
+**Type** | Pointer to **string** |  | [optional] 
+**WebhookLogs** | Pointer to [**[]WebhookLog**](WebhookLog.md) |  | [optional] 
+**WebhookStatus** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewEventResponse
 
-`func NewEventResponse(createdAt int64, data map[string]interface{}, id string, livemode bool, object string, type_ string, webhookLogs []WebhookLog, webhookStatus string, ) *EventResponse`
+`func NewEventResponse() *EventResponse`
 
 NewEventResponse instantiates a new EventResponse object
 This constructor will assign default values to properties that have it defined,
@@ -51,6 +51,11 @@ and a boolean to check if the value has been set.
 
 SetCreatedAt sets CreatedAt field to given value.
 
+### HasCreatedAt
+
+`func (o *EventResponse) HasCreatedAt() bool`
+
+HasCreatedAt returns a boolean if a field has been set.
 
 ### GetData
 
@@ -71,6 +76,11 @@ and a boolean to check if the value has been set.
 
 SetData sets Data field to given value.
 
+### HasData
+
+`func (o *EventResponse) HasData() bool`
+
+HasData returns a boolean if a field has been set.
 
 ### GetId
 
@@ -91,6 +101,11 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
+### HasId
+
+`func (o *EventResponse) HasId() bool`
+
+HasId returns a boolean if a field has been set.
 
 ### GetLivemode
 
@@ -111,6 +126,11 @@ and a boolean to check if the value has been set.
 
 SetLivemode sets Livemode field to given value.
 
+### HasLivemode
+
+`func (o *EventResponse) HasLivemode() bool`
+
+HasLivemode returns a boolean if a field has been set.
 
 ### GetObject
 
@@ -131,6 +151,11 @@ and a boolean to check if the value has been set.
 
 SetObject sets Object field to given value.
 
+### HasObject
+
+`func (o *EventResponse) HasObject() bool`
+
+HasObject returns a boolean if a field has been set.
 
 ### GetType
 
@@ -151,6 +176,11 @@ and a boolean to check if the value has been set.
 
 SetType sets Type field to given value.
 
+### HasType
+
+`func (o *EventResponse) HasType() bool`
+
+HasType returns a boolean if a field has been set.
 
 ### GetWebhookLogs
 
@@ -171,6 +201,11 @@ and a boolean to check if the value has been set.
 
 SetWebhookLogs sets WebhookLogs field to given value.
 
+### HasWebhookLogs
+
+`func (o *EventResponse) HasWebhookLogs() bool`
+
+HasWebhookLogs returns a boolean if a field has been set.
 
 ### GetWebhookStatus
 
@@ -191,6 +226,11 @@ and a boolean to check if the value has been set.
 
 SetWebhookStatus sets WebhookStatus field to given value.
 
+### HasWebhookStatus
+
+`func (o *EventResponse) HasWebhookStatus() bool`
+
+HasWebhookStatus returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

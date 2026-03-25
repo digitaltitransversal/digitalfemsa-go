@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -29,7 +29,7 @@ type GetEventsResponse struct {
 	NextPageUrl NullableString `json:"next_page_url,omitempty"`
 	// Url of the previous page.
 	PreviousPageUrl NullableString `json:"previous_page_url,omitempty"`
-	Data []EventResponse `json:"data"`
+	Data []EventResponse `json:"data,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -39,11 +39,10 @@ type _GetEventsResponse GetEventsResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetEventsResponse(hasMore bool, object string, data []EventResponse) *GetEventsResponse {
+func NewGetEventsResponse(hasMore bool, object string) *GetEventsResponse {
 	this := GetEventsResponse{}
 	this.HasMore = hasMore
 	this.Object = object
-	this.Data = data
 	return &this
 }
 
@@ -187,26 +186,34 @@ func (o *GetEventsResponse) UnsetPreviousPageUrl() {
 	o.PreviousPageUrl.Unset()
 }
 
-// GetData returns the Data field value
+// GetData returns the Data field value if set, zero value otherwise.
 func (o *GetEventsResponse) GetData() []EventResponse {
-	if o == nil {
+	if o == nil || IsNil(o.Data) {
 		var ret []EventResponse
 		return ret
 	}
-
 	return o.Data
 }
 
-// GetDataOk returns a tuple with the Data field value
+// GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GetEventsResponse) GetDataOk() ([]EventResponse, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
 	return o.Data, true
 }
 
-// SetData sets field value
+// HasData returns a boolean if a field has been set.
+func (o *GetEventsResponse) HasData() bool {
+	if o != nil && !IsNil(o.Data) {
+		return true
+	}
+
+	return false
+}
+
+// SetData gets a reference to the given []EventResponse and assigns it to the Data field.
 func (o *GetEventsResponse) SetData(v []EventResponse) {
 	o.Data = v
 }
@@ -229,7 +236,9 @@ func (o GetEventsResponse) ToMap() (map[string]interface{}, error) {
 	if o.PreviousPageUrl.IsSet() {
 		toSerialize["previous_page_url"] = o.PreviousPageUrl.Get()
 	}
-	toSerialize["data"] = o.Data
+	if !IsNil(o.Data) {
+		toSerialize["data"] = o.Data
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -245,7 +254,6 @@ func (o *GetEventsResponse) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"has_more",
 		"object",
-		"data",
 	}
 
 	allProperties := make(map[string]interface{})

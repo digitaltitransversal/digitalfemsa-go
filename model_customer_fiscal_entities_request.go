@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -23,10 +23,10 @@ var _ MappedNullable = &CustomerFiscalEntitiesRequest{}
 type CustomerFiscalEntitiesRequest struct {
 	Address CustomerAddress `json:"address"`
 	TaxId *string `json:"tax_id,omitempty"`
+	Name *string `json:"name,omitempty"`
 	Email *string `json:"email,omitempty"`
 	Phone *string `json:"phone,omitempty"`
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
-	CompanyName *string `json:"company_name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -104,6 +104,38 @@ func (o *CustomerFiscalEntitiesRequest) HasTaxId() bool {
 // SetTaxId gets a reference to the given string and assigns it to the TaxId field.
 func (o *CustomerFiscalEntitiesRequest) SetTaxId(v string) {
 	o.TaxId = &v
+}
+
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *CustomerFiscalEntitiesRequest) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CustomerFiscalEntitiesRequest) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *CustomerFiscalEntitiesRequest) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *CustomerFiscalEntitiesRequest) SetName(v string) {
+	o.Name = &v
 }
 
 // GetEmail returns the Email field value if set, zero value otherwise.
@@ -202,38 +234,6 @@ func (o *CustomerFiscalEntitiesRequest) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
 }
 
-// GetCompanyName returns the CompanyName field value if set, zero value otherwise.
-func (o *CustomerFiscalEntitiesRequest) GetCompanyName() string {
-	if o == nil || IsNil(o.CompanyName) {
-		var ret string
-		return ret
-	}
-	return *o.CompanyName
-}
-
-// GetCompanyNameOk returns a tuple with the CompanyName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CustomerFiscalEntitiesRequest) GetCompanyNameOk() (*string, bool) {
-	if o == nil || IsNil(o.CompanyName) {
-		return nil, false
-	}
-	return o.CompanyName, true
-}
-
-// HasCompanyName returns a boolean if a field has been set.
-func (o *CustomerFiscalEntitiesRequest) HasCompanyName() bool {
-	if o != nil && !IsNil(o.CompanyName) {
-		return true
-	}
-
-	return false
-}
-
-// SetCompanyName gets a reference to the given string and assigns it to the CompanyName field.
-func (o *CustomerFiscalEntitiesRequest) SetCompanyName(v string) {
-	o.CompanyName = &v
-}
-
 func (o CustomerFiscalEntitiesRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -248,6 +248,9 @@ func (o CustomerFiscalEntitiesRequest) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.TaxId) {
 		toSerialize["tax_id"] = o.TaxId
 	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	if !IsNil(o.Email) {
 		toSerialize["email"] = o.Email
 	}
@@ -256,9 +259,6 @@ func (o CustomerFiscalEntitiesRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
-	}
-	if !IsNil(o.CompanyName) {
-		toSerialize["company_name"] = o.CompanyName
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -305,10 +305,10 @@ func (o *CustomerFiscalEntitiesRequest) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "address")
 		delete(additionalProperties, "tax_id")
+		delete(additionalProperties, "name")
 		delete(additionalProperties, "email")
 		delete(additionalProperties, "phone")
 		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "company_name")
 		o.AdditionalProperties = additionalProperties
 	}
 

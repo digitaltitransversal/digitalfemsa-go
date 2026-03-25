@@ -4,9 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ExpiresAt** | Pointer to [**UpdatePaymentMethodsExpiresAt**](UpdatePaymentMethodsExpiresAt.md) |  | [optional] 
-**Amount** | Pointer to [**UpdatePaymentMethodsAmount**](UpdatePaymentMethodsAmount.md) |  | [optional] 
-**Type** | Pointer to **string** |  | [optional] 
+**Name** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -27,80 +25,30 @@ NewUpdatePaymentMethodsWithDefaults instantiates a new UpdatePaymentMethods obje
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetExpiresAt
+### GetName
 
-`func (o *UpdatePaymentMethods) GetExpiresAt() UpdatePaymentMethodsExpiresAt`
+`func (o *UpdatePaymentMethods) GetName() string`
 
-GetExpiresAt returns the ExpiresAt field if non-nil, zero value otherwise.
+GetName returns the Name field if non-nil, zero value otherwise.
 
-### GetExpiresAtOk
+### GetNameOk
 
-`func (o *UpdatePaymentMethods) GetExpiresAtOk() (*UpdatePaymentMethodsExpiresAt, bool)`
+`func (o *UpdatePaymentMethods) GetNameOk() (*string, bool)`
 
-GetExpiresAtOk returns a tuple with the ExpiresAt field if it's non-nil, zero value otherwise
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetExpiresAt
+### SetName
 
-`func (o *UpdatePaymentMethods) SetExpiresAt(v UpdatePaymentMethodsExpiresAt)`
+`func (o *UpdatePaymentMethods) SetName(v string)`
 
-SetExpiresAt sets ExpiresAt field to given value.
+SetName sets Name field to given value.
 
-### HasExpiresAt
+### HasName
 
-`func (o *UpdatePaymentMethods) HasExpiresAt() bool`
+`func (o *UpdatePaymentMethods) HasName() bool`
 
-HasExpiresAt returns a boolean if a field has been set.
-
-### GetAmount
-
-`func (o *UpdatePaymentMethods) GetAmount() UpdatePaymentMethodsAmount`
-
-GetAmount returns the Amount field if non-nil, zero value otherwise.
-
-### GetAmountOk
-
-`func (o *UpdatePaymentMethods) GetAmountOk() (*UpdatePaymentMethodsAmount, bool)`
-
-GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAmount
-
-`func (o *UpdatePaymentMethods) SetAmount(v UpdatePaymentMethodsAmount)`
-
-SetAmount sets Amount field to given value.
-
-### HasAmount
-
-`func (o *UpdatePaymentMethods) HasAmount() bool`
-
-HasAmount returns a boolean if a field has been set.
-
-### GetType
-
-`func (o *UpdatePaymentMethods) GetType() string`
-
-GetType returns the Type field if non-nil, zero value otherwise.
-
-### GetTypeOk
-
-`func (o *UpdatePaymentMethods) GetTypeOk() (*string, bool)`
-
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetType
-
-`func (o *UpdatePaymentMethods) SetType(v string)`
-
-SetType sets Type field to given value.
-
-### HasType
-
-`func (o *UpdatePaymentMethods) HasType() bool`
-
-HasType returns a boolean if a field has been set.
+HasName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

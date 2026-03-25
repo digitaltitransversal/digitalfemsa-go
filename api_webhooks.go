@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -24,9 +24,9 @@ import (
 type WebhooksAPI interface {
 
 	/*
-	CreateWebhook Create webhook
+	CreateWebhook Create Webhook
 
-	Creates a webhook and subscribes it to events so your system can receive notifications when those events occur.
+	What we do at Femsa translates into events. For example, an event of interest to us occurs at the time a payment is successfully processed. At that moment we will be interested in doing several things: Send an email to the buyer, generate an invoice, start the process of shipping the product, etc.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateWebhookRequest
@@ -68,7 +68,7 @@ type WebhooksAPI interface {
 	GetWebhookExecute(r ApiGetWebhookRequest) (*WebhookResponse, *http.Response, error)
 
 	/*
-	GetWebhooks Get webhooks
+	GetWebhooks Get List of Webhooks
 
 	Consume the list of webhooks you have, each environment supports 10 webhooks (For production and testing)
 
@@ -120,7 +120,6 @@ type ApiCreateWebhookRequest struct {
 	ApiService WebhooksAPI
 	webhookRequest *WebhookRequest
 	acceptLanguage *string
-	xChildCompanyId *string
 }
 
 // Webhook creation/update request payload.
@@ -135,20 +134,14 @@ func (r ApiCreateWebhookRequest) AcceptLanguage(acceptLanguage string) ApiCreate
 	return r
 }
 
-// In the case of a holding company, the company id of the child company to which will process the request.
-func (r ApiCreateWebhookRequest) XChildCompanyId(xChildCompanyId string) ApiCreateWebhookRequest {
-	r.xChildCompanyId = &xChildCompanyId
-	return r
-}
-
 func (r ApiCreateWebhookRequest) Execute() (*WebhookResponse, *http.Response, error) {
 	return r.ApiService.CreateWebhookExecute(r)
 }
 
 /*
-CreateWebhook Create webhook
+CreateWebhook Create Webhook
 
-Creates a webhook and subscribes it to events so your system can receive notifications when those events occur.
+What we do at Femsa translates into events. For example, an event of interest to us occurs at the time a payment is successfully processed. At that moment we will be interested in doing several things: Send an email to the buyer, generate an invoice, start the process of shipping the product, etc.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateWebhookRequest
@@ -194,7 +187,7 @@ func (a *WebhooksAPIService) CreateWebhookExecute(r ApiCreateWebhookRequest) (*W
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -203,9 +196,6 @@ func (a *WebhooksAPIService) CreateWebhookExecute(r ApiCreateWebhookRequest) (*W
 	}
 	if r.acceptLanguage != nil {
 		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "")
-	}
-	if r.xChildCompanyId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Child-Company-Id", r.xChildCompanyId, "")
 	}
 	// body params
 	localVarPostBody = r.webhookRequest
@@ -333,7 +323,7 @@ func (a *WebhooksAPIService) DeleteWebhookExecute(r ApiDeleteWebhookRequest) (*W
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -485,7 +475,7 @@ func (a *WebhooksAPIService) GetWebhookExecute(r ApiGetWebhookRequest) (*Webhook
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -570,7 +560,6 @@ func (a *WebhooksAPIService) GetWebhookExecute(r ApiGetWebhookRequest) (*Webhook
 type ApiGetWebhooksRequest struct {
 	ctx context.Context
 	ApiService WebhooksAPI
-	webhookRequest *WebhookRequest
 	acceptLanguage *string
 	xChildCompanyId *string
 	limit *int32
@@ -578,12 +567,6 @@ type ApiGetWebhooksRequest struct {
 	url *string
 	next *string
 	previous *string
-}
-
-// Webhook creation/update request payload.
-func (r ApiGetWebhooksRequest) WebhookRequest(webhookRequest WebhookRequest) ApiGetWebhooksRequest {
-	r.webhookRequest = &webhookRequest
-	return r
 }
 
 // Use for knowing which language to use
@@ -633,7 +616,7 @@ func (r ApiGetWebhooksRequest) Execute() (*GetWebhooksResponse, *http.Response, 
 }
 
 /*
-GetWebhooks Get webhooks
+GetWebhooks Get List of Webhooks
 
 Consume the list of webhooks you have, each environment supports 10 webhooks (For production and testing)
 
@@ -667,9 +650,6 @@ func (a *WebhooksAPIService) GetWebhooksExecute(r ApiGetWebhooksRequest) (*GetWe
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.webhookRequest == nil {
-		return localVarReturnValue, nil, reportError("webhookRequest is required and must be specified")
-	}
 
 	if r.limit != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
@@ -690,7 +670,7 @@ func (a *WebhooksAPIService) GetWebhooksExecute(r ApiGetWebhooksRequest) (*GetWe
 		parameterAddToHeaderOrQuery(localVarQueryParams, "previous", r.previous, "")
 	}
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
+	localVarHTTPContentTypes := []string{}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -699,7 +679,7 @@ func (a *WebhooksAPIService) GetWebhooksExecute(r ApiGetWebhooksRequest) (*GetWe
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -712,8 +692,6 @@ func (a *WebhooksAPIService) GetWebhooksExecute(r ApiGetWebhooksRequest) (*GetWe
 	if r.xChildCompanyId != nil {
 		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Child-Company-Id", r.xChildCompanyId, "")
 	}
-	// body params
-	localVarPostBody = r.webhookRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -838,7 +816,7 @@ func (a *WebhooksAPIService) TestWebhookExecute(r ApiTestWebhookRequest) (*Webho
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -1000,7 +978,7 @@ func (a *WebhooksAPIService) UpdateWebhookExecute(r ApiUpdateWebhookRequest) (*W
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -25,16 +25,14 @@ type UpdateCustomer struct {
 	// Customer email address.
 	Email *string `json:"email,omitempty"`
 	// Customer phone number.
-	Phone NullableString `json:"phone,omitempty"`
-	// Indicates whether the customer email is corporate.
+	Phone *string `json:"phone,omitempty"`
+	// True if the customer represents a company.
 	Corporate *bool `json:"corporate,omitempty"`
 	// Merchant-defined reference used to identify the customer in your system.
-	CustomReference NullableString `json:"custom_reference,omitempty"`
-	// Referrer value (if applicable).
-	Referrer NullableString `json:"referrer,omitempty"`
+	CustomReference *string `json:"custom_reference,omitempty"`
 	// Arbitrary metadata associated with the customer.
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
-	// Contains details of the payment methods that the customer has active or has used in Femsa
+	// Customer payment sources to create/attach (offline recurrent references).
 	PaymentSources []CustomerPaymentMethodsRequest `json:"payment_sources,omitempty"`
 	// Sets the default payment source for the customer (must be an existing payment source on the customer).
 	DefaultPaymentSourceId *string `json:"default_payment_source_id,omitempty"`
@@ -53,8 +51,6 @@ type _UpdateCustomer UpdateCustomer
 // will change when the set of required properties is changed
 func NewUpdateCustomer() *UpdateCustomer {
 	this := UpdateCustomer{}
-	var corporate bool = false
-	this.Corporate = &corporate
 	return &this
 }
 
@@ -63,8 +59,6 @@ func NewUpdateCustomer() *UpdateCustomer {
 // but it doesn't guarantee that properties required by API are set
 func NewUpdateCustomerWithDefaults() *UpdateCustomer {
 	this := UpdateCustomer{}
-	var corporate bool = false
-	this.Corporate = &corporate
 	return &this
 }
 
@@ -132,46 +126,36 @@ func (o *UpdateCustomer) SetEmail(v string) {
 	o.Email = &v
 }
 
-// GetPhone returns the Phone field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetPhone returns the Phone field value if set, zero value otherwise.
 func (o *UpdateCustomer) GetPhone() string {
-	if o == nil || IsNil(o.Phone.Get()) {
+	if o == nil || IsNil(o.Phone) {
 		var ret string
 		return ret
 	}
-	return *o.Phone.Get()
+	return *o.Phone
 }
 
 // GetPhoneOk returns a tuple with the Phone field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateCustomer) GetPhoneOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Phone) {
 		return nil, false
 	}
-	return o.Phone.Get(), o.Phone.IsSet()
+	return o.Phone, true
 }
 
 // HasPhone returns a boolean if a field has been set.
 func (o *UpdateCustomer) HasPhone() bool {
-	if o != nil && o.Phone.IsSet() {
+	if o != nil && !IsNil(o.Phone) {
 		return true
 	}
 
 	return false
 }
 
-// SetPhone gets a reference to the given NullableString and assigns it to the Phone field.
+// SetPhone gets a reference to the given string and assigns it to the Phone field.
 func (o *UpdateCustomer) SetPhone(v string) {
-	o.Phone.Set(&v)
-}
-// SetPhoneNil sets the value for Phone to be an explicit nil
-func (o *UpdateCustomer) SetPhoneNil() {
-	o.Phone.Set(nil)
-}
-
-// UnsetPhone ensures that no value is present for Phone, not even an explicit nil
-func (o *UpdateCustomer) UnsetPhone() {
-	o.Phone.Unset()
+	o.Phone = &v
 }
 
 // GetCorporate returns the Corporate field value if set, zero value otherwise.
@@ -206,88 +190,36 @@ func (o *UpdateCustomer) SetCorporate(v bool) {
 	o.Corporate = &v
 }
 
-// GetCustomReference returns the CustomReference field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetCustomReference returns the CustomReference field value if set, zero value otherwise.
 func (o *UpdateCustomer) GetCustomReference() string {
-	if o == nil || IsNil(o.CustomReference.Get()) {
+	if o == nil || IsNil(o.CustomReference) {
 		var ret string
 		return ret
 	}
-	return *o.CustomReference.Get()
+	return *o.CustomReference
 }
 
 // GetCustomReferenceOk returns a tuple with the CustomReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateCustomer) GetCustomReferenceOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.CustomReference) {
 		return nil, false
 	}
-	return o.CustomReference.Get(), o.CustomReference.IsSet()
+	return o.CustomReference, true
 }
 
 // HasCustomReference returns a boolean if a field has been set.
 func (o *UpdateCustomer) HasCustomReference() bool {
-	if o != nil && o.CustomReference.IsSet() {
+	if o != nil && !IsNil(o.CustomReference) {
 		return true
 	}
 
 	return false
 }
 
-// SetCustomReference gets a reference to the given NullableString and assigns it to the CustomReference field.
+// SetCustomReference gets a reference to the given string and assigns it to the CustomReference field.
 func (o *UpdateCustomer) SetCustomReference(v string) {
-	o.CustomReference.Set(&v)
-}
-// SetCustomReferenceNil sets the value for CustomReference to be an explicit nil
-func (o *UpdateCustomer) SetCustomReferenceNil() {
-	o.CustomReference.Set(nil)
-}
-
-// UnsetCustomReference ensures that no value is present for CustomReference, not even an explicit nil
-func (o *UpdateCustomer) UnsetCustomReference() {
-	o.CustomReference.Unset()
-}
-
-// GetReferrer returns the Referrer field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *UpdateCustomer) GetReferrer() string {
-	if o == nil || IsNil(o.Referrer.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.Referrer.Get()
-}
-
-// GetReferrerOk returns a tuple with the Referrer field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *UpdateCustomer) GetReferrerOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Referrer.Get(), o.Referrer.IsSet()
-}
-
-// HasReferrer returns a boolean if a field has been set.
-func (o *UpdateCustomer) HasReferrer() bool {
-	if o != nil && o.Referrer.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetReferrer gets a reference to the given NullableString and assigns it to the Referrer field.
-func (o *UpdateCustomer) SetReferrer(v string) {
-	o.Referrer.Set(&v)
-}
-// SetReferrerNil sets the value for Referrer to be an explicit nil
-func (o *UpdateCustomer) SetReferrerNil() {
-	o.Referrer.Set(nil)
-}
-
-// UnsetReferrer ensures that no value is present for Referrer, not even an explicit nil
-func (o *UpdateCustomer) UnsetReferrer() {
-	o.Referrer.Unset()
+	o.CustomReference = &v
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
@@ -322,9 +254,9 @@ func (o *UpdateCustomer) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
 }
 
-// GetPaymentSources returns the PaymentSources field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetPaymentSources returns the PaymentSources field value if set, zero value otherwise.
 func (o *UpdateCustomer) GetPaymentSources() []CustomerPaymentMethodsRequest {
-	if o == nil {
+	if o == nil || IsNil(o.PaymentSources) {
 		var ret []CustomerPaymentMethodsRequest
 		return ret
 	}
@@ -333,7 +265,6 @@ func (o *UpdateCustomer) GetPaymentSources() []CustomerPaymentMethodsRequest {
 
 // GetPaymentSourcesOk returns a tuple with the PaymentSources field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *UpdateCustomer) GetPaymentSourcesOk() ([]CustomerPaymentMethodsRequest, bool) {
 	if o == nil || IsNil(o.PaymentSources) {
 		return nil, false
@@ -467,22 +398,19 @@ func (o UpdateCustomer) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Email) {
 		toSerialize["email"] = o.Email
 	}
-	if o.Phone.IsSet() {
-		toSerialize["phone"] = o.Phone.Get()
+	if !IsNil(o.Phone) {
+		toSerialize["phone"] = o.Phone
 	}
 	if !IsNil(o.Corporate) {
 		toSerialize["corporate"] = o.Corporate
 	}
-	if o.CustomReference.IsSet() {
-		toSerialize["custom_reference"] = o.CustomReference.Get()
-	}
-	if o.Referrer.IsSet() {
-		toSerialize["referrer"] = o.Referrer.Get()
+	if !IsNil(o.CustomReference) {
+		toSerialize["custom_reference"] = o.CustomReference
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.PaymentSources != nil {
+	if !IsNil(o.PaymentSources) {
 		toSerialize["payment_sources"] = o.PaymentSources
 	}
 	if !IsNil(o.DefaultPaymentSourceId) {
@@ -521,7 +449,6 @@ func (o *UpdateCustomer) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "phone")
 		delete(additionalProperties, "corporate")
 		delete(additionalProperties, "custom_reference")
-		delete(additionalProperties, "referrer")
 		delete(additionalProperties, "metadata")
 		delete(additionalProperties, "payment_sources")
 		delete(additionalProperties, "default_payment_source_id")

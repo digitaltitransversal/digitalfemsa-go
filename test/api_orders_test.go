@@ -82,7 +82,7 @@ func Test_digitalfemsa_OrdersAPIService(t *testing.T) {
 		var id string
 		var refundId string
 
-		resp, httpRes, err := apiClient.OrdersAPI.CancelOrderRefund(context.Background(), id, refundId).Execute()
+		resp, httpRes, err := apiClient.OrdersAPI.OrderCancelRefund(context.Background(), id, refundId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -110,7 +110,7 @@ func Test_digitalfemsa_OrdersAPIService(t *testing.T) {
 
 		var id string
 
-		resp, httpRes, err := apiClient.OrdersAPI.CaptureOrder(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.OrdersAPI.OrdersCreateCapture(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

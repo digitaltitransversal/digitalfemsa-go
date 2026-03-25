@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -70,7 +70,7 @@ type WebhookKeysAPI interface {
 	/*
 	GetWebhookKeys Get List of Webhook Keys
 
-	Consume the list of webhook keys you have, each environment supports 10 webhook keys (For production and testing)
+	Consume the list of webhook keys you have
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetWebhookKeysRequest
@@ -104,19 +104,12 @@ type ApiCreateWebhookKeyRequest struct {
 	ctx context.Context
 	ApiService WebhookKeysAPI
 	acceptLanguage *string
-	xChildCompanyId *string
 	webhookKeyRequest *WebhookKeyRequest
 }
 
 // Use for knowing which language to use
 func (r ApiCreateWebhookKeyRequest) AcceptLanguage(acceptLanguage string) ApiCreateWebhookKeyRequest {
 	r.acceptLanguage = &acceptLanguage
-	return r
-}
-
-// In the case of a holding company, the company id of the child company to which will process the request.
-func (r ApiCreateWebhookKeyRequest) XChildCompanyId(xChildCompanyId string) ApiCreateWebhookKeyRequest {
-	r.xChildCompanyId = &xChildCompanyId
 	return r
 }
 
@@ -175,7 +168,7 @@ func (a *WebhookKeysAPIService) CreateWebhookKeyExecute(r ApiCreateWebhookKeyReq
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -184,9 +177,6 @@ func (a *WebhookKeysAPIService) CreateWebhookKeyExecute(r ApiCreateWebhookKeyReq
 	}
 	if r.acceptLanguage != nil {
 		parameterAddToHeaderOrQuery(localVarHeaderParams, "Accept-Language", r.acceptLanguage, "")
-	}
-	if r.xChildCompanyId != nil {
-		parameterAddToHeaderOrQuery(localVarHeaderParams, "X-Child-Company-Id", r.xChildCompanyId, "")
 	}
 	// body params
 	localVarPostBody = r.webhookKeyRequest
@@ -314,7 +304,7 @@ func (a *WebhookKeysAPIService) DeleteWebhookKeyExecute(r ApiDeleteWebhookKeyReq
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -466,7 +456,7 @@ func (a *WebhookKeysAPIService) GetWebhookKeyExecute(r ApiGetWebhookKeyRequest) 
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -602,7 +592,7 @@ func (r ApiGetWebhookKeysRequest) Execute() (*GetWebhookKeysResponse, *http.Resp
 /*
 GetWebhookKeys Get List of Webhook Keys
 
-Consume the list of webhook keys you have, each environment supports 10 webhook keys (For production and testing)
+Consume the list of webhook keys you have
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetWebhookKeysRequest
@@ -660,7 +650,7 @@ func (a *WebhookKeysAPIService) GetWebhookKeysExecute(r ApiGetWebhookKeysRequest
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -794,7 +784,7 @@ func (a *WebhookKeysAPIService) UpdateWebhookKeyExecute(r ApiUpdateWebhookKeyReq
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -803,7 +793,7 @@ func (a *WebhookKeysAPIService) UpdateWebhookKeyExecute(r ApiUpdateWebhookKeyReq
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -837,7 +827,7 @@ func (a *WebhookKeysAPIService) UpdateWebhookKeyExecute(r ApiUpdateWebhookKeyReq
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		if localVarHTTPResponse.StatusCode == 401 {
+		if localVarHTTPResponse.StatusCode == 404 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
@@ -848,7 +838,7 @@ func (a *WebhookKeysAPIService) UpdateWebhookKeyExecute(r ApiUpdateWebhookKeyReq
 					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
+		if localVarHTTPResponse.StatusCode == 401 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {

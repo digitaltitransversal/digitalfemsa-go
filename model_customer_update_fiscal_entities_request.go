@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -24,7 +24,7 @@ type CustomerUpdateFiscalEntitiesRequest struct {
 	TaxId *string `json:"tax_id,omitempty"`
 	Email *string `json:"email,omitempty"`
 	Phone *string `json:"phone,omitempty"`
-	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	Metadata map[string]map[string]interface{} `json:"metadata,omitempty"`
 	CompanyName *string `json:"company_name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -177,9 +177,9 @@ func (o *CustomerUpdateFiscalEntitiesRequest) SetPhone(v string) {
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *CustomerUpdateFiscalEntitiesRequest) GetMetadata() map[string]interface{} {
+func (o *CustomerUpdateFiscalEntitiesRequest) GetMetadata() map[string]map[string]interface{} {
 	if o == nil || IsNil(o.Metadata) {
-		var ret map[string]interface{}
+		var ret map[string]map[string]interface{}
 		return ret
 	}
 	return o.Metadata
@@ -187,9 +187,9 @@ func (o *CustomerUpdateFiscalEntitiesRequest) GetMetadata() map[string]interface
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CustomerUpdateFiscalEntitiesRequest) GetMetadataOk() (map[string]interface{}, bool) {
+func (o *CustomerUpdateFiscalEntitiesRequest) GetMetadataOk() (map[string]map[string]interface{}, bool) {
 	if o == nil || IsNil(o.Metadata) {
-		return map[string]interface{}{}, false
+		return map[string]map[string]interface{}{}, false
 	}
 	return o.Metadata, true
 }
@@ -203,8 +203,8 @@ func (o *CustomerUpdateFiscalEntitiesRequest) HasMetadata() bool {
 	return false
 }
 
-// SetMetadata gets a reference to the given map[string]interface{} and assigns it to the Metadata field.
-func (o *CustomerUpdateFiscalEntitiesRequest) SetMetadata(v map[string]interface{}) {
+// SetMetadata gets a reference to the given map[string]map[string]interface{} and assigns it to the Metadata field.
+func (o *CustomerUpdateFiscalEntitiesRequest) SetMetadata(v map[string]map[string]interface{}) {
 	o.Metadata = v
 }
 

@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | **int64** | The amount to be collected for tax in cents | 
-**Description** | **string** | Description or tax name | 
+**Amount** | Pointer to **int64** | The amount to be collected for tax in cents | [optional] 
+**Description** | Pointer to **string** | Description or tax name | [optional] 
 **Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
 
 ## Methods
 
 ### NewUpdateOrderTaxRequest
 
-`func NewUpdateOrderTaxRequest(amount int64, description string, ) *UpdateOrderTaxRequest`
+`func NewUpdateOrderTaxRequest() *UpdateOrderTaxRequest`
 
 NewUpdateOrderTaxRequest instantiates a new UpdateOrderTaxRequest object
 This constructor will assign default values to properties that have it defined,
@@ -46,6 +46,11 @@ and a boolean to check if the value has been set.
 
 SetAmount sets Amount field to given value.
 
+### HasAmount
+
+`func (o *UpdateOrderTaxRequest) HasAmount() bool`
+
+HasAmount returns a boolean if a field has been set.
 
 ### GetDescription
 
@@ -66,6 +71,11 @@ and a boolean to check if the value has been set.
 
 SetDescription sets Description field to given value.
 
+### HasDescription
+
+`func (o *UpdateOrderTaxRequest) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
 
 ### GetMetadata
 

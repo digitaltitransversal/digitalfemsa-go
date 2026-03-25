@@ -12,9 +12,7 @@ Name | Type | Description | Notes
 **Email** | Pointer to **NullableString** |  | [optional] 
 **Phone** | Pointer to **NullableString** | Customer&#39;s phone number | [optional] 
 **Corporate** | Pointer to **bool** | true if the customer is a company | [optional] 
-**CustomReference** | Pointer to **NullableString** | Custom reference | [optional] 
-**Referrer** | Pointer to **NullableString** | Referrer information (if available) | [optional] 
-**VerticalInfo** | Pointer to **map[string]interface{}** | Vertical-specific information (shape depends on integration) | [optional] 
+**CustomReference** | Pointer to **string** | Custom reference | [optional] 
 **DefaultFiscalEntityId** | Pointer to **NullableString** |  | [optional] 
 **DefaultShippingContactId** | Pointer to **NullableString** |  | [optional] 
 **Metadata** | Pointer to **map[string]interface{}** | Customer metadata (maps to contextual_data in backend) | [optional] 
@@ -276,86 +274,6 @@ SetCustomReference sets CustomReference field to given value.
 
 HasCustomReference returns a boolean if a field has been set.
 
-### SetCustomReferenceNil
-
-`func (o *CustomerResponse) SetCustomReferenceNil(b bool)`
-
- SetCustomReferenceNil sets the value for CustomReference to be an explicit nil
-
-### UnsetCustomReference
-`func (o *CustomerResponse) UnsetCustomReference()`
-
-UnsetCustomReference ensures that no value is present for CustomReference, not even an explicit nil
-### GetReferrer
-
-`func (o *CustomerResponse) GetReferrer() string`
-
-GetReferrer returns the Referrer field if non-nil, zero value otherwise.
-
-### GetReferrerOk
-
-`func (o *CustomerResponse) GetReferrerOk() (*string, bool)`
-
-GetReferrerOk returns a tuple with the Referrer field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetReferrer
-
-`func (o *CustomerResponse) SetReferrer(v string)`
-
-SetReferrer sets Referrer field to given value.
-
-### HasReferrer
-
-`func (o *CustomerResponse) HasReferrer() bool`
-
-HasReferrer returns a boolean if a field has been set.
-
-### SetReferrerNil
-
-`func (o *CustomerResponse) SetReferrerNil(b bool)`
-
- SetReferrerNil sets the value for Referrer to be an explicit nil
-
-### UnsetReferrer
-`func (o *CustomerResponse) UnsetReferrer()`
-
-UnsetReferrer ensures that no value is present for Referrer, not even an explicit nil
-### GetVerticalInfo
-
-`func (o *CustomerResponse) GetVerticalInfo() map[string]interface{}`
-
-GetVerticalInfo returns the VerticalInfo field if non-nil, zero value otherwise.
-
-### GetVerticalInfoOk
-
-`func (o *CustomerResponse) GetVerticalInfoOk() (*map[string]interface{}, bool)`
-
-GetVerticalInfoOk returns a tuple with the VerticalInfo field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetVerticalInfo
-
-`func (o *CustomerResponse) SetVerticalInfo(v map[string]interface{})`
-
-SetVerticalInfo sets VerticalInfo field to given value.
-
-### HasVerticalInfo
-
-`func (o *CustomerResponse) HasVerticalInfo() bool`
-
-HasVerticalInfo returns a boolean if a field has been set.
-
-### SetVerticalInfoNil
-
-`func (o *CustomerResponse) SetVerticalInfoNil(b bool)`
-
- SetVerticalInfoNil sets the value for VerticalInfo to be an explicit nil
-
-### UnsetVerticalInfo
-`func (o *CustomerResponse) UnsetVerticalInfo()`
-
-UnsetVerticalInfo ensures that no value is present for VerticalInfo, not even an explicit nil
 ### GetDefaultFiscalEntityId
 
 `func (o *CustomerResponse) GetDefaultFiscalEntityId() string`

@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -24,7 +24,7 @@ type ChargeRequest struct {
 	Amount *int32 `json:"amount,omitempty"`
 	PaymentMethod ChargeRequestPaymentMethod `json:"payment_method"`
 	// Custom reference to add to the charge
-	ReferenceId NullableString `json:"reference_id,omitempty"`
+	ReferenceId *string `json:"reference_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -104,46 +104,36 @@ func (o *ChargeRequest) SetPaymentMethod(v ChargeRequestPaymentMethod) {
 	o.PaymentMethod = v
 }
 
-// GetReferenceId returns the ReferenceId field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetReferenceId returns the ReferenceId field value if set, zero value otherwise.
 func (o *ChargeRequest) GetReferenceId() string {
-	if o == nil || IsNil(o.ReferenceId.Get()) {
+	if o == nil || IsNil(o.ReferenceId) {
 		var ret string
 		return ret
 	}
-	return *o.ReferenceId.Get()
+	return *o.ReferenceId
 }
 
 // GetReferenceIdOk returns a tuple with the ReferenceId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ChargeRequest) GetReferenceIdOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.ReferenceId) {
 		return nil, false
 	}
-	return o.ReferenceId.Get(), o.ReferenceId.IsSet()
+	return o.ReferenceId, true
 }
 
 // HasReferenceId returns a boolean if a field has been set.
 func (o *ChargeRequest) HasReferenceId() bool {
-	if o != nil && o.ReferenceId.IsSet() {
+	if o != nil && !IsNil(o.ReferenceId) {
 		return true
 	}
 
 	return false
 }
 
-// SetReferenceId gets a reference to the given NullableString and assigns it to the ReferenceId field.
+// SetReferenceId gets a reference to the given string and assigns it to the ReferenceId field.
 func (o *ChargeRequest) SetReferenceId(v string) {
-	o.ReferenceId.Set(&v)
-}
-// SetReferenceIdNil sets the value for ReferenceId to be an explicit nil
-func (o *ChargeRequest) SetReferenceIdNil() {
-	o.ReferenceId.Set(nil)
-}
-
-// UnsetReferenceId ensures that no value is present for ReferenceId, not even an explicit nil
-func (o *ChargeRequest) UnsetReferenceId() {
-	o.ReferenceId.Unset()
+	o.ReferenceId = &v
 }
 
 func (o ChargeRequest) MarshalJSON() ([]byte, error) {
@@ -160,8 +150,8 @@ func (o ChargeRequest) ToMap() (map[string]interface{}, error) {
 		toSerialize["amount"] = o.Amount
 	}
 	toSerialize["payment_method"] = o.PaymentMethod
-	if o.ReferenceId.IsSet() {
-		toSerialize["reference_id"] = o.ReferenceId.Get()
+	if !IsNil(o.ReferenceId) {
+		toSerialize["reference_id"] = o.ReferenceId
 	}
 
 	for key, value := range o.AdditionalProperties {

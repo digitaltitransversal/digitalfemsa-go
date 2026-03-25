@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -50,7 +50,7 @@ const (
 	UnknownPlatform string = "unknown platform"
 )
 
-// APIClient manages communication with the Femsa API API v2.2.0
+// APIClient manages communication with the Femsa API API v2.1.0
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -104,7 +104,7 @@ func init() {
 
 func initUserAgent() {
 	data := map[string]string{
-		"sdk_version": "2.0.0",
+		"sdk_version": "1.1.0",
 		"lang":             "go",
 		"lang_version":     runtime.Version(),
 		"uname":            getUname(),

@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -20,9 +20,7 @@ var _ MappedNullable = &UpdatePaymentMethods{}
 
 // UpdatePaymentMethods struct for UpdatePaymentMethods
 type UpdatePaymentMethods struct {
-	ExpiresAt *UpdatePaymentMethodsExpiresAt `json:"expires_at,omitempty"`
-	Amount *UpdatePaymentMethodsAmount `json:"amount,omitempty"`
-	Type *string `json:"type,omitempty"`
+	Name *string `json:"name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -45,100 +43,36 @@ func NewUpdatePaymentMethodsWithDefaults() *UpdatePaymentMethods {
 	return &this
 }
 
-// GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
-func (o *UpdatePaymentMethods) GetExpiresAt() UpdatePaymentMethodsExpiresAt {
-	if o == nil || IsNil(o.ExpiresAt) {
-		var ret UpdatePaymentMethodsExpiresAt
-		return ret
-	}
-	return *o.ExpiresAt
-}
-
-// GetExpiresAtOk returns a tuple with the ExpiresAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethods) GetExpiresAtOk() (*UpdatePaymentMethodsExpiresAt, bool) {
-	if o == nil || IsNil(o.ExpiresAt) {
-		return nil, false
-	}
-	return o.ExpiresAt, true
-}
-
-// HasExpiresAt returns a boolean if a field has been set.
-func (o *UpdatePaymentMethods) HasExpiresAt() bool {
-	if o != nil && !IsNil(o.ExpiresAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetExpiresAt gets a reference to the given UpdatePaymentMethodsExpiresAt and assigns it to the ExpiresAt field.
-func (o *UpdatePaymentMethods) SetExpiresAt(v UpdatePaymentMethodsExpiresAt) {
-	o.ExpiresAt = &v
-}
-
-// GetAmount returns the Amount field value if set, zero value otherwise.
-func (o *UpdatePaymentMethods) GetAmount() UpdatePaymentMethodsAmount {
-	if o == nil || IsNil(o.Amount) {
-		var ret UpdatePaymentMethodsAmount
-		return ret
-	}
-	return *o.Amount
-}
-
-// GetAmountOk returns a tuple with the Amount field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethods) GetAmountOk() (*UpdatePaymentMethodsAmount, bool) {
-	if o == nil || IsNil(o.Amount) {
-		return nil, false
-	}
-	return o.Amount, true
-}
-
-// HasAmount returns a boolean if a field has been set.
-func (o *UpdatePaymentMethods) HasAmount() bool {
-	if o != nil && !IsNil(o.Amount) {
-		return true
-	}
-
-	return false
-}
-
-// SetAmount gets a reference to the given UpdatePaymentMethodsAmount and assigns it to the Amount field.
-func (o *UpdatePaymentMethods) SetAmount(v UpdatePaymentMethodsAmount) {
-	o.Amount = &v
-}
-
-// GetType returns the Type field value if set, zero value otherwise.
-func (o *UpdatePaymentMethods) GetType() string {
-	if o == nil || IsNil(o.Type) {
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *UpdatePaymentMethods) GetName() string {
+	if o == nil || IsNil(o.Name) {
 		var ret string
 		return ret
 	}
-	return *o.Type
+	return *o.Name
 }
 
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdatePaymentMethods) GetTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.Type) {
+func (o *UpdatePaymentMethods) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
 		return nil, false
 	}
-	return o.Type, true
+	return o.Name, true
 }
 
-// HasType returns a boolean if a field has been set.
-func (o *UpdatePaymentMethods) HasType() bool {
-	if o != nil && !IsNil(o.Type) {
+// HasName returns a boolean if a field has been set.
+func (o *UpdatePaymentMethods) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
 		return true
 	}
 
 	return false
 }
 
-// SetType gets a reference to the given string and assigns it to the Type field.
-func (o *UpdatePaymentMethods) SetType(v string) {
-	o.Type = &v
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *UpdatePaymentMethods) SetName(v string) {
+	o.Name = &v
 }
 
 func (o UpdatePaymentMethods) MarshalJSON() ([]byte, error) {
@@ -151,14 +85,8 @@ func (o UpdatePaymentMethods) MarshalJSON() ([]byte, error) {
 
 func (o UpdatePaymentMethods) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.ExpiresAt) {
-		toSerialize["expires_at"] = o.ExpiresAt
-	}
-	if !IsNil(o.Amount) {
-		toSerialize["amount"] = o.Amount
-	}
-	if !IsNil(o.Type) {
-		toSerialize["type"] = o.Type
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -182,9 +110,7 @@ func (o *UpdatePaymentMethods) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "expires_at")
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "type")
+		delete(additionalProperties, "name")
 		o.AdditionalProperties = additionalProperties
 	}
 

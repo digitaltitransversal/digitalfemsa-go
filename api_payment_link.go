@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -39,9 +39,9 @@ type PaymentLinkAPI interface {
 	CancelCheckoutExecute(r ApiCancelCheckoutRequest) (*CheckoutResponse, *http.Response, error)
 
 	/*
-	CreateCheckout Create Unique Payment Link
+	CreateCheckout Create Payment Link
 
-	Creates a new payment link. The request body defines the payment link type, allowed payment methods, and expiration settings.
+	Creates a Payment Link: a shareable URL that lets your customer pay without you building a custom checkout. Configure the link type, allowed payment methods, and expiration. The request also includes an order_template (currency and line items) used to generate an Order when the customer completes a payment. Use recurrent=false for a single-use link, or recurrent=true to allow multiple payments (limited by payments_limit_count).
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateCheckoutRequest
@@ -171,7 +171,7 @@ func (a *PaymentLinkAPIService) CancelCheckoutExecute(r ApiCancelCheckoutRequest
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -306,9 +306,9 @@ func (r ApiCreateCheckoutRequest) Execute() (*CheckoutResponse, *http.Response, 
 }
 
 /*
-CreateCheckout Create Unique Payment Link
+CreateCheckout Create Payment Link
 
-Creates a new payment link. The request body defines the payment link type, allowed payment methods, and expiration settings.
+Creates a Payment Link: a shareable URL that lets your customer pay without you building a custom checkout. Configure the link type, allowed payment methods, and expiration. The request also includes an order_template (currency and line items) used to generate an Order when the customer completes a payment. Use recurrent=false for a single-use link, or recurrent=true to allow multiple payments (limited by payments_limit_count).
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiCreateCheckoutRequest
@@ -354,7 +354,7 @@ func (a *PaymentLinkAPIService) CreateCheckoutExecute(r ApiCreateCheckoutRequest
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -530,7 +530,7 @@ func (a *PaymentLinkAPIService) EmailCheckoutExecute(r ApiEmailCheckoutRequest) 
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -709,7 +709,7 @@ func (a *PaymentLinkAPIService) GetCheckoutExecute(r ApiGetCheckoutRequest) (*Ch
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -914,7 +914,7 @@ func (a *PaymentLinkAPIService) GetCheckoutsExecute(r ApiGetCheckoutsRequest) (*
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

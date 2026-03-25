@@ -4,21 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | Unique identifier of the webhook. | 
-**Object** | **string** | Object name, which is webhook. | 
-**Url** | **string** | The URL where events will be delivered. | 
-**Status** | **string** | Current delivery status of the webhook. | 
-**SubscribedEvents** | **[]string** | List of event types the webhook is subscribed to. | 
-**Synchronous** | **bool** | Indicates whether the webhook uses synchronous delivery behavior. | 
-**Description** | Pointer to **NullableString** | Optional description of the webhook. | [optional] 
-**Livemode** | **bool** | Indicates whether the webhook is in live mode or test mode. | 
-**Active** | **bool** | Indicates whether the webhook is active. | 
+**Deleted** | Pointer to **NullableBool** |  | [optional] 
+**DevelopmentEnabled** | Pointer to **bool** |  | [optional] 
+**Id** | Pointer to **string** |  | [optional] 
+**Livemode** | Pointer to **bool** |  | [optional] 
+**Object** | Pointer to **string** |  | [optional] 
+**ProductionEnabled** | Pointer to **bool** |  | [optional] 
+**Status** | Pointer to **string** |  | [optional] 
+**SubscribedEvents** | Pointer to **[]string** |  | [optional] 
+**Synchronous** | Pointer to **bool** |  | [optional] 
+**Url** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
 ### NewWebhookResponse
 
-`func NewWebhookResponse(id string, object string, url string, status string, subscribedEvents []string, synchronous bool, livemode bool, active bool, ) *WebhookResponse`
+`func NewWebhookResponse() *WebhookResponse`
 
 NewWebhookResponse instantiates a new WebhookResponse object
 This constructor will assign default values to properties that have it defined,
@@ -32,6 +33,66 @@ will change when the set of required properties is changed
 NewWebhookResponseWithDefaults instantiates a new WebhookResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetDeleted
+
+`func (o *WebhookResponse) GetDeleted() bool`
+
+GetDeleted returns the Deleted field if non-nil, zero value otherwise.
+
+### GetDeletedOk
+
+`func (o *WebhookResponse) GetDeletedOk() (*bool, bool)`
+
+GetDeletedOk returns a tuple with the Deleted field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDeleted
+
+`func (o *WebhookResponse) SetDeleted(v bool)`
+
+SetDeleted sets Deleted field to given value.
+
+### HasDeleted
+
+`func (o *WebhookResponse) HasDeleted() bool`
+
+HasDeleted returns a boolean if a field has been set.
+
+### SetDeletedNil
+
+`func (o *WebhookResponse) SetDeletedNil(b bool)`
+
+ SetDeletedNil sets the value for Deleted to be an explicit nil
+
+### UnsetDeleted
+`func (o *WebhookResponse) UnsetDeleted()`
+
+UnsetDeleted ensures that no value is present for Deleted, not even an explicit nil
+### GetDevelopmentEnabled
+
+`func (o *WebhookResponse) GetDevelopmentEnabled() bool`
+
+GetDevelopmentEnabled returns the DevelopmentEnabled field if non-nil, zero value otherwise.
+
+### GetDevelopmentEnabledOk
+
+`func (o *WebhookResponse) GetDevelopmentEnabledOk() (*bool, bool)`
+
+GetDevelopmentEnabledOk returns a tuple with the DevelopmentEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDevelopmentEnabled
+
+`func (o *WebhookResponse) SetDevelopmentEnabled(v bool)`
+
+SetDevelopmentEnabled sets DevelopmentEnabled field to given value.
+
+### HasDevelopmentEnabled
+
+`func (o *WebhookResponse) HasDevelopmentEnabled() bool`
+
+HasDevelopmentEnabled returns a boolean if a field has been set.
 
 ### GetId
 
@@ -52,6 +113,36 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
+### HasId
+
+`func (o *WebhookResponse) HasId() bool`
+
+HasId returns a boolean if a field has been set.
+
+### GetLivemode
+
+`func (o *WebhookResponse) GetLivemode() bool`
+
+GetLivemode returns the Livemode field if non-nil, zero value otherwise.
+
+### GetLivemodeOk
+
+`func (o *WebhookResponse) GetLivemodeOk() (*bool, bool)`
+
+GetLivemodeOk returns a tuple with the Livemode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLivemode
+
+`func (o *WebhookResponse) SetLivemode(v bool)`
+
+SetLivemode sets Livemode field to given value.
+
+### HasLivemode
+
+`func (o *WebhookResponse) HasLivemode() bool`
+
+HasLivemode returns a boolean if a field has been set.
 
 ### GetObject
 
@@ -72,26 +163,36 @@ and a boolean to check if the value has been set.
 
 SetObject sets Object field to given value.
 
+### HasObject
 
-### GetUrl
+`func (o *WebhookResponse) HasObject() bool`
 
-`func (o *WebhookResponse) GetUrl() string`
+HasObject returns a boolean if a field has been set.
 
-GetUrl returns the Url field if non-nil, zero value otherwise.
+### GetProductionEnabled
 
-### GetUrlOk
+`func (o *WebhookResponse) GetProductionEnabled() bool`
 
-`func (o *WebhookResponse) GetUrlOk() (*string, bool)`
+GetProductionEnabled returns the ProductionEnabled field if non-nil, zero value otherwise.
 
-GetUrlOk returns a tuple with the Url field if it's non-nil, zero value otherwise
+### GetProductionEnabledOk
+
+`func (o *WebhookResponse) GetProductionEnabledOk() (*bool, bool)`
+
+GetProductionEnabledOk returns a tuple with the ProductionEnabled field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUrl
+### SetProductionEnabled
 
-`func (o *WebhookResponse) SetUrl(v string)`
+`func (o *WebhookResponse) SetProductionEnabled(v bool)`
 
-SetUrl sets Url field to given value.
+SetProductionEnabled sets ProductionEnabled field to given value.
 
+### HasProductionEnabled
+
+`func (o *WebhookResponse) HasProductionEnabled() bool`
+
+HasProductionEnabled returns a boolean if a field has been set.
 
 ### GetStatus
 
@@ -112,6 +213,11 @@ and a boolean to check if the value has been set.
 
 SetStatus sets Status field to given value.
 
+### HasStatus
+
+`func (o *WebhookResponse) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
 
 ### GetSubscribedEvents
 
@@ -132,6 +238,11 @@ and a boolean to check if the value has been set.
 
 SetSubscribedEvents sets SubscribedEvents field to given value.
 
+### HasSubscribedEvents
+
+`func (o *WebhookResponse) HasSubscribedEvents() bool`
+
+HasSubscribedEvents returns a boolean if a field has been set.
 
 ### GetSynchronous
 
@@ -152,81 +263,36 @@ and a boolean to check if the value has been set.
 
 SetSynchronous sets Synchronous field to given value.
 
+### HasSynchronous
 
-### GetDescription
+`func (o *WebhookResponse) HasSynchronous() bool`
 
-`func (o *WebhookResponse) GetDescription() string`
+HasSynchronous returns a boolean if a field has been set.
 
-GetDescription returns the Description field if non-nil, zero value otherwise.
+### GetUrl
 
-### GetDescriptionOk
+`func (o *WebhookResponse) GetUrl() string`
 
-`func (o *WebhookResponse) GetDescriptionOk() (*string, bool)`
+GetUrl returns the Url field if non-nil, zero value otherwise.
 
-GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+### GetUrlOk
+
+`func (o *WebhookResponse) GetUrlOk() (*string, bool)`
+
+GetUrlOk returns a tuple with the Url field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDescription
+### SetUrl
 
-`func (o *WebhookResponse) SetDescription(v string)`
+`func (o *WebhookResponse) SetUrl(v string)`
 
-SetDescription sets Description field to given value.
+SetUrl sets Url field to given value.
 
-### HasDescription
+### HasUrl
 
-`func (o *WebhookResponse) HasDescription() bool`
+`func (o *WebhookResponse) HasUrl() bool`
 
-HasDescription returns a boolean if a field has been set.
-
-### SetDescriptionNil
-
-`func (o *WebhookResponse) SetDescriptionNil(b bool)`
-
- SetDescriptionNil sets the value for Description to be an explicit nil
-
-### UnsetDescription
-`func (o *WebhookResponse) UnsetDescription()`
-
-UnsetDescription ensures that no value is present for Description, not even an explicit nil
-### GetLivemode
-
-`func (o *WebhookResponse) GetLivemode() bool`
-
-GetLivemode returns the Livemode field if non-nil, zero value otherwise.
-
-### GetLivemodeOk
-
-`func (o *WebhookResponse) GetLivemodeOk() (*bool, bool)`
-
-GetLivemodeOk returns a tuple with the Livemode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLivemode
-
-`func (o *WebhookResponse) SetLivemode(v bool)`
-
-SetLivemode sets Livemode field to given value.
-
-
-### GetActive
-
-`func (o *WebhookResponse) GetActive() bool`
-
-GetActive returns the Active field if non-nil, zero value otherwise.
-
-### GetActiveOk
-
-`func (o *WebhookResponse) GetActiveOk() (*bool, bool)`
-
-GetActiveOk returns a tuple with the Active field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetActive
-
-`func (o *WebhookResponse) SetActive(v bool)`
-
-SetActive sets Active field to given value.
-
+HasUrl returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

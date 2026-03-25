@@ -4,18 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**CustomerId** | **string** |  | 
 **Name** | **string** |  | 
 **Email** | **string** |  | 
-**Phone** | **string** |  | 
+**Phone** | Pointer to **string** |  | [optional] 
 **Corporate** | Pointer to **bool** |  | [optional] 
-**Object** | Pointer to **string** |  | [optional] 
-**CustomerId** | **string** |  | 
 
 ## Methods
 
 ### NewOrderRequestCustomerInfo
 
-`func NewOrderRequestCustomerInfo(name string, email string, phone string, customerId string, ) *OrderRequestCustomerInfo`
+`func NewOrderRequestCustomerInfo(customerId string, name string, email string, ) *OrderRequestCustomerInfo`
 
 NewOrderRequestCustomerInfo instantiates a new OrderRequestCustomerInfo object
 This constructor will assign default values to properties that have it defined,
@@ -29,6 +28,26 @@ will change when the set of required properties is changed
 NewOrderRequestCustomerInfoWithDefaults instantiates a new OrderRequestCustomerInfo object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetCustomerId
+
+`func (o *OrderRequestCustomerInfo) GetCustomerId() string`
+
+GetCustomerId returns the CustomerId field if non-nil, zero value otherwise.
+
+### GetCustomerIdOk
+
+`func (o *OrderRequestCustomerInfo) GetCustomerIdOk() (*string, bool)`
+
+GetCustomerIdOk returns a tuple with the CustomerId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomerId
+
+`func (o *OrderRequestCustomerInfo) SetCustomerId(v string)`
+
+SetCustomerId sets CustomerId field to given value.
+
 
 ### GetName
 
@@ -89,6 +108,11 @@ and a boolean to check if the value has been set.
 
 SetPhone sets Phone field to given value.
 
+### HasPhone
+
+`func (o *OrderRequestCustomerInfo) HasPhone() bool`
+
+HasPhone returns a boolean if a field has been set.
 
 ### GetCorporate
 
@@ -114,51 +138,6 @@ SetCorporate sets Corporate field to given value.
 `func (o *OrderRequestCustomerInfo) HasCorporate() bool`
 
 HasCorporate returns a boolean if a field has been set.
-
-### GetObject
-
-`func (o *OrderRequestCustomerInfo) GetObject() string`
-
-GetObject returns the Object field if non-nil, zero value otherwise.
-
-### GetObjectOk
-
-`func (o *OrderRequestCustomerInfo) GetObjectOk() (*string, bool)`
-
-GetObjectOk returns a tuple with the Object field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetObject
-
-`func (o *OrderRequestCustomerInfo) SetObject(v string)`
-
-SetObject sets Object field to given value.
-
-### HasObject
-
-`func (o *OrderRequestCustomerInfo) HasObject() bool`
-
-HasObject returns a boolean if a field has been set.
-
-### GetCustomerId
-
-`func (o *OrderRequestCustomerInfo) GetCustomerId() string`
-
-GetCustomerId returns the CustomerId field if non-nil, zero value otherwise.
-
-### GetCustomerIdOk
-
-`func (o *OrderRequestCustomerInfo) GetCustomerIdOk() (*string, bool)`
-
-GetCustomerIdOk returns a tuple with the CustomerId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCustomerId
-
-`func (o *OrderRequestCustomerInfo) SetCustomerId(v string)`
-
-SetCustomerId sets CustomerId field to given value.
-
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -5,8 +5,8 @@ All URIs are relative to *https://api.digitalfemsa.io*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateCustomerShippingContacts**](ShippingContactsAPI.md#CreateCustomerShippingContacts) | **Post** /customers/{id}/shipping_contacts | Create a shipping contact
-[**DeleteCustomerShippingContacts**](ShippingContactsAPI.md#DeleteCustomerShippingContacts) | **Delete** /customers/{id}/shipping_contacts/{shipping_contacts_id} | Delete shipping contact
-[**UpdateCustomerShippingContacts**](ShippingContactsAPI.md#UpdateCustomerShippingContacts) | **Put** /customers/{id}/shipping_contacts/{shipping_contacts_id} | Update shipping contact
+[**DeleteCustomerShippingContacts**](ShippingContactsAPI.md#DeleteCustomerShippingContacts) | **Delete** /customers/{id}/shipping_contacts/{shipping_contacts_id} | Delete shipping contacts
+[**UpdateCustomerShippingContacts**](ShippingContactsAPI.md#UpdateCustomerShippingContacts) | **Put** /customers/{id}/shipping_contacts/{shipping_contacts_id} | Update shipping contacts
 
 
 
@@ -79,7 +79,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 > CustomerShippingContactsResponse DeleteCustomerShippingContacts(ctx, id, shippingContactsId).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 
-Delete shipping contact
+Delete shipping contacts
 
 
 
@@ -156,7 +156,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -167,7 +167,7 @@ Name | Type | Description  | Notes
 
 > CustomerShippingContactsResponse UpdateCustomerShippingContacts(ctx, id, shippingContactsId).CustomerUpdateShippingContacts(customerUpdateShippingContacts).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 
-Update shipping contact
+Update shipping contacts
 
 
 
@@ -235,7 +235,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)

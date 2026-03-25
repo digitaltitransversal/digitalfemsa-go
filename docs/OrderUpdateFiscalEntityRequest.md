@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Address** | [**FiscalEntityAddress**](FiscalEntityAddress.md) |  | 
 **Email** | Pointer to **string** | Email of the fiscal entity | [optional] 
 **Name** | Pointer to **NullableString** | Name of the fiscal entity | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** | Metadata associated with the fiscal entity | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Arbitrary key-value data associated with the fiscal entity for your internal use. Keys should be strings; values can be any JSON value.  | [optional] 
 **Phone** | Pointer to **string** | Phone of the fiscal entity | [optional] 
 **TaxId** | Pointer to **NullableString** | Tax ID of the fiscal entity | [optional] 
 

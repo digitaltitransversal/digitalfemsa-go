@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -26,7 +26,6 @@ type CustomerShippingContactsResponse struct {
 	Address *CustomerShippingContactsResponseAddress `json:"address,omitempty"`
 	// Customer ID that owns this shipping contact.
 	ParentId *string `json:"parent_id,omitempty"`
-	// True if this is the customer's default shipping contact.
 	Default *bool `json:"default,omitempty"`
 	Id *string `json:"id,omitempty"`
 	CreatedAt *int64 `json:"created_at,omitempty"`
@@ -34,7 +33,7 @@ type CustomerShippingContactsResponse struct {
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	Object *string `json:"object,omitempty"`
 	// Present only when the shipping contact was deleted.
-	Deleted NullableBool `json:"deleted,omitempty"`
+	Deleted *bool `json:"deleted,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -387,46 +386,36 @@ func (o *CustomerShippingContactsResponse) SetObject(v string) {
 	o.Object = &v
 }
 
-// GetDeleted returns the Deleted field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetDeleted returns the Deleted field value if set, zero value otherwise.
 func (o *CustomerShippingContactsResponse) GetDeleted() bool {
-	if o == nil || IsNil(o.Deleted.Get()) {
+	if o == nil || IsNil(o.Deleted) {
 		var ret bool
 		return ret
 	}
-	return *o.Deleted.Get()
+	return *o.Deleted
 }
 
 // GetDeletedOk returns a tuple with the Deleted field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CustomerShippingContactsResponse) GetDeletedOk() (*bool, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Deleted) {
 		return nil, false
 	}
-	return o.Deleted.Get(), o.Deleted.IsSet()
+	return o.Deleted, true
 }
 
 // HasDeleted returns a boolean if a field has been set.
 func (o *CustomerShippingContactsResponse) HasDeleted() bool {
-	if o != nil && o.Deleted.IsSet() {
+	if o != nil && !IsNil(o.Deleted) {
 		return true
 	}
 
 	return false
 }
 
-// SetDeleted gets a reference to the given NullableBool and assigns it to the Deleted field.
+// SetDeleted gets a reference to the given bool and assigns it to the Deleted field.
 func (o *CustomerShippingContactsResponse) SetDeleted(v bool) {
-	o.Deleted.Set(&v)
-}
-// SetDeletedNil sets the value for Deleted to be an explicit nil
-func (o *CustomerShippingContactsResponse) SetDeletedNil() {
-	o.Deleted.Set(nil)
-}
-
-// UnsetDeleted ensures that no value is present for Deleted, not even an explicit nil
-func (o *CustomerShippingContactsResponse) UnsetDeleted() {
-	o.Deleted.Unset()
+	o.Deleted = &v
 }
 
 func (o CustomerShippingContactsResponse) MarshalJSON() ([]byte, error) {
@@ -469,8 +458,8 @@ func (o CustomerShippingContactsResponse) ToMap() (map[string]interface{}, error
 	if !IsNil(o.Object) {
 		toSerialize["object"] = o.Object
 	}
-	if o.Deleted.IsSet() {
-		toSerialize["deleted"] = o.Deleted.Get()
+	if !IsNil(o.Deleted) {
+		toSerialize["deleted"] = o.Deleted
 	}
 
 	for key, value := range o.AdditionalProperties {

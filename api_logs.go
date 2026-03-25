@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -26,8 +26,7 @@ type LogsAPI interface {
 	/*
 	GetLogById Get Log
 
-	Returns a single log by its ID. Logs can be used for troubleshooting and auditing requests and internal operations.
-
+	Get the details of a specific log
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param id Identifier of the resource
@@ -86,8 +85,7 @@ func (r ApiGetLogByIdRequest) Execute() (*LogResponse, *http.Response, error) {
 /*
 GetLogById Get Log
 
-Returns a single log by its ID. Logs can be used for troubleshooting and auditing requests and internal operations.
-
+Get the details of a specific log
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Identifier of the resource
@@ -133,7 +131,7 @@ func (a *LogsAPIService) GetLogByIdExecute(r ApiGetLogByIdRequest) (*LogResponse
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
@@ -329,7 +327,7 @@ func (a *LogsAPIService) GetLogsExecute(r ApiGetLogsRequest) (*LogsResponse, *ht
 	}
 
 	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.2.0+json"}
+	localVarHTTPHeaderAccepts := []string{"application/vnd.app-v2.1.0+json"}
 
 	// set Accept header
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)

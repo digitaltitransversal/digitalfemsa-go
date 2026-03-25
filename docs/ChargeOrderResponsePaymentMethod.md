@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | Pointer to **string** | Cash payment type | [optional] 
+**Type** | Pointer to **string** |  | [optional] 
 **Object** | **string** |  | 
 **AuthCode** | Pointer to **NullableString** |  | [optional] 
 **CashierId** | Pointer to **NullableString** |  | [optional] 

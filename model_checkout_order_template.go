@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -19,14 +19,14 @@ import (
 // checks if the CheckoutOrderTemplate type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CheckoutOrderTemplate{}
 
-// CheckoutOrderTemplate It maintains the attributes with which the order will be created when receiving a new payment.
+// CheckoutOrderTemplate Attributes used to create the order when a new payment is received.
 type CheckoutOrderTemplate struct {
-	// It is the currency in which the order will be created. It must be a valid ISO 4217 currency code.
+	// ISO 4217 currency code for the order.
 	Currency string `json:"currency"`
-	CustomerInfo *CustomerInfo `json:"customer_info,omitempty"`
-	// They are the products to buy. Each contains the \"unit price\" and \"quantity\" parameters that are used to calculate the total amount of the order.
+	CustomerInfo *CheckoutOrderTemplateCustomerInfo `json:"customer_info,omitempty"`
+	// Products to buy. Each contains unit price and quantity used to calculate the order total.
 	LineItems []Product `json:"line_items"`
-	// It is a set of key-value pairs that you can attach to the order. It can be used to store additional information about the order in a structured format.
+	// Arbitrary key-value data attached to the order for internal use.
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -77,9 +77,9 @@ func (o *CheckoutOrderTemplate) SetCurrency(v string) {
 }
 
 // GetCustomerInfo returns the CustomerInfo field value if set, zero value otherwise.
-func (o *CheckoutOrderTemplate) GetCustomerInfo() CustomerInfo {
+func (o *CheckoutOrderTemplate) GetCustomerInfo() CheckoutOrderTemplateCustomerInfo {
 	if o == nil || IsNil(o.CustomerInfo) {
-		var ret CustomerInfo
+		var ret CheckoutOrderTemplateCustomerInfo
 		return ret
 	}
 	return *o.CustomerInfo
@@ -87,7 +87,7 @@ func (o *CheckoutOrderTemplate) GetCustomerInfo() CustomerInfo {
 
 // GetCustomerInfoOk returns a tuple with the CustomerInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutOrderTemplate) GetCustomerInfoOk() (*CustomerInfo, bool) {
+func (o *CheckoutOrderTemplate) GetCustomerInfoOk() (*CheckoutOrderTemplateCustomerInfo, bool) {
 	if o == nil || IsNil(o.CustomerInfo) {
 		return nil, false
 	}
@@ -103,8 +103,8 @@ func (o *CheckoutOrderTemplate) HasCustomerInfo() bool {
 	return false
 }
 
-// SetCustomerInfo gets a reference to the given CustomerInfo and assigns it to the CustomerInfo field.
-func (o *CheckoutOrderTemplate) SetCustomerInfo(v CustomerInfo) {
+// SetCustomerInfo gets a reference to the given CheckoutOrderTemplateCustomerInfo and assigns it to the CustomerInfo field.
+func (o *CheckoutOrderTemplate) SetCustomerInfo(v CheckoutOrderTemplateCustomerInfo) {
 	o.CustomerInfo = &v
 }
 

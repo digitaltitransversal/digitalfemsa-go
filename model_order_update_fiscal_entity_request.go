@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -19,14 +19,14 @@ import (
 // checks if the OrderUpdateFiscalEntityRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OrderUpdateFiscalEntityRequest{}
 
-// OrderUpdateFiscalEntityRequest Fiscal entity information associated with the order.
+// OrderUpdateFiscalEntityRequest Fiscal entity of the order, Currently it is a purely informative field
 type OrderUpdateFiscalEntityRequest struct {
 	Address FiscalEntityAddress `json:"address"`
 	// Email of the fiscal entity
 	Email *string `json:"email,omitempty"`
 	// Name of the fiscal entity
 	Name NullableString `json:"name,omitempty"`
-	// Metadata associated with the fiscal entity
+	// Arbitrary key-value data associated with the fiscal entity for your internal use. Keys should be strings; values can be any JSON value. 
 	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	// Phone of the fiscal entity
 	Phone *string `json:"phone,omitempty"`

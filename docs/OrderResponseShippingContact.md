@@ -9,12 +9,12 @@ Name | Type | Description | Notes
 **BetweenStreets** | Pointer to **NullableString** |  | [optional] 
 **Address** | Pointer to [**CustomerShippingContactsResponseAddress**](CustomerShippingContactsResponseAddress.md) |  | [optional] 
 **ParentId** | Pointer to **string** | Customer ID that owns this shipping contact. | [optional] 
-**Default** | Pointer to **bool** | True if this is the customer&#39;s default shipping contact. | [optional] 
+**Default** | Pointer to **bool** |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
 **Metadata** | Pointer to **map[string]interface{}** | Metadata associated with the shipping contact | [optional] 
 **Object** | Pointer to **string** |  | [optional] 
-**Deleted** | Pointer to **NullableBool** | Present only when the shipping contact was deleted. | [optional] 
+**Deleted** | Pointer to **bool** | Present only when the shipping contact was deleted. | [optional] 
 
 ## Methods
 
@@ -320,16 +320,6 @@ SetDeleted sets Deleted field to given value.
 
 HasDeleted returns a boolean if a field has been set.
 
-### SetDeletedNil
-
-`func (o *OrderResponseShippingContact) SetDeletedNil(b bool)`
-
- SetDeletedNil sets the value for Deleted to be an explicit nil
-
-### UnsetDeleted
-`func (o *OrderResponseShippingContact) UnsetDeleted()`
-
-UnsetDeleted ensures that no value is present for Deleted, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

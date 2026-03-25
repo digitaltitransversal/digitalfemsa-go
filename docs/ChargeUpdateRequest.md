@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ReferenceId** | Pointer to **NullableString** | Custom reference ID. | [optional] 
+**ReferenceId** | Pointer to **string** | custom reference id | [optional] 
 
 ## Methods
 
@@ -50,16 +50,6 @@ SetReferenceId sets ReferenceId field to given value.
 
 HasReferenceId returns a boolean if a field has been set.
 
-### SetReferenceIdNil
-
-`func (o *ChargeUpdateRequest) SetReferenceIdNil(b bool)`
-
- SetReferenceIdNil sets the value for ReferenceId to be an explicit nil
-
-### UnsetReferenceId
-`func (o *ChargeUpdateRequest) UnsetReferenceId()`
-
-UnsetReferenceId ensures that no value is present for ReferenceId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

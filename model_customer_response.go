@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.2.0
+API version: 2.1.0
 Contact: engineering@femsa.com
 */
 
@@ -36,11 +36,7 @@ type CustomerResponse struct {
 	// true if the customer is a company
 	Corporate *bool `json:"corporate,omitempty"`
 	// Custom reference
-	CustomReference NullableString `json:"custom_reference,omitempty"`
-	// Referrer information (if available)
-	Referrer NullableString `json:"referrer,omitempty"`
-	// Vertical-specific information (shape depends on integration)
-	VerticalInfo map[string]interface{} `json:"vertical_info,omitempty"`
+	CustomReference *string `json:"custom_reference,omitempty"`
 	DefaultFiscalEntityId NullableString `json:"default_fiscal_entity_id,omitempty"`
 	DefaultShippingContactId NullableString `json:"default_shipping_contact_id,omitempty"`
 	// Customer metadata (maps to contextual_data in backend)
@@ -328,121 +324,36 @@ func (o *CustomerResponse) SetCorporate(v bool) {
 	o.Corporate = &v
 }
 
-// GetCustomReference returns the CustomReference field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetCustomReference returns the CustomReference field value if set, zero value otherwise.
 func (o *CustomerResponse) GetCustomReference() string {
-	if o == nil || IsNil(o.CustomReference.Get()) {
+	if o == nil || IsNil(o.CustomReference) {
 		var ret string
 		return ret
 	}
-	return *o.CustomReference.Get()
+	return *o.CustomReference
 }
 
 // GetCustomReferenceOk returns a tuple with the CustomReference field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CustomerResponse) GetCustomReferenceOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.CustomReference) {
 		return nil, false
 	}
-	return o.CustomReference.Get(), o.CustomReference.IsSet()
+	return o.CustomReference, true
 }
 
 // HasCustomReference returns a boolean if a field has been set.
 func (o *CustomerResponse) HasCustomReference() bool {
-	if o != nil && o.CustomReference.IsSet() {
+	if o != nil && !IsNil(o.CustomReference) {
 		return true
 	}
 
 	return false
 }
 
-// SetCustomReference gets a reference to the given NullableString and assigns it to the CustomReference field.
+// SetCustomReference gets a reference to the given string and assigns it to the CustomReference field.
 func (o *CustomerResponse) SetCustomReference(v string) {
-	o.CustomReference.Set(&v)
-}
-// SetCustomReferenceNil sets the value for CustomReference to be an explicit nil
-func (o *CustomerResponse) SetCustomReferenceNil() {
-	o.CustomReference.Set(nil)
-}
-
-// UnsetCustomReference ensures that no value is present for CustomReference, not even an explicit nil
-func (o *CustomerResponse) UnsetCustomReference() {
-	o.CustomReference.Unset()
-}
-
-// GetReferrer returns the Referrer field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CustomerResponse) GetReferrer() string {
-	if o == nil || IsNil(o.Referrer.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.Referrer.Get()
-}
-
-// GetReferrerOk returns a tuple with the Referrer field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CustomerResponse) GetReferrerOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.Referrer.Get(), o.Referrer.IsSet()
-}
-
-// HasReferrer returns a boolean if a field has been set.
-func (o *CustomerResponse) HasReferrer() bool {
-	if o != nil && o.Referrer.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetReferrer gets a reference to the given NullableString and assigns it to the Referrer field.
-func (o *CustomerResponse) SetReferrer(v string) {
-	o.Referrer.Set(&v)
-}
-// SetReferrerNil sets the value for Referrer to be an explicit nil
-func (o *CustomerResponse) SetReferrerNil() {
-	o.Referrer.Set(nil)
-}
-
-// UnsetReferrer ensures that no value is present for Referrer, not even an explicit nil
-func (o *CustomerResponse) UnsetReferrer() {
-	o.Referrer.Unset()
-}
-
-// GetVerticalInfo returns the VerticalInfo field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *CustomerResponse) GetVerticalInfo() map[string]interface{} {
-	if o == nil {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.VerticalInfo
-}
-
-// GetVerticalInfoOk returns a tuple with the VerticalInfo field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *CustomerResponse) GetVerticalInfoOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.VerticalInfo) {
-		return map[string]interface{}{}, false
-	}
-	return o.VerticalInfo, true
-}
-
-// HasVerticalInfo returns a boolean if a field has been set.
-func (o *CustomerResponse) HasVerticalInfo() bool {
-	if o != nil && !IsNil(o.VerticalInfo) {
-		return true
-	}
-
-	return false
-}
-
-// SetVerticalInfo gets a reference to the given map[string]interface{} and assigns it to the VerticalInfo field.
-func (o *CustomerResponse) SetVerticalInfo(v map[string]interface{}) {
-	o.VerticalInfo = v
+	o.CustomReference = &v
 }
 
 // GetDefaultFiscalEntityId returns the DefaultFiscalEntityId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -684,14 +595,8 @@ func (o CustomerResponse) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Corporate) {
 		toSerialize["corporate"] = o.Corporate
 	}
-	if o.CustomReference.IsSet() {
-		toSerialize["custom_reference"] = o.CustomReference.Get()
-	}
-	if o.Referrer.IsSet() {
-		toSerialize["referrer"] = o.Referrer.Get()
-	}
-	if o.VerticalInfo != nil {
-		toSerialize["vertical_info"] = o.VerticalInfo
+	if !IsNil(o.CustomReference) {
+		toSerialize["custom_reference"] = o.CustomReference
 	}
 	if o.DefaultFiscalEntityId.IsSet() {
 		toSerialize["default_fiscal_entity_id"] = o.DefaultFiscalEntityId.Get()
@@ -766,8 +671,6 @@ func (o *CustomerResponse) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "phone")
 		delete(additionalProperties, "corporate")
 		delete(additionalProperties, "custom_reference")
-		delete(additionalProperties, "referrer")
-		delete(additionalProperties, "vertical_info")
 		delete(additionalProperties, "default_fiscal_entity_id")
 		delete(additionalProperties, "default_shipping_contact_id")
 		delete(additionalProperties, "metadata")

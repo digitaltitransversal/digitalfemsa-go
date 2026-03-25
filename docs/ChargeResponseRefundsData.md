@@ -5,14 +5,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Amount** | **int64** |  | 
-**AuthCode** | Pointer to **NullableString** |  | [optional] 
+**AuthCode** | Pointer to **string** |  | [optional] 
 **CreatedAt** | **int64** |  | 
-**ExpiresAt** | Pointer to **NullableInt64** | refund expiration date | [optional] 
+**ExpiresAt** | Pointer to **int64** | refund expiration date | [optional] 
 **Id** | **string** |  | 
 **Object** | **string** |  | 
-**Status** | Pointer to **NullableString** | refund status | [optional] 
-**PayoutId** | Pointer to **NullableString** |  | [optional] 
-**Reference** | Pointer to **NullableString** | payout reference for oxxo stores | [optional] 
+**Status** | Pointer to **string** | refund status | [optional] 
+**PayoutId** | Pointer to **string** |  | [optional] 
+**Reference** | Pointer to **string** | payout reference for oxxo stores | [optional] 
 
 ## Methods
 
@@ -78,16 +78,6 @@ SetAuthCode sets AuthCode field to given value.
 
 HasAuthCode returns a boolean if a field has been set.
 
-### SetAuthCodeNil
-
-`func (o *ChargeResponseRefundsData) SetAuthCodeNil(b bool)`
-
- SetAuthCodeNil sets the value for AuthCode to be an explicit nil
-
-### UnsetAuthCode
-`func (o *ChargeResponseRefundsData) UnsetAuthCode()`
-
-UnsetAuthCode ensures that no value is present for AuthCode, not even an explicit nil
 ### GetCreatedAt
 
 `func (o *ChargeResponseRefundsData) GetCreatedAt() int64`
@@ -133,16 +123,6 @@ SetExpiresAt sets ExpiresAt field to given value.
 
 HasExpiresAt returns a boolean if a field has been set.
 
-### SetExpiresAtNil
-
-`func (o *ChargeResponseRefundsData) SetExpiresAtNil(b bool)`
-
- SetExpiresAtNil sets the value for ExpiresAt to be an explicit nil
-
-### UnsetExpiresAt
-`func (o *ChargeResponseRefundsData) UnsetExpiresAt()`
-
-UnsetExpiresAt ensures that no value is present for ExpiresAt, not even an explicit nil
 ### GetId
 
 `func (o *ChargeResponseRefundsData) GetId() string`
@@ -208,16 +188,6 @@ SetStatus sets Status field to given value.
 
 HasStatus returns a boolean if a field has been set.
 
-### SetStatusNil
-
-`func (o *ChargeResponseRefundsData) SetStatusNil(b bool)`
-
- SetStatusNil sets the value for Status to be an explicit nil
-
-### UnsetStatus
-`func (o *ChargeResponseRefundsData) UnsetStatus()`
-
-UnsetStatus ensures that no value is present for Status, not even an explicit nil
 ### GetPayoutId
 
 `func (o *ChargeResponseRefundsData) GetPayoutId() string`
@@ -243,16 +213,6 @@ SetPayoutId sets PayoutId field to given value.
 
 HasPayoutId returns a boolean if a field has been set.
 
-### SetPayoutIdNil
-
-`func (o *ChargeResponseRefundsData) SetPayoutIdNil(b bool)`
-
- SetPayoutIdNil sets the value for PayoutId to be an explicit nil
-
-### UnsetPayoutId
-`func (o *ChargeResponseRefundsData) UnsetPayoutId()`
-
-UnsetPayoutId ensures that no value is present for PayoutId, not even an explicit nil
 ### GetReference
 
 `func (o *ChargeResponseRefundsData) GetReference() string`
@@ -278,16 +238,6 @@ SetReference sets Reference field to given value.
 
 HasReference returns a boolean if a field has been set.
 
-### SetReferenceNil
-
-`func (o *ChargeResponseRefundsData) SetReferenceNil(b bool)`
-
- SetReferenceNil sets the value for Reference to be an explicit nil
-
-### UnsetReference
-`func (o *ChargeResponseRefundsData) UnsetReference()`
-
-UnsetReference ensures that no value is present for Reference, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

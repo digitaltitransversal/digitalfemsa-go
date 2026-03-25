@@ -5,12 +5,12 @@ All URIs are relative to *https://api.digitalfemsa.io*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CancelOrder**](OrdersAPI.md#CancelOrder) | **Post** /orders/{id}/cancel | Cancel Order
-[**CancelOrderRefund**](OrdersAPI.md#CancelOrderRefund) | **Delete** /orders/{id}/refunds/{refund_id} | Cancel Refund
-[**CaptureOrder**](OrdersAPI.md#CaptureOrder) | **Post** /orders/{id}/capture | Capture Order
 [**CreateOrder**](OrdersAPI.md#CreateOrder) | **Post** /orders | Create order
 [**GetOrderById**](OrdersAPI.md#GetOrderById) | **Get** /orders/{id} | Get Order
 [**GetOrders**](OrdersAPI.md#GetOrders) | **Get** /orders | Get a list of Orders
+[**OrderCancelRefund**](OrdersAPI.md#OrderCancelRefund) | **Delete** /orders/{id}/refunds/{refund_id} | Cancel Refund
 [**OrderRefund**](OrdersAPI.md#OrderRefund) | **Post** /orders/{id}/refunds | Refund Order
+[**OrdersCreateCapture**](OrdersAPI.md#OrdersCreateCapture) | **Post** /orders/{id}/capture | Capture Order
 [**UpdateOrder**](OrdersAPI.md#UpdateOrder) | **Put** /orders/{id} | Update order
 
 
@@ -82,160 +82,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.2.0+json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CancelOrderRefund
-
-> OrderResponse CancelOrderRefund(ctx, id, refundId).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
-
-Cancel Refund
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/digitalfemsa/digitalfemsa-go"
-)
-
-func main() {
-	id := "6307a60c41de27127515a575" // string | Identifier of the resource
-	refundId := "6407b5bee1329a000175ba11" // string | refund identifier
-	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
-	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OrdersAPI.CancelOrderRefund(context.Background(), id, refundId).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `OrdersAPI.CancelOrderRefund``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CancelOrderRefund`: OrderResponse
-	fmt.Fprintf(os.Stdout, "Response from `OrdersAPI.CancelOrderRefund`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Identifier of the resource | 
-**refundId** | **string** | refund identifier | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCancelOrderRefundRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
- **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
- **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
-
-### Return type
-
-[**OrderResponse**](OrderResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.2.0+json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## CaptureOrder
-
-> OrderResponse CaptureOrder(ctx, id).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).OrderCaptureRequest(orderCaptureRequest).Execute()
-
-Capture Order
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/digitalfemsa/digitalfemsa-go"
-)
-
-func main() {
-	id := "6307a60c41de27127515a575" // string | Identifier of the resource
-	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
-	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
-	orderCaptureRequest := *openapiclient.NewOrderCaptureRequest(int64(500)) // OrderCaptureRequest | Requested fields for capturing an order (optional)
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.OrdersAPI.CaptureOrder(context.Background(), id).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).OrderCaptureRequest(orderCaptureRequest).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `OrdersAPI.CaptureOrder``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `CaptureOrder`: OrderResponse
-	fmt.Fprintf(os.Stdout, "Response from `OrdersAPI.CaptureOrder`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | Identifier of the resource | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiCaptureOrderRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
- **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
- **orderCaptureRequest** | [**OrderCaptureRequest**](OrderCaptureRequest.md) | Requested fields for capturing an order | 
-
-### Return type
-
-[**OrderResponse**](OrderResponse.md)
-
-### Authorization
-
-[bearerAuth](../README.md#bearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -263,7 +110,7 @@ import (
 )
 
 func main() {
-	orderRequest := *openapiclient.NewOrderRequest("MXN", *openapiclient.NewCustomerInfo("DevTest", "test@femsa.com", "5522997233"), []openapiclient.Product{*openapiclient.NewProduct("Box of Cohiba S1s", int32(1), int32(20000))}) // OrderRequest | requested field for order
+	orderRequest := *openapiclient.NewOrderRequest("MXN", openapiclient.order_request_customer_info{CustomerInfo: openapiclient.NewCustomerInfo("DevTest", "test@femsa.com")}, []openapiclient.Product{*openapiclient.NewProduct("Box of Cohiba", int32(20000), int32(1))}) // OrderRequest | requested field for order
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
 	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -305,7 +152,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -379,7 +226,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -455,7 +302,84 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrderCancelRefund
+
+> OrderResponse OrderCancelRefund(ctx, id, refundId).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
+
+Cancel Refund
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/digitalfemsa/digitalfemsa-go"
+)
+
+func main() {
+	id := "6307a60c41de27127515a575" // string | Identifier of the resource
+	refundId := "6407b5bee1329a000175ba11" // string | refund identifier
+	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
+	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrdersAPI.OrderCancelRefund(context.Background(), id, refundId).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrdersAPI.OrderCancelRefund``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrderCancelRefund`: OrderResponse
+	fmt.Fprintf(os.Stdout, "Response from `OrdersAPI.OrderCancelRefund`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Identifier of the resource | 
+**refundId** | **string** | refund identifier | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrderCancelRefundRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
+ **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
+
+### Return type
+
+[**OrderResponse**](OrderResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -484,7 +408,7 @@ import (
 
 func main() {
 	id := "6307a60c41de27127515a575" // string | Identifier of the resource
-	orderRefundRequest := *openapiclient.NewOrderRefundRequest(int64(500), "suspected_fraud") // OrderRefundRequest | requested field for a refund
+	orderRefundRequest := *openapiclient.NewOrderRefundRequest(int32(500), "suspected_fraud") // OrderRefundRequest | requested field for a refund
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
 	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -531,7 +455,83 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## OrdersCreateCapture
+
+> OrderResponse OrdersCreateCapture(ctx, id).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).OrderCaptureRequest(orderCaptureRequest).Execute()
+
+Capture Order
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/digitalfemsa/digitalfemsa-go"
+)
+
+func main() {
+	id := "6307a60c41de27127515a575" // string | Identifier of the resource
+	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
+	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
+	orderCaptureRequest := *openapiclient.NewOrderCaptureRequest(int64(500)) // OrderCaptureRequest | Requested fields for capturing an order (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.OrdersAPI.OrdersCreateCapture(context.Background(), id).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).OrderCaptureRequest(orderCaptureRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `OrdersAPI.OrdersCreateCapture``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `OrdersCreateCapture`: OrderResponse
+	fmt.Fprintf(os.Stdout, "Response from `OrdersAPI.OrdersCreateCapture`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Identifier of the resource | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiOrdersCreateCaptureRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
+ **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
+ **orderCaptureRequest** | [**OrderCaptureRequest**](OrderCaptureRequest.md) | Requested fields for capturing an order | 
+
+### Return type
+
+[**OrderResponse**](OrderResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
@@ -605,7 +605,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: application/json
-- **Accept**: application/vnd.app-v2.2.0+json
+- **Accept**: application/vnd.app-v2.1.0+json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../README.md#documentation-for-models)
