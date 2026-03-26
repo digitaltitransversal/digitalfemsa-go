@@ -18,13 +18,13 @@ import (
 // checks if the UpdateOrderTaxRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateOrderTaxRequest{}
 
-// UpdateOrderTaxRequest create new taxes for an existing order
+// UpdateOrderTaxRequest Create a new tax line for an existing order.
 type UpdateOrderTaxRequest struct {
 	// The amount to be collected for tax in cents
 	Amount *int64 `json:"amount,omitempty"`
-	// description or tax's name
-	Description          *string                           `json:"description,omitempty"`
-	Metadata             map[string]map[string]interface{} `json:"metadata,omitempty"`
+	// Description or tax name
+	Description *string `json:"description,omitempty"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -112,9 +112,9 @@ func (o *UpdateOrderTaxRequest) SetDescription(v string) {
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *UpdateOrderTaxRequest) GetMetadata() map[string]map[string]interface{} {
+func (o *UpdateOrderTaxRequest) GetMetadata() map[string]interface{} {
 	if o == nil || IsNil(o.Metadata) {
-		var ret map[string]map[string]interface{}
+		var ret map[string]interface{}
 		return ret
 	}
 	return o.Metadata
@@ -122,9 +122,9 @@ func (o *UpdateOrderTaxRequest) GetMetadata() map[string]map[string]interface{} 
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateOrderTaxRequest) GetMetadataOk() (map[string]map[string]interface{}, bool) {
+func (o *UpdateOrderTaxRequest) GetMetadataOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.Metadata) {
-		return map[string]map[string]interface{}{}, false
+		return map[string]interface{}{}, false
 	}
 	return o.Metadata, true
 }
@@ -138,13 +138,13 @@ func (o *UpdateOrderTaxRequest) HasMetadata() bool {
 	return false
 }
 
-// SetMetadata gets a reference to the given map[string]map[string]interface{} and assigns it to the Metadata field.
-func (o *UpdateOrderTaxRequest) SetMetadata(v map[string]map[string]interface{}) {
+// SetMetadata gets a reference to the given map[string]interface{} and assigns it to the Metadata field.
+func (o *UpdateOrderTaxRequest) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
 }
 
 func (o UpdateOrderTaxRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -228,3 +228,5 @@ func (v *NullableUpdateOrderTaxRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

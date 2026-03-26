@@ -19,30 +19,36 @@ import (
 // checks if the TransactionResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TransactionResponse{}
 
-// TransactionResponse The Transaction object represents the actions or steps of an order. Statuses can be: unprocessed, pending, available, owen, paid_out, voided, capture, capture_reversal, liquidation, liquidation_reversal, payout, payout_reversal, refund, refund_reversal, chargeback, chargeback_reversal, rounding_adjustment, won_chargeback, transferred, and transferred.
+// TransactionResponse Transaction object.
 type TransactionResponse struct {
-	// The amount of the transaction.
-	Amount int64 `json:"amount"`
-	// Randomly assigned unique order identifier associated with the charge.
-	Charge string `json:"charge"`
-	// Date and time of creation of the transaction in Unix format.
-	CreatedAt int64 `json:"created_at"`
-	// The currency of the transaction. It uses the 3-letter code of the [International Standard ISO 4217.](https://es.wikipedia.org/wiki/ISO_4217)
-	Currency string `json:"currency"`
-	// The amount to be deducted for taxes and commissions.
-	Fee int64 `json:"fee"`
 	// Unique identifier of the transaction.
 	Id string `json:"id"`
-	// Indicates whether the transaction was created in live mode or test mode.
-	Livemode bool `json:"livemode"`
-	// The net amount after deducting commissions and taxes.
-	Net int64 `json:"net"`
 	// Object name, which is transaction.
 	Object string `json:"object"`
+	// The amount of the transaction.
+	Amount int64 `json:"amount"`
+	// The amount to be deducted for taxes and commissions.
+	Fee int64 `json:"fee"`
+	// The net amount after deducting commissions and taxes.
+	Net int64 `json:"net"`
+	// The currency of the transaction. It uses the 3-letter code of ISO 4217.
+	Currency string `json:"currency"`
 	// Code indicating transaction status.
 	Status string `json:"status"`
-	// Transaction Type
-	Type                 string `json:"type"`
+	// Transaction type.
+	Type string `json:"type"`
+	// Date and time of creation of the transaction in Unix format.
+	CreatedAt int64 `json:"created_at"`
+	// Indicates whether the transaction was created in live mode or test mode.
+	Livemode bool `json:"livemode"`
+	// Charge ID associated with the transaction (present only if the transaction belongs to a charge).
+	Charge NullableString `json:"charge,omitempty"`
+	// Transfer ID associated with the transaction (present only if the transaction belongs to a transfer).
+	Transfer NullableString `json:"transfer,omitempty"`
+	// Date and time when the transaction was transferred, in Unix format.
+	TransferredAt NullableInt64 `json:"transferred_at,omitempty"`
+	// Transaction fee formula identifier (if available).
+	Formula NullableString `json:"formula,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -52,19 +58,18 @@ type _TransactionResponse TransactionResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransactionResponse(amount int64, charge string, createdAt int64, currency string, fee int64, id string, livemode bool, net int64, object string, status string, type_ string) *TransactionResponse {
+func NewTransactionResponse(id string, object string, amount int64, fee int64, net int64, currency string, status string, type_ string, createdAt int64, livemode bool) *TransactionResponse {
 	this := TransactionResponse{}
-	this.Amount = amount
-	this.Charge = charge
-	this.CreatedAt = createdAt
-	this.Currency = currency
-	this.Fee = fee
 	this.Id = id
-	this.Livemode = livemode
-	this.Net = net
 	this.Object = object
+	this.Amount = amount
+	this.Fee = fee
+	this.Net = net
+	this.Currency = currency
 	this.Status = status
 	this.Type = type_
+	this.CreatedAt = createdAt
+	this.Livemode = livemode
 	return &this
 }
 
@@ -74,126 +79,6 @@ func NewTransactionResponse(amount int64, charge string, createdAt int64, curren
 func NewTransactionResponseWithDefaults() *TransactionResponse {
 	this := TransactionResponse{}
 	return &this
-}
-
-// GetAmount returns the Amount field value
-func (o *TransactionResponse) GetAmount() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.Amount
-}
-
-// GetAmountOk returns a tuple with the Amount field value
-// and a boolean to check if the value has been set.
-func (o *TransactionResponse) GetAmountOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Amount, true
-}
-
-// SetAmount sets field value
-func (o *TransactionResponse) SetAmount(v int64) {
-	o.Amount = v
-}
-
-// GetCharge returns the Charge field value
-func (o *TransactionResponse) GetCharge() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Charge
-}
-
-// GetChargeOk returns a tuple with the Charge field value
-// and a boolean to check if the value has been set.
-func (o *TransactionResponse) GetChargeOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Charge, true
-}
-
-// SetCharge sets field value
-func (o *TransactionResponse) SetCharge(v string) {
-	o.Charge = v
-}
-
-// GetCreatedAt returns the CreatedAt field value
-func (o *TransactionResponse) GetCreatedAt() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value
-// and a boolean to check if the value has been set.
-func (o *TransactionResponse) GetCreatedAtOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.CreatedAt, true
-}
-
-// SetCreatedAt sets field value
-func (o *TransactionResponse) SetCreatedAt(v int64) {
-	o.CreatedAt = v
-}
-
-// GetCurrency returns the Currency field value
-func (o *TransactionResponse) GetCurrency() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Currency
-}
-
-// GetCurrencyOk returns a tuple with the Currency field value
-// and a boolean to check if the value has been set.
-func (o *TransactionResponse) GetCurrencyOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Currency, true
-}
-
-// SetCurrency sets field value
-func (o *TransactionResponse) SetCurrency(v string) {
-	o.Currency = v
-}
-
-// GetFee returns the Fee field value
-func (o *TransactionResponse) GetFee() int64 {
-	if o == nil {
-		var ret int64
-		return ret
-	}
-
-	return o.Fee
-}
-
-// GetFeeOk returns a tuple with the Fee field value
-// and a boolean to check if the value has been set.
-func (o *TransactionResponse) GetFeeOk() (*int64, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Fee, true
-}
-
-// SetFee sets field value
-func (o *TransactionResponse) SetFee(v int64) {
-	o.Fee = v
 }
 
 // GetId returns the Id field value
@@ -220,28 +105,76 @@ func (o *TransactionResponse) SetId(v string) {
 	o.Id = v
 }
 
-// GetLivemode returns the Livemode field value
-func (o *TransactionResponse) GetLivemode() bool {
+// GetObject returns the Object field value
+func (o *TransactionResponse) GetObject() string {
 	if o == nil {
-		var ret bool
+		var ret string
 		return ret
 	}
 
-	return o.Livemode
+	return o.Object
 }
 
-// GetLivemodeOk returns a tuple with the Livemode field value
+// GetObjectOk returns a tuple with the Object field value
 // and a boolean to check if the value has been set.
-func (o *TransactionResponse) GetLivemodeOk() (*bool, bool) {
+func (o *TransactionResponse) GetObjectOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Livemode, true
+	return &o.Object, true
 }
 
-// SetLivemode sets field value
-func (o *TransactionResponse) SetLivemode(v bool) {
-	o.Livemode = v
+// SetObject sets field value
+func (o *TransactionResponse) SetObject(v string) {
+	o.Object = v
+}
+
+// GetAmount returns the Amount field value
+func (o *TransactionResponse) GetAmount() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.Amount
+}
+
+// GetAmountOk returns a tuple with the Amount field value
+// and a boolean to check if the value has been set.
+func (o *TransactionResponse) GetAmountOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Amount, true
+}
+
+// SetAmount sets field value
+func (o *TransactionResponse) SetAmount(v int64) {
+	o.Amount = v
+}
+
+// GetFee returns the Fee field value
+func (o *TransactionResponse) GetFee() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.Fee
+}
+
+// GetFeeOk returns a tuple with the Fee field value
+// and a boolean to check if the value has been set.
+func (o *TransactionResponse) GetFeeOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Fee, true
+}
+
+// SetFee sets field value
+func (o *TransactionResponse) SetFee(v int64) {
+	o.Fee = v
 }
 
 // GetNet returns the Net field value
@@ -268,28 +201,28 @@ func (o *TransactionResponse) SetNet(v int64) {
 	o.Net = v
 }
 
-// GetObject returns the Object field value
-func (o *TransactionResponse) GetObject() string {
+// GetCurrency returns the Currency field value
+func (o *TransactionResponse) GetCurrency() string {
 	if o == nil {
 		var ret string
 		return ret
 	}
 
-	return o.Object
+	return o.Currency
 }
 
-// GetObjectOk returns a tuple with the Object field value
+// GetCurrencyOk returns a tuple with the Currency field value
 // and a boolean to check if the value has been set.
-func (o *TransactionResponse) GetObjectOk() (*string, bool) {
+func (o *TransactionResponse) GetCurrencyOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Object, true
+	return &o.Currency, true
 }
 
-// SetObject sets field value
-func (o *TransactionResponse) SetObject(v string) {
-	o.Object = v
+// SetCurrency sets field value
+func (o *TransactionResponse) SetCurrency(v string) {
+	o.Currency = v
 }
 
 // GetStatus returns the Status field value
@@ -340,8 +273,224 @@ func (o *TransactionResponse) SetType(v string) {
 	o.Type = v
 }
 
+// GetCreatedAt returns the CreatedAt field value
+func (o *TransactionResponse) GetCreatedAt() int64 {
+	if o == nil {
+		var ret int64
+		return ret
+	}
+
+	return o.CreatedAt
+}
+
+// GetCreatedAtOk returns a tuple with the CreatedAt field value
+// and a boolean to check if the value has been set.
+func (o *TransactionResponse) GetCreatedAtOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.CreatedAt, true
+}
+
+// SetCreatedAt sets field value
+func (o *TransactionResponse) SetCreatedAt(v int64) {
+	o.CreatedAt = v
+}
+
+// GetLivemode returns the Livemode field value
+func (o *TransactionResponse) GetLivemode() bool {
+	if o == nil {
+		var ret bool
+		return ret
+	}
+
+	return o.Livemode
+}
+
+// GetLivemodeOk returns a tuple with the Livemode field value
+// and a boolean to check if the value has been set.
+func (o *TransactionResponse) GetLivemodeOk() (*bool, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Livemode, true
+}
+
+// SetLivemode sets field value
+func (o *TransactionResponse) SetLivemode(v bool) {
+	o.Livemode = v
+}
+
+// GetCharge returns the Charge field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionResponse) GetCharge() string {
+	if o == nil || IsNil(o.Charge.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Charge.Get()
+}
+
+// GetChargeOk returns a tuple with the Charge field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionResponse) GetChargeOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Charge.Get(), o.Charge.IsSet()
+}
+
+// HasCharge returns a boolean if a field has been set.
+func (o *TransactionResponse) HasCharge() bool {
+	if o != nil && o.Charge.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCharge gets a reference to the given NullableString and assigns it to the Charge field.
+func (o *TransactionResponse) SetCharge(v string) {
+	o.Charge.Set(&v)
+}
+// SetChargeNil sets the value for Charge to be an explicit nil
+func (o *TransactionResponse) SetChargeNil() {
+	o.Charge.Set(nil)
+}
+
+// UnsetCharge ensures that no value is present for Charge, not even an explicit nil
+func (o *TransactionResponse) UnsetCharge() {
+	o.Charge.Unset()
+}
+
+// GetTransfer returns the Transfer field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionResponse) GetTransfer() string {
+	if o == nil || IsNil(o.Transfer.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Transfer.Get()
+}
+
+// GetTransferOk returns a tuple with the Transfer field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionResponse) GetTransferOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Transfer.Get(), o.Transfer.IsSet()
+}
+
+// HasTransfer returns a boolean if a field has been set.
+func (o *TransactionResponse) HasTransfer() bool {
+	if o != nil && o.Transfer.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTransfer gets a reference to the given NullableString and assigns it to the Transfer field.
+func (o *TransactionResponse) SetTransfer(v string) {
+	o.Transfer.Set(&v)
+}
+// SetTransferNil sets the value for Transfer to be an explicit nil
+func (o *TransactionResponse) SetTransferNil() {
+	o.Transfer.Set(nil)
+}
+
+// UnsetTransfer ensures that no value is present for Transfer, not even an explicit nil
+func (o *TransactionResponse) UnsetTransfer() {
+	o.Transfer.Unset()
+}
+
+// GetTransferredAt returns the TransferredAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionResponse) GetTransferredAt() int64 {
+	if o == nil || IsNil(o.TransferredAt.Get()) {
+		var ret int64
+		return ret
+	}
+	return *o.TransferredAt.Get()
+}
+
+// GetTransferredAtOk returns a tuple with the TransferredAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionResponse) GetTransferredAtOk() (*int64, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.TransferredAt.Get(), o.TransferredAt.IsSet()
+}
+
+// HasTransferredAt returns a boolean if a field has been set.
+func (o *TransactionResponse) HasTransferredAt() bool {
+	if o != nil && o.TransferredAt.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTransferredAt gets a reference to the given NullableInt64 and assigns it to the TransferredAt field.
+func (o *TransactionResponse) SetTransferredAt(v int64) {
+	o.TransferredAt.Set(&v)
+}
+// SetTransferredAtNil sets the value for TransferredAt to be an explicit nil
+func (o *TransactionResponse) SetTransferredAtNil() {
+	o.TransferredAt.Set(nil)
+}
+
+// UnsetTransferredAt ensures that no value is present for TransferredAt, not even an explicit nil
+func (o *TransactionResponse) UnsetTransferredAt() {
+	o.TransferredAt.Unset()
+}
+
+// GetFormula returns the Formula field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionResponse) GetFormula() string {
+	if o == nil || IsNil(o.Formula.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.Formula.Get()
+}
+
+// GetFormulaOk returns a tuple with the Formula field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionResponse) GetFormulaOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.Formula.Get(), o.Formula.IsSet()
+}
+
+// HasFormula returns a boolean if a field has been set.
+func (o *TransactionResponse) HasFormula() bool {
+	if o != nil && o.Formula.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFormula gets a reference to the given NullableString and assigns it to the Formula field.
+func (o *TransactionResponse) SetFormula(v string) {
+	o.Formula.Set(&v)
+}
+// SetFormulaNil sets the value for Formula to be an explicit nil
+func (o *TransactionResponse) SetFormulaNil() {
+	o.Formula.Set(nil)
+}
+
+// UnsetFormula ensures that no value is present for Formula, not even an explicit nil
+func (o *TransactionResponse) UnsetFormula() {
+	o.Formula.Unset()
+}
+
 func (o TransactionResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -350,17 +499,28 @@ func (o TransactionResponse) MarshalJSON() ([]byte, error) {
 
 func (o TransactionResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["amount"] = o.Amount
-	toSerialize["charge"] = o.Charge
-	toSerialize["created_at"] = o.CreatedAt
-	toSerialize["currency"] = o.Currency
-	toSerialize["fee"] = o.Fee
 	toSerialize["id"] = o.Id
-	toSerialize["livemode"] = o.Livemode
-	toSerialize["net"] = o.Net
 	toSerialize["object"] = o.Object
+	toSerialize["amount"] = o.Amount
+	toSerialize["fee"] = o.Fee
+	toSerialize["net"] = o.Net
+	toSerialize["currency"] = o.Currency
 	toSerialize["status"] = o.Status
 	toSerialize["type"] = o.Type
+	toSerialize["created_at"] = o.CreatedAt
+	toSerialize["livemode"] = o.Livemode
+	if o.Charge.IsSet() {
+		toSerialize["charge"] = o.Charge.Get()
+	}
+	if o.Transfer.IsSet() {
+		toSerialize["transfer"] = o.Transfer.Get()
+	}
+	if o.TransferredAt.IsSet() {
+		toSerialize["transferred_at"] = o.TransferredAt.Get()
+	}
+	if o.Formula.IsSet() {
+		toSerialize["formula"] = o.Formula.Get()
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -374,17 +534,16 @@ func (o *TransactionResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"amount",
-		"charge",
-		"created_at",
-		"currency",
-		"fee",
 		"id",
-		"livemode",
-		"net",
 		"object",
+		"amount",
+		"fee",
+		"net",
+		"currency",
 		"status",
 		"type",
+		"created_at",
+		"livemode",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -392,10 +551,10 @@ func (o *TransactionResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -414,17 +573,20 @@ func (o *TransactionResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "amount")
-		delete(additionalProperties, "charge")
-		delete(additionalProperties, "created_at")
-		delete(additionalProperties, "currency")
-		delete(additionalProperties, "fee")
 		delete(additionalProperties, "id")
-		delete(additionalProperties, "livemode")
-		delete(additionalProperties, "net")
 		delete(additionalProperties, "object")
+		delete(additionalProperties, "amount")
+		delete(additionalProperties, "fee")
+		delete(additionalProperties, "net")
+		delete(additionalProperties, "currency")
 		delete(additionalProperties, "status")
 		delete(additionalProperties, "type")
+		delete(additionalProperties, "created_at")
+		delete(additionalProperties, "livemode")
+		delete(additionalProperties, "charge")
+		delete(additionalProperties, "transfer")
+		delete(additionalProperties, "transferred_at")
+		delete(additionalProperties, "formula")
 		o.AdditionalProperties = additionalProperties
 	}
 
@@ -466,3 +628,5 @@ func (v *NullableTransactionResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

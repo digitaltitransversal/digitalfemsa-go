@@ -21,7 +21,7 @@ var _ MappedNullable = &WebhookKeyRequest{}
 // WebhookKeyRequest struct for WebhookKeyRequest
 type WebhookKeyRequest struct {
 	// Indicates if the webhook key is active
-	Active               *bool `json:"active,omitempty"`
+	Active NullableBool `json:"active,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -34,7 +34,7 @@ type _WebhookKeyRequest WebhookKeyRequest
 func NewWebhookKeyRequest() *WebhookKeyRequest {
 	this := WebhookKeyRequest{}
 	var active bool = true
-	this.Active = &active
+	this.Active = *NewNullableBool(&active)
 	return &this
 }
 
@@ -44,44 +44,54 @@ func NewWebhookKeyRequest() *WebhookKeyRequest {
 func NewWebhookKeyRequestWithDefaults() *WebhookKeyRequest {
 	this := WebhookKeyRequest{}
 	var active bool = true
-	this.Active = &active
+	this.Active = *NewNullableBool(&active)
 	return &this
 }
 
-// GetActive returns the Active field value if set, zero value otherwise.
+// GetActive returns the Active field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *WebhookKeyRequest) GetActive() bool {
-	if o == nil || IsNil(o.Active) {
+	if o == nil || IsNil(o.Active.Get()) {
 		var ret bool
 		return ret
 	}
-	return *o.Active
+	return *o.Active.Get()
 }
 
 // GetActiveOk returns a tuple with the Active field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *WebhookKeyRequest) GetActiveOk() (*bool, bool) {
-	if o == nil || IsNil(o.Active) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Active, true
+	return o.Active.Get(), o.Active.IsSet()
 }
 
 // HasActive returns a boolean if a field has been set.
 func (o *WebhookKeyRequest) HasActive() bool {
-	if o != nil && !IsNil(o.Active) {
+	if o != nil && o.Active.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetActive gets a reference to the given bool and assigns it to the Active field.
+// SetActive gets a reference to the given NullableBool and assigns it to the Active field.
 func (o *WebhookKeyRequest) SetActive(v bool) {
-	o.Active = &v
+	o.Active.Set(&v)
+}
+// SetActiveNil sets the value for Active to be an explicit nil
+func (o *WebhookKeyRequest) SetActiveNil() {
+	o.Active.Set(nil)
+}
+
+// UnsetActive ensures that no value is present for Active, not even an explicit nil
+func (o *WebhookKeyRequest) UnsetActive() {
+	o.Active.Unset()
 }
 
 func (o WebhookKeyRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -90,8 +100,8 @@ func (o WebhookKeyRequest) MarshalJSON() ([]byte, error) {
 
 func (o WebhookKeyRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Active) {
-		toSerialize["active"] = o.Active
+	if o.Active.IsSet() {
+		toSerialize["active"] = o.Active.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -157,3 +167,5 @@ func (v *NullableWebhookKeyRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

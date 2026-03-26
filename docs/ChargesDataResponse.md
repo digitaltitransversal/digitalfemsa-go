@@ -4,24 +4,25 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | Pointer to **int32** |  | [optional] 
+**Amount** | Pointer to **int64** |  | [optional] 
 **Channel** | Pointer to [**ChargeResponseChannel**](ChargeResponseChannel.md) |  | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
 **Currency** | Pointer to **string** |  | [optional] 
 **CustomerId** | Pointer to **string** |  | [optional] 
 **Description** | Pointer to **string** |  | [optional] 
 **DeviceFingerprint** | Pointer to **string** |  | [optional] 
-**FailureCode** | Pointer to **string** |  | [optional] 
-**FailureMessage** | Pointer to **string** |  | [optional] 
+**FailureCode** | Pointer to **NullableString** |  | [optional] 
+**FailureMessage** | Pointer to **NullableString** |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
 **Livemode** | Pointer to **bool** |  | [optional] 
 **Object** | Pointer to **string** |  | [optional] 
 **OrderId** | Pointer to **string** |  | [optional] 
-**PaidAt** | Pointer to **NullableInt32** |  | [optional] 
+**PaidAt** | Pointer to **NullableInt64** |  | [optional] 
 **PaymentMethod** | Pointer to [**ChargeResponsePaymentMethod**](ChargeResponsePaymentMethod.md) |  | [optional] 
 **ReferenceId** | Pointer to **NullableString** | Reference ID of the charge | [optional] 
 **Refunds** | Pointer to [**NullableChargeResponseRefunds**](ChargeResponseRefunds.md) |  | [optional] 
 **Status** | Pointer to **string** |  | [optional] 
+**IsRefundable** | Pointer to **bool** |  | [optional] 
 
 ## Methods
 
@@ -44,20 +45,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAmount
 
-`func (o *ChargesDataResponse) GetAmount() int32`
+`func (o *ChargesDataResponse) GetAmount() int64`
 
 GetAmount returns the Amount field if non-nil, zero value otherwise.
 
 ### GetAmountOk
 
-`func (o *ChargesDataResponse) GetAmountOk() (*int32, bool)`
+`func (o *ChargesDataResponse) GetAmountOk() (*int64, bool)`
 
 GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAmount
 
-`func (o *ChargesDataResponse) SetAmount(v int32)`
+`func (o *ChargesDataResponse) SetAmount(v int64)`
 
 SetAmount sets Amount field to given value.
 
@@ -242,6 +243,16 @@ SetFailureCode sets FailureCode field to given value.
 
 HasFailureCode returns a boolean if a field has been set.
 
+### SetFailureCodeNil
+
+`func (o *ChargesDataResponse) SetFailureCodeNil(b bool)`
+
+ SetFailureCodeNil sets the value for FailureCode to be an explicit nil
+
+### UnsetFailureCode
+`func (o *ChargesDataResponse) UnsetFailureCode()`
+
+UnsetFailureCode ensures that no value is present for FailureCode, not even an explicit nil
 ### GetFailureMessage
 
 `func (o *ChargesDataResponse) GetFailureMessage() string`
@@ -267,6 +278,16 @@ SetFailureMessage sets FailureMessage field to given value.
 
 HasFailureMessage returns a boolean if a field has been set.
 
+### SetFailureMessageNil
+
+`func (o *ChargesDataResponse) SetFailureMessageNil(b bool)`
+
+ SetFailureMessageNil sets the value for FailureMessage to be an explicit nil
+
+### UnsetFailureMessage
+`func (o *ChargesDataResponse) UnsetFailureMessage()`
+
+UnsetFailureMessage ensures that no value is present for FailureMessage, not even an explicit nil
 ### GetId
 
 `func (o *ChargesDataResponse) GetId() string`
@@ -369,20 +390,20 @@ HasOrderId returns a boolean if a field has been set.
 
 ### GetPaidAt
 
-`func (o *ChargesDataResponse) GetPaidAt() int32`
+`func (o *ChargesDataResponse) GetPaidAt() int64`
 
 GetPaidAt returns the PaidAt field if non-nil, zero value otherwise.
 
 ### GetPaidAtOk
 
-`func (o *ChargesDataResponse) GetPaidAtOk() (*int32, bool)`
+`func (o *ChargesDataResponse) GetPaidAtOk() (*int64, bool)`
 
 GetPaidAtOk returns a tuple with the PaidAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaidAt
 
-`func (o *ChargesDataResponse) SetPaidAt(v int32)`
+`func (o *ChargesDataResponse) SetPaidAt(v int64)`
 
 SetPaidAt sets PaidAt field to given value.
 
@@ -521,6 +542,31 @@ SetStatus sets Status field to given value.
 `func (o *ChargesDataResponse) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
+
+### GetIsRefundable
+
+`func (o *ChargesDataResponse) GetIsRefundable() bool`
+
+GetIsRefundable returns the IsRefundable field if non-nil, zero value otherwise.
+
+### GetIsRefundableOk
+
+`func (o *ChargesDataResponse) GetIsRefundableOk() (*bool, bool)`
+
+GetIsRefundableOk returns a tuple with the IsRefundable field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsRefundable
+
+`func (o *ChargesDataResponse) SetIsRefundable(v bool)`
+
+SetIsRefundable sets IsRefundable field to given value.
+
+### HasIsRefundable
+
+`func (o *ChargesDataResponse) HasIsRefundable() bool`
+
+HasIsRefundable returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

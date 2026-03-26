@@ -11,10 +11,11 @@ package digitalfemsa
 
 import (
 	"context"
+	"testing"
+
 	openapiclient "github.com/digitalfemsa/digitalfemsa-go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func Test_digitalfemsa_OrdersAPIService(t *testing.T) {
@@ -74,7 +75,7 @@ func Test_digitalfemsa_OrdersAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test OrdersAPIService OrderCancelRefund", func(t *testing.T) {
+	t.Run("Test OrdersAPIService CancelOrderRefund", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
@@ -103,7 +104,7 @@ func Test_digitalfemsa_OrdersAPIService(t *testing.T) {
 
 	})
 
-	t.Run("Test OrdersAPIService OrdersCreateCapture", func(t *testing.T) {
+	t.Run("Test OrdersAPIService CaptureOrder", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 

@@ -1,4 +1,3 @@
-
 ci-test:
 	go test  ./...
 go:
@@ -20,7 +19,7 @@ update-version:
 	@echo "$(VERSION)" > VERSION
 	@sed -i '' 's/"packageVersion": "[^"]*"/"packageVersion": "$(VERSION)"/' config-go.json
 	@sed -i '' 's/"httpUserAgent": "[^"]*"/"httpUserAgent": "App\/v2 GoBindings\/$(VERSION)"/' config-go.json
-	@sed -i '' 's/"bindings_version": "[^"]*"/"bindings_version": "$(VERSION)"/' client.go
-	@sed -i '' 's/UserAgent:     "App\/v2 GoBindings\/[^"]*"/UserAgent:     "App\/v2 GoBindings\/$(VERSION)"/' configuration.go
+	@sed -i '' 's/"sdk_version": "[^"]*"/"sdk_version": "$(VERSION)"/' client.go
+	@sed -i '' 's/UserAgent:        "App\/v2 GoBindings\/[^\"]*"/UserAgent:        "App\/v2 GoBindings\/$(VERSION)"/' configuration.go
 	@sed -i '' 's/- Package version: .*/- Package version: $(VERSION)/' README.md
 	@echo "✨ Version updated to $(VERSION) successfully!"

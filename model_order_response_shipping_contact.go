@@ -18,20 +18,22 @@ import (
 // checks if the OrderResponseShippingContact type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OrderResponseShippingContact{}
 
-// OrderResponseShippingContact struct for OrderResponseShippingContact
+// OrderResponseShippingContact Shipping contact associated with the order. It may be `null` when not provided/required.
 type OrderResponseShippingContact struct {
-	Phone          *string                                  `json:"phone,omitempty"`
-	Receiver       *string                                  `json:"receiver,omitempty"`
-	BetweenStreets NullableString                           `json:"between_streets,omitempty"`
-	Address        *CustomerShippingContactsResponseAddress `json:"address,omitempty"`
-	ParentId       *string                                  `json:"parent_id,omitempty"`
-	Default        *bool                                    `json:"default,omitempty"`
-	Id             *string                                  `json:"id,omitempty"`
-	CreatedAt      *int64                                   `json:"created_at,omitempty"`
+	Phone *string `json:"phone,omitempty"`
+	Receiver *string `json:"receiver,omitempty"`
+	BetweenStreets NullableString `json:"between_streets,omitempty"`
+	Address *CustomerShippingContactsResponseAddress `json:"address,omitempty"`
+	// Customer ID that owns this shipping contact.
+	ParentId *string `json:"parent_id,omitempty"`
+	Default *bool `json:"default,omitempty"`
+	Id *string `json:"id,omitempty"`
+	CreatedAt *int64 `json:"created_at,omitempty"`
 	// Metadata associated with the shipping contact
-	Metadata             map[string]interface{} `json:"metadata,omitempty"`
-	Object               *string                `json:"object,omitempty"`
-	Deleted              *bool                  `json:"deleted,omitempty"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	Object *string `json:"object,omitempty"`
+	// Present only when the shipping contact was deleted.
+	Deleted *bool `json:"deleted,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -150,7 +152,6 @@ func (o *OrderResponseShippingContact) HasBetweenStreets() bool {
 func (o *OrderResponseShippingContact) SetBetweenStreets(v string) {
 	o.BetweenStreets.Set(&v)
 }
-
 // SetBetweenStreetsNil sets the value for BetweenStreets to be an explicit nil
 func (o *OrderResponseShippingContact) SetBetweenStreetsNil() {
 	o.BetweenStreets.Set(nil)
@@ -418,7 +419,7 @@ func (o *OrderResponseShippingContact) SetDeleted(v bool) {
 }
 
 func (o OrderResponseShippingContact) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -534,3 +535,5 @@ func (v *NullableOrderResponseShippingContact) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

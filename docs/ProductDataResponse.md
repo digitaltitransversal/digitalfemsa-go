@@ -4,15 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AntifraudInfo** | Pointer to **map[string]interface{}** |  | [optional] 
-**Brand** | Pointer to **string** | The brand of the item. | [optional] 
-**Description** | Pointer to **string** | Short description of the item | [optional] 
-**Metadata** | Pointer to **map[string]string** | It is a key/value hash that can hold custom fields. Maximum 100 elements and allows special characters. | [optional] 
 **Name** | **string** | The name of the item. It will be displayed in the order. | 
+**UnitPrice** | **int32** | The price of the item in cents. | 
 **Quantity** | **int32** | The quantity of the item in the order. | 
 **Sku** | Pointer to **string** | The stock keeping unit for the item. It is used to identify the item in the order. | [optional] 
+**Brand** | Pointer to **string** | The brand of the item. | [optional] 
+**Description** | Pointer to **string** | Short description of the item | [optional] 
 **Tags** | Pointer to **[]string** | List of tags for the item. It is used to identify the item in the order. | [optional] 
-**UnitPrice** | **int32** | The price of the item in cents. | 
+**Metadata** | Pointer to **map[string]interface{}** | Arbitrary key-value data for your internal use. Keys should be strings; values can be any JSON value.  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
 **Object** | Pointer to **string** |  | [optional] 
 **ParentId** | Pointer to **string** |  | [optional] 
@@ -21,7 +20,7 @@ Name | Type | Description | Notes
 
 ### NewProductDataResponse
 
-`func NewProductDataResponse(name string, quantity int32, unitPrice int32, ) *ProductDataResponse`
+`func NewProductDataResponse(name string, unitPrice int32, quantity int32, ) *ProductDataResponse`
 
 NewProductDataResponse instantiates a new ProductDataResponse object
 This constructor will assign default values to properties that have it defined,
@@ -36,30 +35,90 @@ NewProductDataResponseWithDefaults instantiates a new ProductDataResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetAntifraudInfo
+### GetName
 
-`func (o *ProductDataResponse) GetAntifraudInfo() map[string]interface{}`
+`func (o *ProductDataResponse) GetName() string`
 
-GetAntifraudInfo returns the AntifraudInfo field if non-nil, zero value otherwise.
+GetName returns the Name field if non-nil, zero value otherwise.
 
-### GetAntifraudInfoOk
+### GetNameOk
 
-`func (o *ProductDataResponse) GetAntifraudInfoOk() (*map[string]interface{}, bool)`
+`func (o *ProductDataResponse) GetNameOk() (*string, bool)`
 
-GetAntifraudInfoOk returns a tuple with the AntifraudInfo field if it's non-nil, zero value otherwise
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAntifraudInfo
+### SetName
 
-`func (o *ProductDataResponse) SetAntifraudInfo(v map[string]interface{})`
+`func (o *ProductDataResponse) SetName(v string)`
 
-SetAntifraudInfo sets AntifraudInfo field to given value.
+SetName sets Name field to given value.
 
-### HasAntifraudInfo
 
-`func (o *ProductDataResponse) HasAntifraudInfo() bool`
+### GetUnitPrice
 
-HasAntifraudInfo returns a boolean if a field has been set.
+`func (o *ProductDataResponse) GetUnitPrice() int32`
+
+GetUnitPrice returns the UnitPrice field if non-nil, zero value otherwise.
+
+### GetUnitPriceOk
+
+`func (o *ProductDataResponse) GetUnitPriceOk() (*int32, bool)`
+
+GetUnitPriceOk returns a tuple with the UnitPrice field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnitPrice
+
+`func (o *ProductDataResponse) SetUnitPrice(v int32)`
+
+SetUnitPrice sets UnitPrice field to given value.
+
+
+### GetQuantity
+
+`func (o *ProductDataResponse) GetQuantity() int32`
+
+GetQuantity returns the Quantity field if non-nil, zero value otherwise.
+
+### GetQuantityOk
+
+`func (o *ProductDataResponse) GetQuantityOk() (*int32, bool)`
+
+GetQuantityOk returns a tuple with the Quantity field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetQuantity
+
+`func (o *ProductDataResponse) SetQuantity(v int32)`
+
+SetQuantity sets Quantity field to given value.
+
+
+### GetSku
+
+`func (o *ProductDataResponse) GetSku() string`
+
+GetSku returns the Sku field if non-nil, zero value otherwise.
+
+### GetSkuOk
+
+`func (o *ProductDataResponse) GetSkuOk() (*string, bool)`
+
+GetSkuOk returns a tuple with the Sku field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSku
+
+`func (o *ProductDataResponse) SetSku(v string)`
+
+SetSku sets Sku field to given value.
+
+### HasSku
+
+`func (o *ProductDataResponse) HasSku() bool`
+
+HasSku returns a boolean if a field has been set.
 
 ### GetBrand
 
@@ -111,96 +170,6 @@ SetDescription sets Description field to given value.
 
 HasDescription returns a boolean if a field has been set.
 
-### GetMetadata
-
-`func (o *ProductDataResponse) GetMetadata() map[string]string`
-
-GetMetadata returns the Metadata field if non-nil, zero value otherwise.
-
-### GetMetadataOk
-
-`func (o *ProductDataResponse) GetMetadataOk() (*map[string]string, bool)`
-
-GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMetadata
-
-`func (o *ProductDataResponse) SetMetadata(v map[string]string)`
-
-SetMetadata sets Metadata field to given value.
-
-### HasMetadata
-
-`func (o *ProductDataResponse) HasMetadata() bool`
-
-HasMetadata returns a boolean if a field has been set.
-
-### GetName
-
-`func (o *ProductDataResponse) GetName() string`
-
-GetName returns the Name field if non-nil, zero value otherwise.
-
-### GetNameOk
-
-`func (o *ProductDataResponse) GetNameOk() (*string, bool)`
-
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetName
-
-`func (o *ProductDataResponse) SetName(v string)`
-
-SetName sets Name field to given value.
-
-
-### GetQuantity
-
-`func (o *ProductDataResponse) GetQuantity() int32`
-
-GetQuantity returns the Quantity field if non-nil, zero value otherwise.
-
-### GetQuantityOk
-
-`func (o *ProductDataResponse) GetQuantityOk() (*int32, bool)`
-
-GetQuantityOk returns a tuple with the Quantity field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetQuantity
-
-`func (o *ProductDataResponse) SetQuantity(v int32)`
-
-SetQuantity sets Quantity field to given value.
-
-
-### GetSku
-
-`func (o *ProductDataResponse) GetSku() string`
-
-GetSku returns the Sku field if non-nil, zero value otherwise.
-
-### GetSkuOk
-
-`func (o *ProductDataResponse) GetSkuOk() (*string, bool)`
-
-GetSkuOk returns a tuple with the Sku field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSku
-
-`func (o *ProductDataResponse) SetSku(v string)`
-
-SetSku sets Sku field to given value.
-
-### HasSku
-
-`func (o *ProductDataResponse) HasSku() bool`
-
-HasSku returns a boolean if a field has been set.
-
 ### GetTags
 
 `func (o *ProductDataResponse) GetTags() []string`
@@ -226,25 +195,30 @@ SetTags sets Tags field to given value.
 
 HasTags returns a boolean if a field has been set.
 
-### GetUnitPrice
+### GetMetadata
 
-`func (o *ProductDataResponse) GetUnitPrice() int32`
+`func (o *ProductDataResponse) GetMetadata() map[string]interface{}`
 
-GetUnitPrice returns the UnitPrice field if non-nil, zero value otherwise.
+GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
-### GetUnitPriceOk
+### GetMetadataOk
 
-`func (o *ProductDataResponse) GetUnitPriceOk() (*int32, bool)`
+`func (o *ProductDataResponse) GetMetadataOk() (*map[string]interface{}, bool)`
 
-GetUnitPriceOk returns a tuple with the UnitPrice field if it's non-nil, zero value otherwise
+GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUnitPrice
+### SetMetadata
 
-`func (o *ProductDataResponse) SetUnitPrice(v int32)`
+`func (o *ProductDataResponse) SetMetadata(v map[string]interface{})`
 
-SetUnitPrice sets UnitPrice field to given value.
+SetMetadata sets Metadata field to given value.
 
+### HasMetadata
+
+`func (o *ProductDataResponse) HasMetadata() bool`
+
+HasMetadata returns a boolean if a field has been set.
 
 ### GetId
 

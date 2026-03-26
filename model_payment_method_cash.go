@@ -21,16 +21,16 @@ var _ MappedNullable = &PaymentMethodCash{}
 
 // PaymentMethodCash struct for PaymentMethodCash
 type PaymentMethodCash struct {
-	Type                 *string        `json:"type,omitempty"`
-	Object               string         `json:"object"`
-	AuthCode             NullableInt32  `json:"auth_code,omitempty"`
-	CashierId            NullableString `json:"cashier_id,omitempty"`
-	Reference            *string        `json:"reference,omitempty"`
-	BarcodeUrl           *string        `json:"barcode_url,omitempty"`
-	ExpiresAt            *int64         `json:"expires_at,omitempty"`
-	ServiceName          *string        `json:"service_name,omitempty"`
-	Store                NullableString `json:"store,omitempty"`
-	StoreName            *string        `json:"store_name,omitempty"`
+	Type *string `json:"type,omitempty"`
+	Object string `json:"object"`
+	AuthCode NullableString `json:"auth_code,omitempty"`
+	CashierId NullableString `json:"cashier_id,omitempty"`
+	Reference *string `json:"reference,omitempty"`
+	BarcodeUrl *string `json:"barcode_url,omitempty"`
+	ExpiresAt *int64 `json:"expires_at,omitempty"`
+	ServiceName *string `json:"service_name,omitempty"`
+	Store NullableString `json:"store,omitempty"`
+	StoreName *string `json:"store_name,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -111,9 +111,9 @@ func (o *PaymentMethodCash) SetObject(v string) {
 }
 
 // GetAuthCode returns the AuthCode field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaymentMethodCash) GetAuthCode() int32 {
+func (o *PaymentMethodCash) GetAuthCode() string {
 	if o == nil || IsNil(o.AuthCode.Get()) {
-		var ret int32
+		var ret string
 		return ret
 	}
 	return *o.AuthCode.Get()
@@ -122,7 +122,7 @@ func (o *PaymentMethodCash) GetAuthCode() int32 {
 // GetAuthCodeOk returns a tuple with the AuthCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaymentMethodCash) GetAuthCodeOk() (*int32, bool) {
+func (o *PaymentMethodCash) GetAuthCodeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -138,11 +138,10 @@ func (o *PaymentMethodCash) HasAuthCode() bool {
 	return false
 }
 
-// SetAuthCode gets a reference to the given NullableInt32 and assigns it to the AuthCode field.
-func (o *PaymentMethodCash) SetAuthCode(v int32) {
+// SetAuthCode gets a reference to the given NullableString and assigns it to the AuthCode field.
+func (o *PaymentMethodCash) SetAuthCode(v string) {
 	o.AuthCode.Set(&v)
 }
-
 // SetAuthCodeNil sets the value for AuthCode to be an explicit nil
 func (o *PaymentMethodCash) SetAuthCodeNil() {
 	o.AuthCode.Set(nil)
@@ -185,7 +184,6 @@ func (o *PaymentMethodCash) HasCashierId() bool {
 func (o *PaymentMethodCash) SetCashierId(v string) {
 	o.CashierId.Set(&v)
 }
-
 // SetCashierIdNil sets the value for CashierId to be an explicit nil
 func (o *PaymentMethodCash) SetCashierIdNil() {
 	o.CashierId.Set(nil)
@@ -356,7 +354,6 @@ func (o *PaymentMethodCash) HasStore() bool {
 func (o *PaymentMethodCash) SetStore(v string) {
 	o.Store.Set(&v)
 }
-
 // SetStoreNil sets the value for Store to be an explicit nil
 func (o *PaymentMethodCash) SetStoreNil() {
 	o.Store.Set(nil)
@@ -400,7 +397,7 @@ func (o *PaymentMethodCash) SetStoreName(v string) {
 }
 
 func (o PaymentMethodCash) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -458,10 +455,10 @@ func (o *PaymentMethodCash) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -531,3 +528,5 @@ func (v *NullablePaymentMethodCash) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

@@ -20,13 +20,20 @@ import (
 	"strings"
 )
 
+
 type ChargesAPI interface {
 
 	/*
-		GetCharges Get A List of Charges
+	GetCharges List charges
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiGetChargesRequest
+	Retrieves a paginated list of charges for the authenticated account.
+
+Use the pagination parameters (`limit`, `next_page`, `previous_page`) to navigate through results.
+Use `search` to filter charges (for example by id or reference).
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetChargesRequest
 	*/
 	GetCharges(ctx context.Context) ApiGetChargesRequest
 
@@ -35,13 +42,19 @@ type ChargesAPI interface {
 	GetChargesExecute(r ApiGetChargesRequest) (*GetChargesResponse, *http.Response, error)
 
 	/*
-		OrdersCreateCharge Create charge
+	OrdersCreateCharge Create a charge for an order
 
-		Create charge for an existing orden
+	Creates a new charge associated with an existing order.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param id Identifier of the resource
-		@return ApiOrdersCreateChargeRequest
+Notes:
+- The charge is created for the order identified by the path parameter `id`.
+- Depending on the payment method, the charge may be created in a non-final status (for example, pending).
+- If the order does not meet the required conditions, the API may respond with **428 Precondition Required**.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@return ApiOrdersCreateChargeRequest
 	*/
 	OrdersCreateCharge(ctx context.Context, id string) ApiOrdersCreateChargeRequest
 
@@ -50,11 +63,13 @@ type ChargesAPI interface {
 	OrdersCreateChargeExecute(r ApiOrdersCreateChargeRequest) (*ChargeOrderResponse, *http.Response, error)
 
 	/*
-		UpdateCharge Update a charge
+	UpdateCharge Update a charge
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param id Identifier of the resource
-		@return ApiUpdateChargeRequest
+	Updates an existing charge. Only `reference_id` can be updated.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@return ApiUpdateChargeRequest
 	*/
 	UpdateCharge(ctx context.Context, id string) ApiUpdateChargeRequest
 
@@ -67,14 +82,14 @@ type ChargesAPI interface {
 type ChargesAPIService service
 
 type ApiGetChargesRequest struct {
-	ctx             context.Context
-	ApiService      ChargesAPI
-	acceptLanguage  *string
+	ctx context.Context
+	ApiService ChargesAPI
+	acceptLanguage *string
 	xChildCompanyId *string
-	limit           *int32
-	search          *string
-	next            *string
-	previous        *string
+	limit *int32
+	next *string
+	previous *string
+	search *string
 }
 
 // Use for knowing which language to use
@@ -95,12 +110,6 @@ func (r ApiGetChargesRequest) Limit(limit int32) ApiGetChargesRequest {
 	return r
 }
 
-// General order search, e.g. by mail, reference etc.
-func (r ApiGetChargesRequest) Search(search string) ApiGetChargesRequest {
-	r.search = &search
-	return r
-}
-
 // next page
 func (r ApiGetChargesRequest) Next(next string) ApiGetChargesRequest {
 	r.next = &next
@@ -113,32 +122,43 @@ func (r ApiGetChargesRequest) Previous(previous string) ApiGetChargesRequest {
 	return r
 }
 
+// General order search, e.g. by mail, reference etc.
+func (r ApiGetChargesRequest) Search(search string) ApiGetChargesRequest {
+	r.search = &search
+	return r
+}
+
 func (r ApiGetChargesRequest) Execute() (*GetChargesResponse, *http.Response, error) {
 	return r.ApiService.GetChargesExecute(r)
 }
 
 /*
-GetCharges Get A List of Charges
+GetCharges List charges
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetChargesRequest
+Retrieves a paginated list of charges for the authenticated account.
+
+Use the pagination parameters (`limit`, `next_page`, `previous_page`) to navigate through results.
+Use `search` to filter charges (for example by id or reference).
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetChargesRequest
 */
 func (a *ChargesAPIService) GetCharges(ctx context.Context) ApiGetChargesRequest {
 	return ApiGetChargesRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetChargesResponse
+//  @return GetChargesResponse
 func (a *ChargesAPIService) GetChargesExecute(r ApiGetChargesRequest) (*GetChargesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetChargesResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetChargesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChargesAPIService.GetCharges")
@@ -158,14 +178,14 @@ func (a *ChargesAPIService) GetChargesExecute(r ApiGetChargesRequest) (*GetCharg
 		var defaultValue int32 = 20
 		r.limit = &defaultValue
 	}
-	if r.search != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "")
-	}
 	if r.next != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "next", r.next, "")
 	}
 	if r.previous != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "previous", r.previous, "")
+	}
+	if r.search != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "search", r.search, "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -212,6 +232,17 @@ func (a *ChargesAPIService) GetChargesExecute(r ApiGetChargesRequest) (*GetCharg
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v ModelError
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -219,8 +250,8 @@ func (a *ChargesAPIService) GetChargesExecute(r ApiGetChargesRequest) (*GetCharg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -230,8 +261,8 @@ func (a *ChargesAPIService) GetChargesExecute(r ApiGetChargesRequest) (*GetCharg
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -249,11 +280,11 @@ func (a *ChargesAPIService) GetChargesExecute(r ApiGetChargesRequest) (*GetCharg
 }
 
 type ApiOrdersCreateChargeRequest struct {
-	ctx             context.Context
-	ApiService      ChargesAPI
-	id              string
-	chargeRequest   *ChargeRequest
-	acceptLanguage  *string
+	ctx context.Context
+	ApiService ChargesAPI
+	id string
+	chargeRequest *ChargeRequest
+	acceptLanguage *string
 	xChildCompanyId *string
 }
 
@@ -280,31 +311,36 @@ func (r ApiOrdersCreateChargeRequest) Execute() (*ChargeOrderResponse, *http.Res
 }
 
 /*
-OrdersCreateCharge Create charge
+OrdersCreateCharge Create a charge for an order
 
-Create charge for an existing orden
+Creates a new charge associated with an existing order.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@return ApiOrdersCreateChargeRequest
+Notes:
+- The charge is created for the order identified by the path parameter `id`.
+- Depending on the payment method, the charge may be created in a non-final status (for example, pending).
+- If the order does not meet the required conditions, the API may respond with **428 Precondition Required**.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @return ApiOrdersCreateChargeRequest
 */
 func (a *ChargesAPIService) OrdersCreateCharge(ctx context.Context, id string) ApiOrdersCreateChargeRequest {
 	return ApiOrdersCreateChargeRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ChargeOrderResponse
+//  @return ChargeOrderResponse
 func (a *ChargesAPIService) OrdersCreateChargeExecute(r ApiOrdersCreateChargeRequest) (*ChargeOrderResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ChargeOrderResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ChargeOrderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChargesAPIService.OrdersCreateCharge")
@@ -376,8 +412,8 @@ func (a *ChargesAPIService) OrdersCreateChargeExecute(r ApiOrdersCreateChargeReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -387,8 +423,19 @@ func (a *ChargesAPIService) OrdersCreateChargeExecute(r ApiOrdersCreateChargeReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 428 {
@@ -398,8 +445,8 @@ func (a *ChargesAPIService) OrdersCreateChargeExecute(r ApiOrdersCreateChargeReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -409,8 +456,8 @@ func (a *ChargesAPIService) OrdersCreateChargeExecute(r ApiOrdersCreateChargeReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -428,12 +475,12 @@ func (a *ChargesAPIService) OrdersCreateChargeExecute(r ApiOrdersCreateChargeReq
 }
 
 type ApiUpdateChargeRequest struct {
-	ctx                 context.Context
-	ApiService          ChargesAPI
-	id                  string
+	ctx context.Context
+	ApiService ChargesAPI
+	id string
 	chargeUpdateRequest *ChargeUpdateRequest
-	acceptLanguage      *string
-	xChildCompanyId     *string
+	acceptLanguage *string
+	xChildCompanyId *string
 }
 
 // requested field for update a charge
@@ -461,27 +508,28 @@ func (r ApiUpdateChargeRequest) Execute() (*ChargeResponse, *http.Response, erro
 /*
 UpdateCharge Update a charge
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@return ApiUpdateChargeRequest
+Updates an existing charge. Only `reference_id` can be updated.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @return ApiUpdateChargeRequest
 */
 func (a *ChargesAPIService) UpdateCharge(ctx context.Context, id string) ApiUpdateChargeRequest {
 	return ApiUpdateChargeRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ChargeResponse
+//  @return ChargeResponse
 func (a *ChargesAPIService) UpdateChargeExecute(r ApiUpdateChargeRequest) (*ChargeResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ChargeResponse
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ChargeResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ChargesAPIService.UpdateCharge")
@@ -553,8 +601,8 @@ func (a *ChargesAPIService) UpdateChargeExecute(r ApiUpdateChargeRequest) (*Char
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -564,8 +612,8 @@ func (a *ChargesAPIService) UpdateChargeExecute(r ApiUpdateChargeRequest) (*Char
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -575,8 +623,8 @@ func (a *ChargesAPIService) UpdateChargeExecute(r ApiUpdateChargeRequest) (*Char
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

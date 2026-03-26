@@ -4,21 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AllowedPaymentMethods** | **[]string** | Those are the payment methods that will be available for the link | 
-**ExpiresAt** | **int64** | It is the time when the link will expire. It is expressed in seconds since the Unix epoch. The valid range is from 2 to 365 days (the valid range will be taken from the next day of the creation date at 00:01 hrs)  | 
-**Name** | **string** | Reason for charge | 
-**NeedsShippingContact** | Pointer to **bool** | This flag allows you to fill in the shipping information at checkout. | [optional] 
-**OnDemandEnabled** | Pointer to **NullableBool** | This flag allows you to specify if the link will be on demand. | [optional] 
-**OrderTemplate** | [**CheckoutOrderTemplate**](CheckoutOrderTemplate.md) |  | 
-**PaymentsLimitCount** | Pointer to **int32** | It is the number of payments that can be made through the link. | [optional] 
+**Name** | **string** | Payment link name. | 
+**Type** | **string** | Checkout type. | 
 **Recurrent** | **bool** | false: single use. true: multiple payments | 
-**Type** | **string** | It is the type of link that will be created. It must be a valid type. | 
+**PaymentsLimitCount** | Pointer to **int32** | Required when &#x60;recurrent&#x60; is true. Maximum number of payments allowed through the link. | [optional] 
+**AllowedPaymentMethods** | **[]string** | Payment methods available in the payment link. | 
+**NeedsShippingContact** | **bool** | This flag allows you to fill in the shipping information at checkout. | 
+**StartsAt** | Pointer to **int64** | Start time for the link. Unix timestamp in seconds. | [optional] 
+**ExpiresAt** | **int64** | Expiration time for the link (Unix timestamp in seconds). Valid range is between 2 and 365 days (calculated from the next day of creation at 00:01).  | 
+**CanNotExpire** | Pointer to **bool** | If true, the link does not expire. | [optional] 
+**OrderTemplate** | [**CheckoutOrderTemplate**](CheckoutOrderTemplate.md) |  | 
 
 ## Methods
 
 ### NewCheckout
 
-`func NewCheckout(allowedPaymentMethods []string, expiresAt int64, name string, orderTemplate CheckoutOrderTemplate, recurrent bool, type_ string, ) *Checkout`
+`func NewCheckout(name string, type_ string, recurrent bool, allowedPaymentMethods []string, needsShippingContact bool, expiresAt int64, orderTemplate CheckoutOrderTemplate, ) *Checkout`
 
 NewCheckout instantiates a new Checkout object
 This constructor will assign default values to properties that have it defined,
@@ -32,46 +33,6 @@ will change when the set of required properties is changed
 NewCheckoutWithDefaults instantiates a new Checkout object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetAllowedPaymentMethods
-
-`func (o *Checkout) GetAllowedPaymentMethods() []string`
-
-GetAllowedPaymentMethods returns the AllowedPaymentMethods field if non-nil, zero value otherwise.
-
-### GetAllowedPaymentMethodsOk
-
-`func (o *Checkout) GetAllowedPaymentMethodsOk() (*[]string, bool)`
-
-GetAllowedPaymentMethodsOk returns a tuple with the AllowedPaymentMethods field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAllowedPaymentMethods
-
-`func (o *Checkout) SetAllowedPaymentMethods(v []string)`
-
-SetAllowedPaymentMethods sets AllowedPaymentMethods field to given value.
-
-
-### GetExpiresAt
-
-`func (o *Checkout) GetExpiresAt() int64`
-
-GetExpiresAt returns the ExpiresAt field if non-nil, zero value otherwise.
-
-### GetExpiresAtOk
-
-`func (o *Checkout) GetExpiresAtOk() (*int64, bool)`
-
-GetExpiresAtOk returns a tuple with the ExpiresAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExpiresAt
-
-`func (o *Checkout) SetExpiresAt(v int64)`
-
-SetExpiresAt sets ExpiresAt field to given value.
-
 
 ### GetName
 
@@ -93,84 +54,44 @@ and a boolean to check if the value has been set.
 SetName sets Name field to given value.
 
 
-### GetNeedsShippingContact
+### GetType
 
-`func (o *Checkout) GetNeedsShippingContact() bool`
+`func (o *Checkout) GetType() string`
 
-GetNeedsShippingContact returns the NeedsShippingContact field if non-nil, zero value otherwise.
+GetType returns the Type field if non-nil, zero value otherwise.
 
-### GetNeedsShippingContactOk
+### GetTypeOk
 
-`func (o *Checkout) GetNeedsShippingContactOk() (*bool, bool)`
+`func (o *Checkout) GetTypeOk() (*string, bool)`
 
-GetNeedsShippingContactOk returns a tuple with the NeedsShippingContact field if it's non-nil, zero value otherwise
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNeedsShippingContact
+### SetType
 
-`func (o *Checkout) SetNeedsShippingContact(v bool)`
+`func (o *Checkout) SetType(v string)`
 
-SetNeedsShippingContact sets NeedsShippingContact field to given value.
+SetType sets Type field to given value.
 
-### HasNeedsShippingContact
 
-`func (o *Checkout) HasNeedsShippingContact() bool`
+### GetRecurrent
 
-HasNeedsShippingContact returns a boolean if a field has been set.
+`func (o *Checkout) GetRecurrent() bool`
 
-### GetOnDemandEnabled
+GetRecurrent returns the Recurrent field if non-nil, zero value otherwise.
 
-`func (o *Checkout) GetOnDemandEnabled() bool`
+### GetRecurrentOk
 
-GetOnDemandEnabled returns the OnDemandEnabled field if non-nil, zero value otherwise.
+`func (o *Checkout) GetRecurrentOk() (*bool, bool)`
 
-### GetOnDemandEnabledOk
-
-`func (o *Checkout) GetOnDemandEnabledOk() (*bool, bool)`
-
-GetOnDemandEnabledOk returns a tuple with the OnDemandEnabled field if it's non-nil, zero value otherwise
+GetRecurrentOk returns a tuple with the Recurrent field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOnDemandEnabled
+### SetRecurrent
 
-`func (o *Checkout) SetOnDemandEnabled(v bool)`
+`func (o *Checkout) SetRecurrent(v bool)`
 
-SetOnDemandEnabled sets OnDemandEnabled field to given value.
-
-### HasOnDemandEnabled
-
-`func (o *Checkout) HasOnDemandEnabled() bool`
-
-HasOnDemandEnabled returns a boolean if a field has been set.
-
-### SetOnDemandEnabledNil
-
-`func (o *Checkout) SetOnDemandEnabledNil(b bool)`
-
- SetOnDemandEnabledNil sets the value for OnDemandEnabled to be an explicit nil
-
-### UnsetOnDemandEnabled
-`func (o *Checkout) UnsetOnDemandEnabled()`
-
-UnsetOnDemandEnabled ensures that no value is present for OnDemandEnabled, not even an explicit nil
-### GetOrderTemplate
-
-`func (o *Checkout) GetOrderTemplate() CheckoutOrderTemplate`
-
-GetOrderTemplate returns the OrderTemplate field if non-nil, zero value otherwise.
-
-### GetOrderTemplateOk
-
-`func (o *Checkout) GetOrderTemplateOk() (*CheckoutOrderTemplate, bool)`
-
-GetOrderTemplateOk returns a tuple with the OrderTemplate field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetOrderTemplate
-
-`func (o *Checkout) SetOrderTemplate(v CheckoutOrderTemplate)`
-
-SetOrderTemplate sets OrderTemplate field to given value.
+SetRecurrent sets Recurrent field to given value.
 
 
 ### GetPaymentsLimitCount
@@ -198,44 +119,134 @@ SetPaymentsLimitCount sets PaymentsLimitCount field to given value.
 
 HasPaymentsLimitCount returns a boolean if a field has been set.
 
-### GetRecurrent
+### GetAllowedPaymentMethods
 
-`func (o *Checkout) GetRecurrent() bool`
+`func (o *Checkout) GetAllowedPaymentMethods() []string`
 
-GetRecurrent returns the Recurrent field if non-nil, zero value otherwise.
+GetAllowedPaymentMethods returns the AllowedPaymentMethods field if non-nil, zero value otherwise.
 
-### GetRecurrentOk
+### GetAllowedPaymentMethodsOk
 
-`func (o *Checkout) GetRecurrentOk() (*bool, bool)`
+`func (o *Checkout) GetAllowedPaymentMethodsOk() (*[]string, bool)`
 
-GetRecurrentOk returns a tuple with the Recurrent field if it's non-nil, zero value otherwise
+GetAllowedPaymentMethodsOk returns a tuple with the AllowedPaymentMethods field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetRecurrent
+### SetAllowedPaymentMethods
 
-`func (o *Checkout) SetRecurrent(v bool)`
+`func (o *Checkout) SetAllowedPaymentMethods(v []string)`
 
-SetRecurrent sets Recurrent field to given value.
+SetAllowedPaymentMethods sets AllowedPaymentMethods field to given value.
 
 
-### GetType
+### GetNeedsShippingContact
 
-`func (o *Checkout) GetType() string`
+`func (o *Checkout) GetNeedsShippingContact() bool`
 
-GetType returns the Type field if non-nil, zero value otherwise.
+GetNeedsShippingContact returns the NeedsShippingContact field if non-nil, zero value otherwise.
 
-### GetTypeOk
+### GetNeedsShippingContactOk
 
-`func (o *Checkout) GetTypeOk() (*string, bool)`
+`func (o *Checkout) GetNeedsShippingContactOk() (*bool, bool)`
 
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+GetNeedsShippingContactOk returns a tuple with the NeedsShippingContact field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetType
+### SetNeedsShippingContact
 
-`func (o *Checkout) SetType(v string)`
+`func (o *Checkout) SetNeedsShippingContact(v bool)`
 
-SetType sets Type field to given value.
+SetNeedsShippingContact sets NeedsShippingContact field to given value.
+
+
+### GetStartsAt
+
+`func (o *Checkout) GetStartsAt() int64`
+
+GetStartsAt returns the StartsAt field if non-nil, zero value otherwise.
+
+### GetStartsAtOk
+
+`func (o *Checkout) GetStartsAtOk() (*int64, bool)`
+
+GetStartsAtOk returns a tuple with the StartsAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStartsAt
+
+`func (o *Checkout) SetStartsAt(v int64)`
+
+SetStartsAt sets StartsAt field to given value.
+
+### HasStartsAt
+
+`func (o *Checkout) HasStartsAt() bool`
+
+HasStartsAt returns a boolean if a field has been set.
+
+### GetExpiresAt
+
+`func (o *Checkout) GetExpiresAt() int64`
+
+GetExpiresAt returns the ExpiresAt field if non-nil, zero value otherwise.
+
+### GetExpiresAtOk
+
+`func (o *Checkout) GetExpiresAtOk() (*int64, bool)`
+
+GetExpiresAtOk returns a tuple with the ExpiresAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpiresAt
+
+`func (o *Checkout) SetExpiresAt(v int64)`
+
+SetExpiresAt sets ExpiresAt field to given value.
+
+
+### GetCanNotExpire
+
+`func (o *Checkout) GetCanNotExpire() bool`
+
+GetCanNotExpire returns the CanNotExpire field if non-nil, zero value otherwise.
+
+### GetCanNotExpireOk
+
+`func (o *Checkout) GetCanNotExpireOk() (*bool, bool)`
+
+GetCanNotExpireOk returns a tuple with the CanNotExpire field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanNotExpire
+
+`func (o *Checkout) SetCanNotExpire(v bool)`
+
+SetCanNotExpire sets CanNotExpire field to given value.
+
+### HasCanNotExpire
+
+`func (o *Checkout) HasCanNotExpire() bool`
+
+HasCanNotExpire returns a boolean if a field has been set.
+
+### GetOrderTemplate
+
+`func (o *Checkout) GetOrderTemplate() CheckoutOrderTemplate`
+
+GetOrderTemplate returns the OrderTemplate field if non-nil, zero value otherwise.
+
+### GetOrderTemplateOk
+
+`func (o *Checkout) GetOrderTemplateOk() (*CheckoutOrderTemplate, bool)`
+
+GetOrderTemplateOk returns a tuple with the OrderTemplate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOrderTemplate
+
+`func (o *Checkout) SetOrderTemplate(v CheckoutOrderTemplate)`
+
+SetOrderTemplate sets OrderTemplate field to given value.
 
 
 

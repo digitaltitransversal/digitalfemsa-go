@@ -4,10 +4,10 @@ All URIs are relative to *https://api.digitalfemsa.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateApiKey**](ApiKeysAPI.md#CreateApiKey) | **Post** /api_keys | Create Api Key
+[**CreateApiKey**](ApiKeysAPI.md#CreateApiKey) | **Post** /api_keys | Create API key
 [**DeleteApiKey**](ApiKeysAPI.md#DeleteApiKey) | **Delete** /api_keys/{id} | Delete Api Key
 [**GetApiKey**](ApiKeysAPI.md#GetApiKey) | **Get** /api_keys/{id} | Get Api Key
-[**GetApiKeys**](ApiKeysAPI.md#GetApiKeys) | **Get** /api_keys | Get list of Api Keys
+[**GetApiKeys**](ApiKeysAPI.md#GetApiKeys) | **Get** /api_keys | List API keys
 [**UpdateApiKey**](ApiKeysAPI.md#UpdateApiKey) | **Put** /api_keys/{id} | Update Api Key
 
 
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 > ApiKeyCreateResponse CreateApiKey(ctx).ApiKeyRequest(apiKeyRequest).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 
-Create Api Key
+Create API key
 
 
 
@@ -232,7 +232,7 @@ Name | Type | Description  | Notes
 
 > GetApiKeysResponse GetApiKeys(ctx).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Limit(limit).Next(next).Previous(previous).Search(search).Execute()
 
-Get list of Api Keys
+List API keys
 
 
 

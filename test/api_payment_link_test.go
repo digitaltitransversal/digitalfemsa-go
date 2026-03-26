@@ -11,10 +11,11 @@ package digitalfemsa
 
 import (
 	"context"
+	"testing"
+
 	openapiclient "github.com/digitalfemsa/digitalfemsa-go"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func Test_digitalfemsa_PaymentLinkAPIService(t *testing.T) {
@@ -81,20 +82,6 @@ func Test_digitalfemsa_PaymentLinkAPIService(t *testing.T) {
 		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.PaymentLinkAPI.GetCheckouts(context.Background()).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test PaymentLinkAPIService SmsCheckout", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var id string
-
-		resp, httpRes, err := apiClient.PaymentLinkAPI.SmsCheckout(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

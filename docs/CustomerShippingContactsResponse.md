@@ -8,13 +8,13 @@ Name | Type | Description | Notes
 **Receiver** | Pointer to **string** |  | [optional] 
 **BetweenStreets** | Pointer to **NullableString** |  | [optional] 
 **Address** | Pointer to [**CustomerShippingContactsResponseAddress**](CustomerShippingContactsResponseAddress.md) |  | [optional] 
-**ParentId** | Pointer to **string** |  | [optional] 
+**ParentId** | Pointer to **string** | Customer ID that owns this shipping contact. | [optional] 
 **Default** | Pointer to **bool** |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **int64** |  | [optional] 
 **Metadata** | Pointer to **map[string]interface{}** | Metadata associated with the shipping contact | [optional] 
 **Object** | Pointer to **string** |  | [optional] 
-**Deleted** | Pointer to **bool** |  | [optional] 
+**Deleted** | Pointer to **bool** | Present only when the shipping contact was deleted. | [optional] 
 
 ## Methods
 

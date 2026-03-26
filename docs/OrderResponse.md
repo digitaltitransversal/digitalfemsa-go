@@ -4,27 +4,28 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | Pointer to **int32** | The total amount to be collected in cents | [optional] 
-**AmountRefunded** | Pointer to **int32** | The total amount refunded in cents | [optional] 
-**Channel** | Pointer to [**ChargeResponseChannel**](ChargeResponseChannel.md) |  | [optional] 
-**Charges** | Pointer to [**OrderResponseCharges**](OrderResponseCharges.md) |  | [optional] 
-**Checkout** | Pointer to [**OrderResponseCheckout**](OrderResponseCheckout.md) |  | [optional] 
-**CreatedAt** | Pointer to **int64** | The time at which the object was created in seconds since the Unix epoch | [optional] 
-**Currency** | Pointer to **string** | The three-letter ISO 4217 currency code. The currency of the order. | [optional] 
-**CustomerInfo** | Pointer to [**OrderResponseCustomerInfo**](OrderResponseCustomerInfo.md) |  | [optional] 
-**DiscountLines** | Pointer to [**OrderResponseDiscountLines**](OrderResponseDiscountLines.md) |  | [optional] 
-**FiscalEntity** | Pointer to [**NullableOrderFiscalEntityResponse**](OrderFiscalEntityResponse.md) |  | [optional] 
 **Id** | Pointer to **string** |  | [optional] 
-**IsRefundable** | Pointer to **bool** |  | [optional] 
+**Object** | Pointer to **string** |  | [optional] 
+**Livemode** | Pointer to **bool** |  | [optional] 
+**Amount** | Pointer to **int32** |  | [optional] 
+**Currency** | Pointer to **string** |  | [optional] 
+**PaymentStatus** | Pointer to **NullableString** | Current payment status of the order. It can be &#x60;null&#x60; for orders without payment information yet. | [optional] 
+**AmountRefunded** | Pointer to **int32** |  | [optional] 
+**SplitPayment** | Pointer to **NullableBool** | Indicates whether the order uses split payments (when available/configured). | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Metadata attached to the order. | [optional] 
+**IsRefundable** | Pointer to **bool** | Indicates whether the order is currently refundable. | [optional] 
+**CreatedAt** | Pointer to **int64** |  | [optional] 
+**UpdatedAt** | Pointer to **int64** |  | [optional] 
+**CustomerInfo** | Pointer to [**OrderResponseCustomerInfo**](OrderResponseCustomerInfo.md) |  | [optional] 
+**ShippingContact** | Pointer to [**NullableOrderResponseShippingContact**](OrderResponseShippingContact.md) |  | [optional] 
+**Channel** | Pointer to [**NullableOrderResponseChannel**](OrderResponseChannel.md) |  | [optional] 
+**FiscalEntity** | Pointer to [**NullableOrderFiscalEntityResponse**](OrderFiscalEntityResponse.md) |  | [optional] 
+**Checkout** | Pointer to [**OrderResponseCheckout**](OrderResponseCheckout.md) |  | [optional] 
 **LineItems** | Pointer to [**OrderResponseProducts**](OrderResponseProducts.md) |  | [optional] 
-**Livemode** | Pointer to **bool** | Whether the object exists in live mode or test mode | [optional] 
-**Metadata** | Pointer to **map[string]interface{}** | Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. | [optional] 
-**NextAction** | Pointer to [**OrderNextActionResponse**](OrderNextActionResponse.md) |  | [optional] 
-**Object** | Pointer to **string** | String representing the object’s type. Objects of the same type share the same value. | [optional] 
-**PaymentStatus** | Pointer to **string** | The payment status of the order. | [optional] 
-**ProcessingMode** | Pointer to **string** | Indicates the processing mode for the order, either ecommerce, recurrent or validation. | [optional] 
-**ShippingContact** | Pointer to [**OrderResponseShippingContact**](OrderResponseShippingContact.md) |  | [optional] 
-**UpdatedAt** | Pointer to **int64** | The time at which the object was last updated in seconds since the Unix epoch | [optional] 
+**DiscountLines** | Pointer to [**OrderResponseDiscountLines**](OrderResponseDiscountLines.md) |  | [optional] 
+**Charges** | Pointer to [**OrderResponseCharges**](OrderResponseCharges.md) |  | [optional] 
+**PartialReference** | Pointer to **map[string]interface{}** | Partial reference information (when applicable). Structure may vary depending on the payment flow. | [optional] 
+**PaymentsInfo** | Pointer to **map[string]interface{}** | Additional payment information (when available). Structure may vary. | [optional] 
 
 ## Methods
 
@@ -44,6 +45,81 @@ will change when the set of required properties is changed
 NewOrderResponseWithDefaults instantiates a new OrderResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetId
+
+`func (o *OrderResponse) GetId() string`
+
+GetId returns the Id field if non-nil, zero value otherwise.
+
+### GetIdOk
+
+`func (o *OrderResponse) GetIdOk() (*string, bool)`
+
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetId
+
+`func (o *OrderResponse) SetId(v string)`
+
+SetId sets Id field to given value.
+
+### HasId
+
+`func (o *OrderResponse) HasId() bool`
+
+HasId returns a boolean if a field has been set.
+
+### GetObject
+
+`func (o *OrderResponse) GetObject() string`
+
+GetObject returns the Object field if non-nil, zero value otherwise.
+
+### GetObjectOk
+
+`func (o *OrderResponse) GetObjectOk() (*string, bool)`
+
+GetObjectOk returns a tuple with the Object field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObject
+
+`func (o *OrderResponse) SetObject(v string)`
+
+SetObject sets Object field to given value.
+
+### HasObject
+
+`func (o *OrderResponse) HasObject() bool`
+
+HasObject returns a boolean if a field has been set.
+
+### GetLivemode
+
+`func (o *OrderResponse) GetLivemode() bool`
+
+GetLivemode returns the Livemode field if non-nil, zero value otherwise.
+
+### GetLivemodeOk
+
+`func (o *OrderResponse) GetLivemodeOk() (*bool, bool)`
+
+GetLivemodeOk returns a tuple with the Livemode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLivemode
+
+`func (o *OrderResponse) SetLivemode(v bool)`
+
+SetLivemode sets Livemode field to given value.
+
+### HasLivemode
+
+`func (o *OrderResponse) HasLivemode() bool`
+
+HasLivemode returns a boolean if a field has been set.
 
 ### GetAmount
 
@@ -70,6 +146,66 @@ SetAmount sets Amount field to given value.
 
 HasAmount returns a boolean if a field has been set.
 
+### GetCurrency
+
+`func (o *OrderResponse) GetCurrency() string`
+
+GetCurrency returns the Currency field if non-nil, zero value otherwise.
+
+### GetCurrencyOk
+
+`func (o *OrderResponse) GetCurrencyOk() (*string, bool)`
+
+GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrency
+
+`func (o *OrderResponse) SetCurrency(v string)`
+
+SetCurrency sets Currency field to given value.
+
+### HasCurrency
+
+`func (o *OrderResponse) HasCurrency() bool`
+
+HasCurrency returns a boolean if a field has been set.
+
+### GetPaymentStatus
+
+`func (o *OrderResponse) GetPaymentStatus() string`
+
+GetPaymentStatus returns the PaymentStatus field if non-nil, zero value otherwise.
+
+### GetPaymentStatusOk
+
+`func (o *OrderResponse) GetPaymentStatusOk() (*string, bool)`
+
+GetPaymentStatusOk returns a tuple with the PaymentStatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentStatus
+
+`func (o *OrderResponse) SetPaymentStatus(v string)`
+
+SetPaymentStatus sets PaymentStatus field to given value.
+
+### HasPaymentStatus
+
+`func (o *OrderResponse) HasPaymentStatus() bool`
+
+HasPaymentStatus returns a boolean if a field has been set.
+
+### SetPaymentStatusNil
+
+`func (o *OrderResponse) SetPaymentStatusNil(b bool)`
+
+ SetPaymentStatusNil sets the value for PaymentStatus to be an explicit nil
+
+### UnsetPaymentStatus
+`func (o *OrderResponse) UnsetPaymentStatus()`
+
+UnsetPaymentStatus ensures that no value is present for PaymentStatus, not even an explicit nil
 ### GetAmountRefunded
 
 `func (o *OrderResponse) GetAmountRefunded() int32`
@@ -95,80 +231,90 @@ SetAmountRefunded sets AmountRefunded field to given value.
 
 HasAmountRefunded returns a boolean if a field has been set.
 
-### GetChannel
+### GetSplitPayment
 
-`func (o *OrderResponse) GetChannel() ChargeResponseChannel`
+`func (o *OrderResponse) GetSplitPayment() bool`
 
-GetChannel returns the Channel field if non-nil, zero value otherwise.
+GetSplitPayment returns the SplitPayment field if non-nil, zero value otherwise.
 
-### GetChannelOk
+### GetSplitPaymentOk
 
-`func (o *OrderResponse) GetChannelOk() (*ChargeResponseChannel, bool)`
+`func (o *OrderResponse) GetSplitPaymentOk() (*bool, bool)`
 
-GetChannelOk returns a tuple with the Channel field if it's non-nil, zero value otherwise
+GetSplitPaymentOk returns a tuple with the SplitPayment field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetChannel
+### SetSplitPayment
 
-`func (o *OrderResponse) SetChannel(v ChargeResponseChannel)`
+`func (o *OrderResponse) SetSplitPayment(v bool)`
 
-SetChannel sets Channel field to given value.
+SetSplitPayment sets SplitPayment field to given value.
 
-### HasChannel
+### HasSplitPayment
 
-`func (o *OrderResponse) HasChannel() bool`
+`func (o *OrderResponse) HasSplitPayment() bool`
 
-HasChannel returns a boolean if a field has been set.
+HasSplitPayment returns a boolean if a field has been set.
 
-### GetCharges
+### SetSplitPaymentNil
 
-`func (o *OrderResponse) GetCharges() OrderResponseCharges`
+`func (o *OrderResponse) SetSplitPaymentNil(b bool)`
 
-GetCharges returns the Charges field if non-nil, zero value otherwise.
+ SetSplitPaymentNil sets the value for SplitPayment to be an explicit nil
 
-### GetChargesOk
+### UnsetSplitPayment
+`func (o *OrderResponse) UnsetSplitPayment()`
 
-`func (o *OrderResponse) GetChargesOk() (*OrderResponseCharges, bool)`
+UnsetSplitPayment ensures that no value is present for SplitPayment, not even an explicit nil
+### GetMetadata
 
-GetChargesOk returns a tuple with the Charges field if it's non-nil, zero value otherwise
+`func (o *OrderResponse) GetMetadata() map[string]interface{}`
+
+GetMetadata returns the Metadata field if non-nil, zero value otherwise.
+
+### GetMetadataOk
+
+`func (o *OrderResponse) GetMetadataOk() (*map[string]interface{}, bool)`
+
+GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCharges
+### SetMetadata
 
-`func (o *OrderResponse) SetCharges(v OrderResponseCharges)`
+`func (o *OrderResponse) SetMetadata(v map[string]interface{})`
 
-SetCharges sets Charges field to given value.
+SetMetadata sets Metadata field to given value.
 
-### HasCharges
+### HasMetadata
 
-`func (o *OrderResponse) HasCharges() bool`
+`func (o *OrderResponse) HasMetadata() bool`
 
-HasCharges returns a boolean if a field has been set.
+HasMetadata returns a boolean if a field has been set.
 
-### GetCheckout
+### GetIsRefundable
 
-`func (o *OrderResponse) GetCheckout() OrderResponseCheckout`
+`func (o *OrderResponse) GetIsRefundable() bool`
 
-GetCheckout returns the Checkout field if non-nil, zero value otherwise.
+GetIsRefundable returns the IsRefundable field if non-nil, zero value otherwise.
 
-### GetCheckoutOk
+### GetIsRefundableOk
 
-`func (o *OrderResponse) GetCheckoutOk() (*OrderResponseCheckout, bool)`
+`func (o *OrderResponse) GetIsRefundableOk() (*bool, bool)`
 
-GetCheckoutOk returns a tuple with the Checkout field if it's non-nil, zero value otherwise
+GetIsRefundableOk returns a tuple with the IsRefundable field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCheckout
+### SetIsRefundable
 
-`func (o *OrderResponse) SetCheckout(v OrderResponseCheckout)`
+`func (o *OrderResponse) SetIsRefundable(v bool)`
 
-SetCheckout sets Checkout field to given value.
+SetIsRefundable sets IsRefundable field to given value.
 
-### HasCheckout
+### HasIsRefundable
 
-`func (o *OrderResponse) HasCheckout() bool`
+`func (o *OrderResponse) HasIsRefundable() bool`
 
-HasCheckout returns a boolean if a field has been set.
+HasIsRefundable returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
@@ -195,30 +341,30 @@ SetCreatedAt sets CreatedAt field to given value.
 
 HasCreatedAt returns a boolean if a field has been set.
 
-### GetCurrency
+### GetUpdatedAt
 
-`func (o *OrderResponse) GetCurrency() string`
+`func (o *OrderResponse) GetUpdatedAt() int64`
 
-GetCurrency returns the Currency field if non-nil, zero value otherwise.
+GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
 
-### GetCurrencyOk
+### GetUpdatedAtOk
 
-`func (o *OrderResponse) GetCurrencyOk() (*string, bool)`
+`func (o *OrderResponse) GetUpdatedAtOk() (*int64, bool)`
 
-GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCurrency
+### SetUpdatedAt
 
-`func (o *OrderResponse) SetCurrency(v string)`
+`func (o *OrderResponse) SetUpdatedAt(v int64)`
 
-SetCurrency sets Currency field to given value.
+SetUpdatedAt sets UpdatedAt field to given value.
 
-### HasCurrency
+### HasUpdatedAt
 
-`func (o *OrderResponse) HasCurrency() bool`
+`func (o *OrderResponse) HasUpdatedAt() bool`
 
-HasCurrency returns a boolean if a field has been set.
+HasUpdatedAt returns a boolean if a field has been set.
 
 ### GetCustomerInfo
 
@@ -245,31 +391,76 @@ SetCustomerInfo sets CustomerInfo field to given value.
 
 HasCustomerInfo returns a boolean if a field has been set.
 
-### GetDiscountLines
+### GetShippingContact
 
-`func (o *OrderResponse) GetDiscountLines() OrderResponseDiscountLines`
+`func (o *OrderResponse) GetShippingContact() OrderResponseShippingContact`
 
-GetDiscountLines returns the DiscountLines field if non-nil, zero value otherwise.
+GetShippingContact returns the ShippingContact field if non-nil, zero value otherwise.
 
-### GetDiscountLinesOk
+### GetShippingContactOk
 
-`func (o *OrderResponse) GetDiscountLinesOk() (*OrderResponseDiscountLines, bool)`
+`func (o *OrderResponse) GetShippingContactOk() (*OrderResponseShippingContact, bool)`
 
-GetDiscountLinesOk returns a tuple with the DiscountLines field if it's non-nil, zero value otherwise
+GetShippingContactOk returns a tuple with the ShippingContact field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDiscountLines
+### SetShippingContact
 
-`func (o *OrderResponse) SetDiscountLines(v OrderResponseDiscountLines)`
+`func (o *OrderResponse) SetShippingContact(v OrderResponseShippingContact)`
 
-SetDiscountLines sets DiscountLines field to given value.
+SetShippingContact sets ShippingContact field to given value.
 
-### HasDiscountLines
+### HasShippingContact
 
-`func (o *OrderResponse) HasDiscountLines() bool`
+`func (o *OrderResponse) HasShippingContact() bool`
 
-HasDiscountLines returns a boolean if a field has been set.
+HasShippingContact returns a boolean if a field has been set.
 
+### SetShippingContactNil
+
+`func (o *OrderResponse) SetShippingContactNil(b bool)`
+
+ SetShippingContactNil sets the value for ShippingContact to be an explicit nil
+
+### UnsetShippingContact
+`func (o *OrderResponse) UnsetShippingContact()`
+
+UnsetShippingContact ensures that no value is present for ShippingContact, not even an explicit nil
+### GetChannel
+
+`func (o *OrderResponse) GetChannel() OrderResponseChannel`
+
+GetChannel returns the Channel field if non-nil, zero value otherwise.
+
+### GetChannelOk
+
+`func (o *OrderResponse) GetChannelOk() (*OrderResponseChannel, bool)`
+
+GetChannelOk returns a tuple with the Channel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetChannel
+
+`func (o *OrderResponse) SetChannel(v OrderResponseChannel)`
+
+SetChannel sets Channel field to given value.
+
+### HasChannel
+
+`func (o *OrderResponse) HasChannel() bool`
+
+HasChannel returns a boolean if a field has been set.
+
+### SetChannelNil
+
+`func (o *OrderResponse) SetChannelNil(b bool)`
+
+ SetChannelNil sets the value for Channel to be an explicit nil
+
+### UnsetChannel
+`func (o *OrderResponse) UnsetChannel()`
+
+UnsetChannel ensures that no value is present for Channel, not even an explicit nil
 ### GetFiscalEntity
 
 `func (o *OrderResponse) GetFiscalEntity() OrderFiscalEntityResponse`
@@ -305,55 +496,30 @@ HasFiscalEntity returns a boolean if a field has been set.
 `func (o *OrderResponse) UnsetFiscalEntity()`
 
 UnsetFiscalEntity ensures that no value is present for FiscalEntity, not even an explicit nil
-### GetId
+### GetCheckout
 
-`func (o *OrderResponse) GetId() string`
+`func (o *OrderResponse) GetCheckout() OrderResponseCheckout`
 
-GetId returns the Id field if non-nil, zero value otherwise.
+GetCheckout returns the Checkout field if non-nil, zero value otherwise.
 
-### GetIdOk
+### GetCheckoutOk
 
-`func (o *OrderResponse) GetIdOk() (*string, bool)`
+`func (o *OrderResponse) GetCheckoutOk() (*OrderResponseCheckout, bool)`
 
-GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+GetCheckoutOk returns a tuple with the Checkout field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetId
+### SetCheckout
 
-`func (o *OrderResponse) SetId(v string)`
+`func (o *OrderResponse) SetCheckout(v OrderResponseCheckout)`
 
-SetId sets Id field to given value.
+SetCheckout sets Checkout field to given value.
 
-### HasId
+### HasCheckout
 
-`func (o *OrderResponse) HasId() bool`
+`func (o *OrderResponse) HasCheckout() bool`
 
-HasId returns a boolean if a field has been set.
-
-### GetIsRefundable
-
-`func (o *OrderResponse) GetIsRefundable() bool`
-
-GetIsRefundable returns the IsRefundable field if non-nil, zero value otherwise.
-
-### GetIsRefundableOk
-
-`func (o *OrderResponse) GetIsRefundableOk() (*bool, bool)`
-
-GetIsRefundableOk returns a tuple with the IsRefundable field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsRefundable
-
-`func (o *OrderResponse) SetIsRefundable(v bool)`
-
-SetIsRefundable sets IsRefundable field to given value.
-
-### HasIsRefundable
-
-`func (o *OrderResponse) HasIsRefundable() bool`
-
-HasIsRefundable returns a boolean if a field has been set.
+HasCheckout returns a boolean if a field has been set.
 
 ### GetLineItems
 
@@ -380,206 +546,126 @@ SetLineItems sets LineItems field to given value.
 
 HasLineItems returns a boolean if a field has been set.
 
-### GetLivemode
+### GetDiscountLines
 
-`func (o *OrderResponse) GetLivemode() bool`
+`func (o *OrderResponse) GetDiscountLines() OrderResponseDiscountLines`
 
-GetLivemode returns the Livemode field if non-nil, zero value otherwise.
+GetDiscountLines returns the DiscountLines field if non-nil, zero value otherwise.
 
-### GetLivemodeOk
+### GetDiscountLinesOk
 
-`func (o *OrderResponse) GetLivemodeOk() (*bool, bool)`
+`func (o *OrderResponse) GetDiscountLinesOk() (*OrderResponseDiscountLines, bool)`
 
-GetLivemodeOk returns a tuple with the Livemode field if it's non-nil, zero value otherwise
+GetDiscountLinesOk returns a tuple with the DiscountLines field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetLivemode
+### SetDiscountLines
 
-`func (o *OrderResponse) SetLivemode(v bool)`
+`func (o *OrderResponse) SetDiscountLines(v OrderResponseDiscountLines)`
 
-SetLivemode sets Livemode field to given value.
+SetDiscountLines sets DiscountLines field to given value.
 
-### HasLivemode
+### HasDiscountLines
 
-`func (o *OrderResponse) HasLivemode() bool`
+`func (o *OrderResponse) HasDiscountLines() bool`
 
-HasLivemode returns a boolean if a field has been set.
+HasDiscountLines returns a boolean if a field has been set.
 
-### GetMetadata
+### GetCharges
 
-`func (o *OrderResponse) GetMetadata() map[string]interface{}`
+`func (o *OrderResponse) GetCharges() OrderResponseCharges`
 
-GetMetadata returns the Metadata field if non-nil, zero value otherwise.
+GetCharges returns the Charges field if non-nil, zero value otherwise.
 
-### GetMetadataOk
+### GetChargesOk
 
-`func (o *OrderResponse) GetMetadataOk() (*map[string]interface{}, bool)`
+`func (o *OrderResponse) GetChargesOk() (*OrderResponseCharges, bool)`
 
-GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
+GetChargesOk returns a tuple with the Charges field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetMetadata
+### SetCharges
 
-`func (o *OrderResponse) SetMetadata(v map[string]interface{})`
+`func (o *OrderResponse) SetCharges(v OrderResponseCharges)`
 
-SetMetadata sets Metadata field to given value.
+SetCharges sets Charges field to given value.
 
-### HasMetadata
+### HasCharges
 
-`func (o *OrderResponse) HasMetadata() bool`
+`func (o *OrderResponse) HasCharges() bool`
 
-HasMetadata returns a boolean if a field has been set.
+HasCharges returns a boolean if a field has been set.
 
-### GetNextAction
+### GetPartialReference
 
-`func (o *OrderResponse) GetNextAction() OrderNextActionResponse`
+`func (o *OrderResponse) GetPartialReference() map[string]interface{}`
 
-GetNextAction returns the NextAction field if non-nil, zero value otherwise.
+GetPartialReference returns the PartialReference field if non-nil, zero value otherwise.
 
-### GetNextActionOk
+### GetPartialReferenceOk
 
-`func (o *OrderResponse) GetNextActionOk() (*OrderNextActionResponse, bool)`
+`func (o *OrderResponse) GetPartialReferenceOk() (*map[string]interface{}, bool)`
 
-GetNextActionOk returns a tuple with the NextAction field if it's non-nil, zero value otherwise
+GetPartialReferenceOk returns a tuple with the PartialReference field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNextAction
+### SetPartialReference
 
-`func (o *OrderResponse) SetNextAction(v OrderNextActionResponse)`
+`func (o *OrderResponse) SetPartialReference(v map[string]interface{})`
 
-SetNextAction sets NextAction field to given value.
+SetPartialReference sets PartialReference field to given value.
 
-### HasNextAction
+### HasPartialReference
 
-`func (o *OrderResponse) HasNextAction() bool`
+`func (o *OrderResponse) HasPartialReference() bool`
 
-HasNextAction returns a boolean if a field has been set.
+HasPartialReference returns a boolean if a field has been set.
 
-### GetObject
+### SetPartialReferenceNil
 
-`func (o *OrderResponse) GetObject() string`
+`func (o *OrderResponse) SetPartialReferenceNil(b bool)`
 
-GetObject returns the Object field if non-nil, zero value otherwise.
+ SetPartialReferenceNil sets the value for PartialReference to be an explicit nil
 
-### GetObjectOk
+### UnsetPartialReference
+`func (o *OrderResponse) UnsetPartialReference()`
 
-`func (o *OrderResponse) GetObjectOk() (*string, bool)`
+UnsetPartialReference ensures that no value is present for PartialReference, not even an explicit nil
+### GetPaymentsInfo
 
-GetObjectOk returns a tuple with the Object field if it's non-nil, zero value otherwise
+`func (o *OrderResponse) GetPaymentsInfo() map[string]interface{}`
+
+GetPaymentsInfo returns the PaymentsInfo field if non-nil, zero value otherwise.
+
+### GetPaymentsInfoOk
+
+`func (o *OrderResponse) GetPaymentsInfoOk() (*map[string]interface{}, bool)`
+
+GetPaymentsInfoOk returns a tuple with the PaymentsInfo field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetObject
+### SetPaymentsInfo
 
-`func (o *OrderResponse) SetObject(v string)`
+`func (o *OrderResponse) SetPaymentsInfo(v map[string]interface{})`
 
-SetObject sets Object field to given value.
+SetPaymentsInfo sets PaymentsInfo field to given value.
 
-### HasObject
+### HasPaymentsInfo
 
-`func (o *OrderResponse) HasObject() bool`
+`func (o *OrderResponse) HasPaymentsInfo() bool`
 
-HasObject returns a boolean if a field has been set.
+HasPaymentsInfo returns a boolean if a field has been set.
 
-### GetPaymentStatus
+### SetPaymentsInfoNil
 
-`func (o *OrderResponse) GetPaymentStatus() string`
+`func (o *OrderResponse) SetPaymentsInfoNil(b bool)`
 
-GetPaymentStatus returns the PaymentStatus field if non-nil, zero value otherwise.
+ SetPaymentsInfoNil sets the value for PaymentsInfo to be an explicit nil
 
-### GetPaymentStatusOk
+### UnsetPaymentsInfo
+`func (o *OrderResponse) UnsetPaymentsInfo()`
 
-`func (o *OrderResponse) GetPaymentStatusOk() (*string, bool)`
-
-GetPaymentStatusOk returns a tuple with the PaymentStatus field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPaymentStatus
-
-`func (o *OrderResponse) SetPaymentStatus(v string)`
-
-SetPaymentStatus sets PaymentStatus field to given value.
-
-### HasPaymentStatus
-
-`func (o *OrderResponse) HasPaymentStatus() bool`
-
-HasPaymentStatus returns a boolean if a field has been set.
-
-### GetProcessingMode
-
-`func (o *OrderResponse) GetProcessingMode() string`
-
-GetProcessingMode returns the ProcessingMode field if non-nil, zero value otherwise.
-
-### GetProcessingModeOk
-
-`func (o *OrderResponse) GetProcessingModeOk() (*string, bool)`
-
-GetProcessingModeOk returns a tuple with the ProcessingMode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProcessingMode
-
-`func (o *OrderResponse) SetProcessingMode(v string)`
-
-SetProcessingMode sets ProcessingMode field to given value.
-
-### HasProcessingMode
-
-`func (o *OrderResponse) HasProcessingMode() bool`
-
-HasProcessingMode returns a boolean if a field has been set.
-
-### GetShippingContact
-
-`func (o *OrderResponse) GetShippingContact() OrderResponseShippingContact`
-
-GetShippingContact returns the ShippingContact field if non-nil, zero value otherwise.
-
-### GetShippingContactOk
-
-`func (o *OrderResponse) GetShippingContactOk() (*OrderResponseShippingContact, bool)`
-
-GetShippingContactOk returns a tuple with the ShippingContact field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetShippingContact
-
-`func (o *OrderResponse) SetShippingContact(v OrderResponseShippingContact)`
-
-SetShippingContact sets ShippingContact field to given value.
-
-### HasShippingContact
-
-`func (o *OrderResponse) HasShippingContact() bool`
-
-HasShippingContact returns a boolean if a field has been set.
-
-### GetUpdatedAt
-
-`func (o *OrderResponse) GetUpdatedAt() int64`
-
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
-
-### GetUpdatedAtOk
-
-`func (o *OrderResponse) GetUpdatedAtOk() (*int64, bool)`
-
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetUpdatedAt
-
-`func (o *OrderResponse) SetUpdatedAt(v int64)`
-
-SetUpdatedAt sets UpdatedAt field to given value.
-
-### HasUpdatedAt
-
-`func (o *OrderResponse) HasUpdatedAt() bool`
-
-HasUpdatedAt returns a boolean if a field has been set.
-
+UnsetPaymentsInfo ensures that no value is present for PaymentsInfo, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

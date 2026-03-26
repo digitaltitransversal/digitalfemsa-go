@@ -21,17 +21,17 @@ var _ MappedNullable = &UpdateCustomerFiscalEntitiesResponse{}
 
 // UpdateCustomerFiscalEntitiesResponse struct for UpdateCustomerFiscalEntitiesResponse
 type UpdateCustomerFiscalEntitiesResponse struct {
-	Address              CustomerAddress                   `json:"address"`
-	TaxId                *string                           `json:"tax_id,omitempty"`
-	Email                *string                           `json:"email,omitempty"`
-	Phone                *string                           `json:"phone,omitempty"`
-	Metadata             map[string]map[string]interface{} `json:"metadata,omitempty"`
-	CompanyName          *string                           `json:"company_name,omitempty"`
-	Id                   string                            `json:"id"`
-	Object               string                            `json:"object"`
-	CreatedAt            int64                             `json:"created_at"`
-	ParentId             *string                           `json:"parent_id,omitempty"`
-	Default              *bool                             `json:"default,omitempty"`
+	Address CustomerAddress `json:"address"`
+	TaxId *string `json:"tax_id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	Email *string `json:"email,omitempty"`
+	Phone *string `json:"phone,omitempty"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	Id string `json:"id"`
+	Object string `json:"object"`
+	CreatedAt int64 `json:"created_at"`
+	ParentId *string `json:"parent_id,omitempty"`
+	Default *bool `json:"default,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -114,6 +114,38 @@ func (o *UpdateCustomerFiscalEntitiesResponse) SetTaxId(v string) {
 	o.TaxId = &v
 }
 
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *UpdateCustomerFiscalEntitiesResponse) GetName() string {
+	if o == nil || IsNil(o.Name) {
+		var ret string
+		return ret
+	}
+	return *o.Name
+}
+
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateCustomerFiscalEntitiesResponse) GetNameOk() (*string, bool) {
+	if o == nil || IsNil(o.Name) {
+		return nil, false
+	}
+	return o.Name, true
+}
+
+// HasName returns a boolean if a field has been set.
+func (o *UpdateCustomerFiscalEntitiesResponse) HasName() bool {
+	if o != nil && !IsNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *UpdateCustomerFiscalEntitiesResponse) SetName(v string) {
+	o.Name = &v
+}
+
 // GetEmail returns the Email field value if set, zero value otherwise.
 func (o *UpdateCustomerFiscalEntitiesResponse) GetEmail() string {
 	if o == nil || IsNil(o.Email) {
@@ -179,9 +211,9 @@ func (o *UpdateCustomerFiscalEntitiesResponse) SetPhone(v string) {
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *UpdateCustomerFiscalEntitiesResponse) GetMetadata() map[string]map[string]interface{} {
+func (o *UpdateCustomerFiscalEntitiesResponse) GetMetadata() map[string]interface{} {
 	if o == nil || IsNil(o.Metadata) {
-		var ret map[string]map[string]interface{}
+		var ret map[string]interface{}
 		return ret
 	}
 	return o.Metadata
@@ -189,9 +221,9 @@ func (o *UpdateCustomerFiscalEntitiesResponse) GetMetadata() map[string]map[stri
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UpdateCustomerFiscalEntitiesResponse) GetMetadataOk() (map[string]map[string]interface{}, bool) {
+func (o *UpdateCustomerFiscalEntitiesResponse) GetMetadataOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.Metadata) {
-		return map[string]map[string]interface{}{}, false
+		return map[string]interface{}{}, false
 	}
 	return o.Metadata, true
 }
@@ -205,41 +237,9 @@ func (o *UpdateCustomerFiscalEntitiesResponse) HasMetadata() bool {
 	return false
 }
 
-// SetMetadata gets a reference to the given map[string]map[string]interface{} and assigns it to the Metadata field.
-func (o *UpdateCustomerFiscalEntitiesResponse) SetMetadata(v map[string]map[string]interface{}) {
+// SetMetadata gets a reference to the given map[string]interface{} and assigns it to the Metadata field.
+func (o *UpdateCustomerFiscalEntitiesResponse) SetMetadata(v map[string]interface{}) {
 	o.Metadata = v
-}
-
-// GetCompanyName returns the CompanyName field value if set, zero value otherwise.
-func (o *UpdateCustomerFiscalEntitiesResponse) GetCompanyName() string {
-	if o == nil || IsNil(o.CompanyName) {
-		var ret string
-		return ret
-	}
-	return *o.CompanyName
-}
-
-// GetCompanyNameOk returns a tuple with the CompanyName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UpdateCustomerFiscalEntitiesResponse) GetCompanyNameOk() (*string, bool) {
-	if o == nil || IsNil(o.CompanyName) {
-		return nil, false
-	}
-	return o.CompanyName, true
-}
-
-// HasCompanyName returns a boolean if a field has been set.
-func (o *UpdateCustomerFiscalEntitiesResponse) HasCompanyName() bool {
-	if o != nil && !IsNil(o.CompanyName) {
-		return true
-	}
-
-	return false
-}
-
-// SetCompanyName gets a reference to the given string and assigns it to the CompanyName field.
-func (o *UpdateCustomerFiscalEntitiesResponse) SetCompanyName(v string) {
-	o.CompanyName = &v
 }
 
 // GetId returns the Id field value
@@ -379,7 +379,7 @@ func (o *UpdateCustomerFiscalEntitiesResponse) SetDefault(v bool) {
 }
 
 func (o UpdateCustomerFiscalEntitiesResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -392,6 +392,9 @@ func (o UpdateCustomerFiscalEntitiesResponse) ToMap() (map[string]interface{}, e
 	if !IsNil(o.TaxId) {
 		toSerialize["tax_id"] = o.TaxId
 	}
+	if !IsNil(o.Name) {
+		toSerialize["name"] = o.Name
+	}
 	if !IsNil(o.Email) {
 		toSerialize["email"] = o.Email
 	}
@@ -400,9 +403,6 @@ func (o UpdateCustomerFiscalEntitiesResponse) ToMap() (map[string]interface{}, e
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
-	}
-	if !IsNil(o.CompanyName) {
-		toSerialize["company_name"] = o.CompanyName
 	}
 	toSerialize["id"] = o.Id
 	toSerialize["object"] = o.Object
@@ -437,10 +437,10 @@ func (o *UpdateCustomerFiscalEntitiesResponse) UnmarshalJSON(data []byte) (err e
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -461,10 +461,10 @@ func (o *UpdateCustomerFiscalEntitiesResponse) UnmarshalJSON(data []byte) (err e
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "address")
 		delete(additionalProperties, "tax_id")
+		delete(additionalProperties, "name")
 		delete(additionalProperties, "email")
 		delete(additionalProperties, "phone")
 		delete(additionalProperties, "metadata")
-		delete(additionalProperties, "company_name")
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "object")
 		delete(additionalProperties, "created_at")
@@ -511,3 +511,5 @@ func (v *NullableUpdateCustomerFiscalEntitiesResponse) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

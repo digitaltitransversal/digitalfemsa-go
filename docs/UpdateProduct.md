@@ -4,15 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AntifraudInfo** | Pointer to **map[string]map[string]interface{}** |  | [optional] 
-**Description** | Pointer to **string** |  | [optional] 
-**Sku** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
 **UnitPrice** | Pointer to **int64** |  | [optional] 
 **Quantity** | Pointer to **int32** |  | [optional] 
-**Tags** | Pointer to **[]string** |  | [optional] 
+**Sku** | Pointer to **string** |  | [optional] 
 **Brand** | Pointer to **string** |  | [optional] 
-**Metadata** | Pointer to **map[string]string** |  | [optional] 
+**Description** | Pointer to **string** |  | [optional] 
+**Tags** | Pointer to **[]string** |  | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
 
 ## Methods
 
@@ -32,81 +31,6 @@ will change when the set of required properties is changed
 NewUpdateProductWithDefaults instantiates a new UpdateProduct object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetAntifraudInfo
-
-`func (o *UpdateProduct) GetAntifraudInfo() map[string]map[string]interface{}`
-
-GetAntifraudInfo returns the AntifraudInfo field if non-nil, zero value otherwise.
-
-### GetAntifraudInfoOk
-
-`func (o *UpdateProduct) GetAntifraudInfoOk() (*map[string]map[string]interface{}, bool)`
-
-GetAntifraudInfoOk returns a tuple with the AntifraudInfo field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAntifraudInfo
-
-`func (o *UpdateProduct) SetAntifraudInfo(v map[string]map[string]interface{})`
-
-SetAntifraudInfo sets AntifraudInfo field to given value.
-
-### HasAntifraudInfo
-
-`func (o *UpdateProduct) HasAntifraudInfo() bool`
-
-HasAntifraudInfo returns a boolean if a field has been set.
-
-### GetDescription
-
-`func (o *UpdateProduct) GetDescription() string`
-
-GetDescription returns the Description field if non-nil, zero value otherwise.
-
-### GetDescriptionOk
-
-`func (o *UpdateProduct) GetDescriptionOk() (*string, bool)`
-
-GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDescription
-
-`func (o *UpdateProduct) SetDescription(v string)`
-
-SetDescription sets Description field to given value.
-
-### HasDescription
-
-`func (o *UpdateProduct) HasDescription() bool`
-
-HasDescription returns a boolean if a field has been set.
-
-### GetSku
-
-`func (o *UpdateProduct) GetSku() string`
-
-GetSku returns the Sku field if non-nil, zero value otherwise.
-
-### GetSkuOk
-
-`func (o *UpdateProduct) GetSkuOk() (*string, bool)`
-
-GetSkuOk returns a tuple with the Sku field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSku
-
-`func (o *UpdateProduct) SetSku(v string)`
-
-SetSku sets Sku field to given value.
-
-### HasSku
-
-`func (o *UpdateProduct) HasSku() bool`
-
-HasSku returns a boolean if a field has been set.
 
 ### GetName
 
@@ -183,30 +107,30 @@ SetQuantity sets Quantity field to given value.
 
 HasQuantity returns a boolean if a field has been set.
 
-### GetTags
+### GetSku
 
-`func (o *UpdateProduct) GetTags() []string`
+`func (o *UpdateProduct) GetSku() string`
 
-GetTags returns the Tags field if non-nil, zero value otherwise.
+GetSku returns the Sku field if non-nil, zero value otherwise.
 
-### GetTagsOk
+### GetSkuOk
 
-`func (o *UpdateProduct) GetTagsOk() (*[]string, bool)`
+`func (o *UpdateProduct) GetSkuOk() (*string, bool)`
 
-GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
+GetSkuOk returns a tuple with the Sku field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTags
+### SetSku
 
-`func (o *UpdateProduct) SetTags(v []string)`
+`func (o *UpdateProduct) SetSku(v string)`
 
-SetTags sets Tags field to given value.
+SetSku sets Sku field to given value.
 
-### HasTags
+### HasSku
 
-`func (o *UpdateProduct) HasTags() bool`
+`func (o *UpdateProduct) HasSku() bool`
 
-HasTags returns a boolean if a field has been set.
+HasSku returns a boolean if a field has been set.
 
 ### GetBrand
 
@@ -233,22 +157,72 @@ SetBrand sets Brand field to given value.
 
 HasBrand returns a boolean if a field has been set.
 
+### GetDescription
+
+`func (o *UpdateProduct) GetDescription() string`
+
+GetDescription returns the Description field if non-nil, zero value otherwise.
+
+### GetDescriptionOk
+
+`func (o *UpdateProduct) GetDescriptionOk() (*string, bool)`
+
+GetDescriptionOk returns a tuple with the Description field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDescription
+
+`func (o *UpdateProduct) SetDescription(v string)`
+
+SetDescription sets Description field to given value.
+
+### HasDescription
+
+`func (o *UpdateProduct) HasDescription() bool`
+
+HasDescription returns a boolean if a field has been set.
+
+### GetTags
+
+`func (o *UpdateProduct) GetTags() []string`
+
+GetTags returns the Tags field if non-nil, zero value otherwise.
+
+### GetTagsOk
+
+`func (o *UpdateProduct) GetTagsOk() (*[]string, bool)`
+
+GetTagsOk returns a tuple with the Tags field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTags
+
+`func (o *UpdateProduct) SetTags(v []string)`
+
+SetTags sets Tags field to given value.
+
+### HasTags
+
+`func (o *UpdateProduct) HasTags() bool`
+
+HasTags returns a boolean if a field has been set.
+
 ### GetMetadata
 
-`func (o *UpdateProduct) GetMetadata() map[string]string`
+`func (o *UpdateProduct) GetMetadata() map[string]interface{}`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *UpdateProduct) GetMetadataOk() (*map[string]string, bool)`
+`func (o *UpdateProduct) GetMetadataOk() (*map[string]interface{}, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *UpdateProduct) SetMetadata(v map[string]string)`
+`func (o *UpdateProduct) SetMetadata(v map[string]interface{})`
 
 SetMetadata sets Metadata field to given value.
 

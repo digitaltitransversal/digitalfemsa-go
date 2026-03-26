@@ -20,16 +20,17 @@ import (
 	"strings"
 )
 
+
 type TransfersAPI interface {
 
 	/*
-		GetTransfer Get Transfer
+	GetTransfer Get transfer
 
-		Get the details of a Transfer
+	Retrieves the details of a transfer by its ID.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param id Identifier of the resource
-		@return ApiGetTransferRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@return ApiGetTransferRequest
 	*/
 	GetTransfer(ctx context.Context, id string) ApiGetTransferRequest
 
@@ -38,12 +39,18 @@ type TransfersAPI interface {
 	GetTransferExecute(r ApiGetTransferRequest) (*TransferResponse, *http.Response, error)
 
 	/*
-		GetTransfers Get a list of transfers
+	GetTransfers List transfers
 
-		Get transfers details in the form of a list
+	Returns a paginated list of transfers (payouts/dispersions).
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@return ApiGetTransfersRequest
+A transfer represents a payout of funds to the merchant (where the money is sent and the payout status).
+Transfers typically aggregate multiple transactions.
+
+If you need movement-level details (amount/fee/net per operation) or to reconcile charges, use GET /transactions.
+
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetTransfersRequest
 	*/
 	GetTransfers(ctx context.Context) ApiGetTransfersRequest
 
@@ -56,10 +63,10 @@ type TransfersAPI interface {
 type TransfersAPIService service
 
 type ApiGetTransferRequest struct {
-	ctx             context.Context
-	ApiService      TransfersAPI
-	id              string
-	acceptLanguage  *string
+	ctx context.Context
+	ApiService TransfersAPI
+	id string
+	acceptLanguage *string
 	xChildCompanyId *string
 }
 
@@ -80,31 +87,30 @@ func (r ApiGetTransferRequest) Execute() (*TransferResponse, *http.Response, err
 }
 
 /*
-GetTransfer Get Transfer
+GetTransfer Get transfer
 
-Get the details of a Transfer
+Retrieves the details of a transfer by its ID.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@return ApiGetTransferRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @return ApiGetTransferRequest
 */
 func (a *TransfersAPIService) GetTransfer(ctx context.Context, id string) ApiGetTransferRequest {
 	return ApiGetTransferRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return TransferResponse
+//  @return TransferResponse
 func (a *TransfersAPIService) GetTransferExecute(r ApiGetTransferRequest) (*TransferResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *TransferResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *TransferResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransfersAPIService.GetTransfer")
@@ -171,19 +177,8 @@ func (a *TransfersAPIService) GetTransferExecute(r ApiGetTransferRequest) (*Tran
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ModelError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -193,8 +188,8 @@ func (a *TransfersAPIService) GetTransferExecute(r ApiGetTransferRequest) (*Tran
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -212,14 +207,14 @@ func (a *TransfersAPIService) GetTransferExecute(r ApiGetTransferRequest) (*Tran
 }
 
 type ApiGetTransfersRequest struct {
-	ctx             context.Context
-	ApiService      TransfersAPI
-	acceptLanguage  *string
+	ctx context.Context
+	ApiService TransfersAPI
+	acceptLanguage *string
 	xChildCompanyId *string
-	limit           *int32
-	search          *string
-	next            *string
-	previous        *string
+	limit *int32
+	search *string
+	next *string
+	previous *string
 }
 
 // Use for knowing which language to use
@@ -263,29 +258,34 @@ func (r ApiGetTransfersRequest) Execute() (*GetTransfersResponse, *http.Response
 }
 
 /*
-GetTransfers Get a list of transfers
+GetTransfers List transfers
 
-Get transfers details in the form of a list
+Returns a paginated list of transfers (payouts/dispersions).
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetTransfersRequest
+A transfer represents a payout of funds to the merchant (where the money is sent and the payout status).
+Transfers typically aggregate multiple transactions.
+
+If you need movement-level details (amount/fee/net per operation) or to reconcile charges, use GET /transactions.
+
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetTransfersRequest
 */
 func (a *TransfersAPIService) GetTransfers(ctx context.Context) ApiGetTransfersRequest {
 	return ApiGetTransfersRequest{
 		ApiService: a,
-		ctx:        ctx,
+		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetTransfersResponse
+//  @return GetTransfersResponse
 func (a *TransfersAPIService) GetTransfersExecute(r ApiGetTransfersRequest) (*GetTransfersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetTransfersResponse
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *GetTransfersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransfersAPIService.GetTransfers")
@@ -366,8 +366,8 @@ func (a *TransfersAPIService) GetTransfersExecute(r ApiGetTransfersRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -377,8 +377,8 @@ func (a *TransfersAPIService) GetTransfersExecute(r ApiGetTransfersRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

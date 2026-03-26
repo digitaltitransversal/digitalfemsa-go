@@ -11,7 +11,7 @@ Method | HTTP request | Description
 [**OrderCancelRefund**](OrdersAPI.md#OrderCancelRefund) | **Delete** /orders/{id}/refunds/{refund_id} | Cancel Refund
 [**OrderRefund**](OrdersAPI.md#OrderRefund) | **Post** /orders/{id}/refunds | Refund Order
 [**OrdersCreateCapture**](OrdersAPI.md#OrdersCreateCapture) | **Post** /orders/{id}/capture | Capture Order
-[**UpdateOrder**](OrdersAPI.md#UpdateOrder) | **Put** /orders/{id} | Update Order
+[**UpdateOrder**](OrdersAPI.md#UpdateOrder) | **Put** /orders/{id} | Update order
 
 
 
@@ -110,7 +110,7 @@ import (
 )
 
 func main() {
-	orderRequest := *openapiclient.NewOrderRequest("MXN", openapiclient.order_request_customer_info{CustomerInfo: openapiclient.NewCustomerInfo("DevTest", "test@femsa.com", "5522997233")}, []openapiclient.Product{*openapiclient.NewProduct("Box of Cohiba S1s", int32(1), int32(20000))}) // OrderRequest | requested field for order
+	orderRequest := *openapiclient.NewOrderRequest("MXN", openapiclient.order_request_customer_info{CustomerInfo: openapiclient.NewCustomerInfo("DevTest", "test@femsa.com")}, []openapiclient.Product{*openapiclient.NewProduct("Box of Cohiba", int32(20000), int32(1))}) // OrderRequest | requested field for order
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
 	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -486,7 +486,7 @@ func main() {
 	id := "6307a60c41de27127515a575" // string | Identifier of the resource
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
 	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
-	orderCaptureRequest := *openapiclient.NewOrderCaptureRequest(int64(500)) // OrderCaptureRequest | requested fields for capture order (optional)
+	orderCaptureRequest := *openapiclient.NewOrderCaptureRequest(int64(500)) // OrderCaptureRequest | Requested fields for capturing an order (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -518,7 +518,7 @@ Name | Type | Description  | Notes
 
  **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
  **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
- **orderCaptureRequest** | [**OrderCaptureRequest**](OrderCaptureRequest.md) | requested fields for capture order | 
+ **orderCaptureRequest** | [**OrderCaptureRequest**](OrderCaptureRequest.md) | Requested fields for capturing an order | 
 
 ### Return type
 
@@ -542,7 +542,7 @@ Name | Type | Description  | Notes
 
 > OrderResponse UpdateOrder(ctx, id).OrderUpdateRequest(orderUpdateRequest).AcceptLanguage(acceptLanguage).Execute()
 
-Update Order
+Update order
 
 
 

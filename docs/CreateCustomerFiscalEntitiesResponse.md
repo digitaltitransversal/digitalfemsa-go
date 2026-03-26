@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Address** | [**CustomerAddress**](CustomerAddress.md) |  | 
 **TaxId** | Pointer to **string** |  | [optional] 
+**Name** | Pointer to **string** |  | [optional] 
 **Email** | Pointer to **string** |  | [optional] 
 **Phone** | Pointer to **string** |  | [optional] 
-**Metadata** | Pointer to **map[string]map[string]interface{}** |  | [optional] 
-**CompanyName** | Pointer to **string** |  | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
 **Id** | **string** |  | 
 **Object** | **string** |  | 
 **CreatedAt** | **int64** |  | 
@@ -80,6 +80,31 @@ SetTaxId sets TaxId field to given value.
 
 HasTaxId returns a boolean if a field has been set.
 
+### GetName
+
+`func (o *CreateCustomerFiscalEntitiesResponse) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *CreateCustomerFiscalEntitiesResponse) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *CreateCustomerFiscalEntitiesResponse) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *CreateCustomerFiscalEntitiesResponse) HasName() bool`
+
+HasName returns a boolean if a field has been set.
+
 ### GetEmail
 
 `func (o *CreateCustomerFiscalEntitiesResponse) GetEmail() string`
@@ -132,20 +157,20 @@ HasPhone returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *CreateCustomerFiscalEntitiesResponse) GetMetadata() map[string]map[string]interface{}`
+`func (o *CreateCustomerFiscalEntitiesResponse) GetMetadata() map[string]interface{}`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *CreateCustomerFiscalEntitiesResponse) GetMetadataOk() (*map[string]map[string]interface{}, bool)`
+`func (o *CreateCustomerFiscalEntitiesResponse) GetMetadataOk() (*map[string]interface{}, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *CreateCustomerFiscalEntitiesResponse) SetMetadata(v map[string]map[string]interface{})`
+`func (o *CreateCustomerFiscalEntitiesResponse) SetMetadata(v map[string]interface{})`
 
 SetMetadata sets Metadata field to given value.
 
@@ -154,31 +179,6 @@ SetMetadata sets Metadata field to given value.
 `func (o *CreateCustomerFiscalEntitiesResponse) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
-
-### GetCompanyName
-
-`func (o *CreateCustomerFiscalEntitiesResponse) GetCompanyName() string`
-
-GetCompanyName returns the CompanyName field if non-nil, zero value otherwise.
-
-### GetCompanyNameOk
-
-`func (o *CreateCustomerFiscalEntitiesResponse) GetCompanyNameOk() (*string, bool)`
-
-GetCompanyNameOk returns a tuple with the CompanyName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCompanyName
-
-`func (o *CreateCustomerFiscalEntitiesResponse) SetCompanyName(v string)`
-
-SetCompanyName sets CompanyName field to given value.
-
-### HasCompanyName
-
-`func (o *CreateCustomerFiscalEntitiesResponse) HasCompanyName() bool`
-
-HasCompanyName returns a boolean if a field has been set.
 
 ### GetId
 

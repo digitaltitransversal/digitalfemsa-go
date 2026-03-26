@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **Id** | **string** |  | 
 **Object** | **string** |  | 
 **Status** | Pointer to **string** | refund status | [optional] 
+**PayoutId** | Pointer to **string** |  | [optional] 
+**Reference** | Pointer to **string** | payout reference for oxxo stores | [optional] 
 
 ## Methods
 
@@ -185,6 +187,56 @@ SetStatus sets Status field to given value.
 `func (o *ChargeResponseRefundsData) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
+
+### GetPayoutId
+
+`func (o *ChargeResponseRefundsData) GetPayoutId() string`
+
+GetPayoutId returns the PayoutId field if non-nil, zero value otherwise.
+
+### GetPayoutIdOk
+
+`func (o *ChargeResponseRefundsData) GetPayoutIdOk() (*string, bool)`
+
+GetPayoutIdOk returns a tuple with the PayoutId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPayoutId
+
+`func (o *ChargeResponseRefundsData) SetPayoutId(v string)`
+
+SetPayoutId sets PayoutId field to given value.
+
+### HasPayoutId
+
+`func (o *ChargeResponseRefundsData) HasPayoutId() bool`
+
+HasPayoutId returns a boolean if a field has been set.
+
+### GetReference
+
+`func (o *ChargeResponseRefundsData) GetReference() string`
+
+GetReference returns the Reference field if non-nil, zero value otherwise.
+
+### GetReferenceOk
+
+`func (o *ChargeResponseRefundsData) GetReferenceOk() (*string, bool)`
+
+GetReferenceOk returns a tuple with the Reference field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReference
+
+`func (o *ChargeResponseRefundsData) SetReference(v string)`
+
+SetReference sets Reference field to given value.
+
+### HasReference
+
+`func (o *ChargeResponseRefundsData) HasReference() bool`
+
+HasReference returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

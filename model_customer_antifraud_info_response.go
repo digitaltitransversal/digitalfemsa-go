@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -20,8 +20,8 @@ var _ MappedNullable = &CustomerAntifraudInfoResponse{}
 
 // CustomerAntifraudInfoResponse struct for CustomerAntifraudInfoResponse
 type CustomerAntifraudInfoResponse struct {
-	FirstPaidAt          *int32 `json:"first_paid_at,omitempty"`
-	AccountCreatedAt     *int64 `json:"account_created_at,omitempty"`
+	FirstPaidAt NullableInt64 `json:"first_paid_at,omitempty"`
+	AccountCreatedAt NullableInt64 `json:"account_created_at,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -44,72 +44,92 @@ func NewCustomerAntifraudInfoResponseWithDefaults() *CustomerAntifraudInfoRespon
 	return &this
 }
 
-// GetFirstPaidAt returns the FirstPaidAt field value if set, zero value otherwise.
-func (o *CustomerAntifraudInfoResponse) GetFirstPaidAt() int32 {
-	if o == nil || IsNil(o.FirstPaidAt) {
-		var ret int32
+// GetFirstPaidAt returns the FirstPaidAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CustomerAntifraudInfoResponse) GetFirstPaidAt() int64 {
+	if o == nil || IsNil(o.FirstPaidAt.Get()) {
+		var ret int64
 		return ret
 	}
-	return *o.FirstPaidAt
+	return *o.FirstPaidAt.Get()
 }
 
 // GetFirstPaidAtOk returns a tuple with the FirstPaidAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CustomerAntifraudInfoResponse) GetFirstPaidAtOk() (*int32, bool) {
-	if o == nil || IsNil(o.FirstPaidAt) {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CustomerAntifraudInfoResponse) GetFirstPaidAtOk() (*int64, bool) {
+	if o == nil {
 		return nil, false
 	}
-	return o.FirstPaidAt, true
+	return o.FirstPaidAt.Get(), o.FirstPaidAt.IsSet()
 }
 
 // HasFirstPaidAt returns a boolean if a field has been set.
 func (o *CustomerAntifraudInfoResponse) HasFirstPaidAt() bool {
-	if o != nil && !IsNil(o.FirstPaidAt) {
+	if o != nil && o.FirstPaidAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetFirstPaidAt gets a reference to the given int32 and assigns it to the FirstPaidAt field.
-func (o *CustomerAntifraudInfoResponse) SetFirstPaidAt(v int32) {
-	o.FirstPaidAt = &v
+// SetFirstPaidAt gets a reference to the given NullableInt64 and assigns it to the FirstPaidAt field.
+func (o *CustomerAntifraudInfoResponse) SetFirstPaidAt(v int64) {
+	o.FirstPaidAt.Set(&v)
+}
+// SetFirstPaidAtNil sets the value for FirstPaidAt to be an explicit nil
+func (o *CustomerAntifraudInfoResponse) SetFirstPaidAtNil() {
+	o.FirstPaidAt.Set(nil)
 }
 
-// GetAccountCreatedAt returns the AccountCreatedAt field value if set, zero value otherwise.
+// UnsetFirstPaidAt ensures that no value is present for FirstPaidAt, not even an explicit nil
+func (o *CustomerAntifraudInfoResponse) UnsetFirstPaidAt() {
+	o.FirstPaidAt.Unset()
+}
+
+// GetAccountCreatedAt returns the AccountCreatedAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CustomerAntifraudInfoResponse) GetAccountCreatedAt() int64 {
-	if o == nil || IsNil(o.AccountCreatedAt) {
+	if o == nil || IsNil(o.AccountCreatedAt.Get()) {
 		var ret int64
 		return ret
 	}
-	return *o.AccountCreatedAt
+	return *o.AccountCreatedAt.Get()
 }
 
 // GetAccountCreatedAtOk returns a tuple with the AccountCreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CustomerAntifraudInfoResponse) GetAccountCreatedAtOk() (*int64, bool) {
-	if o == nil || IsNil(o.AccountCreatedAt) {
+	if o == nil {
 		return nil, false
 	}
-	return o.AccountCreatedAt, true
+	return o.AccountCreatedAt.Get(), o.AccountCreatedAt.IsSet()
 }
 
 // HasAccountCreatedAt returns a boolean if a field has been set.
 func (o *CustomerAntifraudInfoResponse) HasAccountCreatedAt() bool {
-	if o != nil && !IsNil(o.AccountCreatedAt) {
+	if o != nil && o.AccountCreatedAt.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccountCreatedAt gets a reference to the given int64 and assigns it to the AccountCreatedAt field.
+// SetAccountCreatedAt gets a reference to the given NullableInt64 and assigns it to the AccountCreatedAt field.
 func (o *CustomerAntifraudInfoResponse) SetAccountCreatedAt(v int64) {
-	o.AccountCreatedAt = &v
+	o.AccountCreatedAt.Set(&v)
+}
+// SetAccountCreatedAtNil sets the value for AccountCreatedAt to be an explicit nil
+func (o *CustomerAntifraudInfoResponse) SetAccountCreatedAtNil() {
+	o.AccountCreatedAt.Set(nil)
+}
+
+// UnsetAccountCreatedAt ensures that no value is present for AccountCreatedAt, not even an explicit nil
+func (o *CustomerAntifraudInfoResponse) UnsetAccountCreatedAt() {
+	o.AccountCreatedAt.Unset()
 }
 
 func (o CustomerAntifraudInfoResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -118,11 +138,11 @@ func (o CustomerAntifraudInfoResponse) MarshalJSON() ([]byte, error) {
 
 func (o CustomerAntifraudInfoResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.FirstPaidAt) {
-		toSerialize["first_paid_at"] = o.FirstPaidAt
+	if o.FirstPaidAt.IsSet() {
+		toSerialize["first_paid_at"] = o.FirstPaidAt.Get()
 	}
-	if !IsNil(o.AccountCreatedAt) {
-		toSerialize["account_created_at"] = o.AccountCreatedAt
+	if o.AccountCreatedAt.IsSet() {
+		toSerialize["account_created_at"] = o.AccountCreatedAt.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -189,3 +209,5 @@ func (v *NullableCustomerAntifraudInfoResponse) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

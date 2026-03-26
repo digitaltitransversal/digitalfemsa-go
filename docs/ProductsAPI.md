@@ -32,7 +32,7 @@ import (
 
 func main() {
 	id := "6307a60c41de27127515a575" // string | Identifier of the resource
-	product := *openapiclient.NewProduct("Box of Cohiba S1s", int32(1), int32(20000)) // Product | requested field for a product
+	product := *openapiclient.NewProduct("Box of Cohiba", int32(20000), int32(1)) // Product | Fields required to create a new product (line item) for an existing order. This request adds a new item to the order.
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
 	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -64,7 +64,7 @@ Other parameters are passed through a pointer to a apiOrdersCreateProductRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **product** | [**Product**](Product.md) | requested field for a product | 
+ **product** | [**Product**](Product.md) | Fields required to create a new product (line item) for an existing order. This request adds a new item to the order. | 
  **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
  **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
 
@@ -186,7 +186,7 @@ import (
 func main() {
 	id := "6307a60c41de27127515a575" // string | Identifier of the resource
 	lineItemId := "line_item_2tQ8HkkfbauaKP9Ho" // string | identifier
-	updateProduct := *openapiclient.NewUpdateProduct() // UpdateProduct | requested field for products
+	updateProduct := *openapiclient.NewUpdateProduct() // UpdateProduct | Fields allowed to update an existing product (line item) in an order. All fields are optional; only the provided fields will be updated.
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
 	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -220,7 +220,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **updateProduct** | [**UpdateProduct**](UpdateProduct.md) | requested field for products | 
+ **updateProduct** | [**UpdateProduct**](UpdateProduct.md) | Fields allowed to update an existing product (line item) in an order. All fields are optional; only the provided fields will be updated. | 
  **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
  **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
 

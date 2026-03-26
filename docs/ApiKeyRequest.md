@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Description** | Pointer to **string** | A name or brief explanation of what this api key is used for | [optional] 
-**Role** | **string** |  | 
+**Description** | Pointer to **string** | A name or brief explanation of what this API key is used for. | [optional] 
+**Role** | **string** | Defines the type of API key to create. Only \&quot;private\&quot; is supported for creation. A \&quot;public\&quot; API key already exists by default per company/environment.  | 
 
 ## Methods
 

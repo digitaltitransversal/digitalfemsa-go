@@ -28,6 +28,7 @@ func PaymentMethodCashResponseAsCreateCustomerPaymentMethodsResponse(v *PaymentM
 	}
 }
 
+
 // Unmarshal JSON data into one of the pointers in the struct
 func (dst *CreateCustomerPaymentMethodsResponse) UnmarshalJSON(data []byte) error {
 	var err error
@@ -87,7 +88,7 @@ func (src CreateCustomerPaymentMethodsResponse) MarshalJSON() ([]byte, error) {
 }
 
 // Get the actual instance
-func (obj *CreateCustomerPaymentMethodsResponse) GetActualInstance() interface{} {
+func (obj *CreateCustomerPaymentMethodsResponse) GetActualInstance() (interface{}) {
 	if obj == nil {
 		return nil
 	}
@@ -134,3 +135,5 @@ func (v *NullableCreateCustomerPaymentMethodsResponse) UnmarshalJSON(src []byte)
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

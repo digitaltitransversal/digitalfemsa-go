@@ -18,18 +18,18 @@ import (
 // checks if the WebhookResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &WebhookResponse{}
 
-// WebhookResponse webhooks model
+// WebhookResponse Represents a webhook endpoint configured to receive event notifications.
 type WebhookResponse struct {
-	Deleted              NullableBool `json:"deleted,omitempty"`
-	DevelopmentEnabled   *bool        `json:"development_enabled,omitempty"`
-	Id                   *string      `json:"id,omitempty"`
-	Livemode             *bool        `json:"livemode,omitempty"`
-	Object               *string      `json:"object,omitempty"`
-	ProductionEnabled    *bool        `json:"production_enabled,omitempty"`
-	Status               *string      `json:"status,omitempty"`
-	SubscribedEvents     []string     `json:"subscribed_events,omitempty"`
-	Synchronous          *bool        `json:"synchronous,omitempty"`
-	Url                  *string      `json:"url,omitempty"`
+	Deleted NullableBool `json:"deleted,omitempty"`
+	DevelopmentEnabled *bool `json:"development_enabled,omitempty"`
+	Id *string `json:"id,omitempty"`
+	Livemode *bool `json:"livemode,omitempty"`
+	Object *string `json:"object,omitempty"`
+	ProductionEnabled *bool `json:"production_enabled,omitempty"`
+	Status *string `json:"status,omitempty"`
+	SubscribedEvents []string `json:"subscribed_events,omitempty"`
+	Synchronous *bool `json:"synchronous,omitempty"`
+	Url *string `json:"url,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -84,7 +84,6 @@ func (o *WebhookResponse) HasDeleted() bool {
 func (o *WebhookResponse) SetDeleted(v bool) {
 	o.Deleted.Set(&v)
 }
-
 // SetDeletedNil sets the value for Deleted to be an explicit nil
 func (o *WebhookResponse) SetDeletedNil() {
 	o.Deleted.Set(nil)
@@ -384,7 +383,7 @@ func (o *WebhookResponse) SetUrl(v string) {
 }
 
 func (o WebhookResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -496,3 +495,5 @@ func (v *NullableWebhookResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

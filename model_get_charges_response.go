@@ -21,15 +21,15 @@ var _ MappedNullable = &GetChargesResponse{}
 
 // GetChargesResponse struct for GetChargesResponse
 type GetChargesResponse struct {
+	// URL of the next page.
+	NextPageUrl NullableString `json:"next_page_url,omitempty"`
+	// Url of the previous page.
+	PreviousPageUrl NullableString `json:"previous_page_url,omitempty"`
 	// Indicates if there are more pages to be requested
 	HasMore bool `json:"has_more"`
 	// Object type, in this case is list
 	Object string `json:"object"`
-	// URL of the next page.
-	NextPageUrl NullableString `json:"next_page_url,omitempty"`
-	// Url of the previous page.
-	PreviousPageUrl      NullableString   `json:"previous_page_url,omitempty"`
-	Data                 []ChargeResponse `json:"data,omitempty"`
+	Data []ChargeResponse `json:"data,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -52,6 +52,90 @@ func NewGetChargesResponse(hasMore bool, object string) *GetChargesResponse {
 func NewGetChargesResponseWithDefaults() *GetChargesResponse {
 	this := GetChargesResponse{}
 	return &this
+}
+
+// GetNextPageUrl returns the NextPageUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetChargesResponse) GetNextPageUrl() string {
+	if o == nil || IsNil(o.NextPageUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.NextPageUrl.Get()
+}
+
+// GetNextPageUrlOk returns a tuple with the NextPageUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetChargesResponse) GetNextPageUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.NextPageUrl.Get(), o.NextPageUrl.IsSet()
+}
+
+// HasNextPageUrl returns a boolean if a field has been set.
+func (o *GetChargesResponse) HasNextPageUrl() bool {
+	if o != nil && o.NextPageUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetNextPageUrl gets a reference to the given NullableString and assigns it to the NextPageUrl field.
+func (o *GetChargesResponse) SetNextPageUrl(v string) {
+	o.NextPageUrl.Set(&v)
+}
+// SetNextPageUrlNil sets the value for NextPageUrl to be an explicit nil
+func (o *GetChargesResponse) SetNextPageUrlNil() {
+	o.NextPageUrl.Set(nil)
+}
+
+// UnsetNextPageUrl ensures that no value is present for NextPageUrl, not even an explicit nil
+func (o *GetChargesResponse) UnsetNextPageUrl() {
+	o.NextPageUrl.Unset()
+}
+
+// GetPreviousPageUrl returns the PreviousPageUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetChargesResponse) GetPreviousPageUrl() string {
+	if o == nil || IsNil(o.PreviousPageUrl.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.PreviousPageUrl.Get()
+}
+
+// GetPreviousPageUrlOk returns a tuple with the PreviousPageUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetChargesResponse) GetPreviousPageUrlOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.PreviousPageUrl.Get(), o.PreviousPageUrl.IsSet()
+}
+
+// HasPreviousPageUrl returns a boolean if a field has been set.
+func (o *GetChargesResponse) HasPreviousPageUrl() bool {
+	if o != nil && o.PreviousPageUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPreviousPageUrl gets a reference to the given NullableString and assigns it to the PreviousPageUrl field.
+func (o *GetChargesResponse) SetPreviousPageUrl(v string) {
+	o.PreviousPageUrl.Set(&v)
+}
+// SetPreviousPageUrlNil sets the value for PreviousPageUrl to be an explicit nil
+func (o *GetChargesResponse) SetPreviousPageUrlNil() {
+	o.PreviousPageUrl.Set(nil)
+}
+
+// UnsetPreviousPageUrl ensures that no value is present for PreviousPageUrl, not even an explicit nil
+func (o *GetChargesResponse) UnsetPreviousPageUrl() {
+	o.PreviousPageUrl.Unset()
 }
 
 // GetHasMore returns the HasMore field value
@@ -102,92 +186,6 @@ func (o *GetChargesResponse) SetObject(v string) {
 	o.Object = v
 }
 
-// GetNextPageUrl returns the NextPageUrl field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GetChargesResponse) GetNextPageUrl() string {
-	if o == nil || IsNil(o.NextPageUrl.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.NextPageUrl.Get()
-}
-
-// GetNextPageUrlOk returns a tuple with the NextPageUrl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetChargesResponse) GetNextPageUrlOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.NextPageUrl.Get(), o.NextPageUrl.IsSet()
-}
-
-// HasNextPageUrl returns a boolean if a field has been set.
-func (o *GetChargesResponse) HasNextPageUrl() bool {
-	if o != nil && o.NextPageUrl.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetNextPageUrl gets a reference to the given NullableString and assigns it to the NextPageUrl field.
-func (o *GetChargesResponse) SetNextPageUrl(v string) {
-	o.NextPageUrl.Set(&v)
-}
-
-// SetNextPageUrlNil sets the value for NextPageUrl to be an explicit nil
-func (o *GetChargesResponse) SetNextPageUrlNil() {
-	o.NextPageUrl.Set(nil)
-}
-
-// UnsetNextPageUrl ensures that no value is present for NextPageUrl, not even an explicit nil
-func (o *GetChargesResponse) UnsetNextPageUrl() {
-	o.NextPageUrl.Unset()
-}
-
-// GetPreviousPageUrl returns the PreviousPageUrl field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GetChargesResponse) GetPreviousPageUrl() string {
-	if o == nil || IsNil(o.PreviousPageUrl.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.PreviousPageUrl.Get()
-}
-
-// GetPreviousPageUrlOk returns a tuple with the PreviousPageUrl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GetChargesResponse) GetPreviousPageUrlOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.PreviousPageUrl.Get(), o.PreviousPageUrl.IsSet()
-}
-
-// HasPreviousPageUrl returns a boolean if a field has been set.
-func (o *GetChargesResponse) HasPreviousPageUrl() bool {
-	if o != nil && o.PreviousPageUrl.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetPreviousPageUrl gets a reference to the given NullableString and assigns it to the PreviousPageUrl field.
-func (o *GetChargesResponse) SetPreviousPageUrl(v string) {
-	o.PreviousPageUrl.Set(&v)
-}
-
-// SetPreviousPageUrlNil sets the value for PreviousPageUrl to be an explicit nil
-func (o *GetChargesResponse) SetPreviousPageUrlNil() {
-	o.PreviousPageUrl.Set(nil)
-}
-
-// UnsetPreviousPageUrl ensures that no value is present for PreviousPageUrl, not even an explicit nil
-func (o *GetChargesResponse) UnsetPreviousPageUrl() {
-	o.PreviousPageUrl.Unset()
-}
-
 // GetData returns the Data field value if set, zero value otherwise.
 func (o *GetChargesResponse) GetData() []ChargeResponse {
 	if o == nil || IsNil(o.Data) {
@@ -221,7 +219,7 @@ func (o *GetChargesResponse) SetData(v []ChargeResponse) {
 }
 
 func (o GetChargesResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,14 +228,14 @@ func (o GetChargesResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetChargesResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["has_more"] = o.HasMore
-	toSerialize["object"] = o.Object
 	if o.NextPageUrl.IsSet() {
 		toSerialize["next_page_url"] = o.NextPageUrl.Get()
 	}
 	if o.PreviousPageUrl.IsSet() {
 		toSerialize["previous_page_url"] = o.PreviousPageUrl.Get()
 	}
+	toSerialize["has_more"] = o.HasMore
+	toSerialize["object"] = o.Object
 	if !IsNil(o.Data) {
 		toSerialize["data"] = o.Data
 	}
@@ -263,10 +261,10 @@ func (o *GetChargesResponse) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -285,10 +283,10 @@ func (o *GetChargesResponse) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "has_more")
-		delete(additionalProperties, "object")
 		delete(additionalProperties, "next_page_url")
 		delete(additionalProperties, "previous_page_url")
+		delete(additionalProperties, "has_more")
+		delete(additionalProperties, "object")
 		delete(additionalProperties, "data")
 		o.AdditionalProperties = additionalProperties
 	}
@@ -331,3 +329,5 @@ func (v *NullableGetChargesResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

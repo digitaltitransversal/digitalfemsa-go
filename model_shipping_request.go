@@ -19,7 +19,7 @@ import (
 // checks if the ShippingRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ShippingRequest{}
 
-// ShippingRequest struct for ShippingRequest
+// ShippingRequest Shipping line request payload.
 type ShippingRequest struct {
 	// Shipping amount in cents
 	Amount int64 `json:"amount"`
@@ -29,8 +29,10 @@ type ShippingRequest struct {
 	TrackingNumber *string `json:"tracking_number,omitempty"`
 	// Method of shipment
 	Method *string `json:"method,omitempty"`
+	// Shipping line description
+	Description *string `json:"description,omitempty"`
 	// Hash where the user can send additional information for each 'shipping'.
-	Metadata             map[string]interface{} `json:"metadata,omitempty"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -174,6 +176,38 @@ func (o *ShippingRequest) SetMethod(v string) {
 	o.Method = &v
 }
 
+// GetDescription returns the Description field value if set, zero value otherwise.
+func (o *ShippingRequest) GetDescription() string {
+	if o == nil || IsNil(o.Description) {
+		var ret string
+		return ret
+	}
+	return *o.Description
+}
+
+// GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ShippingRequest) GetDescriptionOk() (*string, bool) {
+	if o == nil || IsNil(o.Description) {
+		return nil, false
+	}
+	return o.Description, true
+}
+
+// HasDescription returns a boolean if a field has been set.
+func (o *ShippingRequest) HasDescription() bool {
+	if o != nil && !IsNil(o.Description) {
+		return true
+	}
+
+	return false
+}
+
+// SetDescription gets a reference to the given string and assigns it to the Description field.
+func (o *ShippingRequest) SetDescription(v string) {
+	o.Description = &v
+}
+
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
 func (o *ShippingRequest) GetMetadata() map[string]interface{} {
 	if o == nil || IsNil(o.Metadata) {
@@ -207,7 +241,7 @@ func (o *ShippingRequest) SetMetadata(v map[string]interface{}) {
 }
 
 func (o ShippingRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -225,6 +259,9 @@ func (o ShippingRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Method) {
 		toSerialize["method"] = o.Method
+	}
+	if !IsNil(o.Description) {
+		toSerialize["description"] = o.Description
 	}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
@@ -250,10 +287,10 @@ func (o *ShippingRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -276,6 +313,7 @@ func (o *ShippingRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "carrier")
 		delete(additionalProperties, "tracking_number")
 		delete(additionalProperties, "method")
+		delete(additionalProperties, "description")
 		delete(additionalProperties, "metadata")
 		o.AdditionalProperties = additionalProperties
 	}
@@ -318,3 +356,5 @@ func (v *NullableShippingRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

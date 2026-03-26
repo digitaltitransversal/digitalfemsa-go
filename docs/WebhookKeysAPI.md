@@ -5,10 +5,10 @@ All URIs are relative to *https://api.digitalfemsa.io*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CreateWebhookKey**](WebhookKeysAPI.md#CreateWebhookKey) | **Post** /webhook_keys | Create Webhook Key
-[**DeleteWebhookKey**](WebhookKeysAPI.md#DeleteWebhookKey) | **Delete** /webhook_keys/{id} | Delete Webhook key
-[**GetWebhookKey**](WebhookKeysAPI.md#GetWebhookKey) | **Get** /webhook_keys/{id} | Get Webhook Key
+[**DeleteWebhookKey**](WebhookKeysAPI.md#DeleteWebhookKey) | **Delete** /webhook_keys/{id} | Delete webhook key
+[**GetWebhookKey**](WebhookKeysAPI.md#GetWebhookKey) | **Get** /webhook_keys/{id} | Get webhook key
 [**GetWebhookKeys**](WebhookKeysAPI.md#GetWebhookKeys) | **Get** /webhook_keys | Get List of Webhook Keys
-[**UpdateWebhookKey**](WebhookKeysAPI.md#UpdateWebhookKey) | **Put** /webhook_keys/{id} | Update Webhook Key
+[**UpdateWebhookKey**](WebhookKeysAPI.md#UpdateWebhookKey) | **Put** /webhook_keys/{id} | Update webhook key
 
 
 
@@ -84,7 +84,9 @@ Name | Type | Description  | Notes
 
 > WebhookKeyDeleteResponse DeleteWebhookKey(ctx, id).AcceptLanguage(acceptLanguage).Execute()
 
-Delete Webhook key
+Delete webhook key
+
+
 
 ### Example
 
@@ -154,7 +156,9 @@ Name | Type | Description  | Notes
 
 > WebhookKeyResponse GetWebhookKey(ctx, id).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 
-Get Webhook Key
+Get webhook key
+
+
 
 ### Example
 
@@ -302,7 +306,7 @@ Name | Type | Description  | Notes
 
 > WebhookKeyResponse UpdateWebhookKey(ctx, id).AcceptLanguage(acceptLanguage).WebhookKeyUpdateRequest(webhookKeyUpdateRequest).Execute()
 
-Update Webhook Key
+Update webhook key
 
 
 

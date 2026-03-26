@@ -21,15 +21,18 @@ var _ MappedNullable = &ChargeResponseRefundsData{}
 
 // ChargeResponseRefundsData struct for ChargeResponseRefundsData
 type ChargeResponseRefundsData struct {
-	Amount    int64   `json:"amount"`
-	AuthCode  *string `json:"auth_code,omitempty"`
-	CreatedAt int64   `json:"created_at"`
+	Amount int64 `json:"amount"`
+	AuthCode *string `json:"auth_code,omitempty"`
+	CreatedAt int64 `json:"created_at"`
 	// refund expiration date
 	ExpiresAt *int64 `json:"expires_at,omitempty"`
-	Id        string `json:"id"`
-	Object    string `json:"object"`
+	Id string `json:"id"`
+	Object string `json:"object"`
 	// refund status
-	Status               *string `json:"status,omitempty"`
+	Status *string `json:"status,omitempty"`
+	PayoutId *string `json:"payout_id,omitempty"`
+	// payout reference for oxxo stores
+	Reference *string `json:"reference,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -248,8 +251,72 @@ func (o *ChargeResponseRefundsData) SetStatus(v string) {
 	o.Status = &v
 }
 
+// GetPayoutId returns the PayoutId field value if set, zero value otherwise.
+func (o *ChargeResponseRefundsData) GetPayoutId() string {
+	if o == nil || IsNil(o.PayoutId) {
+		var ret string
+		return ret
+	}
+	return *o.PayoutId
+}
+
+// GetPayoutIdOk returns a tuple with the PayoutId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChargeResponseRefundsData) GetPayoutIdOk() (*string, bool) {
+	if o == nil || IsNil(o.PayoutId) {
+		return nil, false
+	}
+	return o.PayoutId, true
+}
+
+// HasPayoutId returns a boolean if a field has been set.
+func (o *ChargeResponseRefundsData) HasPayoutId() bool {
+	if o != nil && !IsNil(o.PayoutId) {
+		return true
+	}
+
+	return false
+}
+
+// SetPayoutId gets a reference to the given string and assigns it to the PayoutId field.
+func (o *ChargeResponseRefundsData) SetPayoutId(v string) {
+	o.PayoutId = &v
+}
+
+// GetReference returns the Reference field value if set, zero value otherwise.
+func (o *ChargeResponseRefundsData) GetReference() string {
+	if o == nil || IsNil(o.Reference) {
+		var ret string
+		return ret
+	}
+	return *o.Reference
+}
+
+// GetReferenceOk returns a tuple with the Reference field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ChargeResponseRefundsData) GetReferenceOk() (*string, bool) {
+	if o == nil || IsNil(o.Reference) {
+		return nil, false
+	}
+	return o.Reference, true
+}
+
+// HasReference returns a boolean if a field has been set.
+func (o *ChargeResponseRefundsData) HasReference() bool {
+	if o != nil && !IsNil(o.Reference) {
+		return true
+	}
+
+	return false
+}
+
+// SetReference gets a reference to the given string and assigns it to the Reference field.
+func (o *ChargeResponseRefundsData) SetReference(v string) {
+	o.Reference = &v
+}
+
 func (o ChargeResponseRefundsData) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -270,6 +337,12 @@ func (o ChargeResponseRefundsData) ToMap() (map[string]interface{}, error) {
 	toSerialize["object"] = o.Object
 	if !IsNil(o.Status) {
 		toSerialize["status"] = o.Status
+	}
+	if !IsNil(o.PayoutId) {
+		toSerialize["payout_id"] = o.PayoutId
+	}
+	if !IsNil(o.Reference) {
+		toSerialize["reference"] = o.Reference
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -295,10 +368,10 @@ func (o *ChargeResponseRefundsData) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -324,6 +397,8 @@ func (o *ChargeResponseRefundsData) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "object")
 		delete(additionalProperties, "status")
+		delete(additionalProperties, "payout_id")
+		delete(additionalProperties, "reference")
 		o.AdditionalProperties = additionalProperties
 	}
 
@@ -365,3 +440,5 @@ func (v *NullableChargeResponseRefundsData) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

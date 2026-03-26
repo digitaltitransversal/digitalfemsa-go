@@ -18,28 +18,28 @@ import (
 // checks if the BalanceResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &BalanceResponse{}
 
-// BalanceResponse balance model
+// BalanceResponse Company balance summary.  Monetary fields are returned as arrays of amounts grouped by currency (see `balance_common_field` items). 
 type BalanceResponse struct {
-	// The balance's available
+	// Amounts currently available, grouped by currency.
 	Available []BalanceCommonField `json:"available,omitempty"`
 	// The balance's cashout retention amount
 	CashoutRetentionAmount []BalanceCommonField `json:"cashout_retention_amount,omitempty"`
 	// The balance's Femsa retention
 	ConektaRetention []BalanceCommonField `json:"conekta_retention,omitempty"`
-	// The balance's gateway
+	// Gateway balance amounts, grouped by currency.
 	Gateway []BalanceCommonField `json:"gateway,omitempty"`
-	// The balance's pending
+	// Amounts pending settlement, grouped by currency.
 	Pending []BalanceCommonField `json:"pending,omitempty"`
-	// The balance's retained
+	// Amounts currently retained, grouped by currency.
 	Retained []BalanceCommonField `json:"retained,omitempty"`
-	// The balance's retention amount
+	// Retention amount applied, grouped by currency.
 	RetentionAmount []BalanceCommonField `json:"retention_amount,omitempty"`
-	// The balance's target collateral amount
+	// Target collateral amount, grouped by currency.
 	TargetCollateralAmount map[string]interface{} `json:"target_collateral_amount,omitempty"`
-	// The balance's target retention amount
+	// Target retention amount, grouped by currency.
 	TargetRetentionAmount []BalanceCommonField `json:"target_retention_amount,omitempty"`
-	// The balance's temporarily retained
-	TemporarilyRetained  []BalanceCommonField `json:"temporarily_retained,omitempty"`
+	// Amounts temporarily retained
+	TemporarilyRetained []BalanceCommonField `json:"temporarily_retained,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -383,7 +383,7 @@ func (o *BalanceResponse) SetTemporarilyRetained(v []BalanceCommonField) {
 }
 
 func (o BalanceResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -495,3 +495,5 @@ func (v *NullableBalanceResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

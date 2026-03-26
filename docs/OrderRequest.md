@@ -4,20 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Charges** | Pointer to [**[]ChargeRequest**](ChargeRequest.md) | List of [charges](https://developers.femsa.com/v2.1.0/reference/orderscreatecharge) that are applied to the order | [optional] 
-**Checkout** | Pointer to [**CheckoutRequest**](CheckoutRequest.md) |  | [optional] 
-**Currency** | **string** | Currency with which the payment will be made. It uses the 3-letter code of the [International Standard ISO 4217.](https://es.wikipedia.org/wiki/ISO_4217) | 
+**Currency** | **string** | Currency with which the payment will be made. | 
 **CustomerInfo** | [**OrderRequestCustomerInfo**](OrderRequestCustomerInfo.md) |  | 
-**DiscountLines** | Pointer to [**[]OrderDiscountLinesRequest**](OrderDiscountLinesRequest.md) | List of [discounts](https://developers.femsa.com/v2.1.0/reference/orderscreatediscountline) that are applied to the order. You must have at least one discount. | [optional] 
-**FiscalEntity** | Pointer to [**OrderFiscalEntityRequest**](OrderFiscalEntityRequest.md) |  | [optional] 
-**LineItems** | [**[]Product**](Product.md) | List of [products](https://developers.femsa.com/v2.1.0/reference/orderscreateproduct) that are sold in the order. You must have at least one product. | 
-**Metadata** | Pointer to **map[string]interface{}** | Metadata associated with the order | [optional] 
+**LineItems** | [**[]Product**](Product.md) | List of [products](https://developers.digitalfemsa.io/reference/orderscreateproduct) that are sold in the order. You must have at least one product. | 
+**Charges** | Pointer to [**[]ChargeRequest**](ChargeRequest.md) | List of [charges](https://developers.digitalfemsa.io/reference/orderscreatecharge) that are applied to the order | [optional] 
+**Checkout** | Pointer to [**CheckoutRequest**](CheckoutRequest.md) |  | [optional] 
+**DiscountLines** | Pointer to [**[]OrderDiscountLinesRequest**](OrderDiscountLinesRequest.md) | List of [discounts](https://developers.digitalfemsa.io/reference/orderscreatediscountline) that are applied to the order. You must have at least one discount. | [optional] 
+**TaxLines** | Pointer to [**[]OrderTaxRequest**](OrderTaxRequest.md) | List of [taxes](https://developers.digitalfemsa.io/reference/orderscreatetaxes) that are applied to the order. | [optional] 
 **NeedsShippingContact** | Pointer to **bool** | Allows you to fill out the shipping information at checkout | [optional] 
-**ProcessingMode** | Pointer to **string** | Indicates the processing mode for the order, either ecommerce, recurrent or validation. | [optional] 
-**ReturnUrl** | Pointer to **string** | Indicates the redirection callback upon completion of the 3DS2 flow. | [optional] 
 **ShippingContact** | Pointer to [**CustomerShippingContacts**](CustomerShippingContacts.md) |  | [optional] 
-**ShippingLines** | Pointer to [**[]ShippingRequest**](ShippingRequest.md) | List of [shipping costs](https://developers.femsa.com/v2.1.0/reference/orderscreateshipping). If the online store offers digital products. | [optional] 
-**TaxLines** | Pointer to [**[]OrderTaxRequest**](OrderTaxRequest.md) | List of [taxes](https://developers.femsa.com/v2.1.0/reference/orderscreatetaxes) that are applied to the order. | [optional] 
+**ShippingLines** | Pointer to [**[]ShippingRequest**](ShippingRequest.md) | List of [shipping costs](https://developers.digitalfemsa.io/reference/orderscreateshipping). If the online store offers digital products. | [optional] 
+**FiscalEntity** | Pointer to [**OrderFiscalEntityRequest**](OrderFiscalEntityRequest.md) |  | [optional] 
+**ProcessingMode** | Pointer to **string** | Indicates the processing mode for the order, either ecommerce, recurrent or validation. | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Arbitrary key-value data that you can attach to the order for your internal use (e.g. &#x60;customer_segment&#x60;, &#x60;sales_channel&#x60;, &#x60;internal_order_id&#x60;). It is not used for payment processing or fraud decisions. Keys should be strings; values can be any JSON value. | [optional] 
 
 ## Methods
 
@@ -37,6 +36,66 @@ will change when the set of required properties is changed
 NewOrderRequestWithDefaults instantiates a new OrderRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetCurrency
+
+`func (o *OrderRequest) GetCurrency() string`
+
+GetCurrency returns the Currency field if non-nil, zero value otherwise.
+
+### GetCurrencyOk
+
+`func (o *OrderRequest) GetCurrencyOk() (*string, bool)`
+
+GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrency
+
+`func (o *OrderRequest) SetCurrency(v string)`
+
+SetCurrency sets Currency field to given value.
+
+
+### GetCustomerInfo
+
+`func (o *OrderRequest) GetCustomerInfo() OrderRequestCustomerInfo`
+
+GetCustomerInfo returns the CustomerInfo field if non-nil, zero value otherwise.
+
+### GetCustomerInfoOk
+
+`func (o *OrderRequest) GetCustomerInfoOk() (*OrderRequestCustomerInfo, bool)`
+
+GetCustomerInfoOk returns a tuple with the CustomerInfo field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCustomerInfo
+
+`func (o *OrderRequest) SetCustomerInfo(v OrderRequestCustomerInfo)`
+
+SetCustomerInfo sets CustomerInfo field to given value.
+
+
+### GetLineItems
+
+`func (o *OrderRequest) GetLineItems() []Product`
+
+GetLineItems returns the LineItems field if non-nil, zero value otherwise.
+
+### GetLineItemsOk
+
+`func (o *OrderRequest) GetLineItemsOk() (*[]Product, bool)`
+
+GetLineItemsOk returns a tuple with the LineItems field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLineItems
+
+`func (o *OrderRequest) SetLineItems(v []Product)`
+
+SetLineItems sets LineItems field to given value.
+
 
 ### GetCharges
 
@@ -88,46 +147,6 @@ SetCheckout sets Checkout field to given value.
 
 HasCheckout returns a boolean if a field has been set.
 
-### GetCurrency
-
-`func (o *OrderRequest) GetCurrency() string`
-
-GetCurrency returns the Currency field if non-nil, zero value otherwise.
-
-### GetCurrencyOk
-
-`func (o *OrderRequest) GetCurrencyOk() (*string, bool)`
-
-GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCurrency
-
-`func (o *OrderRequest) SetCurrency(v string)`
-
-SetCurrency sets Currency field to given value.
-
-
-### GetCustomerInfo
-
-`func (o *OrderRequest) GetCustomerInfo() OrderRequestCustomerInfo`
-
-GetCustomerInfo returns the CustomerInfo field if non-nil, zero value otherwise.
-
-### GetCustomerInfoOk
-
-`func (o *OrderRequest) GetCustomerInfoOk() (*OrderRequestCustomerInfo, bool)`
-
-GetCustomerInfoOk returns a tuple with the CustomerInfo field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCustomerInfo
-
-`func (o *OrderRequest) SetCustomerInfo(v OrderRequestCustomerInfo)`
-
-SetCustomerInfo sets CustomerInfo field to given value.
-
-
 ### GetDiscountLines
 
 `func (o *OrderRequest) GetDiscountLines() []OrderDiscountLinesRequest`
@@ -153,75 +172,30 @@ SetDiscountLines sets DiscountLines field to given value.
 
 HasDiscountLines returns a boolean if a field has been set.
 
-### GetFiscalEntity
+### GetTaxLines
 
-`func (o *OrderRequest) GetFiscalEntity() OrderFiscalEntityRequest`
+`func (o *OrderRequest) GetTaxLines() []OrderTaxRequest`
 
-GetFiscalEntity returns the FiscalEntity field if non-nil, zero value otherwise.
+GetTaxLines returns the TaxLines field if non-nil, zero value otherwise.
 
-### GetFiscalEntityOk
+### GetTaxLinesOk
 
-`func (o *OrderRequest) GetFiscalEntityOk() (*OrderFiscalEntityRequest, bool)`
+`func (o *OrderRequest) GetTaxLinesOk() (*[]OrderTaxRequest, bool)`
 
-GetFiscalEntityOk returns a tuple with the FiscalEntity field if it's non-nil, zero value otherwise
+GetTaxLinesOk returns a tuple with the TaxLines field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetFiscalEntity
+### SetTaxLines
 
-`func (o *OrderRequest) SetFiscalEntity(v OrderFiscalEntityRequest)`
+`func (o *OrderRequest) SetTaxLines(v []OrderTaxRequest)`
 
-SetFiscalEntity sets FiscalEntity field to given value.
+SetTaxLines sets TaxLines field to given value.
 
-### HasFiscalEntity
+### HasTaxLines
 
-`func (o *OrderRequest) HasFiscalEntity() bool`
+`func (o *OrderRequest) HasTaxLines() bool`
 
-HasFiscalEntity returns a boolean if a field has been set.
-
-### GetLineItems
-
-`func (o *OrderRequest) GetLineItems() []Product`
-
-GetLineItems returns the LineItems field if non-nil, zero value otherwise.
-
-### GetLineItemsOk
-
-`func (o *OrderRequest) GetLineItemsOk() (*[]Product, bool)`
-
-GetLineItemsOk returns a tuple with the LineItems field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLineItems
-
-`func (o *OrderRequest) SetLineItems(v []Product)`
-
-SetLineItems sets LineItems field to given value.
-
-
-### GetMetadata
-
-`func (o *OrderRequest) GetMetadata() map[string]interface{}`
-
-GetMetadata returns the Metadata field if non-nil, zero value otherwise.
-
-### GetMetadataOk
-
-`func (o *OrderRequest) GetMetadataOk() (*map[string]interface{}, bool)`
-
-GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMetadata
-
-`func (o *OrderRequest) SetMetadata(v map[string]interface{})`
-
-SetMetadata sets Metadata field to given value.
-
-### HasMetadata
-
-`func (o *OrderRequest) HasMetadata() bool`
-
-HasMetadata returns a boolean if a field has been set.
+HasTaxLines returns a boolean if a field has been set.
 
 ### GetNeedsShippingContact
 
@@ -247,56 +221,6 @@ SetNeedsShippingContact sets NeedsShippingContact field to given value.
 `func (o *OrderRequest) HasNeedsShippingContact() bool`
 
 HasNeedsShippingContact returns a boolean if a field has been set.
-
-### GetProcessingMode
-
-`func (o *OrderRequest) GetProcessingMode() string`
-
-GetProcessingMode returns the ProcessingMode field if non-nil, zero value otherwise.
-
-### GetProcessingModeOk
-
-`func (o *OrderRequest) GetProcessingModeOk() (*string, bool)`
-
-GetProcessingModeOk returns a tuple with the ProcessingMode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProcessingMode
-
-`func (o *OrderRequest) SetProcessingMode(v string)`
-
-SetProcessingMode sets ProcessingMode field to given value.
-
-### HasProcessingMode
-
-`func (o *OrderRequest) HasProcessingMode() bool`
-
-HasProcessingMode returns a boolean if a field has been set.
-
-### GetReturnUrl
-
-`func (o *OrderRequest) GetReturnUrl() string`
-
-GetReturnUrl returns the ReturnUrl field if non-nil, zero value otherwise.
-
-### GetReturnUrlOk
-
-`func (o *OrderRequest) GetReturnUrlOk() (*string, bool)`
-
-GetReturnUrlOk returns a tuple with the ReturnUrl field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetReturnUrl
-
-`func (o *OrderRequest) SetReturnUrl(v string)`
-
-SetReturnUrl sets ReturnUrl field to given value.
-
-### HasReturnUrl
-
-`func (o *OrderRequest) HasReturnUrl() bool`
-
-HasReturnUrl returns a boolean if a field has been set.
 
 ### GetShippingContact
 
@@ -348,30 +272,80 @@ SetShippingLines sets ShippingLines field to given value.
 
 HasShippingLines returns a boolean if a field has been set.
 
-### GetTaxLines
+### GetFiscalEntity
 
-`func (o *OrderRequest) GetTaxLines() []OrderTaxRequest`
+`func (o *OrderRequest) GetFiscalEntity() OrderFiscalEntityRequest`
 
-GetTaxLines returns the TaxLines field if non-nil, zero value otherwise.
+GetFiscalEntity returns the FiscalEntity field if non-nil, zero value otherwise.
 
-### GetTaxLinesOk
+### GetFiscalEntityOk
 
-`func (o *OrderRequest) GetTaxLinesOk() (*[]OrderTaxRequest, bool)`
+`func (o *OrderRequest) GetFiscalEntityOk() (*OrderFiscalEntityRequest, bool)`
 
-GetTaxLinesOk returns a tuple with the TaxLines field if it's non-nil, zero value otherwise
+GetFiscalEntityOk returns a tuple with the FiscalEntity field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetTaxLines
+### SetFiscalEntity
 
-`func (o *OrderRequest) SetTaxLines(v []OrderTaxRequest)`
+`func (o *OrderRequest) SetFiscalEntity(v OrderFiscalEntityRequest)`
 
-SetTaxLines sets TaxLines field to given value.
+SetFiscalEntity sets FiscalEntity field to given value.
 
-### HasTaxLines
+### HasFiscalEntity
 
-`func (o *OrderRequest) HasTaxLines() bool`
+`func (o *OrderRequest) HasFiscalEntity() bool`
 
-HasTaxLines returns a boolean if a field has been set.
+HasFiscalEntity returns a boolean if a field has been set.
+
+### GetProcessingMode
+
+`func (o *OrderRequest) GetProcessingMode() string`
+
+GetProcessingMode returns the ProcessingMode field if non-nil, zero value otherwise.
+
+### GetProcessingModeOk
+
+`func (o *OrderRequest) GetProcessingModeOk() (*string, bool)`
+
+GetProcessingModeOk returns a tuple with the ProcessingMode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProcessingMode
+
+`func (o *OrderRequest) SetProcessingMode(v string)`
+
+SetProcessingMode sets ProcessingMode field to given value.
+
+### HasProcessingMode
+
+`func (o *OrderRequest) HasProcessingMode() bool`
+
+HasProcessingMode returns a boolean if a field has been set.
+
+### GetMetadata
+
+`func (o *OrderRequest) GetMetadata() map[string]interface{}`
+
+GetMetadata returns the Metadata field if non-nil, zero value otherwise.
+
+### GetMetadataOk
+
+`func (o *OrderRequest) GetMetadataOk() (*map[string]interface{}, bool)`
+
+GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetadata
+
+`func (o *OrderRequest) SetMetadata(v map[string]interface{})`
+
+SetMetadata sets Metadata field to given value.
+
+### HasMetadata
+
+`func (o *OrderRequest) HasMetadata() bool`
+
+HasMetadata returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

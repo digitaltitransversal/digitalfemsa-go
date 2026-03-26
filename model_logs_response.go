@@ -18,7 +18,7 @@ import (
 // checks if the LogsResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &LogsResponse{}
 
-// LogsResponse logs model
+// LogsResponse Log model representing a recorded request/response cycle for troubleshooting and auditing.
 type LogsResponse struct {
 	// True, if there are more pages.
 	HasMore *bool `json:"has_more,omitempty"`
@@ -29,7 +29,7 @@ type LogsResponse struct {
 	// Url of the previous page.
 	PreviousPageUrl NullableString `json:"previous_page_url,omitempty"`
 	// set to page results.
-	Data                 []LogsResponseData `json:"data,omitempty"`
+	Data []LogsResponseData `json:"data,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -148,7 +148,6 @@ func (o *LogsResponse) HasNextPageUrl() bool {
 func (o *LogsResponse) SetNextPageUrl(v string) {
 	o.NextPageUrl.Set(&v)
 }
-
 // SetNextPageUrlNil sets the value for NextPageUrl to be an explicit nil
 func (o *LogsResponse) SetNextPageUrlNil() {
 	o.NextPageUrl.Set(nil)
@@ -191,7 +190,6 @@ func (o *LogsResponse) HasPreviousPageUrl() bool {
 func (o *LogsResponse) SetPreviousPageUrl(v string) {
 	o.PreviousPageUrl.Set(&v)
 }
-
 // SetPreviousPageUrlNil sets the value for PreviousPageUrl to be an explicit nil
 func (o *LogsResponse) SetPreviousPageUrlNil() {
 	o.PreviousPageUrl.Set(nil)
@@ -236,7 +234,7 @@ func (o *LogsResponse) SetData(v []LogsResponseData) {
 }
 
 func (o LogsResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -328,3 +326,5 @@ func (v *NullableLogsResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

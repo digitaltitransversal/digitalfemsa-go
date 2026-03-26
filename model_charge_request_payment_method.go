@@ -19,12 +19,13 @@ import (
 // checks if the ChargeRequestPaymentMethod type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ChargeRequestPaymentMethod{}
 
-// ChargeRequestPaymentMethod Payment method used in the charge. Go to the [payment methods](https://developers.femsa.com/reference/m%C3%A9todos-de-pago) section for more details
+// ChargeRequestPaymentMethod Payment method used in the charge. 
 type ChargeRequestPaymentMethod struct {
-	// Method expiration date as unix timestamp
-	ExpiresAt            *int64  `json:"expires_at,omitempty"`
-	Type                 string  `json:"type"`
-	PaymentSourceId      *string `json:"payment_source_id,omitempty"`
+	// Method expiration date as unix timestamp (applies to some payment methods, e.g. cash).
+	ExpiresAt *int64 `json:"expires_at,omitempty"`
+	Type string `json:"type"`
+	// Identifier of a saved payment source to be used for this charge (if applicable).
+	PaymentSourceId *string `json:"payment_source_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -137,7 +138,7 @@ func (o *ChargeRequestPaymentMethod) SetPaymentSourceId(v string) {
 }
 
 func (o ChargeRequestPaymentMethod) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -174,10 +175,10 @@ func (o *ChargeRequestPaymentMethod) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -240,3 +241,5 @@ func (v *NullableChargeRequestPaymentMethod) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

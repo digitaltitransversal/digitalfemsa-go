@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** | Type of payment method | 
-**ExpiresAt** | Pointer to **int64** |  | [optional] 
+**Type** | **string** | Type of payment method. | 
+**ExpiresAt** | Pointer to **int64** | Expiration date as unix timestamp (seconds). | [optional] 
 
 ## Methods
 

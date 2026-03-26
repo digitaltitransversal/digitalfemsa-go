@@ -4,17 +4,19 @@ All URIs are relative to *https://api.digitalfemsa.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetCharges**](ChargesAPI.md#GetCharges) | **Get** /charges | Get A List of Charges
-[**OrdersCreateCharge**](ChargesAPI.md#OrdersCreateCharge) | **Post** /orders/{id}/charges | Create charge
+[**GetCharges**](ChargesAPI.md#GetCharges) | **Get** /charges | List charges
+[**OrdersCreateCharge**](ChargesAPI.md#OrdersCreateCharge) | **Post** /orders/{id}/charges | Create a charge for an order
 [**UpdateCharge**](ChargesAPI.md#UpdateCharge) | **Put** /charges/{id} | Update a charge
 
 
 
 ## GetCharges
 
-> GetChargesResponse GetCharges(ctx).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Limit(limit).Search(search).Next(next).Previous(previous).Execute()
+> GetChargesResponse GetCharges(ctx).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Limit(limit).Next(next).Previous(previous).Search(search).Execute()
 
-Get A List of Charges
+List charges
+
+
 
 ### Example
 
@@ -32,13 +34,13 @@ func main() {
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
 	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 	limit := int32(56) // int32 | The numbers of items to return, the maximum value is 250 (optional) (default to 20)
-	search := "search_example" // string | General order search, e.g. by mail, reference etc. (optional)
 	next := "next_example" // string | next page (optional)
 	previous := "previous_example" // string | previous page (optional)
+	search := "search_example" // string | General order search, e.g. by mail, reference etc. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ChargesAPI.GetCharges(context.Background()).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Limit(limit).Search(search).Next(next).Previous(previous).Execute()
+	resp, r, err := apiClient.ChargesAPI.GetCharges(context.Background()).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Limit(limit).Next(next).Previous(previous).Search(search).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ChargesAPI.GetCharges``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -62,9 +64,9 @@ Name | Type | Description  | Notes
  **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
  **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
  **limit** | **int32** | The numbers of items to return, the maximum value is 250 | [default to 20]
- **search** | **string** | General order search, e.g. by mail, reference etc. | 
  **next** | **string** | next page | 
  **previous** | **string** | previous page | 
+ **search** | **string** | General order search, e.g. by mail, reference etc. | 
 
 ### Return type
 
@@ -88,7 +90,7 @@ Name | Type | Description  | Notes
 
 > ChargeOrderResponse OrdersCreateCharge(ctx, id).ChargeRequest(chargeRequest).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 
-Create charge
+Create a charge for an order
 
 
 
@@ -165,6 +167,8 @@ Name | Type | Description  | Notes
 > ChargeResponse UpdateCharge(ctx, id).ChargeUpdateRequest(chargeUpdateRequest).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 
 Update a charge
+
+
 
 ### Example
 

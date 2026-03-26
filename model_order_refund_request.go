@@ -21,9 +21,14 @@ var _ MappedNullable = &OrderRefundRequest{}
 
 // OrderRefundRequest struct for OrderRefundRequest
 type OrderRefundRequest struct {
-	Amount               int32         `json:"amount"`
-	ExpiresAt            NullableInt64 `json:"expires_at,omitempty"`
-	Reason               string        `json:"reason"`
+	// Amount to refund. If not provided, the API refunds the refundable amount of the selected charge.
+	Amount int32 `json:"amount"`
+	// Charge ID to refund. If not provided, the API selects a refundable charge from the order.
+	ChargeId NullableString `json:"charge_id,omitempty"`
+	// Refund reason. If not provided, the API uses a default reason.
+	Reason string `json:"reason"`
+	// Expiration timestamp for cash refunds (must be within the allowed range configured by the API).
+	ExpiresAt NullableInt64 `json:"expires_at,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -72,6 +77,72 @@ func (o *OrderRefundRequest) SetAmount(v int32) {
 	o.Amount = v
 }
 
+// GetChargeId returns the ChargeId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OrderRefundRequest) GetChargeId() string {
+	if o == nil || IsNil(o.ChargeId.Get()) {
+		var ret string
+		return ret
+	}
+	return *o.ChargeId.Get()
+}
+
+// GetChargeIdOk returns a tuple with the ChargeId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OrderRefundRequest) GetChargeIdOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return o.ChargeId.Get(), o.ChargeId.IsSet()
+}
+
+// HasChargeId returns a boolean if a field has been set.
+func (o *OrderRefundRequest) HasChargeId() bool {
+	if o != nil && o.ChargeId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetChargeId gets a reference to the given NullableString and assigns it to the ChargeId field.
+func (o *OrderRefundRequest) SetChargeId(v string) {
+	o.ChargeId.Set(&v)
+}
+// SetChargeIdNil sets the value for ChargeId to be an explicit nil
+func (o *OrderRefundRequest) SetChargeIdNil() {
+	o.ChargeId.Set(nil)
+}
+
+// UnsetChargeId ensures that no value is present for ChargeId, not even an explicit nil
+func (o *OrderRefundRequest) UnsetChargeId() {
+	o.ChargeId.Unset()
+}
+
+// GetReason returns the Reason field value
+func (o *OrderRefundRequest) GetReason() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Reason
+}
+
+// GetReasonOk returns a tuple with the Reason field value
+// and a boolean to check if the value has been set.
+func (o *OrderRefundRequest) GetReasonOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Reason, true
+}
+
+// SetReason sets field value
+func (o *OrderRefundRequest) SetReason(v string) {
+	o.Reason = v
+}
+
 // GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OrderRefundRequest) GetExpiresAt() int64 {
 	if o == nil || IsNil(o.ExpiresAt.Get()) {
@@ -104,7 +175,6 @@ func (o *OrderRefundRequest) HasExpiresAt() bool {
 func (o *OrderRefundRequest) SetExpiresAt(v int64) {
 	o.ExpiresAt.Set(&v)
 }
-
 // SetExpiresAtNil sets the value for ExpiresAt to be an explicit nil
 func (o *OrderRefundRequest) SetExpiresAtNil() {
 	o.ExpiresAt.Set(nil)
@@ -115,32 +185,8 @@ func (o *OrderRefundRequest) UnsetExpiresAt() {
 	o.ExpiresAt.Unset()
 }
 
-// GetReason returns the Reason field value
-func (o *OrderRefundRequest) GetReason() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Reason
-}
-
-// GetReasonOk returns a tuple with the Reason field value
-// and a boolean to check if the value has been set.
-func (o *OrderRefundRequest) GetReasonOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return &o.Reason, true
-}
-
-// SetReason sets field value
-func (o *OrderRefundRequest) SetReason(v string) {
-	o.Reason = v
-}
-
 func (o OrderRefundRequest) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -150,10 +196,13 @@ func (o OrderRefundRequest) MarshalJSON() ([]byte, error) {
 func (o OrderRefundRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["amount"] = o.Amount
+	if o.ChargeId.IsSet() {
+		toSerialize["charge_id"] = o.ChargeId.Get()
+	}
+	toSerialize["reason"] = o.Reason
 	if o.ExpiresAt.IsSet() {
 		toSerialize["expires_at"] = o.ExpiresAt.Get()
 	}
-	toSerialize["reason"] = o.Reason
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -176,10 +225,10 @@ func (o *OrderRefundRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -199,8 +248,9 @@ func (o *OrderRefundRequest) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "amount")
-		delete(additionalProperties, "expires_at")
+		delete(additionalProperties, "charge_id")
 		delete(additionalProperties, "reason")
+		delete(additionalProperties, "expires_at")
 		o.AdditionalProperties = additionalProperties
 	}
 
@@ -242,3 +292,5 @@ func (v *NullableOrderRefundRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

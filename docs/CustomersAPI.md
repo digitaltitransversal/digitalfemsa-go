@@ -4,13 +4,13 @@ All URIs are relative to *https://api.digitalfemsa.io*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CreateCustomer**](CustomersAPI.md#CreateCustomer) | **Post** /customers | Create customer
+[**CreateCustomer**](CustomersAPI.md#CreateCustomer) | **Post** /customers | Create a customer
 [**CreateCustomerFiscalEntities**](CustomersAPI.md#CreateCustomerFiscalEntities) | **Post** /customers/{id}/fiscal_entities | Create Fiscal Entity
 [**DeleteCustomerById**](CustomersAPI.md#DeleteCustomerById) | **Delete** /customers/{id} | Delete Customer
 [**GetCustomerById**](CustomersAPI.md#GetCustomerById) | **Get** /customers/{id} | Get Customer
 [**GetCustomers**](CustomersAPI.md#GetCustomers) | **Get** /customers | Get a list of customers
 [**UpdateCustomer**](CustomersAPI.md#UpdateCustomer) | **Put** /customers/{id} | Update customer
-[**UpdateCustomerFiscalEntities**](CustomersAPI.md#UpdateCustomerFiscalEntities) | **Put** /customers/{id}/fiscal_entities/{fiscal_entities_id} | Update  Fiscal Entity
+[**UpdateCustomerFiscalEntities**](CustomersAPI.md#UpdateCustomerFiscalEntities) | **Put** /customers/{id}/fiscal_entities/{fiscal_entities_id} | Update Fiscal Entity
 
 
 
@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 > CustomerResponse CreateCustomer(ctx).Customer(customer).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 
-Create customer
+Create a customer
 
 
 
@@ -35,7 +35,7 @@ import (
 )
 
 func main() {
-	customer := *openapiclient.NewCustomer("miguel@gmail.com", "miguel", "+5215555555555") // Customer | requested field for customer
+	customer := *openapiclient.NewCustomer("miguel", "miguel@gmail.com") // Customer | requested field for customer
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
 	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -106,7 +106,7 @@ import (
 
 func main() {
 	id := "6307a60c41de27127515a575" // string | Identifier of the resource
-	customerFiscalEntitiesRequest := *openapiclient.NewCustomerFiscalEntitiesRequest(*openapiclient.NewCustomerAddress("Nuevo Leon 254", "06100", "Ciudad de Mexico")) // CustomerFiscalEntitiesRequest | requested field for customer fiscal entities
+	customerFiscalEntitiesRequest := *openapiclient.NewCustomerFiscalEntitiesRequest(*openapiclient.NewCustomerAddress("Nuevo Leon 254", "06100", "Ciudad de Mexico", "MX")) // CustomerFiscalEntitiesRequest | requested field for customer fiscal entities
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
 	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -464,7 +464,7 @@ Name | Type | Description  | Notes
 
 > UpdateCustomerFiscalEntitiesResponse UpdateCustomerFiscalEntities(ctx, id, fiscalEntitiesId).CustomerUpdateFiscalEntitiesRequest(customerUpdateFiscalEntitiesRequest).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Execute()
 
-Update  Fiscal Entity
+Update Fiscal Entity
 
 
 
@@ -483,7 +483,7 @@ import (
 func main() {
 	id := "6307a60c41de27127515a575" // string | Identifier of the resource
 	fiscalEntitiesId := "fis_ent_2tQ8HkkfbauaKP9Ho" // string | identifier
-	customerUpdateFiscalEntitiesRequest := *openapiclient.NewCustomerUpdateFiscalEntitiesRequest() // CustomerUpdateFiscalEntitiesRequest | requested field for customer update fiscal entities
+	customerUpdateFiscalEntitiesRequest := *openapiclient.NewCustomerUpdateFiscalEntitiesRequest() // CustomerUpdateFiscalEntitiesRequest | Request body for updating a customer fiscal entity.
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
 	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -517,7 +517,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **customerUpdateFiscalEntitiesRequest** | [**CustomerUpdateFiscalEntitiesRequest**](CustomerUpdateFiscalEntitiesRequest.md) | requested field for customer update fiscal entities | 
+ **customerUpdateFiscalEntitiesRequest** | [**CustomerUpdateFiscalEntitiesRequest**](CustomerUpdateFiscalEntitiesRequest.md) | Request body for updating a customer fiscal entity. | 
  **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
  **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
 

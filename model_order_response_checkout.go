@@ -18,30 +18,30 @@ import (
 // checks if the OrderResponseCheckout type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OrderResponseCheckout{}
 
-// OrderResponseCheckout struct for OrderResponseCheckout
+// OrderResponseCheckout Checkout resource linked to the order. Present only when the order is linked to a checkout (`channel.checkout_request_id`).
 type OrderResponseCheckout struct {
-	AllowedPaymentMethods []string               `json:"allowed_payment_methods,omitempty"`
-	CanNotExpire          *bool                  `json:"can_not_expire,omitempty"`
-	EmailsSent            *int32                 `json:"emails_sent,omitempty"`
-	ExpiresAt             *int64                 `json:"expires_at,omitempty"`
-	FailureUrl            *string                `json:"failure_url,omitempty"`
-	Id                    *string                `json:"id,omitempty"`
-	IsRedirectOnFailure   *bool                  `json:"is_redirect_on_failure,omitempty"`
-	Livemode              *bool                  `json:"livemode,omitempty"`
-	Metadata              map[string]interface{} `json:"metadata,omitempty"`
-	Name                  *string                `json:"name,omitempty"`
-	NeedsShippingContact  *bool                  `json:"needs_shipping_contact,omitempty"`
-	Object                *string                `json:"object,omitempty"`
-	OnDemandEnabled       NullableBool           `json:"on_demand_enabled,omitempty"`
-	Recurrent             *bool                  `json:"recurrent,omitempty"`
-	Slug                  *string                `json:"slug,omitempty"`
-	SmsSent               *int32                 `json:"sms_sent,omitempty"`
-	SuccessUrl            *string                `json:"success_url,omitempty"`
-	StartsAt              *int32                 `json:"starts_at,omitempty"`
-	Status                *string                `json:"status,omitempty"`
-	Type                  *string                `json:"type,omitempty"`
-	Url                   *string                `json:"url,omitempty"`
-	AdditionalProperties  map[string]interface{}
+	AllowedPaymentMethods []string `json:"allowed_payment_methods,omitempty"`
+	CanNotExpire *bool `json:"can_not_expire,omitempty"`
+	EmailsSent *int32 `json:"emails_sent,omitempty"`
+	ExpiresAt *int64 `json:"expires_at,omitempty"`
+	FailureUrl *string `json:"failure_url,omitempty"`
+	Id *string `json:"id,omitempty"`
+	IsRedirectOnFailure *bool `json:"is_redirect_on_failure,omitempty"`
+	Livemode *bool `json:"livemode,omitempty"`
+	Metadata map[string]interface{} `json:"metadata,omitempty"`
+	Name *string `json:"name,omitempty"`
+	NeedsShippingContact *bool `json:"needs_shipping_contact,omitempty"`
+	Object *string `json:"object,omitempty"`
+	OnDemandEnabled NullableBool `json:"on_demand_enabled,omitempty"`
+	Recurrent *bool `json:"recurrent,omitempty"`
+	Slug *string `json:"slug,omitempty"`
+	SmsSent *int32 `json:"sms_sent,omitempty"`
+	SuccessUrl *string `json:"success_url,omitempty"`
+	StartsAt *int32 `json:"starts_at,omitempty"`
+	Status *string `json:"status,omitempty"`
+	Type *string `json:"type,omitempty"`
+	Url *string `json:"url,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
 type _OrderResponseCheckout OrderResponseCheckout
@@ -479,7 +479,6 @@ func (o *OrderResponseCheckout) HasOnDemandEnabled() bool {
 func (o *OrderResponseCheckout) SetOnDemandEnabled(v bool) {
 	o.OnDemandEnabled.Set(&v)
 }
-
 // SetOnDemandEnabledNil sets the value for OnDemandEnabled to be an explicit nil
 func (o *OrderResponseCheckout) SetOnDemandEnabledNil() {
 	o.OnDemandEnabled.Set(nil)
@@ -747,7 +746,7 @@ func (o *OrderResponseCheckout) SetUrl(v string) {
 }
 
 func (o OrderResponseCheckout) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -903,3 +902,5 @@ func (v *NullableOrderResponseCheckout) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

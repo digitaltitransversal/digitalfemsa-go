@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Object** | **string** | Object type, in this case is list | 
 **NextPageUrl** | Pointer to **NullableString** | URL of the next page. | [optional] 
 **PreviousPageUrl** | Pointer to **NullableString** | Url of the previous page. | [optional] 
-**Data** | Pointer to [**[]CustomerResponse**](CustomerResponse.md) |  | [optional] 
+**Data** | Pointer to [**[]CustomerResponse**](CustomerResponse.md) | Customers | [optional] 
 
 ## Methods
 

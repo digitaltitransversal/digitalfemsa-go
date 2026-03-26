@@ -32,7 +32,7 @@ import (
 
 func main() {
 	id := "6307a60c41de27127515a575" // string | Identifier of the resource
-	shippingRequest := *openapiclient.NewShippingRequest(int64(100)) // ShippingRequest | requested field for a shipping
+	shippingRequest := *openapiclient.NewShippingRequest(int64(100)) // ShippingRequest | Request body for creating or updating a shipping line.
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
 	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -64,7 +64,7 @@ Other parameters are passed through a pointer to a apiOrdersCreateShippingReques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **shippingRequest** | [**ShippingRequest**](ShippingRequest.md) | requested field for a shipping | 
+ **shippingRequest** | [**ShippingRequest**](ShippingRequest.md) | Request body for creating or updating a shipping line. | 
  **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
  **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
 
@@ -186,7 +186,7 @@ import (
 func main() {
 	id := "6307a60c41de27127515a575" // string | Identifier of the resource
 	shippingId := "ship_lin_2tQ974hSHcsdeSZHG" // string | identifier
-	shippingRequest := *openapiclient.NewShippingRequest(int64(100)) // ShippingRequest | requested field for a shipping
+	shippingRequest := *openapiclient.NewShippingRequest(int64(100)) // ShippingRequest | Request body for creating or updating a shipping line.
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
 	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -220,7 +220,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **shippingRequest** | [**ShippingRequest**](ShippingRequest.md) | requested field for a shipping | 
+ **shippingRequest** | [**ShippingRequest**](ShippingRequest.md) | Request body for creating or updating a shipping line. | 
  **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
  **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
 

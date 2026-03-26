@@ -5,7 +5,7 @@ All URIs are relative to *https://api.digitalfemsa.io*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetTransaction**](TransactionsAPI.md#GetTransaction) | **Get** /transactions/{id} | Get transaction
-[**GetTransactions**](TransactionsAPI.md#GetTransactions) | **Get** /transactions | Get List transactions
+[**GetTransactions**](TransactionsAPI.md#GetTransactions) | **Get** /transactions | List transactions
 
 
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 > GetTransactionsResponse GetTransactions(ctx).AcceptLanguage(acceptLanguage).XChildCompanyId(xChildCompanyId).Limit(limit).Next(next).Previous(previous).Id(id).ChargeId(chargeId).Type_(type_).Currency(currency).Execute()
 
-Get List transactions
+List transactions
 
 
 

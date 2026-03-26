@@ -4,16 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Available** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | The balance&#39;s available | [optional] 
+**Available** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | Amounts currently available, grouped by currency. | [optional] 
 **CashoutRetentionAmount** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | The balance&#39;s cashout retention amount | [optional] 
 **ConektaRetention** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | The balance&#39;s Femsa retention | [optional] 
-**Gateway** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | The balance&#39;s gateway | [optional] 
-**Pending** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | The balance&#39;s pending | [optional] 
-**Retained** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | The balance&#39;s retained | [optional] 
-**RetentionAmount** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | The balance&#39;s retention amount | [optional] 
-**TargetCollateralAmount** | Pointer to **map[string]interface{}** | The balance&#39;s target collateral amount | [optional] 
-**TargetRetentionAmount** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | The balance&#39;s target retention amount | [optional] 
-**TemporarilyRetained** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | The balance&#39;s temporarily retained | [optional] 
+**Gateway** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | Gateway balance amounts, grouped by currency. | [optional] 
+**Pending** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | Amounts pending settlement, grouped by currency. | [optional] 
+**Retained** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | Amounts currently retained, grouped by currency. | [optional] 
+**RetentionAmount** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | Retention amount applied, grouped by currency. | [optional] 
+**TargetCollateralAmount** | Pointer to **map[string]interface{}** | Target collateral amount, grouped by currency. | [optional] 
+**TargetRetentionAmount** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | Target retention amount, grouped by currency. | [optional] 
+**TemporarilyRetained** | Pointer to [**[]BalanceCommonField**](BalanceCommonField.md) | Amounts temporarily retained | [optional] 
 
 ## Methods
 

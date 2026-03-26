@@ -21,15 +21,15 @@ var _ MappedNullable = &CustomerAddress{}
 
 // CustomerAddress struct for CustomerAddress
 type CustomerAddress struct {
-	Street1    string  `json:"street1"`
-	Street2    *string `json:"street2,omitempty"`
-	PostalCode string  `json:"postal_code"`
-	City       string  `json:"city"`
-	State      *string `json:"state,omitempty"`
+	Street1 string `json:"street1"`
+	Street2 *string `json:"street2,omitempty"`
+	PostalCode string `json:"postal_code"`
+	City string `json:"city"`
+	State *string `json:"state,omitempty"`
 	// this field follows the [ISO 3166-1 alpha-2 standard](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-	Country              *string `json:"country,omitempty"`
-	Residential          *bool   `json:"residential,omitempty"`
-	ExternalNumber       *string `json:"external_number,omitempty"`
+	Country string `json:"country"`
+	Residential *bool `json:"residential,omitempty"`
+	ExternalNumber *string `json:"external_number,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -39,11 +39,12 @@ type _CustomerAddress CustomerAddress
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomerAddress(street1 string, postalCode string, city string) *CustomerAddress {
+func NewCustomerAddress(street1 string, postalCode string, city string, country string) *CustomerAddress {
 	this := CustomerAddress{}
 	this.Street1 = street1
 	this.PostalCode = postalCode
 	this.City = city
+	this.Country = country
 	var residential bool = false
 	this.Residential = &residential
 	return &this
@@ -195,36 +196,28 @@ func (o *CustomerAddress) SetState(v string) {
 	o.State = &v
 }
 
-// GetCountry returns the Country field value if set, zero value otherwise.
+// GetCountry returns the Country field value
 func (o *CustomerAddress) GetCountry() string {
-	if o == nil || IsNil(o.Country) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Country
+
+	return o.Country
 }
 
-// GetCountryOk returns a tuple with the Country field value if set, nil otherwise
+// GetCountryOk returns a tuple with the Country field value
 // and a boolean to check if the value has been set.
 func (o *CustomerAddress) GetCountryOk() (*string, bool) {
-	if o == nil || IsNil(o.Country) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Country, true
+	return &o.Country, true
 }
 
-// HasCountry returns a boolean if a field has been set.
-func (o *CustomerAddress) HasCountry() bool {
-	if o != nil && !IsNil(o.Country) {
-		return true
-	}
-
-	return false
-}
-
-// SetCountry gets a reference to the given string and assigns it to the Country field.
+// SetCountry sets field value
 func (o *CustomerAddress) SetCountry(v string) {
-	o.Country = &v
+	o.Country = v
 }
 
 // GetResidential returns the Residential field value if set, zero value otherwise.
@@ -292,7 +285,7 @@ func (o *CustomerAddress) SetExternalNumber(v string) {
 }
 
 func (o CustomerAddress) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -310,9 +303,7 @@ func (o CustomerAddress) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.State) {
 		toSerialize["state"] = o.State
 	}
-	if !IsNil(o.Country) {
-		toSerialize["country"] = o.Country
-	}
+	toSerialize["country"] = o.Country
 	if !IsNil(o.Residential) {
 		toSerialize["residential"] = o.Residential
 	}
@@ -335,6 +326,7 @@ func (o *CustomerAddress) UnmarshalJSON(data []byte) (err error) {
 		"street1",
 		"postal_code",
 		"city",
+		"country",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -342,10 +334,10 @@ func (o *CustomerAddress) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -413,3 +405,5 @@ func (v *NullableCustomerAddress) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

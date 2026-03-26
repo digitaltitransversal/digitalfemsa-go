@@ -4,9 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ExpiresAt** | Pointer to **int64** | Method expiration date as unix timestamp | [optional] 
+**ExpiresAt** | Pointer to **int64** | Method expiration date as unix timestamp (applies to some payment methods, e.g. cash). | [optional] 
 **Type** | **string** |  | 
-**PaymentSourceId** | Pointer to **string** |  | [optional] 
+**PaymentSourceId** | Pointer to **string** | Identifier of a saved payment source to be used for this charge (if applicable). | [optional] 
 
 ## Methods
 

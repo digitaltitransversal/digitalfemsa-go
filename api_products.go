@@ -20,16 +20,17 @@ import (
 	"strings"
 )
 
+
 type ProductsAPI interface {
 
 	/*
-		OrdersCreateProduct Create Product
+	OrdersCreateProduct Create Product
 
-		Create a new product for an existing order.
+	Creates a new product (line item) for an existing order. Use this endpoint to add an additional item to the order after it has been created.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param id Identifier of the resource
-		@return ApiOrdersCreateProductRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@return ApiOrdersCreateProductRequest
 	*/
 	OrdersCreateProduct(ctx context.Context, id string) ApiOrdersCreateProductRequest
 
@@ -38,14 +39,14 @@ type ProductsAPI interface {
 	OrdersCreateProductExecute(r ApiOrdersCreateProductRequest) (*ProductOrderResponse, *http.Response, error)
 
 	/*
-		OrdersDeleteProduct Delete Product
+	OrdersDeleteProduct Delete Product
 
-		Delete product for an existing orden
+	Deletes a product (line item) from an existing order. The API will validate whether the order can be modified before removing the item.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param id Identifier of the resource
-		@param lineItemId identifier
-		@return ApiOrdersDeleteProductRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@param lineItemId identifier
+	@return ApiOrdersDeleteProductRequest
 	*/
 	OrdersDeleteProduct(ctx context.Context, id string, lineItemId string) ApiOrdersDeleteProductRequest
 
@@ -54,14 +55,14 @@ type ProductsAPI interface {
 	OrdersDeleteProductExecute(r ApiOrdersDeleteProductRequest) (*ProductOrderResponse, *http.Response, error)
 
 	/*
-		OrdersUpdateProduct Update Product
+	OrdersUpdateProduct Update Product
 
-		Update an existing product for an existing orden
+	Updates an existing product (line item) for an existing order. Use this endpoint to modify the details of a specific line item in the order.
 
-		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-		@param id Identifier of the resource
-		@param lineItemId identifier
-		@return ApiOrdersUpdateProductRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param id Identifier of the resource
+	@param lineItemId identifier
+	@return ApiOrdersUpdateProductRequest
 	*/
 	OrdersUpdateProduct(ctx context.Context, id string, lineItemId string) ApiOrdersUpdateProductRequest
 
@@ -74,15 +75,15 @@ type ProductsAPI interface {
 type ProductsAPIService service
 
 type ApiOrdersCreateProductRequest struct {
-	ctx             context.Context
-	ApiService      ProductsAPI
-	id              string
-	product         *Product
-	acceptLanguage  *string
+	ctx context.Context
+	ApiService ProductsAPI
+	id string
+	product *Product
+	acceptLanguage *string
 	xChildCompanyId *string
 }
 
-// requested field for a product
+// Fields required to create a new product (line item) for an existing order. This request adds a new item to the order.
 func (r ApiOrdersCreateProductRequest) Product(product Product) ApiOrdersCreateProductRequest {
 	r.product = &product
 	return r
@@ -107,29 +108,28 @@ func (r ApiOrdersCreateProductRequest) Execute() (*ProductOrderResponse, *http.R
 /*
 OrdersCreateProduct Create Product
 
-Create a new product for an existing order.
+Creates a new product (line item) for an existing order. Use this endpoint to add an additional item to the order after it has been created.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@return ApiOrdersCreateProductRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @return ApiOrdersCreateProductRequest
 */
 func (a *ProductsAPIService) OrdersCreateProduct(ctx context.Context, id string) ApiOrdersCreateProductRequest {
 	return ApiOrdersCreateProductRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ProductOrderResponse
+//  @return ProductOrderResponse
 func (a *ProductsAPIService) OrdersCreateProductExecute(r ApiOrdersCreateProductRequest) (*ProductOrderResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ProductOrderResponse
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ProductOrderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsAPIService.OrdersCreateProduct")
@@ -201,8 +201,8 @@ func (a *ProductsAPIService) OrdersCreateProductExecute(r ApiOrdersCreateProduct
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -212,8 +212,8 @@ func (a *ProductsAPIService) OrdersCreateProductExecute(r ApiOrdersCreateProduct
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -223,8 +223,8 @@ func (a *ProductsAPIService) OrdersCreateProductExecute(r ApiOrdersCreateProduct
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -242,11 +242,11 @@ func (a *ProductsAPIService) OrdersCreateProductExecute(r ApiOrdersCreateProduct
 }
 
 type ApiOrdersDeleteProductRequest struct {
-	ctx             context.Context
-	ApiService      ProductsAPI
-	id              string
-	lineItemId      string
-	acceptLanguage  *string
+	ctx context.Context
+	ApiService ProductsAPI
+	id string
+	lineItemId string
+	acceptLanguage *string
 	xChildCompanyId *string
 }
 
@@ -269,31 +269,30 @@ func (r ApiOrdersDeleteProductRequest) Execute() (*ProductOrderResponse, *http.R
 /*
 OrdersDeleteProduct Delete Product
 
-Delete product for an existing orden
+Deletes a product (line item) from an existing order. The API will validate whether the order can be modified before removing the item.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@param lineItemId identifier
-	@return ApiOrdersDeleteProductRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @param lineItemId identifier
+ @return ApiOrdersDeleteProductRequest
 */
 func (a *ProductsAPIService) OrdersDeleteProduct(ctx context.Context, id string, lineItemId string) ApiOrdersDeleteProductRequest {
 	return ApiOrdersDeleteProductRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 		lineItemId: lineItemId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ProductOrderResponse
+//  @return ProductOrderResponse
 func (a *ProductsAPIService) OrdersDeleteProductExecute(r ApiOrdersDeleteProductRequest) (*ProductOrderResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodDelete
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ProductOrderResponse
+		localVarHTTPMethod   = http.MethodDelete
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ProductOrderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsAPIService.OrdersDeleteProduct")
@@ -361,19 +360,8 @@ func (a *ProductsAPIService) OrdersDeleteProductExecute(r ApiOrdersDeleteProduct
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v ModelError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -383,8 +371,19 @@ func (a *ProductsAPIService) OrdersDeleteProductExecute(r ApiOrdersDeleteProduct
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -394,8 +393,8 @@ func (a *ProductsAPIService) OrdersDeleteProductExecute(r ApiOrdersDeleteProduct
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -413,16 +412,16 @@ func (a *ProductsAPIService) OrdersDeleteProductExecute(r ApiOrdersDeleteProduct
 }
 
 type ApiOrdersUpdateProductRequest struct {
-	ctx             context.Context
-	ApiService      ProductsAPI
-	id              string
-	lineItemId      string
-	updateProduct   *UpdateProduct
-	acceptLanguage  *string
+	ctx context.Context
+	ApiService ProductsAPI
+	id string
+	lineItemId string
+	updateProduct *UpdateProduct
+	acceptLanguage *string
 	xChildCompanyId *string
 }
 
-// requested field for products
+// Fields allowed to update an existing product (line item) in an order. All fields are optional; only the provided fields will be updated.
 func (r ApiOrdersUpdateProductRequest) UpdateProduct(updateProduct UpdateProduct) ApiOrdersUpdateProductRequest {
 	r.updateProduct = &updateProduct
 	return r
@@ -447,31 +446,30 @@ func (r ApiOrdersUpdateProductRequest) Execute() (*ProductOrderResponse, *http.R
 /*
 OrdersUpdateProduct Update Product
 
-Update an existing product for an existing orden
+Updates an existing product (line item) for an existing order. Use this endpoint to modify the details of a specific line item in the order.
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param id Identifier of the resource
-	@param lineItemId identifier
-	@return ApiOrdersUpdateProductRequest
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id Identifier of the resource
+ @param lineItemId identifier
+ @return ApiOrdersUpdateProductRequest
 */
 func (a *ProductsAPIService) OrdersUpdateProduct(ctx context.Context, id string, lineItemId string) ApiOrdersUpdateProductRequest {
 	return ApiOrdersUpdateProductRequest{
 		ApiService: a,
-		ctx:        ctx,
-		id:         id,
+		ctx: ctx,
+		id: id,
 		lineItemId: lineItemId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return ProductOrderResponse
+//  @return ProductOrderResponse
 func (a *ProductsAPIService) OrdersUpdateProductExecute(r ApiOrdersUpdateProductRequest) (*ProductOrderResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod  = http.MethodPut
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *ProductOrderResponse
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *ProductOrderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ProductsAPIService.OrdersUpdateProduct")
@@ -544,19 +542,8 @@ func (a *ProductsAPIService) OrdersUpdateProductExecute(r ApiOrdersUpdateProduct
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 422 {
-			var v ModelError
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -566,8 +553,19 @@ func (a *ProductsAPIService) OrdersUpdateProductExecute(r ApiOrdersUpdateProduct
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v ModelError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -577,8 +575,8 @@ func (a *ProductsAPIService) OrdersUpdateProductExecute(r ApiOrdersUpdateProduct
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

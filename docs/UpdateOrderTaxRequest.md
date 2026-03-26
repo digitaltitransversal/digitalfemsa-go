@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Amount** | Pointer to **int64** | The amount to be collected for tax in cents | [optional] 
-**Description** | Pointer to **string** | description or tax&#39;s name | [optional] 
-**Metadata** | Pointer to **map[string]map[string]interface{}** |  | [optional] 
+**Description** | Pointer to **string** | Description or tax name | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
 
 ## Methods
 
@@ -79,20 +79,20 @@ HasDescription returns a boolean if a field has been set.
 
 ### GetMetadata
 
-`func (o *UpdateOrderTaxRequest) GetMetadata() map[string]map[string]interface{}`
+`func (o *UpdateOrderTaxRequest) GetMetadata() map[string]interface{}`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *UpdateOrderTaxRequest) GetMetadataOk() (*map[string]map[string]interface{}, bool)`
+`func (o *UpdateOrderTaxRequest) GetMetadataOk() (*map[string]interface{}, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *UpdateOrderTaxRequest) SetMetadata(v map[string]map[string]interface{})`
+`func (o *UpdateOrderTaxRequest) SetMetadata(v map[string]interface{})`
 
 SetMetadata sets Metadata field to given value.
 

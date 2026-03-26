@@ -18,7 +18,7 @@ import (
 // checks if the TransfersResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TransfersResponse{}
 
-// TransfersResponse A transfer represents the action of sending an amount to a business bank account including the status, amount and method used to make the transfer.
+// TransfersResponse A transfer represents the action of sending an amount to a business bank account including the status, amount and destination used to make the transfer.
 type TransfersResponse struct {
 	// Amount in cents of the transfer.
 	Amount *int64 `json:"amount,omitempty"`
@@ -29,8 +29,8 @@ type TransfersResponse struct {
 	// Unique identifier of the transfer.
 	Id *string `json:"id,omitempty"`
 	// Indicates whether the transfer was created in live mode or test mode.
-	Livemode *bool                   `json:"livemode,omitempty"`
-	Method   *TransferMethodResponse `json:"method,omitempty"`
+	Livemode *bool `json:"livemode,omitempty"`
+	Method *TransferMethodResponse `json:"method,omitempty"`
 	// Object name, which is transfer.
 	Object *string `json:"object,omitempty"`
 	// Description of the transfer.
@@ -38,7 +38,7 @@ type TransfersResponse struct {
 	// Reference number of the transfer.
 	StatementReference *string `json:"statement_reference,omitempty"`
 	// Code indicating transfer status.
-	Status               *string `json:"status,omitempty"`
+	Status *string `json:"status,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -382,7 +382,7 @@ func (o *TransfersResponse) SetStatus(v string) {
 }
 
 func (o TransfersResponse) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -494,3 +494,5 @@ func (v *NullableTransfersResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

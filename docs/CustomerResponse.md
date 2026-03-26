@@ -4,29 +4,27 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AntifraudInfo** | Pointer to [**NullableCustomerAntifraudInfoResponse**](CustomerAntifraudInfoResponse.md) |  | [optional] 
+**Id** | **string** | Customer&#39;s ID | 
+**Object** | **string** |  | 
+**CreatedAt** | **int64** | Creation date of the object (Unix timestamp) | 
+**Livemode** | **bool** | true if the object exists in live mode or false if the object exists in test mode | 
+**Name** | Pointer to **NullableString** | Customer&#39;s name | [optional] 
+**Email** | Pointer to **NullableString** |  | [optional] 
+**Phone** | Pointer to **NullableString** | Customer&#39;s phone number | [optional] 
 **Corporate** | Pointer to **bool** | true if the customer is a company | [optional] 
-**CreatedAt** | **int64** | Creation date of the object | 
 **CustomReference** | Pointer to **string** | Custom reference | [optional] 
 **DefaultFiscalEntityId** | Pointer to **NullableString** |  | [optional] 
-**DefaultShippingContactId** | Pointer to **string** |  | [optional] 
-**DefaultPaymentSourceId** | Pointer to **NullableString** |  | [optional] 
-**Email** | Pointer to **string** |  | [optional] 
-**FiscalEntities** | Pointer to [**CustomerFiscalEntitiesResponse**](CustomerFiscalEntitiesResponse.md) |  | [optional] 
-**Id** | **string** | Customer&#39;s ID | 
-**Livemode** | **bool** | true if the object exists in live mode or the value false if the object exists in test mode | 
-**Name** | **string** | Customer&#39;s name | 
-**Metadata** | Pointer to **map[string]interface{}** |  | [optional] 
-**Object** | **string** |  | 
+**DefaultShippingContactId** | Pointer to **NullableString** |  | [optional] 
+**Metadata** | Pointer to **map[string]interface{}** | Customer metadata (maps to contextual_data in backend) | [optional] 
 **PaymentSources** | Pointer to [**CustomerPaymentMethodsResponse**](CustomerPaymentMethodsResponse.md) |  | [optional] 
-**Phone** | Pointer to **string** | Customer&#39;s phone number | [optional] 
+**FiscalEntities** | Pointer to [**CustomerFiscalEntitiesResponse**](CustomerFiscalEntitiesResponse.md) |  | [optional] 
 **ShippingContacts** | Pointer to [**CustomerResponseShippingContacts**](CustomerResponseShippingContacts.md) |  | [optional] 
 
 ## Methods
 
 ### NewCustomerResponse
 
-`func NewCustomerResponse(createdAt int64, id string, livemode bool, name string, object string, ) *CustomerResponse`
+`func NewCustomerResponse(id string, object string, createdAt int64, livemode bool, ) *CustomerResponse`
 
 NewCustomerResponse instantiates a new CustomerResponse object
 This constructor will assign default values to properties that have it defined,
@@ -41,41 +39,191 @@ NewCustomerResponseWithDefaults instantiates a new CustomerResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetAntifraudInfo
+### GetId
 
-`func (o *CustomerResponse) GetAntifraudInfo() CustomerAntifraudInfoResponse`
+`func (o *CustomerResponse) GetId() string`
 
-GetAntifraudInfo returns the AntifraudInfo field if non-nil, zero value otherwise.
+GetId returns the Id field if non-nil, zero value otherwise.
 
-### GetAntifraudInfoOk
+### GetIdOk
 
-`func (o *CustomerResponse) GetAntifraudInfoOk() (*CustomerAntifraudInfoResponse, bool)`
+`func (o *CustomerResponse) GetIdOk() (*string, bool)`
 
-GetAntifraudInfoOk returns a tuple with the AntifraudInfo field if it's non-nil, zero value otherwise
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAntifraudInfo
+### SetId
 
-`func (o *CustomerResponse) SetAntifraudInfo(v CustomerAntifraudInfoResponse)`
+`func (o *CustomerResponse) SetId(v string)`
 
-SetAntifraudInfo sets AntifraudInfo field to given value.
+SetId sets Id field to given value.
 
-### HasAntifraudInfo
 
-`func (o *CustomerResponse) HasAntifraudInfo() bool`
+### GetObject
 
-HasAntifraudInfo returns a boolean if a field has been set.
+`func (o *CustomerResponse) GetObject() string`
 
-### SetAntifraudInfoNil
+GetObject returns the Object field if non-nil, zero value otherwise.
 
-`func (o *CustomerResponse) SetAntifraudInfoNil(b bool)`
+### GetObjectOk
 
- SetAntifraudInfoNil sets the value for AntifraudInfo to be an explicit nil
+`func (o *CustomerResponse) GetObjectOk() (*string, bool)`
 
-### UnsetAntifraudInfo
-`func (o *CustomerResponse) UnsetAntifraudInfo()`
+GetObjectOk returns a tuple with the Object field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
 
-UnsetAntifraudInfo ensures that no value is present for AntifraudInfo, not even an explicit nil
+### SetObject
+
+`func (o *CustomerResponse) SetObject(v string)`
+
+SetObject sets Object field to given value.
+
+
+### GetCreatedAt
+
+`func (o *CustomerResponse) GetCreatedAt() int64`
+
+GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
+
+### GetCreatedAtOk
+
+`func (o *CustomerResponse) GetCreatedAtOk() (*int64, bool)`
+
+GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatedAt
+
+`func (o *CustomerResponse) SetCreatedAt(v int64)`
+
+SetCreatedAt sets CreatedAt field to given value.
+
+
+### GetLivemode
+
+`func (o *CustomerResponse) GetLivemode() bool`
+
+GetLivemode returns the Livemode field if non-nil, zero value otherwise.
+
+### GetLivemodeOk
+
+`func (o *CustomerResponse) GetLivemodeOk() (*bool, bool)`
+
+GetLivemodeOk returns a tuple with the Livemode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLivemode
+
+`func (o *CustomerResponse) SetLivemode(v bool)`
+
+SetLivemode sets Livemode field to given value.
+
+
+### GetName
+
+`func (o *CustomerResponse) GetName() string`
+
+GetName returns the Name field if non-nil, zero value otherwise.
+
+### GetNameOk
+
+`func (o *CustomerResponse) GetNameOk() (*string, bool)`
+
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetName
+
+`func (o *CustomerResponse) SetName(v string)`
+
+SetName sets Name field to given value.
+
+### HasName
+
+`func (o *CustomerResponse) HasName() bool`
+
+HasName returns a boolean if a field has been set.
+
+### SetNameNil
+
+`func (o *CustomerResponse) SetNameNil(b bool)`
+
+ SetNameNil sets the value for Name to be an explicit nil
+
+### UnsetName
+`func (o *CustomerResponse) UnsetName()`
+
+UnsetName ensures that no value is present for Name, not even an explicit nil
+### GetEmail
+
+`func (o *CustomerResponse) GetEmail() string`
+
+GetEmail returns the Email field if non-nil, zero value otherwise.
+
+### GetEmailOk
+
+`func (o *CustomerResponse) GetEmailOk() (*string, bool)`
+
+GetEmailOk returns a tuple with the Email field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEmail
+
+`func (o *CustomerResponse) SetEmail(v string)`
+
+SetEmail sets Email field to given value.
+
+### HasEmail
+
+`func (o *CustomerResponse) HasEmail() bool`
+
+HasEmail returns a boolean if a field has been set.
+
+### SetEmailNil
+
+`func (o *CustomerResponse) SetEmailNil(b bool)`
+
+ SetEmailNil sets the value for Email to be an explicit nil
+
+### UnsetEmail
+`func (o *CustomerResponse) UnsetEmail()`
+
+UnsetEmail ensures that no value is present for Email, not even an explicit nil
+### GetPhone
+
+`func (o *CustomerResponse) GetPhone() string`
+
+GetPhone returns the Phone field if non-nil, zero value otherwise.
+
+### GetPhoneOk
+
+`func (o *CustomerResponse) GetPhoneOk() (*string, bool)`
+
+GetPhoneOk returns a tuple with the Phone field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPhone
+
+`func (o *CustomerResponse) SetPhone(v string)`
+
+SetPhone sets Phone field to given value.
+
+### HasPhone
+
+`func (o *CustomerResponse) HasPhone() bool`
+
+HasPhone returns a boolean if a field has been set.
+
+### SetPhoneNil
+
+`func (o *CustomerResponse) SetPhoneNil(b bool)`
+
+ SetPhoneNil sets the value for Phone to be an explicit nil
+
+### UnsetPhone
+`func (o *CustomerResponse) UnsetPhone()`
+
+UnsetPhone ensures that no value is present for Phone, not even an explicit nil
 ### GetCorporate
 
 `func (o *CustomerResponse) GetCorporate() bool`
@@ -100,26 +248,6 @@ SetCorporate sets Corporate field to given value.
 `func (o *CustomerResponse) HasCorporate() bool`
 
 HasCorporate returns a boolean if a field has been set.
-
-### GetCreatedAt
-
-`func (o *CustomerResponse) GetCreatedAt() int64`
-
-GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
-
-### GetCreatedAtOk
-
-`func (o *CustomerResponse) GetCreatedAtOk() (*int64, bool)`
-
-GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCreatedAt
-
-`func (o *CustomerResponse) SetCreatedAt(v int64)`
-
-SetCreatedAt sets CreatedAt field to given value.
-
 
 ### GetCustomReference
 
@@ -206,151 +334,16 @@ SetDefaultShippingContactId sets DefaultShippingContactId field to given value.
 
 HasDefaultShippingContactId returns a boolean if a field has been set.
 
-### GetDefaultPaymentSourceId
+### SetDefaultShippingContactIdNil
 
-`func (o *CustomerResponse) GetDefaultPaymentSourceId() string`
+`func (o *CustomerResponse) SetDefaultShippingContactIdNil(b bool)`
 
-GetDefaultPaymentSourceId returns the DefaultPaymentSourceId field if non-nil, zero value otherwise.
+ SetDefaultShippingContactIdNil sets the value for DefaultShippingContactId to be an explicit nil
 
-### GetDefaultPaymentSourceIdOk
+### UnsetDefaultShippingContactId
+`func (o *CustomerResponse) UnsetDefaultShippingContactId()`
 
-`func (o *CustomerResponse) GetDefaultPaymentSourceIdOk() (*string, bool)`
-
-GetDefaultPaymentSourceIdOk returns a tuple with the DefaultPaymentSourceId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDefaultPaymentSourceId
-
-`func (o *CustomerResponse) SetDefaultPaymentSourceId(v string)`
-
-SetDefaultPaymentSourceId sets DefaultPaymentSourceId field to given value.
-
-### HasDefaultPaymentSourceId
-
-`func (o *CustomerResponse) HasDefaultPaymentSourceId() bool`
-
-HasDefaultPaymentSourceId returns a boolean if a field has been set.
-
-### SetDefaultPaymentSourceIdNil
-
-`func (o *CustomerResponse) SetDefaultPaymentSourceIdNil(b bool)`
-
- SetDefaultPaymentSourceIdNil sets the value for DefaultPaymentSourceId to be an explicit nil
-
-### UnsetDefaultPaymentSourceId
-`func (o *CustomerResponse) UnsetDefaultPaymentSourceId()`
-
-UnsetDefaultPaymentSourceId ensures that no value is present for DefaultPaymentSourceId, not even an explicit nil
-### GetEmail
-
-`func (o *CustomerResponse) GetEmail() string`
-
-GetEmail returns the Email field if non-nil, zero value otherwise.
-
-### GetEmailOk
-
-`func (o *CustomerResponse) GetEmailOk() (*string, bool)`
-
-GetEmailOk returns a tuple with the Email field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEmail
-
-`func (o *CustomerResponse) SetEmail(v string)`
-
-SetEmail sets Email field to given value.
-
-### HasEmail
-
-`func (o *CustomerResponse) HasEmail() bool`
-
-HasEmail returns a boolean if a field has been set.
-
-### GetFiscalEntities
-
-`func (o *CustomerResponse) GetFiscalEntities() CustomerFiscalEntitiesResponse`
-
-GetFiscalEntities returns the FiscalEntities field if non-nil, zero value otherwise.
-
-### GetFiscalEntitiesOk
-
-`func (o *CustomerResponse) GetFiscalEntitiesOk() (*CustomerFiscalEntitiesResponse, bool)`
-
-GetFiscalEntitiesOk returns a tuple with the FiscalEntities field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetFiscalEntities
-
-`func (o *CustomerResponse) SetFiscalEntities(v CustomerFiscalEntitiesResponse)`
-
-SetFiscalEntities sets FiscalEntities field to given value.
-
-### HasFiscalEntities
-
-`func (o *CustomerResponse) HasFiscalEntities() bool`
-
-HasFiscalEntities returns a boolean if a field has been set.
-
-### GetId
-
-`func (o *CustomerResponse) GetId() string`
-
-GetId returns the Id field if non-nil, zero value otherwise.
-
-### GetIdOk
-
-`func (o *CustomerResponse) GetIdOk() (*string, bool)`
-
-GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetId
-
-`func (o *CustomerResponse) SetId(v string)`
-
-SetId sets Id field to given value.
-
-
-### GetLivemode
-
-`func (o *CustomerResponse) GetLivemode() bool`
-
-GetLivemode returns the Livemode field if non-nil, zero value otherwise.
-
-### GetLivemodeOk
-
-`func (o *CustomerResponse) GetLivemodeOk() (*bool, bool)`
-
-GetLivemodeOk returns a tuple with the Livemode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLivemode
-
-`func (o *CustomerResponse) SetLivemode(v bool)`
-
-SetLivemode sets Livemode field to given value.
-
-
-### GetName
-
-`func (o *CustomerResponse) GetName() string`
-
-GetName returns the Name field if non-nil, zero value otherwise.
-
-### GetNameOk
-
-`func (o *CustomerResponse) GetNameOk() (*string, bool)`
-
-GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetName
-
-`func (o *CustomerResponse) SetName(v string)`
-
-SetName sets Name field to given value.
-
-
+UnsetDefaultShippingContactId ensures that no value is present for DefaultShippingContactId, not even an explicit nil
 ### GetMetadata
 
 `func (o *CustomerResponse) GetMetadata() map[string]interface{}`
@@ -376,26 +369,16 @@ SetMetadata sets Metadata field to given value.
 
 HasMetadata returns a boolean if a field has been set.
 
-### GetObject
+### SetMetadataNil
 
-`func (o *CustomerResponse) GetObject() string`
+`func (o *CustomerResponse) SetMetadataNil(b bool)`
 
-GetObject returns the Object field if non-nil, zero value otherwise.
+ SetMetadataNil sets the value for Metadata to be an explicit nil
 
-### GetObjectOk
+### UnsetMetadata
+`func (o *CustomerResponse) UnsetMetadata()`
 
-`func (o *CustomerResponse) GetObjectOk() (*string, bool)`
-
-GetObjectOk returns a tuple with the Object field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetObject
-
-`func (o *CustomerResponse) SetObject(v string)`
-
-SetObject sets Object field to given value.
-
-
+UnsetMetadata ensures that no value is present for Metadata, not even an explicit nil
 ### GetPaymentSources
 
 `func (o *CustomerResponse) GetPaymentSources() CustomerPaymentMethodsResponse`
@@ -421,30 +404,30 @@ SetPaymentSources sets PaymentSources field to given value.
 
 HasPaymentSources returns a boolean if a field has been set.
 
-### GetPhone
+### GetFiscalEntities
 
-`func (o *CustomerResponse) GetPhone() string`
+`func (o *CustomerResponse) GetFiscalEntities() CustomerFiscalEntitiesResponse`
 
-GetPhone returns the Phone field if non-nil, zero value otherwise.
+GetFiscalEntities returns the FiscalEntities field if non-nil, zero value otherwise.
 
-### GetPhoneOk
+### GetFiscalEntitiesOk
 
-`func (o *CustomerResponse) GetPhoneOk() (*string, bool)`
+`func (o *CustomerResponse) GetFiscalEntitiesOk() (*CustomerFiscalEntitiesResponse, bool)`
 
-GetPhoneOk returns a tuple with the Phone field if it's non-nil, zero value otherwise
+GetFiscalEntitiesOk returns a tuple with the FiscalEntities field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPhone
+### SetFiscalEntities
 
-`func (o *CustomerResponse) SetPhone(v string)`
+`func (o *CustomerResponse) SetFiscalEntities(v CustomerFiscalEntitiesResponse)`
 
-SetPhone sets Phone field to given value.
+SetFiscalEntities sets FiscalEntities field to given value.
 
-### HasPhone
+### HasFiscalEntities
 
-`func (o *CustomerResponse) HasPhone() bool`
+`func (o *CustomerResponse) HasFiscalEntities() bool`
 
-HasPhone returns a boolean if a field has been set.
+HasFiscalEntities returns a boolean if a field has been set.
 
 ### GetShippingContacts
 

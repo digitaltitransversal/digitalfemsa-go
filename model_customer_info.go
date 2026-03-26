@@ -21,11 +21,11 @@ var _ MappedNullable = &CustomerInfo{}
 
 // CustomerInfo struct for CustomerInfo
 type CustomerInfo struct {
-	Name                 string  `json:"name"`
-	Email                string  `json:"email"`
-	Phone                string  `json:"phone"`
-	Corporate            *bool   `json:"corporate,omitempty"`
-	Object               *string `json:"object,omitempty"`
+	CustomerId *string `json:"customer_id,omitempty"`
+	Name string `json:"name"`
+	Email string `json:"email"`
+	Phone *string `json:"phone,omitempty"`
+	Corporate *bool `json:"corporate,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -35,11 +35,10 @@ type _CustomerInfo CustomerInfo
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCustomerInfo(name string, email string, phone string) *CustomerInfo {
+func NewCustomerInfo(name string, email string) *CustomerInfo {
 	this := CustomerInfo{}
 	this.Name = name
 	this.Email = email
-	this.Phone = phone
 	return &this
 }
 
@@ -49,6 +48,38 @@ func NewCustomerInfo(name string, email string, phone string) *CustomerInfo {
 func NewCustomerInfoWithDefaults() *CustomerInfo {
 	this := CustomerInfo{}
 	return &this
+}
+
+// GetCustomerId returns the CustomerId field value if set, zero value otherwise.
+func (o *CustomerInfo) GetCustomerId() string {
+	if o == nil || IsNil(o.CustomerId) {
+		var ret string
+		return ret
+	}
+	return *o.CustomerId
+}
+
+// GetCustomerIdOk returns a tuple with the CustomerId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CustomerInfo) GetCustomerIdOk() (*string, bool) {
+	if o == nil || IsNil(o.CustomerId) {
+		return nil, false
+	}
+	return o.CustomerId, true
+}
+
+// HasCustomerId returns a boolean if a field has been set.
+func (o *CustomerInfo) HasCustomerId() bool {
+	if o != nil && !IsNil(o.CustomerId) {
+		return true
+	}
+
+	return false
+}
+
+// SetCustomerId gets a reference to the given string and assigns it to the CustomerId field.
+func (o *CustomerInfo) SetCustomerId(v string) {
+	o.CustomerId = &v
 }
 
 // GetName returns the Name field value
@@ -99,28 +130,36 @@ func (o *CustomerInfo) SetEmail(v string) {
 	o.Email = v
 }
 
-// GetPhone returns the Phone field value
+// GetPhone returns the Phone field value if set, zero value otherwise.
 func (o *CustomerInfo) GetPhone() string {
-	if o == nil {
+	if o == nil || IsNil(o.Phone) {
 		var ret string
 		return ret
 	}
-
-	return o.Phone
+	return *o.Phone
 }
 
-// GetPhoneOk returns a tuple with the Phone field value
+// GetPhoneOk returns a tuple with the Phone field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *CustomerInfo) GetPhoneOk() (*string, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Phone) {
 		return nil, false
 	}
-	return &o.Phone, true
+	return o.Phone, true
 }
 
-// SetPhone sets field value
+// HasPhone returns a boolean if a field has been set.
+func (o *CustomerInfo) HasPhone() bool {
+	if o != nil && !IsNil(o.Phone) {
+		return true
+	}
+
+	return false
+}
+
+// SetPhone gets a reference to the given string and assigns it to the Phone field.
 func (o *CustomerInfo) SetPhone(v string) {
-	o.Phone = v
+	o.Phone = &v
 }
 
 // GetCorporate returns the Corporate field value if set, zero value otherwise.
@@ -155,40 +194,8 @@ func (o *CustomerInfo) SetCorporate(v bool) {
 	o.Corporate = &v
 }
 
-// GetObject returns the Object field value if set, zero value otherwise.
-func (o *CustomerInfo) GetObject() string {
-	if o == nil || IsNil(o.Object) {
-		var ret string
-		return ret
-	}
-	return *o.Object
-}
-
-// GetObjectOk returns a tuple with the Object field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CustomerInfo) GetObjectOk() (*string, bool) {
-	if o == nil || IsNil(o.Object) {
-		return nil, false
-	}
-	return o.Object, true
-}
-
-// HasObject returns a boolean if a field has been set.
-func (o *CustomerInfo) HasObject() bool {
-	if o != nil && !IsNil(o.Object) {
-		return true
-	}
-
-	return false
-}
-
-// SetObject gets a reference to the given string and assigns it to the Object field.
-func (o *CustomerInfo) SetObject(v string) {
-	o.Object = &v
-}
-
 func (o CustomerInfo) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -197,14 +204,16 @@ func (o CustomerInfo) MarshalJSON() ([]byte, error) {
 
 func (o CustomerInfo) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.CustomerId) {
+		toSerialize["customer_id"] = o.CustomerId
+	}
 	toSerialize["name"] = o.Name
 	toSerialize["email"] = o.Email
-	toSerialize["phone"] = o.Phone
+	if !IsNil(o.Phone) {
+		toSerialize["phone"] = o.Phone
+	}
 	if !IsNil(o.Corporate) {
 		toSerialize["corporate"] = o.Corporate
-	}
-	if !IsNil(o.Object) {
-		toSerialize["object"] = o.Object
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -221,7 +230,6 @@ func (o *CustomerInfo) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"name",
 		"email",
-		"phone",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -229,10 +237,10 @@ func (o *CustomerInfo) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err
+		return err;
 	}
 
-	for _, requiredProperty := range requiredProperties {
+	for _, requiredProperty := range(requiredProperties) {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -251,11 +259,11 @@ func (o *CustomerInfo) UnmarshalJSON(data []byte) (err error) {
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "customer_id")
 		delete(additionalProperties, "name")
 		delete(additionalProperties, "email")
 		delete(additionalProperties, "phone")
 		delete(additionalProperties, "corporate")
-		delete(additionalProperties, "object")
 		o.AdditionalProperties = additionalProperties
 	}
 
@@ -297,3 +305,5 @@ func (v *NullableCustomerInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
+
+

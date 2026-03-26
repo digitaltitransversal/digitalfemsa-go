@@ -269,7 +269,7 @@ import (
 func main() {
 	id := "6307a60c41de27127515a575" // string | Identifier of the resource
 	paymentMethodId := "src_2tQ974hSHcsdeSZHG" // string | Identifier of the payment method
-	updatePaymentMethods := *openapiclient.NewUpdatePaymentMethods() // UpdatePaymentMethods | requested field for customer payment methods
+	updatePaymentMethods := *openapiclient.NewUpdatePaymentMethods() // UpdatePaymentMethods | Request body for updating a customer payment method.
 	acceptLanguage := "es" // string | Use for knowing which language to use (optional) (default to "es")
 	xChildCompanyId := "6441b6376b60c3a638da80af" // string | In the case of a holding company, the company id of the child company to which will process the request. (optional)
 
@@ -303,7 +303,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **updatePaymentMethods** | [**UpdatePaymentMethods**](UpdatePaymentMethods.md) | requested field for customer payment methods | 
+ **updatePaymentMethods** | [**UpdatePaymentMethods**](UpdatePaymentMethods.md) | Request body for updating a customer payment method. | 
  **acceptLanguage** | **string** | Use for knowing which language to use | [default to &quot;es&quot;]
  **xChildCompanyId** | **string** | In the case of a holding company, the company id of the child company to which will process the request. | 
 

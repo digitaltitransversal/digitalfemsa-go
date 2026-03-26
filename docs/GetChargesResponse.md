@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**HasMore** | **bool** | Indicates if there are more pages to be requested | 
-**Object** | **string** | Object type, in this case is list | 
 **NextPageUrl** | Pointer to **NullableString** | URL of the next page. | [optional] 
 **PreviousPageUrl** | Pointer to **NullableString** | Url of the previous page. | [optional] 
+**HasMore** | **bool** | Indicates if there are more pages to be requested | 
+**Object** | **string** | Object type, in this case is list | 
 **Data** | Pointer to [**[]ChargeResponse**](ChargeResponse.md) |  | [optional] 
 
 ## Methods
@@ -28,46 +28,6 @@ will change when the set of required properties is changed
 NewGetChargesResponseWithDefaults instantiates a new GetChargesResponse object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetHasMore
-
-`func (o *GetChargesResponse) GetHasMore() bool`
-
-GetHasMore returns the HasMore field if non-nil, zero value otherwise.
-
-### GetHasMoreOk
-
-`func (o *GetChargesResponse) GetHasMoreOk() (*bool, bool)`
-
-GetHasMoreOk returns a tuple with the HasMore field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetHasMore
-
-`func (o *GetChargesResponse) SetHasMore(v bool)`
-
-SetHasMore sets HasMore field to given value.
-
-
-### GetObject
-
-`func (o *GetChargesResponse) GetObject() string`
-
-GetObject returns the Object field if non-nil, zero value otherwise.
-
-### GetObjectOk
-
-`func (o *GetChargesResponse) GetObjectOk() (*string, bool)`
-
-GetObjectOk returns a tuple with the Object field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetObject
-
-`func (o *GetChargesResponse) SetObject(v string)`
-
-SetObject sets Object field to given value.
-
 
 ### GetNextPageUrl
 
@@ -139,6 +99,46 @@ HasPreviousPageUrl returns a boolean if a field has been set.
 `func (o *GetChargesResponse) UnsetPreviousPageUrl()`
 
 UnsetPreviousPageUrl ensures that no value is present for PreviousPageUrl, not even an explicit nil
+### GetHasMore
+
+`func (o *GetChargesResponse) GetHasMore() bool`
+
+GetHasMore returns the HasMore field if non-nil, zero value otherwise.
+
+### GetHasMoreOk
+
+`func (o *GetChargesResponse) GetHasMoreOk() (*bool, bool)`
+
+GetHasMoreOk returns a tuple with the HasMore field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasMore
+
+`func (o *GetChargesResponse) SetHasMore(v bool)`
+
+SetHasMore sets HasMore field to given value.
+
+
+### GetObject
+
+`func (o *GetChargesResponse) GetObject() string`
+
+GetObject returns the Object field if non-nil, zero value otherwise.
+
+### GetObjectOk
+
+`func (o *GetChargesResponse) GetObjectOk() (*string, bool)`
+
+GetObjectOk returns a tuple with the Object field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetObject
+
+`func (o *GetChargesResponse) SetObject(v string)`
+
+SetObject sets Object field to given value.
+
+
 ### GetData
 
 `func (o *GetChargesResponse) GetData() []ChargeResponse`
