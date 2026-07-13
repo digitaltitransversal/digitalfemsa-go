@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -90,7 +90,7 @@ type Configuration struct {
 func NewConfiguration() *Configuration {
 	cfg := &Configuration{
 		DefaultHeader:    make(map[string]string),
-		UserAgent:        "App/v2 GoBindings/1.1.1",
+		UserAgent:        "App/v2 GoBindings/1.2.0",
 		Debug:            false,
 		Servers:          ServerConfigurations{
 			{

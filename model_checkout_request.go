@@ -3,7 +3,7 @@ Femsa API
 
 Femsa sdk
 
-API version: 2.1.0
+API version: 2.2.0
 Contact: engineering@femsa.com
 */
 
@@ -34,6 +34,8 @@ type CheckoutRequest struct {
 	SuccessUrl *string `json:"success_url,omitempty"`
 	// This field represents the type of checkout
 	Type *string `json:"type,omitempty"`
+	// Number of seconds to wait before redirecting to the success or failure url
+	RedirectionTime *int32 `json:"redirection_time,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -273,6 +275,38 @@ func (o *CheckoutRequest) SetType(v string) {
 	o.Type = &v
 }
 
+// GetRedirectionTime returns the RedirectionTime field value if set, zero value otherwise.
+func (o *CheckoutRequest) GetRedirectionTime() int32 {
+	if o == nil || IsNil(o.RedirectionTime) {
+		var ret int32
+		return ret
+	}
+	return *o.RedirectionTime
+}
+
+// GetRedirectionTimeOk returns a tuple with the RedirectionTime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CheckoutRequest) GetRedirectionTimeOk() (*int32, bool) {
+	if o == nil || IsNil(o.RedirectionTime) {
+		return nil, false
+	}
+	return o.RedirectionTime, true
+}
+
+// HasRedirectionTime returns a boolean if a field has been set.
+func (o *CheckoutRequest) HasRedirectionTime() bool {
+	if o != nil && !IsNil(o.RedirectionTime) {
+		return true
+	}
+
+	return false
+}
+
+// SetRedirectionTime gets a reference to the given int32 and assigns it to the RedirectionTime field.
+func (o *CheckoutRequest) SetRedirectionTime(v int32) {
+	o.RedirectionTime = &v
+}
+
 func (o CheckoutRequest) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -301,6 +335,9 @@ func (o CheckoutRequest) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Type) {
 		toSerialize["type"] = o.Type
+	}
+	if !IsNil(o.RedirectionTime) {
+		toSerialize["redirection_time"] = o.RedirectionTime
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -352,6 +389,7 @@ func (o *CheckoutRequest) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "on_demand_enabled")
 		delete(additionalProperties, "success_url")
 		delete(additionalProperties, "type")
+		delete(additionalProperties, "redirection_time")
 		o.AdditionalProperties = additionalProperties
 	}
 
